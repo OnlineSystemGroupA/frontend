@@ -1,11 +1,11 @@
 <template>
-  <div>
+    <div>
         <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
             <el-radio-button :label="false">展开</el-radio-button>
             <el-radio-button :label="true">收起</el-radio-button>
         </el-radio-group>
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-            :collapse="isCollapse">
+                 :collapse="isCollapse">
             <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-document"></i>
@@ -33,8 +33,9 @@
                     <span slot="title">测试</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="2-1">进度填写</el-menu-item>
-                    <el-menu-item index="2-2">测试报告填写</el-menu-item>
+                    <el-menu-item index="3-1">进度填写</el-menu-item>
+                    <el-menu-item index="3-2">测试报告填写</el-menu-item>
+                    <el-menu-item index="3-3" @click="verifyReport">测试报告审核</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -43,22 +44,28 @@
 
 <script>
 export default {
-    name:'EmployeeMenu',
-    data(){
+    name: 'EmployeeMenu',
+    data() {
         return {
             isCollapse: true
         };
     },
-    methods:{
+    methods: {
         handleOpen(key, keyPath) {
             console.log(key, keyPath);
         },
         handleClose(key, keyPath) {
             console.log(key, keyPath);
         },
-        verifyApplication(){
+        verifyApplication() {
             this.$router.push({
-                    name:'applicationVerifyForm'
+                    name: 'applicationVerifyForm'
+                }
+            )
+        },
+        verifyReport() {
+            this.$router.push({
+                    name: 'reportVerifyForm'
                 }
             )
         }
