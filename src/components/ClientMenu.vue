@@ -15,6 +15,7 @@
                     <el-menu-item index="1-1" @click="createApplication">创建新申请</el-menu-item>
                     <el-menu-item index="1-2">查看已提交申请</el-menu-item>
                     <el-menu-item index="1-3">申请草稿</el-menu-item>
+                    <el-menu-item index="1-4" @click="functionList">功能表格</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -60,6 +61,11 @@ export default {
         createApplication(){
             this.$router.push({
                 name:'applicationForm',
+            })
+        },
+        functionList(){
+            this.$router.push({
+                name:'functionList'
             })
         }
     }

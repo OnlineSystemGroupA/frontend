@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="func_list">
+        <h1>功能表格</h1>
         <el-form :model="form" ref="form" label-width="100px" class="demo-dynamic">
             <el-form-item label="软件名称">
                 <el-input></el-input>
@@ -7,9 +8,30 @@
             <el-form-item label="版本号">
                 <el-input></el-input>
             </el-form-item>
-            <el-form-item v-for="(func, index) in form.functions" :label="'域名' + index" :key="func.key">
-                <el-input v-model="func.value"></el-input><el-button @click.prevent="removeDomain(domain)">删除</el-button>
+            <el-form-item v-for="(func, index) in form.functions" :key="func.key">
+                <div class="func">
+                    <h2>功能{{ index }}</h2>
+                    <el-form-item label="功能名称">
+                        <el-input v-model="func.title"></el-input>
+                        <el-form-item v-for="(item, index_item) in func.items" :key="item.key">
+                            <span>
+                                <label>详细功能{{index_item}}</label> <el-button @click.prevent="removeItem(index, item)">删除详细功能</el-button>
+                            </span>
+                            <el-form-item label="详细功能名称">
+                                <el-input v-model="item.name"></el-input>
+                            </el-form-item>
+                            <el-form-item label="详细功能描述">
+                                <el-input v-model="item.description"></el-input>
+                            </el-form-item>
+                            <hr>
+                        </el-form-item>
+                    </el-form-item>
+                    <el-button @click.prevent="removeFunc(func)">删除</el-button>
+                    <el-button @click="addItem(index)">添加功能</el-button>
+                </div>
+
             </el-form-item>
+            <el-button @click="addFunc">添加表项</el-button>
         </el-form>
     </div>
 </template>
@@ -22,13 +44,70 @@ export default {
             form: {
                 softwareName: '',
                 softwareVersion: '',
-                functions:[
+                functions: [
 
                 ]
+            }
+        }
+    },
+    methods: {
+        addFunc() {
+            const func = {
+                title: '',
+                items: [
+                    {
+                        name: '',
+                        description: '',
+                        key: Date.now()
+                    }
+                ]
+            }
+            this.form.functions.push(func)
+        },
+        addItem(index) {
+            const item = {
+                name: '',
+                description: '',
+                key: Date.now()
+            }
+            this.form.functions[index].items.push(item)
+        },
+        removeFunc(func) {
+            var index = this.form.functions.indexOf(func)
+            console.log(index)
+            if (index != -1) {
+                this.form.functions.splice(index, 1)
+            }
+        },
+        removeItem(index, item) {
+            if (index != -1) {
+                var index_item = this.form.functions[index].items.indexOf(item)
+                console.log(index, index_item)
+                if (index_item != -1) {
+                    this.form.functions[index].items.splice(index_item, 1)
+                }
             }
         }
     }
 }
 </script>
 
-<style></style>
+<style scoped>
+.func_list {
+    width: 800px;
+    align-items: center;
+    border-radius: 30px;
+    margin: 30px;
+    padding: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.func {
+    width: 600px;
+    align-items: center;
+    border-radius: 30px;
+    margin: 30px;
+    padding: 50px;
+    border: 5px solid skyblue;
+}
+</style>
