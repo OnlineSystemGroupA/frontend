@@ -5,7 +5,7 @@
             <el-radio-button :label="true">收起</el-radio-button>
         </el-radio-group>
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-                 :collapse="isCollapse">
+            :collapse="isCollapse">
             <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-document"></i>
@@ -35,7 +35,16 @@
                 <el-menu-item-group>
                     <el-menu-item index="3-1">进度填写</el-menu-item>
                     <el-menu-item index="3-2">测试报告填写</el-menu-item>
-                    <el-menu-item index="3-3" @click="verifyReport">测试报告审核</el-menu-item>
+                </el-menu-item-group>
+            </el-submenu>
+            <el-submenu index="4">
+                <template slot="title">
+                    <i class="el-icon-document"></i>
+                    <span slot="title">审核</span>
+                </template>
+                <el-menu-item-group>
+                    <el-menu-item index="4-1" @click="documentReview">文件审核表填写</el-menu-item>
+                    <el-menu-item index="4-2" @click="reportVerify">报告审核填写</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -59,15 +68,18 @@ export default {
         },
         verifyApplication() {
             this.$router.push({
-                    name: 'applicationVerifyForm'
-                }
-            )
+                name: 'applicationVerifyForm'
+            })
         },
-        verifyReport() {
+        documentReview() {
             this.$router.push({
-                    name: 'reportVerifyForm'
-                }
-            )
+                name: 'documentReviewForm'
+            })
+        },
+        reportVerify() {
+            this.$router.push({
+                name: 'reportVerifyForm',
+            })
         }
     }
 }

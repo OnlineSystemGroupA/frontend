@@ -8,6 +8,7 @@ import ClientPage from '../pages/ClientPage'
 import EmployeePage from '../pages/EmployeePage'
 import ReportVerifyForm from "@/pages/ReportVerifyForm.vue";
 import TestFunctionList from '../pages/TestFunctionList'
+import DocumentReviewForm from '../pages/DocumentReviewForm'
 
 const router = new VueRouter({
     routes: [
@@ -64,11 +65,16 @@ const router = new VueRouter({
                     component: ReportVerifyForm,
                     isAuth: true,
                     meta: {title: '测试报告审核表格'}
+                },
+                {
+                    name:'documentReviewForm',
+                    path:'documentReviewForm',
+                    component:DocumentReviewForm,
+                    isAuth:true,
+                    meta: {title:'软件文档评审表'}
                 }
             ]
         }
-
-
     ]
 })
 
