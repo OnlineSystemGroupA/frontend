@@ -4,7 +4,7 @@
       <LoginHeader></LoginHeader>
       <el-row>
         <el-button type="primary" @click="login">登录界面</el-button>
-        <el-button type="primary" @click="regist">注册界面</el-button>
+        <el-button type="primary" @click="register">注册界面</el-button>
       </el-row>
     </div>
     <div>
@@ -27,9 +27,9 @@ export default {
     }
   },
   methods: {
-    regist() {
+    register() {
       this.$router.push({
-        name: 'regist',
+        name: 'register',
       })
     },
     login(){

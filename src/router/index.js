@@ -11,8 +11,8 @@ import TestFunctionList from '../pages/TestFunctionList'
 const router = new VueRouter({
     routes:[
         {
-            name:'regist',//name属性可以用来简化路由的跳转，但是to要写成对象式的
-            path:'/regist',
+            name:'register',//name属性可以用来简化路由的跳转，但是to要写成对象式的
+            path:'/register',
             component:RegisterForm,
             meta:{title:'注册'}
         },
