@@ -6,6 +6,7 @@ import ApplicationForm from '../pages/ApplicationForm'
 import ApplicationVerifyForm from '../pages/ApplicationVerifyForm'
 import ClientPage from '../pages/ClientPage'
 import EmployeePage from '../pages/EmployeePage'
+import TestFunctionList from '../pages/TestFunctionList'
 
 const router = new VueRouter({
     routes:[
@@ -34,6 +35,13 @@ const router = new VueRouter({
                     isAuth:true,
                     meta:{title:'申请表格'}
                 },
+                {
+                    name:'functionList',
+                    path:'functionList',
+                    component:TestFunctionList,
+                    isAuth:true,
+                    meta:{title:'功能表格'}
+                }
             ]
         },
         {
