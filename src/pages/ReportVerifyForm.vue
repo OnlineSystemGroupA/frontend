@@ -1,5 +1,5 @@
 <template>
-    <div class="form">
+    <div class="report-verification">
         <h1>测试报告审核</h1>
         <el-form label-position="left" label-width="125px">
             <h2>测试任务信息</h2>
@@ -130,7 +130,7 @@ export default {
 </script>
 
 <style scoped>
-.form {
+.report-verification {
     width: 800px;
     align-items: center;
     border-radius: 30px;
