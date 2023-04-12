@@ -51,7 +51,7 @@ export default {
     },
     userRegister() {
       this.$router.push({
-        name: "regist",
+        name: "register",
       });
     },
   },
