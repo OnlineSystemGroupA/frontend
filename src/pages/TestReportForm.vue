@@ -1,6 +1,6 @@
 <template>
     <div class="report">
-        <h2>测 试 报 告</h2>
+        <h1>测 试 报 告</h1>
         <el-form label-width="100px" label-position="left">
             <el-form-item label="软件名称">
                 <el-input v-model="form.softwareName" placeholder="软件名称"></el-input>
@@ -58,7 +58,8 @@
             <el-row>
                 <el-col class="col">
                     <el-form-item label="采样日期">
-                        <el-date-picker type="date" placeholder="采样日期" style="width: 100%;" v-model="form.sampleTime"></el-date-picker>
+                        <el-date-picker type="date" placeholder="采样日期" style="width: 100%;"
+                            v-model="form.sampleTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col class="col">
@@ -69,9 +70,11 @@
             </el-row>
             <el-row>
                 <el-form-item label="测试时间">
-                    <el-date-picker type="date" placeholder="开始日期" style="width: 45%;" v-model="form.startTime"></el-date-picker>
+                    <el-date-picker type="date" placeholder="开始日期" style="width: 45%;"
+                        v-model="form.startTime"></el-date-picker>
                     ——
-                    <el-date-picker type="date" placeholder="结束日期" style="width: 45%;" v-model="form.endTime"></el-date-picker>
+                    <el-date-picker type="date" placeholder="结束日期" style="width: 45%;"
+                        v-model="form.endTime"></el-date-picker>
                 </el-form-item>
             </el-row>
             <el-row>
@@ -102,7 +105,8 @@
                 </el-col>
                 <el-col class="col">
                     <el-form-item label="日期">
-                        <el-date-picker type="date" placeholder="日期" style="width: 100%;" v-model="form.complierTime"></el-date-picker>
+                        <el-date-picker type="date" placeholder="日期" style="width: 100%;"
+                            v-model="form.complierTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -114,7 +118,8 @@
                 </el-col>
                 <el-col class="col">
                     <el-form-item label="日期">
-                        <el-date-picker type="date" placeholder="日期" style="width: 100%;" v-model="form.reviewerTime"></el-date-picker>
+                        <el-date-picker type="date" placeholder="日期" style="width: 100%;"
+                            v-model="form.reviewerTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -126,7 +131,8 @@
                 </el-col>
                 <el-col class="col">
                     <el-form-item label="日期">
-                        <el-date-picker type="date" placeholder="日期" style="width: 100%;" v-model="form.approverTime"></el-date-picker>
+                        <el-date-picker type="date" placeholder="日期" style="width: 100%;"
+                            v-model="form.approverTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -251,7 +257,7 @@
             <h2>二、测试依据和参考资料</h2>
             <div>
                 <h3>测试依据</h3>
-                <el-form-item v-for="(item,index) in form.testStandardList" :key="index" :label="'依据' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.testStandardList" :key="index" :label="'依据' + (index + 1)">
                     <el-input v-model="item.standard"></el-input>
                     <el-button @click="deleteStandard(index)">删除</el-button>
                 </el-form-item>
@@ -261,7 +267,7 @@
             </div>
             <div>
                 <h3>参考资料</h3>
-                <el-form-item v-for="(item,index) in form.referenceList" :key="index" :label="'参考'+ (index + 1)">
+                <el-form-item v-for="(item, index) in form.referenceList" :key="index" :label="'参考' + (index + 1)">
                     <el-input v-model="item.reference"></el-input>
                     <el-button @click="deleteReference(index)">删除</el-button>
                 </el-form-item>
@@ -272,7 +278,7 @@
             <h2>三、测试内容</h2>
             <div>
                 <h3>功能性测试</h3>
-                <el-form-item v-for="(item,index) in form.functionTest" :key="index" :label="'功能' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.functionTest" :key="index" :label="'功能' + (index + 1)">
                     <br>
                     <el-form-item label="功能模块">
                         <el-input placeholder="功能模块" v-model="item.functionModule"></el-input>
@@ -289,7 +295,7 @@
             </div>
             <div>
                 <h3>效率测试</h3>
-                <el-form-item v-for = "(item,index) in form.efficiencyTest" :key="index" :label="'效率' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.efficiencyTest" :key="index" :label="'效率' + (index + 1)">
                     <br>
                     <el-form-item label="测试特性">
                         <el-input placeholder="特性测试" v-model="item.property"></el-input>
@@ -306,7 +312,7 @@
             </div>
             <div>
                 <h3>可移植性测试</h3>
-                <el-form-item v-for = "(item,index) in form.portabilityTest" :key="index" :label="'可移植性' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.portabilityTest" :key="index" :label="'可移植性' + (index + 1)">
                     <br>
                     <el-form-item label="测试特性">
                         <el-input placeholder="特性测试" v-model="item.property"></el-input>
@@ -323,7 +329,7 @@
             </div>
             <div>
                 <h3>易用性测试</h3>
-                <el-form-item v-for = "(item,index) in form.usabilityTest" :key="index" :label="'易用性' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.usabilityTest" :key="index" :label="'易用性' + (index + 1)">
                     <br>
                     <el-form-item label="测试特性">
                         <el-input placeholder="特性测试" v-model="item.property"></el-input>
@@ -333,14 +339,14 @@
                     </el-form-item>
                     <el-form-item label="测试结果">
                         <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                        <el-button @click="deleteUsability(index)">删除</el-button>
+                    </el-form-item>
+                    <el-button @click="deleteUsability(index)">删除</el-button>
                 </el-form-item>
                 <el-button @click="addUsability">添加表项</el-button>
-                </el-form-item>
             </div>
             <div>
                 <h3>可靠性测试</h3>
-                <el-form-item v-for = "(item,index) in form.reliabilityTest" :key="index" :label="'可靠性' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.reliabilityTest" :key="index" :label="'可靠性' + (index + 1)">
                     <br>
                     <el-form-item label="测试特性">
                         <el-input placeholder="特性测试" v-model="item.property"></el-input>
@@ -350,14 +356,14 @@
                     </el-form-item>
                     <el-form-item label="测试结果">
                         <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                        <el-button @click="deleteReliability(index)">删除</el-button>
+                    </el-form-item>
+                    <el-button @click="deleteReliability(index)">删除</el-button>
                 </el-form-item>
                 <el-button @click="addReliability">添加表项</el-button>
-                </el-form-item>
             </div>
             <div>
                 <h3>可维护性测试</h3>
-                <el-form-item v-for = "(item,index) in form.maintainabilityTest" :key="index" :label="'可维护性' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.maintainabilityTest" :key="index" :label="'可维护性' + (index + 1)">
                     <br>
                     <el-form-item label="测试特性">
                         <el-input placeholder="特性测试" v-model="item.property"></el-input>
@@ -367,10 +373,10 @@
                     </el-form-item>
                     <el-form-item label="测试结果">
                         <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                        <el-button @click="deleteMaintainability(index)">删除</el-button>
+                    </el-form-item>
+                    <el-button @click="deleteMaintainability(index)">删除</el-button>
                 </el-form-item>
                 <el-button @click="addMaintainability">添加表项</el-button>
-                </el-form-item>
             </div>
         </el-form>
     </div>
@@ -387,158 +393,158 @@ export default {
                 clientCompany: '',
                 testType: '',
                 reportDate: '',
-                itemNum:'',
-                sampleTime:'',
-                startTime:'',
-                endTime:'',
-                sampleCondition:'',
-                testStandard:'',
-                sampleList:'',
-                testConclusion:'',
-                compiler:'',
-                compilerTime:'',
-                reviewer:'',
-                reviewerTime:'',
-                approver:'',
-                approverTime:'',
-                hardwareType:'',
-                hardwareName:'',
-                hardwareConfiguration:'',
-                hardwareNum:'',
-                softwareEnvironment:{
-                    operatingSystem:{
-                        name:'',
-                        version:'',
+                itemNum: '',
+                sampleTime: '',
+                startTime: '',
+                endTime: '',
+                sampleCondition: '',
+                testStandard: '',
+                sampleList: '',
+                testConclusion: '',
+                compiler: '',
+                compilerTime: '',
+                reviewer: '',
+                reviewerTime: '',
+                approver: '',
+                approverTime: '',
+                hardwareType: '',
+                hardwareName: '',
+                hardwareConfiguration: '',
+                hardwareNum: '',
+                softwareEnvironment: {
+                    operatingSystem: {
+                        name: '',
+                        version: '',
                     },
-                    softwareOne:{
-                        name:'',
-                        version:'',
+                    softwareOne: {
+                        name: '',
+                        version: '',
                     },
-                    softwareTwo:{
-                        name:'',
-                        version:'',
+                    softwareTwo: {
+                        name: '',
+                        version: '',
                     },
-                    softwareThree:{
-                        name:'',
-                        version:'',
+                    softwareThree: {
+                        name: '',
+                        version: '',
                     },
-                    ancillaryTool:{
-                        name:'',
-                        version:''
+                    ancillaryTool: {
+                        name: '',
+                        version: ''
                     },
-                    developmentTool:{
-                        name:'',
-                        version:''
+                    developmentTool: {
+                        name: '',
+                        version: ''
                     },
-                    testSample:{
-                        name:'',
-                        version:''
+                    testSample: {
+                        name: '',
+                        version: ''
                     }
                 },
-                testStandardList:[{standard:''},],
-                referenceList:[{reference:''},],
-                functionTest:[{functionModule:'',functionRequirement:'',testResult:''}],
-                efficiencyTest:[{property:'',testExplanation:'',testResult:''}],
-                portabilityTest:[{property:'',testExplanation:'',testResult:''}],
-                usabilityTest:[{property:'',testExplanation:'',testResult:''}],
-                reliabilityTest:[{property:'',testExplanation:'',testResult:''}],
-                maintainabilityTest:[{property:'',testExplanation:'',testResult:''}]
+                testStandardList: [{ standard: '' },],
+                referenceList: [{ reference: '' },],
+                functionTest: [{ functionModule: '', functionRequirement: '', testResult: '' }],
+                efficiencyTest: [{ property: '', testExplanation: '', testResult: '' }],
+                portabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
+                usabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
+                reliabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
+                maintainabilityTest: [{ property: '', testExplanation: '', testResult: '' }]
             }
         }
     },
-    methods:{
-        addStandard(){
+    methods: {
+        addStandard() {
             const item = {
-                standard:''
+                standard: ''
             }
             this.form.testStandardList.push(item)
         },
-        deleteStandard(index){
-            this.form.testStandardList.splice(index,1)
+        deleteStandard(index) {
+            this.form.testStandardList.splice(index, 1)
         },
-        addReference(){
-            const item ={
-                reference:''
+        addReference() {
+            const item = {
+                reference: ''
             }
             this.form.referenceList.push(item)
         },
-        deleteReference(index){
-            this.form.referenceList.splice(index,1)
+        deleteReference(index) {
+            this.form.referenceList.splice(index, 1)
         },
-        addFunction(){
+        addFunction() {
             const item = {
-                functionModule:'',
-                functionRequirement:'',
-                testResult:''
+                functionModule: '',
+                functionRequirement: '',
+                testResult: ''
             }
             this.form.functionTest.push(item)
         },
-        deleteFunction(index){
-            this.form.functionTest.splice(index,1)
+        deleteFunction(index) {
+            this.form.functionTest.splice(index, 1)
         },
-        addEfficiency(){
+        addEfficiency() {
             const item = {
-                property:'',
-                testExplanation:'',
-                testResult:''
+                property: '',
+                testExplanation: '',
+                testResult: ''
             }
             this.form.efficiencyTest.push(item)
         },
-        deleteEfficiency(index){
-            this.form.efficiencyTest.splice(index,1)
+        deleteEfficiency(index) {
+            this.form.efficiencyTest.splice(index, 1)
         },
-        addReliability(){
+        addReliability() {
             const item = {
-                property:'',
-                testExplanation:'',
-                testResult:''
+                property: '',
+                testExplanation: '',
+                testResult: ''
             }
             this.form.reliabilityTest.push(item)
         },
-        deleteReliability(index){
-            this.form.reliabilityTest.splice(index,1)
+        deleteReliability(index) {
+            this.form.reliabilityTest.splice(index, 1)
         },
-        addPortability(){
+        addPortability() {
             const item = {
-                property:'',
-                testExplanation:'',
-                testResult:''
+                property: '',
+                testExplanation: '',
+                testResult: ''
             }
             this.form.portabilityTest.push(item)
         },
-        deletePortability(index){
-            this.form.portabilityTest.splice(index,1)
+        deletePortability(index) {
+            this.form.portabilityTest.splice(index, 1)
         },
-        addUsability(){
+        addUsability() {
             const item = {
-                property:'',
-                testExplanation:'',
-                testResult:''
+                property: '',
+                testExplanation: '',
+                testResult: ''
             }
             this.form.usabilityTest.push(item)
         },
-        deleteUsability(index){
-            this.form.usabilityTest.splice(index,1)
+        deleteUsability(index) {
+            this.form.usabilityTest.splice(index, 1)
         },
-        addMaintainability(){
+        addMaintainability() {
             const item = {
-                property:'',
-                testExplanation:'',
-                testResult:''
+                property: '',
+                testExplanation: '',
+                testResult: ''
             }
             this.form.maintainabilityTest.push(item)
         },
-        deleteMaintainability(index){
-            this.form.maintainabilityTest.splice(index,1)
+        deleteMaintainability(index) {
+            this.form.maintainabilityTest.splice(index, 1)
         }
     }
 }
 </script>
 
 <style scoped>
-.col{
-  width: 50%;
-  padding: 10px;
+.col {
+    width: 50%;
+    padding: 10px;
 }
 
 .report {
