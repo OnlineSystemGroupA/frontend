@@ -34,7 +34,7 @@
                 </template>
                 <el-menu-item-group>
                     <el-menu-item index="3-1">进度填写</el-menu-item>
-                    <el-menu-item index="3-2">测试报告填写</el-menu-item>
+                    <el-menu-item index="3-2" @click="writeTestReport">测试报告填写</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="4">
@@ -43,8 +43,9 @@
                     <span slot="title">审核</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="4-1" @click="documentReview">文件审核表填写</el-menu-item>
-                    <el-menu-item index="4-2" @click="reportVerify">报告审核填写</el-menu-item>
+                    <el-menu-item index="4-1" @click="reviewDocument">文件审核表填写</el-menu-item>
+                    <el-menu-item index="4-2" @click="verifyReport">报告审核填写</el-menu-item>
+                    <el-menu-item index="4-3" @click="verifyTestPlan">测试计划审核表填写</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -71,14 +72,24 @@ export default {
                 name: 'applicationVerifyForm'
             })
         },
-        documentReview() {
+        reviewDocument() {
             this.$router.push({
                 name: 'documentReviewForm'
             })
         },
-        reportVerify() {
+        verifyReport() {
             this.$router.push({
                 name: 'reportVerifyForm',
+            })
+        },
+        writeTestReport(){
+            this.$router.push({
+                name: 'testReportForm',
+            })
+        },
+        verifyTestPlan(){
+            this.$router.push({
+                name: 'testPlanVerifyForm'
             })
         }
     }

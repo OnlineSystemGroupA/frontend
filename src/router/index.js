@@ -9,6 +9,8 @@ import EmployeePage from '../pages/EmployeePage'
 import ReportVerifyForm from "@/pages/ReportVerifyForm.vue";
 import TestFunctionList from '../pages/TestFunctionList'
 import DocumentReviewForm from '../pages/DocumentReviewForm'
+import TestReportForm from '../pages/TestReportForm'
+import TestPlanVerifyForm from '../pages/TestPlanVerifyForm'
 
 const router = new VueRouter({
     routes: [
@@ -72,6 +74,20 @@ const router = new VueRouter({
                     component:DocumentReviewForm,
                     isAuth:true,
                     meta: {title:'软件文档评审表'}
+                },
+                {
+                    name:'testReportForm',
+                    path:'testReportForm',
+                    component:TestReportForm,
+                    isAuth:true,
+                    meta:{title:'测试报告填写'}
+                },
+                {
+                    name:'testPlanVerifyForm',
+                    path:'testPlanVerifyForm',
+                    component:TestPlanVerifyForm,
+                    isAuth:true,
+                    meta:{title:'测试方案审核'}
                 }
             ]
         }
