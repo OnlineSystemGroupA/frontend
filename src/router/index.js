@@ -11,6 +11,7 @@ import TestFunctionList from '../pages/TestFunctionList'
 import DocumentReviewForm from '../pages/DocumentReviewForm'
 import TestReportForm from '../pages/TestReportForm'
 import TestPlanVerifyForm from '../pages/TestPlanVerifyForm'
+import TestRecordsForm from "@/pages/TestRecordsForm.vue";
 
 const router = new VueRouter({
     routes: [
@@ -40,11 +41,11 @@ const router = new VueRouter({
                     meta: {title: '申请表格'}
                 },
                 {
-                    name:'functionList',
-                    path:'functionList',
-                    component:TestFunctionList,
-                    isAuth:true,
-                    meta:{title:'功能表格'}
+                    name: 'functionList',
+                    path: 'functionList',
+                    component: TestFunctionList,
+                    isAuth: true,
+                    meta: {title: '功能表格'}
                 }
             ]
         },
@@ -69,25 +70,32 @@ const router = new VueRouter({
                     meta: {title: '测试报告审核表格'}
                 },
                 {
-                    name:'documentReviewForm',
-                    path:'documentReviewForm',
-                    component:DocumentReviewForm,
-                    isAuth:true,
-                    meta: {title:'软件文档评审表'}
+                    name: 'documentReviewForm',
+                    path: 'documentReviewForm',
+                    component: DocumentReviewForm,
+                    isAuth: true,
+                    meta: {title: '软件文档评审表'}
                 },
                 {
-                    name:'testReportForm',
-                    path:'testReportForm',
-                    component:TestReportForm,
-                    isAuth:true,
-                    meta:{title:'测试报告填写'}
+                    name: 'testReportForm',
+                    path: 'testReportForm',
+                    component: TestReportForm,
+                    isAuth: true,
+                    meta: {title: '测试报告填写'}
                 },
                 {
-                    name:'testPlanVerifyForm',
-                    path:'testPlanVerifyForm',
-                    component:TestPlanVerifyForm,
-                    isAuth:true,
-                    meta:{title:'测试方案审核'}
+                    name: 'testPlanVerifyForm',
+                    path: 'testPlanVerifyForm',
+                    component: TestPlanVerifyForm,
+                    isAuth: true,
+                    meta: {title: '测试方案审核'}
+                },
+                {
+                    name: 'testRecordsForm',
+                    path: 'testRecordsForm',
+                    component: TestRecordsForm,
+                    isAuth: true,
+                    meta: {title: '软件测试记录'}
                 }
             ]
         }
