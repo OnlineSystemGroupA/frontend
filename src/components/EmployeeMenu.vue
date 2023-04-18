@@ -5,7 +5,7 @@
             <el-radio-button :label="true">收起</el-radio-button>
         </el-radio-group>
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-            :collapse="isCollapse">
+                 :collapse="isCollapse">
             <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-document"></i>
@@ -35,6 +35,7 @@
                 <el-menu-item-group>
                     <el-menu-item index="3-1">进度填写</el-menu-item>
                     <el-menu-item index="3-2" @click="writeTestReport">测试报告填写</el-menu-item>
+                    <el-menu-item index="3-3" @click="checkTestRecords">软件测试记录</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="4">
@@ -82,14 +83,19 @@ export default {
                 name: 'reportVerifyForm',
             })
         },
-        writeTestReport(){
+        writeTestReport() {
             this.$router.push({
                 name: 'testReportForm',
             })
         },
-        verifyTestPlan(){
+        verifyTestPlan() {
             this.$router.push({
                 name: 'testPlanVerifyForm'
+            })
+        },
+        checkTestRecords() {
+            this.$router.push({
+                name:'testRecordsForm'
             })
         }
     }
