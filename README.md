@@ -38,6 +38,9 @@ npm run lint
 ```
 软件测试报告（TestReportForm）
 ```
+```
+软件测试记录（TestRecordsForm）
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
