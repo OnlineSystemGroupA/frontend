@@ -2,7 +2,6 @@
     <div class="record-form">
         <h1>软件测试记录</h1>
         <el-button @click="addRecord">新建测试记录</el-button>
-        <el-button @click="logg">test</el-button>
         <el-form>
             <el-form-item v-for="(record, index) in records" :key="index" class="record">
                 <h1>Testcase {{ index }}</h1>
@@ -84,9 +83,6 @@ export default {
         },
         deleteRecord(index) {
             this.records.splice(index, 1)
-        },
-        logg() {
-            console.log(this.records)
         }
     }
 }
