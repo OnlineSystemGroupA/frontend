@@ -1,16 +1,16 @@
 import VueRouter from "vue-router";//引入路由器
 
-import RegisterForm from '../pages/RegisterForm.vue';
-import LoginForm from '../pages/LoginForm.vue';
-import ApplicationForm from '../pages/ApplicationForm'
-import ApplicationVerifyForm from '../pages/ApplicationVerifyForm'
-import ClientPage from '../pages/ClientPage'
-import EmployeePage from '../pages/EmployeePage'
-import ReportVerifyForm from "@/pages/ReportVerifyForm.vue";
-import TestFunctionList from '../pages/TestFunctionList'
-import DocumentReviewForm from '../pages/DocumentReviewForm'
-import TestReportForm from '../pages/TestReportForm'
-import TestPlanVerifyForm from '../pages/TestPlanVerifyForm'
+import RegisterForm from '../pages/Forms/RegisterForm'
+import LoginForm from '../pages/Forms/LoginForm'
+import ApplicationForm from '../pages/Forms/ApplicationForm'
+import ApplicationVerifyForm from '../pages/Forms/ApplicationVerifyForm'
+import ClientPage from '../pages/Pages/ClientPage'
+import EmployeePage from '../pages/Pages/EmployeePage'
+import ReportVerifyForm from "../pages/Forms/ReportVerifyForm"
+import TestFunctionList from '../pages/Forms/TestFunctionList'
+import DocumentReviewForm from '../pages/Forms/DocumentReviewForm'
+import TestReportForm from '../pages/Forms/TestReportForm'
+import TestPlanVerifyForm from '../pages/Forms/TestPlanVerifyForm'
 
 const router = new VueRouter({
     routes: [

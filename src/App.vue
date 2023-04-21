@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import LoginHeader from "./components/LoginHeader.vue";
+import LoginHeader from "./components/Headers/LoginHeader.vue";
 
 export default {
   name: "App",
