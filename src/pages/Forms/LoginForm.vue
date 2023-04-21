@@ -38,14 +38,14 @@ export default {
         this.$router.push({
           name:'client'
         })
-        this.$bus.$emit('login',true)
+        //this.$bus.$emit('login',true)
         sessionStorage.setItem('logInfo','true')
       }
       else{
         this.$router.push({
           name: "employee",
         })
-        this.$bus.$emit('login',true)
+        //this.$bus.$emit('login',true)
         sessionStorage.setItem('logInfo','true')
       }
     },

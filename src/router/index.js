@@ -11,20 +11,29 @@ import TestFunctionList from '../pages/Forms/TestFunctionList'
 import DocumentReviewForm from '../pages/Forms/DocumentReviewForm'
 import TestReportForm from '../pages/Forms/TestReportForm'
 import TestPlanVerifyForm from '../pages/Forms/TestPlanVerifyForm'
+import TestRecordsForm from '../pages/Forms/TestRecordsForm'
+import LoginPage from '../pages/Pages/LoginPage'
 
 const router = new VueRouter({
     routes: [
         {
-            name: 'register',//name属性可以用来简化路由的跳转，但是to要写成对象式的
-            path: '/register',
-            component: RegisterForm,
-            meta: {title: '注册'}
-        },
-        {
-            name: 'login',
-            path: '/login',
-            component: LoginForm,
-            meta: {title: '登录'},
+            name:"index",
+            path:'/',
+            component:LoginPage,
+            children:[
+                {
+                    name: 'register',//name属性可以用来简化路由的跳转，但是to要写成对象式的
+                    path: '/register',
+                    component: RegisterForm,
+                    meta: {title: '注册'}
+                },
+                {
+                    name: 'login',
+                    path: '/login',
+                    component: LoginForm,
+                    meta: {title: '登录'},
+                }
+            ]
         },
         {
             name: 'client',

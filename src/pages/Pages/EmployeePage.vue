@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import EmployeeMenu from '@/components/EmployeeMenu.vue';
+import EmployeeMenu from '../../components/Menus/EmployeeMenu.vue';
 export default {
     name:'EmployeePage',
     components:{

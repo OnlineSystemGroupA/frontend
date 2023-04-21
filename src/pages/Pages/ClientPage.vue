@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ClientMenu from '../components/Menus/ClientMenu.vue'
+import ClientMenu from '../../components/Menus/ClientMenu.vue'
 export default {
     name: 'ClientPage',
     components: {
