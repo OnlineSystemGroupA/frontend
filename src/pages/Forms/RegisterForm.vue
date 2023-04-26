@@ -33,18 +33,31 @@ export default {
         };
     },
     methods: {
-        onSubmit(){
-            if(this.userInfo.username === ''){
+        onSubmit() {
+            if (this.userInfo.username === '') {
                 alert('请输入用户名')
-            }
-            else if(this.userInfo.mail === ''){
+            } else if (this.userInfo.mail === '') {
                 alert('请输入邮箱')
-            }
-            else if(this.userInfo.password ===  ''){
+            } else if (this.userInfo.password === '') {
                 alert('请输入密码')
-            }
-            else if(this.userInfo.certainPassword !==  this.userInfo.password){
+            } else if (this.userInfo.certainPassword !== this.userInfo.password) {
                 alert('两遍密码不一致')
+            } else {
+                let registerData = {
+                    "username": this.userInfo.username,
+                    "email": this.userInfo.mail,
+                    "password": this.userInfo.password
+                }
+                this.axios.post('/api/register', registerData).then(res => {
+                    if (res.data.code === 600) {
+                        alert('注册成功')
+                        this.$router.push({
+                            name: "login"
+                        })
+                    } else if (res.data.code === 601) {
+                        alert('用户名已存在')
+                    }
+                })
             }
         }
     },
@@ -52,7 +65,7 @@ export default {
 </script>
 
 <style scoped>
-.register{
+.register {
     width: 400px;
     border-radius: 30px;
     margin: 30px;
