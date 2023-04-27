@@ -1,8 +1,9 @@
 <template>
   <div class="clientTable">
     <div style="width: 30%">
-      <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword"><el-button slot="append"
-          icon="el-icon-search"></el-button></el-input>
+      <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
+        <el-button slot="append" icon="el-icon-search"></el-button>
+      </el-input>
     </div>
     <br />
     <el-table :data="clientData" height="600" border style="width: 100%">

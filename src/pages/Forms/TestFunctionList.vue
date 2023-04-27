@@ -33,6 +33,8 @@
             </el-form-item>
             <el-button @click="addFunc">添加表项</el-button>
         </el-form>
+        <el-button type="primary" @click="submit">提交</el-button>
+        <el-button type="primary">保存</el-button>
     </div>
 </template>
 
@@ -87,6 +89,9 @@ export default {
                     this.form.functions[index].items.splice(index_item, 1)
                 }
             }
+        },
+        submit(){
+            
         }
     }
 }
@@ -105,9 +110,9 @@ export default {
 .func {
     width: 600px;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 3px;
     margin: 30px;
     padding: 50px;
-    border: 5px solid skyblue;
+    border: 1px solid black;
 }
 </style>

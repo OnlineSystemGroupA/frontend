@@ -8,8 +8,8 @@
                     <el-checkbox label="成果/技术鉴定测试" name="testType"></el-checkbox>
                     <el-checkbox label="专项资金验收测试" name="testType"></el-checkbox>
                 </el-checkbox-group>
-                <el-checkbox v-model="chooseOtherTestType"><el-input placeholder="其他"
-                        v-model="otherTestType"></el-input></el-checkbox>
+                <el-checkbox v-model="form.chooseOtherTestType"><el-input placeholder="其他"
+                        v-model="form.otherTestType"></el-input></el-checkbox>
             </el-form-item>
             <hr />
             <el-form-item label="软件名称">
@@ -51,8 +51,8 @@
                     <el-checkbox label="NST-03-WI13-2011" name="testStandard"></el-checkbox>
                     <el-checkbox label="NST-03-WI22-2014" name="testStandard"></el-checkbox>
                 </el-checkbox-group>
-                <el-checkbox v-model="chooseOtherStandard"><el-input placeholder="其他"
-                        v-model="otherStandard"></el-input></el-checkbox>
+                <el-checkbox v-model="form.chooseOtherStandard"><el-input placeholder="其他"
+                        v-model="form.otherStandard"></el-input></el-checkbox>
             </el-form-item>
             <hr />
             <el-form-item label="需要测试的指标">
@@ -70,8 +70,8 @@
                     <el-checkbox label="产品说明要求" name="testAspects"></el-checkbox>
                     <el-checkbox label="用户文档集要求" name="testAspects"></el-checkbox>
                 </el-checkbox-group>
-                <el-checkbox v-model="chooseOtherAspect"><el-input placeholder="其他"
-                        v-model="otherAspect"></el-input></el-checkbox>
+                <el-checkbox v-model="form.chooseOtherAspect"><el-input placeholder="其他"
+                        v-model="form.otherAspect"></el-input></el-checkbox>
             </el-form-item>
             <hr />
             <div>
@@ -90,8 +90,7 @@
             <div>
                 <div class="block">
                     <span class="demonstration">软件类型:</span>
-                    <el-cascader v-model="form.softwareType" :options="typeList" :props="{ expandTrigger: 'hover' }"
-                        @change="handleChange"></el-cascader>
+                    <el-cascader v-model="form.softwareType" :options="typeList" :props="{ expandTrigger: 'hover' }"></el-cascader>
                 </div>
             </div>
             <hr />
@@ -101,14 +100,14 @@
                 <el-form-item label="操作系统:">
                     <br>
                     <el-row>
-                        <el-checkbox v-model="clientSystemWindows">Windows<el-input placeholder="版本" size="small"
-                                v-model="clientWindowsVersion"></el-input></el-checkbox>
+                        <el-checkbox v-model="form.clientSystemWindows">Windows<el-input placeholder="版本" size="small"
+                                v-model="form.clientWindowsVersion"></el-input></el-checkbox>
                         <br>
-                        <el-checkbox v-model="clientSystemLinux">Linux<el-input placeholder="版本" size="small"
-                                v-model="clientLinuxVersion"></el-input></el-checkbox>
+                        <el-checkbox v-model="form.clientSystemLinux">Linux<el-input placeholder="版本" size="small"
+                                v-model="form.clientLinuxVersion"></el-input></el-checkbox>
                         <br>
-                        <el-checkbox v-model="clientSystemOther">其他<el-input placeholder="其他" size="small"
-                                v-model="otherSystem"></el-input></el-checkbox>
+                        <el-checkbox v-model="form.clientSystemOther">其他<el-input placeholder="其他" size="small"
+                                v-model="form.otherSystem"></el-input></el-checkbox>
                     </el-row>
                 </el-form-item>
                 <el-form label-position="left" label-width="180px">
@@ -123,12 +122,12 @@
                 <h4>硬件</h4>
                 <el-form-item label="架构:">
                     <br>
-                    <el-checkbox v-model="PCServer">PC服务器</el-checkbox>
+                    <el-checkbox v-model="form.PCServer">PC服务器</el-checkbox>
                     <br>
-                    <el-checkbox v-model="UnixServer">Unix/Linux服务器</el-checkbox>
+                    <el-checkbox v-model="form.UnixServer">Unix/Linux服务器</el-checkbox>
                     <br>
-                    <el-checkbox v-model="OtherSever">其他<el-input placeholder="其他"
-                            v-model="OtherServerName"></el-input></el-checkbox>
+                    <el-checkbox v-model="form.OtherSever">其他<el-input placeholder="其他"
+                            v-model="form.OtherServerName"></el-input></el-checkbox>
                 </el-form-item>
                 <el-form label-position="left" label-width="180px">
                     <el-form-item label="内存要求（单位MB）:">
@@ -147,7 +146,7 @@
                 <el-form-item label="编程语言:"><el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input></el-form-item>
                 <el-form-item label="构架:" v-model="form.serverFrame">
                     <br>
-                    <el-select v-model="value" placeholder="请选择">
+                    <el-select v-model="form.serverFrame" placeholder="请选择">
                         <el-option v-for="item in frameOptions" :key="item.value" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
@@ -164,19 +163,19 @@
                 <h3>软件介质</h3>
                 <el-col :span="8">
                     <el-form-item label="光盘">
-                        <el-input-number controls-position="right" @change="handleChange" :min="0"
+                        <el-input-number controls-position="right"  :min="0"
                             :max="100000" v-model="form.cdNum"></el-input-number>
                     </el-form-item>
                 </el-col>
                 <el-col :span="8">
                     <el-form-item label="U盘">
-                        <el-input-number controls-position="right" @change="handleChange" :min="0"
+                        <el-input-number controls-position="right"  :min="0"
                             :max="100000" v-model="form.usbNum"></el-input-number>
                     </el-form-item>
                 </el-col>
                 <el-col :span="8">
                     <el-form-item label="其他">
-                        <el-input-number controls-position="right" @change="handleChange" :min="0"
+                        <el-input-number controls-position="right"  :min="0"
                             :max="100000" v-model="form.otherMediumNum"></el-input-number>
                         <el-input placeholder="其他" v-model="form.otherMedium"></el-input>
                     </el-form-item>
@@ -231,7 +230,7 @@
         </el-form>
         <el-row>
             <el-button type="primary" @click="submit">提交</el-button>
-            <el-button type="primary">保存</el-button>
+            <el-button type="primary" @click="save">保存</el-button>
         </el-row>
     </div>
 </template>
@@ -241,14 +240,10 @@ export default {
     name: "ApplicationForm",
     data() {
         return {
-            otherTestType: '',
-            chooseOtherTestType: false,
-            otherStandard: '',
-            chooseOtherStandard: false,
-            otherAspect: '',
-            chooseOtherAspect: false,
             form: {
-                testType: [],
+                testType:[],
+                otherTestType: '',
+                chooseOtherTestType: false,
                 softwareName: "",
                 softwareVersion: "",
                 companyChineseName: "",
@@ -256,18 +251,30 @@ export default {
                 developmentDepartment: "",
                 companyType: "",
                 description: "",
-                testStandard: [],
-                testAspects: [],
+                testStandard:[],
+                otherStandard: '',
+                chooseOtherStandard: false,
+                testAspects:[],
+                otherAspect: '',
+                chooseOtherAspect: false,
                 softwareScale: {
                     functionNum: "",
                     functionPoint: "",
                     codeLines: "",
                 },
                 softwareType: "",
-                clientSystem: [],
+                clientSystemWindows: false,
+                clientSystemLinux: false,
+                clientSystemOther: false,
+                clientWindowsVersion: '',
+                clientLinuxVersion: '',
+                otherSystem: '',
                 clientMemory: '',
                 clientOtherRequirement: '',
-                serverType: [],
+                PCServer: false,
+                UnixServer: false,
+                OtherSever: false,
+                OtherServerName: '',
                 serverMemory:'',
                 serverDisk:'',
                 serverOtherRequirement:'',
@@ -437,214 +444,21 @@ export default {
                     label: '其他'
                 },
             ],
-            clientSystemWindows: false,
-            clientSystemLinux: false,
-            clientSystemOther: false,
-            clientWindowsVersion: '',
-            clientLinuxVersion: '',
-            otherSystem: '',
-            PCServer: false,
-            UnixServer: false,
-            OtherSever: false,
-            OtherServerName: '',
         };
-    },
-    watch: {
-        otherTestType: {
-            handler(newValue, oldValue) {
-                //console.log('changed')
-                //console.log(newValue)
-                var i;
-                for (i = 0; i < this.form.testType.length; i++) {
-                    if (this.form.testType[i] === "其他") {
-                        this.form.testType[i] = newValue;
-                        //console.log('I found the replacable one')
-                        //console.log(this.form.testType)
-                    } else if (this.form.testType[i] === oldValue) {
-                        if (newValue !== "") {
-                            this.form.testType[i] = newValue;
-                        } else {
-                            this.form.testType[i] = "其他";
-                        }
-
-                        //console.log('I found the one')
-                        //console.log(this.form.testType)
-                    }
-                }
-            },
-        },//监视其他的值，如果被更改则对其所在列表进行修改操作
-        chooseOtherTestType: {
-            handler(newValue) {
-                if (!newValue) {
-                    this.form.testType = this.form.testType.filter((type) => {
-                        return !(type === "其他" || type === this.otherTestType);
-                    });
-                } else {
-                    console.log(newValue);
-                    if (!this.otherTestType) {
-                        console.log("其他");
-                        this.form.testType.unshift("其他");
-                    } else {
-                        this.form.testType.unshift(this.otherTestType);
-                    }
-                }
-            },
-        },//监视其他项是否被勾选，如果被勾选则插入对应列表，否则从列表中删除
-        otherStandard: {
-            handler(newValue, oldValue) {
-                var i;
-                for (i = 0; i < this.form.testStandard.length; i++) {
-                    if (this.form.testStandard[i] === "其他") {
-                        this.form.testStandard[i] = newValue;
-                    } else if (this.form.testStandard[i] === oldValue) {
-                        if (newValue !== "") {
-                            this.form.testStandard[i] = newValue;
-                        } else {
-                            this.form.testStandard[i] = "其他";
-                        }
-                    }
-                }
-            }
-        },
-        chooseOtherStandard: {
-            handler(newValue) {
-                if (!newValue) {
-                    this.form.testStandard = this.form.testStandard.filter((type) => {
-                        return !(type === "其他" || type === this.otherStandard);
-                    });
-                } else {
-                    console.log(newValue);
-                    if (!this.otherStandard) {
-                        console.log("其他");
-                        this.form.testStandard.unshift("其他");
-                    } else {
-                        this.form.testStandard.unshift(this.otherStandard);
-                    }
-                }
-            },
-        },
-        otherAspect: {
-            handler(newValue, oldValue) {
-                var i;
-                for (i = 0; i < this.form.testAspects.length; i++) {
-                    if (this.form.testAspects[i] === "其他") {
-                        this.form.testAspects[i] = newValue;
-                    } else if (this.form.testAspects[i] === oldValue) {
-                        if (newValue !== "") {
-                            this.form.testAspects[i] = newValue;
-                        } else {
-                            this.form.testAspects[i] = "其他";
-                        }
-                    }
-
-                }
-            },
-        },
-        chooseOtherAspect: {
-            handler(newValue) {
-                if (!newValue) {
-                    this.form.testAspects = this.form.testAspects.filter((type) => {
-                        return !(type === "其他" || type === this.otherAspect);
-                    });
-                } else {
-                    console.log(newValue);
-                    if (!this.otherAspect) {
-                        console.log("其他");
-                        this.form.testAspects.unshift("其他");
-                    } else {
-                        this.form.testAspects.unshift(this.otherAspect);
-                    }
-                }
-            },
-        },
-        clientSystemWindows: {
-            handler() {
-                this.form.clientSystem = this.clientSystem
-            }
-        },
-        clientSystemLinux: {
-            handler() {
-                this.form.clientSystem = this.clientSystem
-            }
-        },
-        clientSystemOther: {
-            handler() {
-                this.form.clientSystem = this.clientSystem
-            }
-        },
-        clientWindowsVersion: {
-            handler() {
-                this.form.clientSystem = this.clientSystem
-            }
-        },
-        clientLinuxVersion: {
-            handler() {
-                this.form.clientSystem = this.clientSystem
-            }
-        },
-        otherSystem: {
-            handler() {
-                this.form.clientSystem = this.clientSystem
-            }
-        },
-        PCServer: {
-            handler() {
-                this.form.serverType = this.serverType
-            }
-        },
-        UnixServer: {
-            handler() {
-                this.form.serverType = this.serverType
-            }
-        },
-        OtherSever: {
-            handler() {
-                this.form.serverType = this.serverType
-            }
-        },
-        OtherServerName: {
-            handler() {
-                this.form.serverType = this.serverType
-            }
-        }
-    },
-    computed: {
-        clientSystem() {
-            var temp = []
-            if (this.clientSystemWindows) {
-                var win = 'windows:' + this.clientWindowsVersion
-                temp.unshift(win)
-            }
-            if (this.clientSystemLinux) {
-                var lin = 'linux' + this.clientLinuxVersion
-                temp.unshift(lin)
-            }
-            if (this.clientSystemOther) {
-                temp.unshift(this.otherSystem)
-            }
-            return temp
-        },
-        serverType() {
-            var temp = []
-            if (this.PCServer) {
-                temp.unshift('PC服务器')
-            }
-            if (this.UnixServer) {
-                temp.unshift('Unix/Linux服务器')
-            }
-            if (this.OtherSever) {
-                temp.unshift(this.OtherServerName)
-            }
-            return temp
-        }
     },
     methods:{
         submit(){
             console.log(JSON.stringify(this.form))
+            this.$bus.$emit('submitApplication')
         },
         save(){
-            
+            sessionStorage.setItem('applicationForm',JSON.stringify(this.form))
         }
+    },
+    mounted(){
+        let stringForm = sessionStorage.getItem('applicationForm')
+        console.log(stringForm)
+        this.form = JSON.parse(stringForm)
     }
 };
 </script>

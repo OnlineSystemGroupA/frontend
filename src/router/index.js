@@ -2,6 +2,7 @@ import VueRouter from "vue-router";//引入路由器
 
 import RegisterForm from '../pages/Forms/RegisterForm'
 import LoginForm from '../pages/Forms/LoginForm'
+import ClientCreateApplication from '../pages/Possessions/ClientCreateApplication'
 import ApplicationForm from '../pages/Forms/ApplicationForm'
 import ApplicationVerifyForm from '../pages/Forms/ApplicationVerifyForm'
 import ClientPage from '../pages/Pages/ClientPage'
@@ -17,6 +18,8 @@ import AdminPage from '../pages/Pages/AdminPage'
 import ClientTable from '../pages/Tables/ClientTable'
 import EmployeeTable from '../pages/Tables/EmployeeTable'
 import EmployeeInfoForm from '../pages/Forms/EmployeeInfoForm'
+import ApplicationExplanation from '../pages/Explanations/ApplicationExplanation'
+import ClientItemTable from '../pages/Tables/ClientItemTable'
 const router = new VueRouter({
     routes: [
         {
@@ -45,19 +48,38 @@ const router = new VueRouter({
             meta: {title: '客户'},
             children: [
                 {
-                    name: 'applicationForm',
-                    path: 'applicationForm',
-                    component: ApplicationForm,
-                    isAuth: true,
-                    meta: {title: '申请表格'}
+                    name:'createApplication',
+                    path:'createApplication',
+                    component:ClientCreateApplication,
+                    meta:{title: '创建申请'},
+                    children:[
+                        {
+                            name:"applicationExplanation",
+                            path:"",
+                            component:ApplicationExplanation,
+                            meta:{title:"申请说明"}
+
+                        },
+                        {
+                            name: 'applicationForm',
+                            path: 'applicationForm',
+                            component: ApplicationForm,
+                            meta: {title: '申请表格'}
+                        },
+                        {
+                            name: 'functionList',
+                            path: 'functionList',
+                            component: TestFunctionList,
+                            meta: {title: '功能表格'}
+                        }
+                    ]
                 },
                 {
-                    name: 'functionList',
-                    path: 'functionList',
-                    component: TestFunctionList,
-                    isAuth: true,
-                    meta: {title: '功能表格'}
-                }
+                    name:'ClientItemTable',
+                    path:'ClientItemTable',
+                    component:ClientItemTable,
+                    meta:{title:'查看项目'}
+                },
             ]
         },//客户界面
         {
@@ -112,7 +134,7 @@ const router = new VueRouter({
         },//员工界面
         {
             name:'admin',
-            path:'admin',
+            path:'/admin',
             component: AdminPage,
             meta: {title: '管理员'},
             children:[
