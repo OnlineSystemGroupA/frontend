@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="document">
     <el-form label-width="100px" label-position="left">
       <el-form-item label="软件名称">
         <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
@@ -342,6 +342,14 @@ export default {
 </script>
 
 <style scoped>
+.document {
+    width: 800px;
+    align-items: center;
+    border-radius: 30px;
+    margin: 30px;
+    padding: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
 .col{
   width: 50%;
   padding: 10px;

@@ -13,7 +13,10 @@ import TestReportForm from '../pages/Forms/TestReportForm'
 import TestPlanVerifyForm from '../pages/Forms/TestPlanVerifyForm'
 import TestRecordsForm from '../pages/Forms/TestRecordsForm'
 import LoginPage from '../pages/Pages/LoginPage'
-
+import AdminPage from '../pages/Pages/AdminPage'
+import ClientTable from '../pages/Tables/ClientTable'
+import EmployeeTable from '../pages/Tables/EmployeeTable'
+import EmployeeInfoForm from '../pages/Forms/EmployeeInfoForm'
 const router = new VueRouter({
     routes: [
         {
@@ -34,7 +37,7 @@ const router = new VueRouter({
                     meta: {title: '登录'},
                 }
             ]
-        },
+        },//登录界面
         {
             name: 'client',
             path: '/client',
@@ -56,7 +59,7 @@ const router = new VueRouter({
                     meta: {title: '功能表格'}
                 }
             ]
-        },
+        },//客户界面
         {
             name: 'employee',
             path: '/employee',
@@ -106,7 +109,33 @@ const router = new VueRouter({
                     meta: {title: '软件测试记录'}
                 }
             ]
-        }
+        },//员工界面
+        {
+            name:'admin',
+            path:'admin',
+            component: AdminPage,
+            meta: {title: '管理员'},
+            children:[
+                {
+                    name:'clientTable',
+                    path:'clientTable',
+                    component:ClientTable,
+                    meta:{title:'用户列表'}
+                },
+                {
+                    name:'employeeTable',
+                    path:'employeeTable',
+                    component:EmployeeTable,
+                    meta:{title:'员工列表'}
+                },
+                {
+                    name:'employeeInfoForm',
+                    path:'employeeInfoForm',
+                    component:EmployeeInfoForm,
+                    meta:{title:'新员工信息'}
+                }
+            ]
+        }//管理员界面
     ]
 })
 
