@@ -1,7 +1,7 @@
 <template>
     <div class="employee">
         <el-container>
-            <el-header>Header</el-header>
+            <el-header fixed>Header</el-header>
             <el-container>
                 <el-container>
                     <el-aside style="width: auto;">
@@ -15,7 +15,7 @@
                         </div>
                     </el-main>
                 </el-container>
-                <el-footer>
+                <el-footer style="height: auto;">
                     <PageFooter></PageFooter>
                 </el-footer>
             </el-container>

@@ -1,7 +1,7 @@
 <template>
     <div class="func_list">
         <h1>功能表格</h1>
-        <el-form :model="form" ref="form" label-width="100px" class="demo-dynamic">
+        <el-form :model="form" ref="form" label-width="100px" class="demo-dynamic" :disabled = "disable">
             <el-form-item label="软件名称">
                 <el-input></el-input>
             </el-form-item>
@@ -15,7 +15,7 @@
                         <el-input v-model="func.title"></el-input>
                         <el-form-item v-for="(item, index_item) in func.items" :key="item.key">
                             <span>
-                                <label>详细功能{{index_item}}</label> <el-button @click.prevent="removeItem(index, item)">删除详细功能</el-button>
+                                <label>详细功能{{index_item}} </label> <el-button @click.prevent="removeItem(index, item)">删除详细功能</el-button>
                             </span>
                             <el-form-item label="详细功能名称">
                                 <el-input v-model="item.name"></el-input>
@@ -32,15 +32,24 @@
 
             </el-form-item>
             <el-button @click="addFunc">添加表项</el-button>
+            <br>
         </el-form>
-        <el-button type="primary" @click="submit">提交</el-button>
-        <el-button type="primary">保存</el-button>
+        <br>
+        <el-row v-show="!disable">
+            <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
+        </el-row>
+        <el-row v-show="disable">
+            <el-button type="primary" @click="pass" :disabled = "!disable">通过</el-button>
+            <el-button type="primary" @click="refute" :disabled = "!disable">驳回</el-button>
+        </el-row>
     </div>
 </template>
 
 <script>
 export default {
     name: 'TestFunctionList',
+    props:['writable'],
     data() {
         return {
             form: {
@@ -92,6 +101,25 @@ export default {
         },
         submit(){
             
+        },
+        save(){
+
+        },
+        pass(){
+            this.$bus.$emit('passFunction')
+        },
+        refute(){
+
+        }
+    },
+    computed:{
+        disable(){
+            console.log(this.writable)
+            if(this.writable === 'false'){
+                console.log('true')
+                return true
+            }
+            return false
         }
     }
 }

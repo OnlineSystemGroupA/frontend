@@ -20,6 +20,8 @@ import EmployeeTable from '../pages/Tables/EmployeeTable'
 import EmployeeInfoForm from '../pages/Forms/EmployeeInfoForm'
 import ApplicationExplanation from '../pages/Explanations/ApplicationExplanation'
 import ClientItemTable from '../pages/Tables/ClientItemTable'
+import EmployeeItemTable from '../pages/Tables/EmployeeItemTable'
+import EmployeeCheckApplication from '../pages/Possessions/EmployeeCheckApplication'
 const router = new VueRouter({
     routes: [
         {
@@ -64,6 +66,9 @@ const router = new VueRouter({
                             name: 'applicationForm',
                             path: 'applicationForm',
                             component: ApplicationForm,
+                            props({query:{writable}}){
+                                return{writable}
+                            },
                             meta: {title: '申请表格'}
                         },
                         {
@@ -89,12 +94,53 @@ const router = new VueRouter({
             meta: {title: '员工'},
             children: [
                 {
-                    name: 'applicationVerifyForm',
-                    path: 'applicationVerifyForm',
-                    component: ApplicationVerifyForm,
-                    isAuth: true,
-                    meta: {title: '申请审核表格'}
+                    name:'applicationItem',
+                    path:'applicationItem',
+                    component:EmployeeItemTable,
+                    props({query:{mission}}){
+                        return{mission}
+                    },
+                    meta: {title: '查看申请项目'}
                 },
+                {
+                    name:'checkApplication',
+                    path:'checkApplication',
+                    component:EmployeeCheckApplication,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title: '申请详情'},
+                    children:[
+                        {
+                            name: 'checkApplicationForm',
+                            path: 'checkApplicationForm',
+                            component: ApplicationForm,
+                            props({query:{writable}}){
+                                return{writable}
+                            },
+                            meta: {title: '查看申请表格'}
+                        },
+                        {
+                            name: 'checkFunctionList',
+                            path: 'checkFunctionList',
+                            component: TestFunctionList,
+                            props({query:{writable}}){
+                                return{writable}
+                            },
+                            meta: {title: '查看测试功能'}
+                        },
+                        {
+                            name: 'applicationVerifyForm',
+                            path: 'applicationVerifyForm',
+                            component: ApplicationVerifyForm,
+                            props({query:{writable}}){
+                                return{writable}
+                            },
+                            meta: {title: '申请审核表格'}
+                        },
+                    ]
+                },
+                
                 {
                     name: 'reportVerifyForm',
                     path: 'reportVerifyForm',

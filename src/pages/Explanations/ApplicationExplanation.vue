@@ -19,7 +19,7 @@
             <li>以上申报材料（书面文档、电子文档）请在签订合同5天内提交我中心；</li>
             <li>如有疑问请发电子邮件或电话联系。</li>
         </ol>
-        <el-button @click="applicationForm">开始提交</el-button>
+        <el-button type="primary" @click="applicationForm">开始提交</el-button>
     </div>
 </template>
 
@@ -28,14 +28,19 @@ export default {
     name:'ApplicationExplanation',
     data(){
         return{
-            
+
         }
     },
     methods:{
         applicationForm(){
             this.$router.push({
-                name:'applicationForm'
+                name:'applicationForm',
+                query:{
+                    writable:true
+                }
             })
+            //this.$bus.$emit('setWritable',false)
+            //console.log('Set writable')
         }
     }
 }

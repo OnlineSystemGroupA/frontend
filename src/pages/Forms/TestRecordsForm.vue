@@ -88,7 +88,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .record-form {
     width: 800px;
@@ -102,9 +102,9 @@ export default {
 .record {
     width: 600px;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 3px;
     margin: 30px;
     padding: 50px;
-    border: 5px solid skyblue;
+    border: 1px solid black;
 }
 </style>

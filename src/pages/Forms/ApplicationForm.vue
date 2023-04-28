@@ -1,6 +1,6 @@
 <template>
     <div class="application">
-        <el-form>
+        <el-form :disabled = "disable">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型">
                 <el-checkbox-group v-model="form.testType">
@@ -110,7 +110,7 @@
                                 v-model="form.otherSystem"></el-input></el-checkbox>
                     </el-row>
                 </el-form-item>
-                <el-form label-position="left" label-width="180px">
+                <el-form label-position="left" label-width="180px" :disabled = "disable">
                     <el-form-item label="内存要求（单位MB）:">
                         <el-input placeholder="内存要求" v-model.number="form.clientMemory"></el-input>
                     </el-form-item>
@@ -129,7 +129,7 @@
                     <el-checkbox v-model="form.OtherSever">其他<el-input placeholder="其他"
                             v-model="form.OtherServerName"></el-input></el-checkbox>
                 </el-form-item>
-                <el-form label-position="left" label-width="180px">
+                <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
                         <el-input placeholder="内存要求" v-model="form.serverMemory"></el-input>
                     </el-form-item>
@@ -205,7 +205,7 @@
             <hr>
             <div class="InfoCom">
                 <div class="CompanyInfo">
-                    <el-form label-position="left" label-width="80px">
+                    <el-form label-position="left" label-width="80px" :disabled = "disable">
                         <h2>委托单位信息</h2>
                         <el-form-item label="电话"><el-input placeholder="电话" v-model="form.companyInfo.telephone"></el-input></el-form-item>
                         <el-form-item label="传真"><el-input placeholder="传真" v-model="form.companyInfo.fax"></el-input></el-form-item>
@@ -228,9 +228,13 @@
                 </div>
             </div>
         </el-form>
-        <el-row>
-            <el-button type="primary" @click="submit">提交</el-button>
-            <el-button type="primary" @click="save">保存</el-button>
+        <el-row v-show="!disable">
+            <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
+        </el-row>
+        <el-row v-show="disable">
+            <el-button type="primary" @click="pass" :disabled = "!disable">通过</el-button>
+            <el-button type="primary" @click="refute" :disabled = "!disable">驳回</el-button>
         </el-row>
     </div>
 </template>
@@ -238,6 +242,7 @@
 <script>
 export default {
     name: "ApplicationForm",
+    props:['writable'],
     data() {
         return {
             form: {
@@ -448,19 +453,40 @@ export default {
     },
     methods:{
         submit(){
-            console.log(JSON.stringify(this.form))
-            this.$bus.$emit('submitApplication')
+            if(this.writable){
+                console.log(JSON.stringify(this.form))
+                this.$bus.$emit('submitApplication')
+            }
         },
         save(){
-            sessionStorage.setItem('applicationForm',JSON.stringify(this.form))
+            if(this.writable){
+                sessionStorage.setItem('applicationForm',JSON.stringify(this.form))
+            }
+        },
+        pass(){
+            this.$bus.$emit('passApplication')
+        },
+        refute(){
+
         }
     },
     mounted(){
         let stringForm = sessionStorage.getItem('applicationForm')
-        console.log(stringForm)
-        this.form = JSON.parse(stringForm)
+        if(stringForm){
+            console.log(stringForm)
+            this.form = JSON.parse(stringForm)
+        }
+        
+    },
+    computed:{
+        disable(){
+            if(this.writable === 'false'){
+                return true
+            }
+            return false
+        }
     }
-};
+}
 </script>
 
 <style scoped>

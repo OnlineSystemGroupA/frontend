@@ -11,44 +11,36 @@
             <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-document"></i>
-                    <span slot="title">审核申请</span>
+                    <span slot="title">所有任务</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="1-1">查看用户申请</el-menu-item>
-                    <el-menu-item index="1-2" @click="verifyApplication">填写审核表单</el-menu-item>
+                    <el-menu-item index="1-1">查看项目列表</el-menu-item>
+                    <el-menu-item index="1-2">接受新任务</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
                 <template slot="title">
                     <i class="el-icon-document"></i>
-                    <span slot="title">合同签订</span>
+                    <span slot="title">申请审核</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="2-1">创建合同</el-menu-item>
-                    <el-menu-item index="2-2">查看已提交合同</el-menu-item>
-                    <el-menu-item index="2-3">合同草稿</el-menu-item>
+                    <el-menu-item index="2-1" @click="checkApplication">查看申请项</el-menu-item>
+                    <el-menu-item index="2-2">查看已拒绝项目</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
                 <template slot="title">
                     <i class="el-icon-document"></i>
-                    <span slot="title">测试</span>
+                    <span slot="title">测试任务</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="3-1">进度填写</el-menu-item>
-                    <el-menu-item index="3-2" @click="writeTestReport">测试报告填写</el-menu-item>
-                    <el-menu-item index="3-3" @click="checkTestRecords">软件测试记录</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="4">
-                <template slot="title">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">审核</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="4-1" @click="reviewDocument">文件审核表填写</el-menu-item>
-                    <el-menu-item index="4-2" @click="verifyReport">报告审核填写</el-menu-item>
-                    <el-menu-item index="4-3" @click="verifyTestPlan">测试计划审核表填写</el-menu-item>
+                    <el-menu-item index="3-1">查看测试项目</el-menu-item>
+                    <el-menu-item index="3-2">查看完成项目</el-menu-item>
+                    <el-menu-item index="3-3">测试方案填写</el-menu-item>
+                    <el-menu-item index="3-4">测试方案审核</el-menu-item>
+                    <el-menu-item index="3-5">测试进度填写</el-menu-item>
+                    <el-menu-item index="3-6">测试报告填写</el-menu-item>
+                    <el-menu-item index="3-7">测试报告审核</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -70,34 +62,12 @@ export default {
         handleClose(key, keyPath) {
             console.log(key, keyPath);
         },
-        verifyApplication() {
+        checkApplication(){
             this.$router.push({
-                name: 'applicationVerifyForm'
-            })
-        },
-        reviewDocument() {
-            this.$router.push({
-                name: 'documentReviewForm'
-            })
-        },
-        verifyReport() {
-            this.$router.push({
-                name: 'reportVerifyForm',
-            })
-        },
-        writeTestReport() {
-            this.$router.push({
-                name: 'testReportForm',
-            })
-        },
-        verifyTestPlan() {
-            this.$router.push({
-                name: 'testPlanVerifyForm'
-            })
-        },
-        checkTestRecords() {
-            this.$router.push({
-                name:'testRecordsForm'
+                name:'applicationItem',
+                query:{
+                    mission:'checkApplication'
+                }
             })
         }
     }

@@ -15,8 +15,11 @@
                 <el-input v-model="form.testType" placeholder="测试类型"></el-input>
             </el-form-item>
             <el-form-item label="报告日期">
-                <el-date-picker type="date" placeholder="报告日期" style="width: 100%;"
-                    v-model="form.reportDate"></el-date-picker>
+                <el-date-picker type="date" 
+                placeholder="报告日期" 
+                style="width: 100%;"
+                v-model="form.reportDate">
+                </el-date-picker>
             </el-form-item>
             <h3>南京大学</h3>
             <h3>软件测试中心</h3>
