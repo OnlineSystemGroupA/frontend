@@ -3,18 +3,20 @@
         <el-container>
             <el-header>Header</el-header>
             <el-container>
-                <el-aside width="200px">
-                    <ClientMenu></ClientMenu>
-                </el-aside>
                 <el-container>
+                    <el-aside style="width: auto;">
+                        <ClientMenu></ClientMenu>
+                    </el-aside>
                     <el-main>
                         <div style="{width:1000px}">
                             <router-view>
                             </router-view>
                         </div>
                     </el-main>
-                    <el-footer>Footer</el-footer>
                 </el-container>
+                <el-footer style="height: auto;">
+                    <PageFooter></PageFooter>
+                </el-footer>
             </el-container>
         </el-container>
     </div>
@@ -22,16 +24,18 @@
 
 <script>
 import ClientMenu from '../../components/Menus/ClientMenu.vue'
+import PageFooter from '../../components/Footers/PageFooter.vue'
 export default {
     name: 'ClientPage',
     components: {
-        ClientMenu
+        ClientMenu,
+        PageFooter
     }
 }
 </script>
 
 <style scoped>
-.client{
+.client {
     width: 1200px;
     margin: 30px;
     padding: 50px;

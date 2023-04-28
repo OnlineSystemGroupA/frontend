@@ -1,21 +1,23 @@
 <template>
-  <div class="employee">
+    <div class="employee">
         <el-container>
             <el-header>Header</el-header>
             <el-container>
-                <el-aside width="200px">
-                    <EmployeeMenu>
-                    </EmployeeMenu>
-                </el-aside>
                 <el-container>
+                    <el-aside style="width: auto;">
+                        <EmployeeMenu>
+                        </EmployeeMenu>
+                    </el-aside>
                     <el-main>
                         <div style="{width:1000px}">
                             <router-view>
                             </router-view>
                         </div>
                     </el-main>
-                    <el-footer>Footer</el-footer>
                 </el-container>
+                <el-footer>
+                    <PageFooter></PageFooter>
+                </el-footer>
             </el-container>
         </el-container>
     </div>
@@ -23,16 +25,18 @@
 
 <script>
 import EmployeeMenu from '../../components/Menus/EmployeeMenu.vue';
+import PageFooter from '../../components/Footers/PageFooter.vue';
 export default {
-    name:'EmployeePage',
-    components:{
-        EmployeeMenu
+    name: 'EmployeePage',
+    components: {
+        EmployeeMenu,
+        PageFooter
     }
 }
 </script>
 
 <style scoped>
-.employee{
+.employee {
     width: 1200px;
     margin: 30px;
     padding: 50px;

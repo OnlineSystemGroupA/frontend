@@ -1,20 +1,22 @@
 <template>
-  <div class="admin">
+    <div class="admin">
         <el-container>
             <el-header>Header</el-header>
             <el-container>
-                <el-aside width="200px">
-                    <AdminMenu></AdminMenu>
-                </el-aside>
                 <el-container>
+                    <el-aside style="width: auto;">
+                        <AdminMenu></AdminMenu>
+                    </el-aside>
                     <el-main>
                         <div style="{width:1000px}">
                             <router-view>
                             </router-view>
                         </div>
                     </el-main>
-                    <el-footer>Footer</el-footer>
                 </el-container>
+                <el-footer style="height: auto;">
+                    <PageFooter></PageFooter>
+                </el-footer>
             </el-container>
         </el-container>
     </div>
@@ -22,16 +24,18 @@
 
 <script>
 import AdminMenu from '../../components/Menus/AdminMenu'
+import PageFooter from '../../components/Footers/PageFooter.vue'
 export default {
-    name:'AdminPage',
-    components:{
-        AdminMenu
+    name: 'AdminPage',
+    components: {
+        AdminMenu,
+        PageFooter
     }
 }
 </script>
 
 <style scoped>
-.admin{
+.admin {
     width: 1200px;
     margin: 30px;
     padding: 50px;
