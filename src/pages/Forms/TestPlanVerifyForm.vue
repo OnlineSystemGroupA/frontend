@@ -1,7 +1,7 @@
 <template>
     <div class="verification">
         <h1>测试方案评审表</h1>
-        <el-form label-width="100px" label-position="left">
+        <el-form label-width="100px" label-position="left" :disabled="disable">
             <el-form-item label="软件名称">
                 <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
             </el-form-item>
@@ -15,30 +15,39 @@
                 <el-input placeholder="测试类别" v-model="form.testType"></el-input>
             </el-form-item>
             <h2>内容审核</h2>
-            <el-form-item v-for="(item, index) in form.verifyItems" :key="index">
+            <el-form-item v-for="item in form.verifyItems" :key="item.content">
                 <h3>审核内容:{{ item.content }}</h3>
                 <el-radio-group v-model="item.passOrNot">
                     <el-radio :label="true">是</el-radio>
                     <el-radio :label="false">否</el-radio>
                 </el-radio-group>
                 <el-form-item label="不通过原因">
-                    <el-input v-model="item.explanation" placeholder="不通过原因" :disabled="item.passOrNot"></el-input>
+                    <el-input type="textarea" v-model="item.explanation" placeholder="不通过原因" :disabled="item.passOrNot"></el-input>
                 </el-form-item>
             </el-form-item>
             <h2>审评意见</h2>
-            <el-form-item v-for="(employee, index) in form.verfiyEmployees" :key="index">
+            <el-form-item v-for="employee in form.verfiyEmployees" :key="employee.position">
                 <h3>职责:{{ employee.position }}</h3>
                 <el-form-item>
-                    <el-input v-model="employee.suggestions" placeholder="评审意见"></el-input>
+                    <el-input type="textarea" v-model="employee.suggestions" placeholder="评审意见"></el-input>
                 </el-form-item>
             </el-form-item>
         </el-form>
+        <el-row v-show="!disable">
+            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
+        </el-row>
+        <el-row v-show="check">
+            <el-button type="primary" @click="pass" :disabled="!disable">通过</el-button>
+            <el-button type="primary" @click="refute" :disabled="!disable">驳回</el-button>
+        </el-row>
     </div>
 </template>
 
 <script>
 export default {
     name: 'TestPlanVerifyForm',
+    props: ['writable', 'checking'],
     data() {
         return {
             form: {
@@ -112,6 +121,46 @@ export default {
                 ]
             }
         }
+    },
+    methods:{
+        submit() {
+            console.log(JSON.stringify(this.form))
+        },
+        save() {
+            console.log(JSON.stringify(this.form))
+        },
+        pass() {
+
+        },
+        refute() {
+
+        }
+    },
+    computed: {
+        disable() {
+            if (this.writable === 'false') {
+                return true
+            }
+            else if (this.writable === 'true') {
+                return false
+            }
+            else if (!this.writable) {
+                return true
+            }
+            return false
+        },
+        check() {
+            if (this.checking === 'true') {
+                return true
+            }
+            else if (this.checking === 'false') {
+                return false
+            }
+            else if (this.checking) {
+                return true
+            }
+            return false
+        },
     }
 }
 </script>
