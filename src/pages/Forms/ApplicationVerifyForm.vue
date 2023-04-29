@@ -114,7 +114,11 @@ export default {
     },
     computed:{
         disable(){
+            console.log(this.writable)
             if(this.writable === 'false'){
+                return true
+            }
+            else if(!this.writable){
                 return true
             }
             return false

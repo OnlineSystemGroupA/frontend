@@ -232,7 +232,7 @@
             <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
         </el-row>
-        <el-row v-show="disable">
+        <el-row v-show="check">
             <el-button type="primary" @click="pass" :disabled = "!disable">通过</el-button>
             <el-button type="primary" @click="refute" :disabled = "!disable">驳回</el-button>
         </el-row>
@@ -242,7 +242,7 @@
 <script>
 export default {
     name: "ApplicationForm",
-    props:['writable'],
+    props:['writable','formId','checking'],
     data() {
         return {
             form: {
@@ -481,6 +481,24 @@ export default {
     computed:{
         disable(){
             if(this.writable === 'false'){
+                return true
+            }
+            else if(this.writable === 'true'){
+                return false
+            }
+            else if(!this.writable){
+                return true
+            }
+            return false
+        },
+        check(){
+            if(this.checking === 'true'){
+                return true
+            }
+            else if(this.checking === 'false'){
+                return false
+            }
+            else if(this.checking){
                 return true
             }
             return false

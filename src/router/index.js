@@ -22,6 +22,8 @@ import ApplicationExplanation from '../pages/Explanations/ApplicationExplanation
 import ClientItemTable from '../pages/Tables/ClientItemTable'
 import EmployeeItemTable from '../pages/Tables/EmployeeItemTable'
 import EmployeeCheckApplication from '../pages/Possessions/EmployeeCheckApplication'
+import EmployeeWriteTestPlan from '../pages/Possessions/EmployeeWriteTestPlan'
+import TestPlanForm from '../pages/Forms/TestPlanForm'
 const router = new VueRouter({
     routes: [
         {
@@ -75,6 +77,9 @@ const router = new VueRouter({
                             name: 'functionList',
                             path: 'functionList',
                             component: TestFunctionList,
+                            props({query:{writable}}){
+                                return{writable}
+                            },
                             meta: {title: '功能表格'}
                         }
                     ]
@@ -115,8 +120,8 @@ const router = new VueRouter({
                             name: 'checkApplicationForm',
                             path: 'checkApplicationForm',
                             component: ApplicationForm,
-                            props({query:{writable}}){
-                                return{writable}
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
                             },
                             meta: {title: '查看申请表格'}
                         },
@@ -124,8 +129,8 @@ const router = new VueRouter({
                             name: 'checkFunctionList',
                             path: 'checkFunctionList',
                             component: TestFunctionList,
-                            props({query:{writable}}){
-                                return{writable}
+                            props({query:{writable,checking}}){
+                                return{writable,checking}
                             },
                             meta: {title: '查看测试功能'}
                         },
@@ -140,7 +145,52 @@ const router = new VueRouter({
                         },
                     ]
                 },
-                
+                {
+                    name:'writeTestPlanItem',
+                    path:'writeTestPlanItem',
+                    component:EmployeeItemTable,
+                    props({query:{mission}}){
+                        return{mission}
+                    },
+                    meta:{title:'测试计划项目'}
+                },
+                {
+                    name:'writeTestPlan',
+                    path:'writeTestPlan',
+                    component:EmployeeWriteTestPlan,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title:'创建测试计划'},
+                    children:[{
+                        name: 'readApplication',
+                        path: 'readApplication',
+                        component: ApplicationForm,
+                        props({query:{writable,checking,formId}}){
+                            return{writable,checking,formId}
+                        },
+                        meta: {title: '阅读申请表格'}
+                    },
+                    {
+                        name: 'readFunctionList',
+                        path: 'readFunctionList',
+                        component: TestFunctionList,
+                        props({query:{writable,checking}}){
+                            return{writable,checking}
+                        },
+                        meta: {title: '阅读测试功能'}
+                    },
+                    {
+                        name: 'testPlanForm',
+                        path: 'testPlanForm',
+                        component: TestPlanForm,
+                        props({query:{writable,checking}}){
+                            return{writable,checking}
+                        },
+                        meta: {title: '测试计划'}
+                    },
+                ]
+                },
                 {
                     name: 'reportVerifyForm',
                     path: 'reportVerifyForm',

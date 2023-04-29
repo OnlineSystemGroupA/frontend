@@ -15,7 +15,7 @@
                         <el-input v-model="func.title"></el-input>
                         <el-form-item v-for="(item, index_item) in func.items" :key="item.key">
                             <span>
-                                <label>详细功能{{index_item}} </label> <el-button @click.prevent="removeItem(index, item)">删除详细功能</el-button>
+                                <label>详细功能{{index_item}} </label> <el-button v-show="!disable" @click.prevent="removeItem(index, item)">删除详细功能</el-button>
                             </span>
                             <el-form-item label="详细功能名称">
                                 <el-input v-model="item.name"></el-input>
@@ -26,12 +26,12 @@
                             <hr>
                         </el-form-item>
                     </el-form-item>
-                    <el-button @click.prevent="removeFunc(func)">删除</el-button>
-                    <el-button @click="addItem(index)">添加功能</el-button>
+                    <el-button v-show="!disable" @click.prevent="removeFunc(func)">删除</el-button>
+                    <el-button v-show="!disable" @click="addItem(index)">添加功能</el-button>
                 </div>
 
             </el-form-item>
-            <el-button @click="addFunc">添加表项</el-button>
+            <el-button v-show="!disable" @click="addFunc">添加表项</el-button>
             <br>
         </el-form>
         <br>
@@ -39,7 +39,7 @@
             <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
         </el-row>
-        <el-row v-show="disable">
+        <el-row v-show="check">
             <el-button type="primary" @click="pass" :disabled = "!disable">通过</el-button>
             <el-button type="primary" @click="refute" :disabled = "!disable">驳回</el-button>
         </el-row>
@@ -49,7 +49,7 @@
 <script>
 export default {
     name: 'TestFunctionList',
-    props:['writable'],
+    props:['writable','checking'],
     data() {
         return {
             form: {
@@ -85,7 +85,7 @@ export default {
         },
         removeFunc(func) {
             var index = this.form.functions.indexOf(func)
-            console.log(index)
+            //console.log(index)
             if (index != -1) {
                 this.form.functions.splice(index, 1)
             }
@@ -93,7 +93,7 @@ export default {
         removeItem(index, item) {
             if (index != -1) {
                 var index_item = this.form.functions[index].items.indexOf(item)
-                console.log(index, index_item)
+                //console.log(index, index_item)
                 if (index_item != -1) {
                     this.form.functions[index].items.splice(index_item, 1)
                 }
@@ -114,9 +114,25 @@ export default {
     },
     computed:{
         disable(){
-            console.log(this.writable)
             if(this.writable === 'false'){
-                console.log('true')
+                return true
+            }
+            else if(this.writable === 'true'){
+                return false
+            }
+            else if(!this.writable){
+                return true
+            }
+            return false
+        },
+        check(){
+            if(this.checking === 'true'){
+                return true
+            }
+            else if(this.checking === 'false'){
+                return false
+            }
+            else if(this.checking){
                 return true
             }
             return false

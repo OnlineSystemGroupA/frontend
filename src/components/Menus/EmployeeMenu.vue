@@ -34,9 +34,9 @@
                     <span slot="title">测试任务</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="3-1">查看测试项目</el-menu-item>
+                    <el-menu-item index="3-1" @click="checkTestItems">查看测试项目</el-menu-item>
                     <el-menu-item index="3-2">查看完成项目</el-menu-item>
-                    <el-menu-item index="3-3">测试方案填写</el-menu-item>
+                    <el-menu-item index="3-3" @click="writeTestPlan">测试方案填写</el-menu-item>
                     <el-menu-item index="3-4">测试方案审核</el-menu-item>
                     <el-menu-item index="3-5">测试进度填写</el-menu-item>
                     <el-menu-item index="3-6">测试报告填写</el-menu-item>
@@ -67,6 +67,17 @@ export default {
                 name:'applicationItem',
                 query:{
                     mission:'checkApplication'
+                }
+            })
+        },
+        checkTestItems(){
+            
+        },
+        writeTestPlan(){
+            this.$router.push({
+                name:'writeTestPlanItem',
+                query:{
+                    mission:'writeTestPlan'
                 }
             })
         }

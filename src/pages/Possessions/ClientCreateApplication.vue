@@ -23,7 +23,10 @@ export default {
     mounted() {
         this.$bus.$on('submitApplication', ()=>{
             this.$router.push({
-                name:'functionList'
+                name:'functionList',
+                query:{
+                    writable:true
+                }
             })
         })
     },

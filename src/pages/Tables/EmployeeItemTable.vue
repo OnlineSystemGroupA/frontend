@@ -61,9 +61,9 @@ export default {
     props:['mission'],
     methods:{
         checkItemDetail(id){
-            if(this.mission === 'checkApplication'){
+            if(this.mission){
                 this.$router.push({
-                    name:'checkApplication',
+                    name:this.mission,
                     query:{itemId:id}
                 })
             }
