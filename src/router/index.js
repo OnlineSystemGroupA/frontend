@@ -24,6 +24,7 @@ import EmployeeItemTable from '../pages/Tables/EmployeeItemTable'
 import EmployeeCheckApplication from '../pages/Possessions/EmployeeCheckApplication'
 import EmployeeWriteTestPlan from '../pages/Possessions/EmployeeWriteTestPlan'
 import TestPlanForm from '../pages/Forms/TestPlanForm'
+import EmployeeVerifyTestPlan from '../pages/Possessions/EmployeeVerifyTestPlan'
 const router = new VueRouter({
     routes: [
         {
@@ -192,6 +193,44 @@ const router = new VueRouter({
                 ]
                 },
                 {
+                    name:'verifyTestPlanItem',
+                    path:'verifyTestPlanItem',
+                    component:EmployeeItemTable,
+                    props({query:{mission}}){
+                        return{mission}
+                    },
+                    meta:{title:'审核计划项目'}
+                },
+                {
+                    name:'verifyTestPlan',
+                    path:'verifyTestPlan',
+                    component:EmployeeVerifyTestPlan,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title:'审核测试计划'},
+                    children:[
+                        {
+                            name: 'checkTestPlanForm',
+                            path: 'checkTestPlanForm',
+                            component: TestPlanForm,
+                            props({query:{writable,checking}}){
+                                return{writable,checking}
+                            },
+                            meta: {title: '查看测试计划'}
+                        },
+                        {
+                            name: 'testPlanVerifyForm',
+                            path: 'testPlanVerifyForm',
+                            component: TestPlanVerifyForm,
+                            props({query:{writable,checking}}){
+                                return{writable,checking}
+                            },
+                            meta: {title: '测试方案审核'}
+                        },
+                    ]
+                },
+                {
                     name: 'reportVerifyForm',
                     path: 'reportVerifyForm',
                     component: ReportVerifyForm,
@@ -212,13 +251,7 @@ const router = new VueRouter({
                     isAuth: true,
                     meta: {title: '测试报告填写'}
                 },
-                {
-                    name: 'testPlanVerifyForm',
-                    path: 'testPlanVerifyForm',
-                    component: TestPlanVerifyForm,
-                    isAuth: true,
-                    meta: {title: '测试方案审核'}
-                },
+                
                 {
                     name: 'testRecordsForm',
                     path: 'testRecordsForm',
