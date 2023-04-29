@@ -2,7 +2,7 @@ import VueRouter from "vue-router";//引入路由器
 
 import RegisterForm from '../pages/Forms/RegisterForm'
 import LoginForm from '../pages/Forms/LoginForm'
-import ClientCreateApplication from '../pages/Possessions/ClientCreateApplication'
+import ClientCreateApplication from '../pages/Process/ClientCreateApplication'
 import ApplicationForm from '../pages/Forms/ApplicationForm'
 import ApplicationVerifyForm from '../pages/Forms/ApplicationVerifyForm'
 import ClientPage from '../pages/Pages/ClientPage'
@@ -21,10 +21,10 @@ import EmployeeInfoForm from '../pages/Forms/EmployeeInfoForm'
 import ApplicationExplanation from '../pages/Explanations/ApplicationExplanation'
 import ClientItemTable from '../pages/Tables/ClientItemTable'
 import EmployeeItemTable from '../pages/Tables/EmployeeItemTable'
-import EmployeeCheckApplication from '../pages/Possessions/EmployeeCheckApplication'
-import EmployeeWriteTestPlan from '../pages/Possessions/EmployeeWriteTestPlan'
+import EmployeeCheckApplication from '../pages/Process/EmployeeCheckApplication'
+import EmployeeWriteTestPlan from '../pages/Process/EmployeeWriteTestPlan'
 import TestPlanForm from '../pages/Forms/TestPlanForm'
-import EmployeeVerifyTestPlan from '../pages/Possessions/EmployeeVerifyTestPlan'
+import EmployeeVerifyTestPlan from '../pages/Process/EmployeeVerifyTestPlan'
 const router = new VueRouter({
     routes: [
         {
