@@ -64,7 +64,7 @@ export default {
         },
         checkApplication(){
             this.$router.push({
-                name:'applicationItem',
+                name:'EmployeeItem',
                 query:{
                     mission:'checkApplication'
                 }
@@ -75,7 +75,7 @@ export default {
         },
         writeTestPlan(){
             this.$router.push({
-                name:'writeTestPlanItem',
+                name:'EmployeeItem',
                 query:{
                     mission:'writeTestPlan'
                 }
@@ -83,7 +83,7 @@ export default {
         },
         verifyTestPlan(){
             this.$router.push({
-                name:'verifyTestPlanItem',
+                name:'EmployeeItem',
                 query:{
                     mission:'verifyTestPlan'
                 }

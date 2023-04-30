@@ -85,7 +85,7 @@
 <script>
 export default {
     name: 'ApplicationVerifyForm',
-    props:['writable'],
+    props:['writable','formId'],
     data() {
         return {
             form: {
@@ -114,7 +114,7 @@ export default {
     },
     computed:{
         disable(){
-            console.log(this.writable)
+            //console.log(this.writable)
             if(this.writable === 'false'){
                 return true
             }

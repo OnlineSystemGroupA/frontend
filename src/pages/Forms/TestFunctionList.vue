@@ -49,7 +49,7 @@
 <script>
 export default {
     name: 'TestFunctionList',
-    props:['writable','checking'],
+    props:['writable','checking','formId'],
     data() {
         return {
             form: {

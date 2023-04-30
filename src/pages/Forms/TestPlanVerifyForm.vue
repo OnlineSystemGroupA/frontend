@@ -37,17 +37,13 @@
             <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
-        <el-row v-show="check">
-            <el-button type="primary" @click="pass" :disabled="!disable">通过</el-button>
-            <el-button type="primary" @click="refute" :disabled="!disable">驳回</el-button>
-        </el-row>
     </div>
 </template>
 
 <script>
 export default {
     name: 'TestPlanVerifyForm',
-    props: ['writable', 'checking'],
+    props: ['writable', 'formId'],
     data() {
         return {
             form: {
@@ -148,19 +144,7 @@ export default {
                 return true
             }
             return false
-        },
-        check() {
-            if (this.checking === 'true') {
-                return true
-            }
-            else if (this.checking === 'false') {
-                return false
-            }
-            else if (this.checking) {
-                return true
-            }
-            return false
-        },
+        }
     }
 }
 </script>

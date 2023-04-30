@@ -23,6 +23,7 @@
 <script>
 export default {
     name: "ClientItemTable",
+    props:['mission'],
     data() {
         return {
             keyword:'',
@@ -60,7 +61,12 @@ export default {
     },
     methods:{
         checkItemDetail(id){
-            console.log(id)
+            if(this.mission){
+                this.$router.push({
+                    name:this.mission,
+                    query:{itemId:id}
+                })
+            }
         }
     }
 }

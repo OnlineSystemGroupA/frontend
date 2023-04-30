@@ -104,7 +104,7 @@
 <script>
 export default {
     name: 'TestPlanForm',
-    props: ['writable', 'checking'],
+    props: ['writable', 'checking','formId'],
     data() {
         return {
             form: {

@@ -37,6 +37,7 @@
                     <el-menu-item index="2-1">进度查看</el-menu-item>
                     <el-menu-item index="2-2">测试报告</el-menu-item>
                     <el-menu-item index="2-3">测试申诉</el-menu-item>
+                    <el-menu-item index="2-4" @click="confirmTestReport">确认测试报告</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -64,7 +65,15 @@ export default {
         },
         checkItem(){
             this.$router.push({
-                name:'ClientItemTable'
+                name:'ClientItem'
+            })
+        },
+        confirmTestReport(){
+            this.$router.push({
+                name:'ClientItem',
+                query:{
+                    mission:'ConfirmTestReport'
+                }
             })
         }
     }

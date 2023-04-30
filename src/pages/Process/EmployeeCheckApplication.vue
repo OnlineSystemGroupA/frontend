@@ -56,6 +56,7 @@ export default {
                 query: {
                     writable: false,
                     checking: true,
+                    formId: this.itemId,
                     itemId: this.itemId
                 }
             })
@@ -65,6 +66,7 @@ export default {
                 name: 'applicationVerifyForm',
                 query: {
                     writable: true,
+                    formId: this.itemId,
                     itemId: this.itemId
                 }
             })

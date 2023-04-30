@@ -25,6 +25,7 @@ import EmployeeCheckApplication from '../pages/Process/EmployeeCheckApplication'
 import EmployeeWriteTestPlan from '../pages/Process/EmployeeWriteTestPlan'
 import TestPlanForm from '../pages/Forms/TestPlanForm'
 import EmployeeVerifyTestPlan from '../pages/Process/EmployeeVerifyTestPlan'
+import ClientConfirmReport from '../pages/Process/ClientConfirmReport'
 const router = new VueRouter({
     routes: [
         {
@@ -86,11 +87,34 @@ const router = new VueRouter({
                     ]
                 },
                 {
-                    name:'ClientItemTable',
-                    path:'ClientItemTable',
+                    name:'ClientItem',
+                    path:'ClientItem',
                     component:ClientItemTable,
+                    props({query:{mission}}){
+                        return{mission}
+                    },
                     meta:{title:'查看项目'}
                 },
+                {
+                    name:'ConfirmTestReport',
+                    path:'ConfirmTestReport',
+                    component:ClientConfirmReport,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title:'确认测试报告'},
+                    children:[
+                        {
+                            name: 'readTestReportForm',
+                            path: 'readTestReportForm',
+                            component: TestReportForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '测试报告填写'}
+                        },
+                    ]
+                }
             ]
         },//客户界面
         {
@@ -100,13 +124,13 @@ const router = new VueRouter({
             meta: {title: '员工'},
             children: [
                 {
-                    name:'applicationItem',
-                    path:'applicationItem',
+                    name:'EmployeeItem',
+                    path:'EmployeeItem',
                     component:EmployeeItemTable,
                     props({query:{mission}}){
                         return{mission}
                     },
-                    meta: {title: '查看申请项目'}
+                    meta: {title: '查看项目'}
                 },
                 {
                     name:'checkApplication',
@@ -130,8 +154,8 @@ const router = new VueRouter({
                             name: 'checkFunctionList',
                             path: 'checkFunctionList',
                             component: TestFunctionList,
-                            props({query:{writable,checking}}){
-                                return{writable,checking}
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
                             },
                             meta: {title: '查看测试功能'}
                         },
@@ -139,21 +163,12 @@ const router = new VueRouter({
                             name: 'applicationVerifyForm',
                             path: 'applicationVerifyForm',
                             component: ApplicationVerifyForm,
-                            props({query:{writable}}){
-                                return{writable}
+                            props({query:{writable,formId}}){
+                                return{writable,formId}
                             },
                             meta: {title: '申请审核表格'}
                         },
                     ]
-                },
-                {
-                    name:'writeTestPlanItem',
-                    path:'writeTestPlanItem',
-                    component:EmployeeItemTable,
-                    props({query:{mission}}){
-                        return{mission}
-                    },
-                    meta:{title:'测试计划项目'}
                 },
                 {
                     name:'writeTestPlan',
@@ -176,8 +191,8 @@ const router = new VueRouter({
                         name: 'readFunctionList',
                         path: 'readFunctionList',
                         component: TestFunctionList,
-                        props({query:{writable,checking}}){
-                            return{writable,checking}
+                        props({query:{writable,checking,formId}}){
+                            return{writable,checking,formId}
                         },
                         meta: {title: '阅读测试功能'}
                     },
@@ -185,21 +200,12 @@ const router = new VueRouter({
                         name: 'testPlanForm',
                         path: 'testPlanForm',
                         component: TestPlanForm,
-                        props({query:{writable,checking}}){
-                            return{writable,checking}
+                        props({query:{writable,checking,formId}}){
+                            return{writable,checking,formId}
                         },
                         meta: {title: '测试计划'}
                     },
                 ]
-                },
-                {
-                    name:'verifyTestPlanItem',
-                    path:'verifyTestPlanItem',
-                    component:EmployeeItemTable,
-                    props({query:{mission}}){
-                        return{mission}
-                    },
-                    meta:{title:'审核计划项目'}
                 },
                 {
                     name:'verifyTestPlan',
@@ -214,8 +220,8 @@ const router = new VueRouter({
                             name: 'checkTestPlanForm',
                             path: 'checkTestPlanForm',
                             component: TestPlanForm,
-                            props({query:{writable,checking}}){
-                                return{writable,checking}
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
                             },
                             meta: {title: '查看测试计划'}
                         },
@@ -223,8 +229,8 @@ const router = new VueRouter({
                             name: 'testPlanVerifyForm',
                             path: 'testPlanVerifyForm',
                             component: TestPlanVerifyForm,
-                            props({query:{writable,checking}}){
-                                return{writable,checking}
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
                             },
                             meta: {title: '测试方案审核'}
                         },
@@ -248,7 +254,6 @@ const router = new VueRouter({
                     name: 'testReportForm',
                     path: 'testReportForm',
                     component: TestReportForm,
-                    isAuth: true,
                     meta: {title: '测试报告填写'}
                 },
                 
