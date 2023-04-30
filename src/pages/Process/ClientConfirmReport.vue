@@ -1,9 +1,9 @@
 <template>
     <div>
         <h2>确认测试报告</h2>
-        <h3>项目号:{{itemId}}</h3>
+        <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="readTestReport">查看测试报告</el-button>
-        <el-button type="primary">确认测试报告</el-button>
+        <el-button type="primary" @click="confirmReport">确认测试报告</el-button>
         <router-view></router-view>
     </div>
 </template>
@@ -11,16 +11,16 @@
 <script>
 export default {
     name: 'ClientConfirmReport',
-    props:['itemId'],
+    props: ['itemId'],
     data() {
         return {
 
         }
     },
-    methods:{
-        readTestReport(){
+    methods: {
+        readTestReport() {
             this.$router.push({
-                name:'readTestReportForm',
+                name: 'readTestReportForm',
                 query: {
                     writable: false,
                     checking: false,
@@ -28,6 +28,25 @@ export default {
                     itemId: this.itemId
                 }
             })
+        },
+        confirmReport() {
+            this.$confirm('请确认您已经仔细阅读了测试报告', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+                center: true
+            }).then(() => {
+                this.$message({
+                    type: 'success',
+                    message: '确认成功!'
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消操作'
+                });
+            });
+
         }
     }
 
