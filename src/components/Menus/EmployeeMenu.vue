@@ -38,9 +38,8 @@
                     <el-menu-item index="3-2">查看完成项目</el-menu-item>
                     <el-menu-item index="3-3" @click="writeTestPlan">测试方案填写</el-menu-item>
                     <el-menu-item index="3-4" @click="verifyTestPlan">测试方案审核</el-menu-item>
-                    <el-menu-item index="3-5">测试进度填写</el-menu-item>
-                    <el-menu-item index="3-6">测试报告填写</el-menu-item>
-                    <el-menu-item index="3-7">测试报告审核</el-menu-item>
+                    <el-menu-item index="3-5" @click="testProcess">测试进度填写</el-menu-item>
+                    <el-menu-item index="3-6">测试报告审核</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -86,6 +85,14 @@ export default {
                 name:'EmployeeItem',
                 query:{
                     mission:'verifyTestPlan'
+                }
+            })
+        },
+        testProcess(){
+            this.$router.push({
+                name:'EmployeeItem',
+                query:{
+                    mission:'testProcess'
                 }
             })
         }

@@ -26,6 +26,8 @@ import EmployeeWriteTestPlan from '../pages/Process/EmployeeWriteTestPlan'
 import TestPlanForm from '../pages/Forms/TestPlanForm'
 import EmployeeVerifyTestPlan from '../pages/Process/EmployeeVerifyTestPlan'
 import ClientConfirmReport from '../pages/Process/ClientConfirmReport'
+import EmployeeTestProcess from '../pages/Process/EmployeeTestProcess'
+
 const router = new VueRouter({
     routes: [
         {
@@ -236,6 +238,35 @@ const router = new VueRouter({
                         },
                     ]
                 },
+                {   
+                    name:'testProcess',
+                    path:'testProcess',
+                    component:EmployeeTestProcess,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title:'测试过程'},
+                    children:[
+                        {
+                            name:'readTestPlan',
+                            path:'readTestPlan',
+                            component: TestPlanForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '查看测试计划'}
+                        },
+                        {
+                            name: 'testReportForm',
+                            path: 'testReportForm',
+                            component: TestReportForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '测试报告填写'}
+                        }
+                    ]
+                },
                 {
                     name: 'reportVerifyForm',
                     path: 'reportVerifyForm',
@@ -250,13 +281,7 @@ const router = new VueRouter({
                     isAuth: true,
                     meta: {title: '软件文档评审表'}
                 },
-                {
-                    name: 'testReportForm',
-                    path: 'testReportForm',
-                    component: TestReportForm,
-                    meta: {title: '测试报告填写'}
-                },
-                
+            
                 {
                     name: 'testRecordsForm',
                     path: 'testRecordsForm',
