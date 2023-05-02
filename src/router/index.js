@@ -29,6 +29,7 @@ import ClientConfirmReport from '../pages/Process/ClientConfirmReport'
 import EmployeeTestProcess from '../pages/Process/EmployeeTestProcess'
 import EmployeeVerifyTestReport from '../pages/Process/EmployeeVerifyTestReport'
 import EmployeeArrangeMission from '../pages/Process/EmployeeArrangeMission'
+import ClientCheckApplication from '../pages/Process/ClientCheckApplication'
 
 const router = new VueRouter({
     routes: [
@@ -57,6 +58,15 @@ const router = new VueRouter({
             component: ClientPage,
             meta: {title: '客户'},
             children: [
+                {
+                    name:'ClientItem',
+                    path:'ClientItem',
+                    component:ClientItemTable,
+                    props({query:{mission}}){
+                        return{mission}
+                    },
+                    meta:{title:'查看项目'}
+                },
                 {
                     name:'createApplication',
                     path:'createApplication',
@@ -91,13 +101,42 @@ const router = new VueRouter({
                     ]
                 },
                 {
-                    name:'ClientItem',
-                    path:'ClientItem',
-                    component:ClientItemTable,
-                    props({query:{mission}}){
-                        return{mission}
+                    name:'submittedApplication',
+                    path:'submittedApplication',
+                    component:ClientCheckApplication,
+                    props({query:{itemId}}){
+                        return{itemId}
                     },
-                    meta:{title:'查看项目'}
+                    meta:{title:'查看测试报告'},
+                    children:[
+                        {
+                            name: 'editApplicationForm',
+                            path: 'editApplicationForm',
+                            component: ApplicationForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '编辑申请表格'}
+                        },
+                        {
+                            name: 'editFunctionList',
+                            path: 'editFunctionList',
+                            component: TestFunctionList,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '编辑功能表格'}
+                        },
+                        {
+                            name: 'readVerification',
+                            path: 'readVerification',
+                            component: ApplicationVerifyForm,
+                            props({query:{writable,formId}}){
+                                return{writable,formId}
+                            },
+                            meta: {title: '申请审核表格'}
+                        },
+                    ]
                 },
                 {
                     name:'ConfirmTestReport',
