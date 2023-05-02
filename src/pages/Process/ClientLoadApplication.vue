@@ -1,19 +1,51 @@
 <template>
     <div>
-
+        <h2>查看已保存申请</h2>
+        <h3>项目号:{{itemId}}</h3>
+        <el-button type="primary" @click="editApplicationForm">修改测试申请表</el-button>
+        <el-button type="primary" @click="editFunctionList">修改测试功能表</el-button>
+        <el-button type="primary" @click="submit">提交申请</el-button>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 
 <script>
 export default {
     name: 'ClientLoadApplication',
+    props:['itemId'],
     data() {
         return {
 
         }
     },
-    methods() {
+    methods:{
+        editApplicationForm(){
+            this.$router.push({
+                name:'editSavedApplicationForm',
+                query:{
+                    writable:true,
+                    checking:false,
+                    formId:this.itemId,
+                    itemId:this.itemId
+                }
+            })
+        },
+        editFunctionList(){
+            this.$router.push({
+                name:'editSavedFunctionList',
+                query:{
+                    writable:true,
+                    checking:false,
+                    formId:this.itemId,
+                    itemId:this.itemId
+                }
+            })
+        },
+        submit(){
 
+        }
     }
 }
 </script>

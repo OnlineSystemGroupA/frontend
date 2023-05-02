@@ -30,6 +30,7 @@ import EmployeeTestProcess from '../pages/Process/EmployeeTestProcess'
 import EmployeeVerifyTestReport from '../pages/Process/EmployeeVerifyTestReport'
 import EmployeeArrangeMission from '../pages/Process/EmployeeArrangeMission'
 import ClientCheckApplication from '../pages/Process/ClientCheckApplication'
+import ClientLoadApplication from '../pages/Process/ClientLoadApplication'
 
 const router = new VueRouter({
     routes: [
@@ -135,6 +136,35 @@ const router = new VueRouter({
                                 return{writable,formId}
                             },
                             meta: {title: '申请审核表格'}
+                        },
+                    ]
+                },
+                {
+                    name:'savedApplication',
+                    path:'savedApplication',
+                    component:ClientLoadApplication,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title:'查看测试报告'},
+                    children:[
+                        {
+                            name: 'editSavedApplicationForm',
+                            path: 'editSavedApplicationForm',
+                            component: ApplicationForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '编辑申请表格'}
+                        },
+                        {
+                            name: 'editSavedFunctionList',
+                            path: 'editSavedFunctionList',
+                            component: TestFunctionList,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '编辑功能表格'}
                         },
                     ]
                 },
