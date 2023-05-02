@@ -6,7 +6,7 @@
             </el-input>
         </div>
         <br/>
-        <el-table :data="itemList" height="600" border style="width: 100%">
+        <el-table :data="itemList"  border style="width: 100%; height: auto;">
             <el-table-column prop="id" label="项目号" style="width: 20%"> 
                 <template slot-scope="scope" >
                     <p @click="checkItemDetail(scope.row.id)">{{ scope.row.id }}</p>

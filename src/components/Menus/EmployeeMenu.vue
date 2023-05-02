@@ -15,7 +15,7 @@
                 </template>
                 <el-menu-item-group>
                     <el-menu-item index="1-1">查看项目列表</el-menu-item>
-                    <el-menu-item index="1-2">接受新任务</el-menu-item>
+                    <el-menu-item index="1-2" @click="arrangeMission">分配任务</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -101,6 +101,14 @@ export default {
                 name:'EmployeeItem',
                 query:{
                     mission:'verifyTestReport'
+                }
+            })
+        },
+        arrangeMission(){
+            this.$router.push({
+                name:'EmployeeItem',
+                query:{
+                    mission:'arrangeMission'
                 }
             })
         }

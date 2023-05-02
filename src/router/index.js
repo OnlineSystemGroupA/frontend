@@ -28,6 +28,7 @@ import EmployeeVerifyTestPlan from '../pages/Process/EmployeeVerifyTestPlan'
 import ClientConfirmReport from '../pages/Process/ClientConfirmReport'
 import EmployeeTestProcess from '../pages/Process/EmployeeTestProcess'
 import EmployeeVerifyTestReport from '../pages/Process/EmployeeVerifyTestReport'
+import EmployeeArrangeMission from '../pages/Process/EmployeeArrangeMission'
 
 const router = new VueRouter({
     routes: [
@@ -298,13 +299,41 @@ const router = new VueRouter({
                     ]
                 },
                 {
+                    name:'arrangeMission',
+                    path:'arrangeMission',
+                    component:EmployeeArrangeMission,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title: '分配任务'},
+                    children:[
+                        {
+                            name: 'readApplicationFormForManager',
+                            path: 'readApplicationFormForManager',
+                            component: ApplicationForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '查看申请表格'}
+                        },
+                        {
+                            name: 'readFunctionListForManager',
+                            path: 'readFunctionListForManager',
+                            component: TestFunctionList,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '查看测试功能'}
+                        },
+                    ]
+                },
+                {
                     name: 'documentReviewForm',
                     path: 'documentReviewForm',
                     component: DocumentReviewForm,
                     isAuth: true,
                     meta: {title: '软件文档评审表'}
                 },
-            
                 {
                     name: 'testRecordsForm',
                     path: 'testRecordsForm',

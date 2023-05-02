@@ -6,7 +6,7 @@
             </el-input>
         </div>
         <br>
-        <el-table :data="employeeData" height="600" border style="width: 100%">
+        <el-table :data="employeeData" border style="width: 100%; height: auto;">
             <el-table-column prop="id" label="id" width="180">
             </el-table-column>
             <el-table-column prop="employeeName" label="姓名" width="180">

@@ -22,7 +22,7 @@
                 <el-form-item label="说明">
                     <el-input v-model="record.description" placeholder="说明" style="width:50%"></el-input>
                 </el-form-item>
-                <el-button @click="removeItem(record)">删除表项</el-button>
+                <el-button @click="removeItem(index)">删除表项</el-button>
             </el-form-item>
             <el-button @click="addItem">添加表项</el-button>
             <h6>(A-添加，M-修改，D-删除)</h6>
@@ -175,10 +175,9 @@ export default {
             }
             this.form.editRecords.push(item)
         },
-        removeItem(record) {
-            var index = this.form.editRecords.indexOf(record)
+        removeItem(index) {
             if (index !== -1) {
-                this.editRecords.splice(index, 1)
+                this.form.editRecords.splice(index, 1)
             }
         },
         submit() {
