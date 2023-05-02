@@ -39,7 +39,7 @@
                     <el-menu-item index="3-3" @click="writeTestPlan">测试方案填写</el-menu-item>
                     <el-menu-item index="3-4" @click="verifyTestPlan">测试方案审核</el-menu-item>
                     <el-menu-item index="3-5" @click="testProcess">测试进度填写</el-menu-item>
-                    <el-menu-item index="3-6">测试报告审核</el-menu-item>
+                    <el-menu-item index="3-6" @click="verifyReport">测试报告审核</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -93,6 +93,14 @@ export default {
                 name:'EmployeeItem',
                 query:{
                     mission:'testProcess'
+                }
+            })
+        },
+        verifyReport(){
+            this.$router.push({
+                name:'EmployeeItem',
+                query:{
+                    mission:'verifyTestReport'
                 }
             })
         }

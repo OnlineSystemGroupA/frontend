@@ -6,7 +6,9 @@
         <el-button @click="writeTestRecord">填写测试记录</el-button>
         <el-button @click="writeTestProblem">填写测试问题表</el-button>
         <el-button @click="writeTestReport">填写测试报告</el-button>
-        <router-view></router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 

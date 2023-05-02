@@ -7,8 +7,9 @@
             <el-step title="步骤 3" description="填写测试功能表"></el-step>
             <el-step title="步骤 4" description="等待审核通过"></el-step>
         </el-steps>
-        <router-view>
-        </router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 

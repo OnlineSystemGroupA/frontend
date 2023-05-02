@@ -5,7 +5,9 @@
         <el-button type="primary" @click="checkApplication">查看申请表格</el-button>
         <el-button type="primary" @click="checkFunctionList">查看测试功能</el-button>
         <el-button type="primary" @click="writeTestPlan">创建测试方案</el-button>
-        <router-view></router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 

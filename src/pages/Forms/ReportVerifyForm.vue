@@ -1,7 +1,7 @@
 <template>
     <div class="report-verification">
         <h1>测试报告审核</h1>
-        <el-form label-position="left" label-width="125px">
+        <el-form label-position="left" label-width="125px" :disabled="disable">
             <h2>测试任务信息</h2>
             <el-form-item label="软件名称">
                 <el-input v-model="form.softwareName"></el-input>
@@ -98,12 +98,17 @@
                 </el-radio-group>
             </el-form-item>
         </el-form>
+        <el-row v-show="!disable">
+            <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
+        </el-row>
     </div>
 </template>
 
 <script>
 export default {
     name: "ReportVerifyForm",
+    props:['writable','checking','formId'],
     data() {
         return {
             form: {
@@ -124,6 +129,40 @@ export default {
                 formatChecked: false,
                 reportChecked: false,
             }
+        }
+    },
+    method:{
+        submit(){
+            
+        },
+        save(){
+
+        },
+    },
+    computed:{
+        disable(){
+            if(this.writable === 'false'){
+                return true
+            }
+            else if(this.writable === 'true'){
+                return false
+            }
+            else if(!this.writable){
+                return true
+            }
+            return false
+        },
+        check(){
+            if(this.checking === 'true'){
+                return true
+            }
+            else if(this.checking === 'false'){
+                return false
+            }
+            else if(this.checking){
+                return true
+            }
+            return false
         }
     }
 }

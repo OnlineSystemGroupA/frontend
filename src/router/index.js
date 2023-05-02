@@ -27,6 +27,7 @@ import TestPlanForm from '../pages/Forms/TestPlanForm'
 import EmployeeVerifyTestPlan from '../pages/Process/EmployeeVerifyTestPlan'
 import ClientConfirmReport from '../pages/Process/ClientConfirmReport'
 import EmployeeTestProcess from '../pages/Process/EmployeeTestProcess'
+import EmployeeVerifyTestReport from '../pages/Process/EmployeeVerifyTestReport'
 
 const router = new VueRouter({
     routes: [
@@ -268,11 +269,33 @@ const router = new VueRouter({
                     ]
                 },
                 {
-                    name: 'reportVerifyForm',
-                    path: 'reportVerifyForm',
-                    component: ReportVerifyForm,
-                    isAuth: true,
-                    meta: {title: '测试报告审核表格'}
+                    name:'verifyTestReport',
+                    path:'verifyTestReport',
+                    component: EmployeeVerifyTestReport,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title:'审核测试报告'},
+                    children:[
+                        {
+                            name: 'checkTestReportForm',
+                            path: 'checkTestReportForm',
+                            component: TestReportForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '查看测试报告'}
+                        },
+                        {
+                            name: 'reportVerifyForm',
+                            path: 'reportVerifyForm',
+                            component: ReportVerifyForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '测试报告审核表格'}
+                        }
+                    ]
                 },
                 {
                     name: 'documentReviewForm',

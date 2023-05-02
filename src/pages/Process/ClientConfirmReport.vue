@@ -4,7 +4,9 @@
         <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="readTestReport">查看测试报告</el-button>
         <el-button type="primary" @click="confirmReport">确认测试报告</el-button>
-        <router-view></router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 

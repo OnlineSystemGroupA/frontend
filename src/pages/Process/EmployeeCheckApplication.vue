@@ -7,7 +7,9 @@
             <el-step title="步骤 2" description="审核功能列表"></el-step>
             <el-step title="步骤 3" description="填写申请审核表"></el-step>
         </el-steps>
-        <router-view></router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
         <el-button v-if="active === -1" @click="start">开始审核</el-button>
     </div>
 </template>

@@ -4,7 +4,9 @@
         <h3>项目号:{{itemId}}</h3>
         <el-button type="priamry" @click="checkTestPlan">查看测试计划</el-button>
         <el-button type="priamry" @click="verfiyTestPlan">填写审核表格</el-button>
-        <router-view></router-view>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 
