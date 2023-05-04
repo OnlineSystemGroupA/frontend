@@ -2,7 +2,7 @@
     <div class="record-form">
         <h1>软件测试记录</h1>
         <el-button @click="addRecord">新建测试记录</el-button>
-        <el-form>
+        <el-form label-width="80px" label-position="left" :disabled="disable">
             <el-form-item v-for="(record, index) in records" :key="index" class="record">
                 <h1>Testcase {{ index }}</h1>
                 <el-form-item label="测试类型">
@@ -156,7 +156,7 @@ export default {
     align-items: center;
     border-radius: 3px;
     margin: 30px;
-    padding: 50px;
+    padding: 10px;
     border: 1px solid black;
 }
 </style>
