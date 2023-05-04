@@ -1,6 +1,6 @@
 <template>
   <div class="document">
-    <el-form label-width="100px" label-position="left">
+    <el-form label-width="100px" label-position="left" :disabled='disable'>
       <el-form-item label="软件名称">
         <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
       </el-form-item>
@@ -33,7 +33,7 @@
               </el-col>
               <el-col class="col">
                 <el-form-item label="评审结果说明">
-                  <el-input v-model="item.explanation" placeholder="评审结果说明"></el-input>
+                  <el-input type="textarea" v-model="item.explanation" placeholder="评审结果说明"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -54,7 +54,7 @@
               </el-col>
               <el-col class="col">
                 <el-form-item label="评审结果说明">
-                  <el-input v-model="item.explanation" placeholder="评审结果说明"></el-input>
+                  <el-input type="textarea" v-model="item.explanation" placeholder="评审结果说明"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -65,12 +65,21 @@
         <el-input placeholder="检查人" v-model="checker"></el-input>
       </el-form-item>
     </el-form>
+    <el-row v-show="!disable">
+      <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
+      <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
+    </el-row>
+    <el-row v-show="check">
+      <el-button type="primary" @click="pass" :disabled="!disable">通过</el-button>
+      <el-button type="primary" @click="refute" :disabled="!disable">驳回</el-button>
+    </el-row>
   </div>
 </template>
 
 <script>
 export default {
   name: 'DocumentReviewForm',
+  props: ['writable', 'formId', 'checking'],
   data() {
     return {
       form: {
@@ -337,20 +346,47 @@ export default {
         checker: ''
       }
     }
+  },
+  computed: {
+    disable() {
+      if (this.writable === 'false') {
+        return true
+      }
+      else if (this.writable === 'true') {
+        return false
+      }
+      else if (!this.writable) {
+        return true
+      }
+      return false
+    },
+    check() {
+      if (this.checking === 'true') {
+        return true
+      }
+      else if (this.checking === 'false') {
+        return false
+      }
+      else if (this.checking) {
+        return true
+      }
+      return false
+    }
   }
 }
 </script>
 
 <style scoped>
 .document {
-    width: 800px;
-    align-items: center;
-    border-radius: 30px;
-    margin: 30px;
-    padding: 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  width: 800px;
+  align-items: center;
+  border-radius: 30px;
+  margin: 30px;
+  padding: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
-.col{
+
+.col {
   width: 50%;
   padding: 10px;
 }

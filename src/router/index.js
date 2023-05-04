@@ -31,6 +31,8 @@ import EmployeeVerifyTestReport from '../pages/Process/EmployeeVerifyTestReport'
 import EmployeeArrangeMission from '../pages/Process/EmployeeArrangeMission'
 import ClientCheckApplication from '../pages/Process/ClientCheckApplication'
 import ClientLoadApplication from '../pages/Process/ClientLoadApplication'
+import EmployeeCheckTestWork from '../pages/Process/EmployeeCheckTestWork'
+import TestWorkCheck from '../pages/Forms/TestWorkCheck'
 
 const router = new VueRouter({
     routes: [
@@ -397,12 +399,35 @@ const router = new VueRouter({
                     ]
                 },
                 {
-                    name: 'documentReviewForm',
-                    path: 'documentReviewForm',
-                    component: DocumentReviewForm,
-                    isAuth: true,
-                    meta: {title: '软件文档评审表'}
+                    name:'checkTestWork',
+                    path:'checkTestWork',
+                    component:EmployeeCheckTestWork,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title: '检查测试工作'},
+                    children:[
+                        {
+                            name: 'documentReviewForm',
+                            path: 'documentReviewForm',
+                            component: DocumentReviewForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '软件文档评审表'}
+                        },
+                        {
+                            name:'workCheckForm',
+                            path:'workCheckForm',
+                            component:TestWorkCheck,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '测试工作检查表'}
+                        },
+                    ]
                 },
+                
                 {
                     name: 'testRecordsForm',
                     path: 'testRecordsForm',
