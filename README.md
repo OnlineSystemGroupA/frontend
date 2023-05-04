@@ -44,6 +44,9 @@ npm run lint
 ```
 测试方案（TestPlanForm）
 ```
+```
+测试工作检查表（TestWorkCheck）
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
