@@ -48,16 +48,25 @@
                     <el-input v-model="record.confirmer"></el-input>
                 </el-form-item>
                 <br/>
-                <el-button type="primary">提交</el-button>
                 <el-button type="danger" @click="deleteRecord(index)">删除</el-button>
             </el-form-item>
         </el-form>
+        <br>
+        <el-row v-show="!disable">
+            <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
+        </el-row>
+        <el-row v-show="check">
+            <el-button type="primary" @click="pass" :disabled = "!disable">通过</el-button>
+            <el-button type="primary" @click="refute" :disabled = "!disable">驳回</el-button>
+        </el-row>
     </div>
 </template>
 
 <script>
 export default {
     name: 'TestRecordForm',
+    props:['writable','formId','checking'],
     data() {
         return {
             records: []
@@ -83,6 +92,49 @@ export default {
         },
         deleteRecord(index) {
             this.records.splice(index, 1)
+        },
+        submit(){
+            if(this.writable){
+                console.log(JSON.stringify(this.form))
+                this.$bus.$emit('submitApplication')
+            }
+        },
+        save(){
+            if(this.writable){
+                sessionStorage.setItem('applicationForm',JSON.stringify(this.form))
+            }
+        },
+        pass(){
+            this.$bus.$emit('passApplication')
+        },
+        refute(){
+
+        }
+    },
+    computed:{
+        disable(){
+            if(this.writable === 'false'){
+                return true
+            }
+            else if(this.writable === 'true'){
+                return false
+            }
+            else if(!this.writable){
+                return true
+            }
+            return false
+        },
+        check(){
+            if(this.checking === 'true'){
+                return true
+            }
+            else if(this.checking === 'false'){
+                return false
+            }
+            else if(this.checking){
+                return true
+            }
+            return false
         }
     }
 }

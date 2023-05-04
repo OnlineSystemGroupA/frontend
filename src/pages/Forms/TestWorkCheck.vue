@@ -286,6 +286,25 @@ export default {
             }
             return false
         }
+    },
+    methods:{
+        submit(){
+            if(this.writable){
+                console.log(JSON.stringify(this.form))
+                this.$bus.$emit('submitApplication')
+            }
+        },
+        save(){
+            if(this.writable){
+                sessionStorage.setItem('applicationForm',JSON.stringify(this.form))
+            }
+        },
+        pass(){
+            this.$bus.$emit('passApplication')
+        },
+        refute(){
+
+        }
     }
 }
 

@@ -34,7 +34,15 @@ export default {
             })
         },
         writeTestRecord(){
-
+            this.$router.push({
+                name: 'testRecordsForm',
+                query: {
+                    writable: true,
+                    checking: false,
+                    formId: this.itemId,
+                    itemId: this.itemId
+                }
+            })
         },
         writeTestProblem(){
 

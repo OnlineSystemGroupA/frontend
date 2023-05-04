@@ -330,6 +330,15 @@ const router = new VueRouter({
                             meta: {title: '查看测试计划'}
                         },
                         {
+                            name: 'testRecordsForm',
+                            path: 'testRecordsForm',
+                            component: TestRecordsForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '软件测试记录'}
+                        },
+                        {
                             name: 'testReportForm',
                             path: 'testReportForm',
                             component: TestReportForm,
@@ -428,13 +437,7 @@ const router = new VueRouter({
                     ]
                 },
                 
-                {
-                    name: 'testRecordsForm',
-                    path: 'testRecordsForm',
-                    component: TestRecordsForm,
-                    isAuth: true,
-                    meta: {title: '软件测试记录'}
-                }
+                
             ]
         },//员工界面
         {
