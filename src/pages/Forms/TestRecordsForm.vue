@@ -3,7 +3,7 @@
         <h1>软件测试记录</h1>
         <el-button @click="addRecord">新建测试记录</el-button>
         <el-form label-width="80px" label-position="left" :disabled="disable">
-            <el-form-item v-for="(record, index) in records" :key="index" class="record">
+            <el-form-item v-for="(record, index) in form.records" :key="index" class="record">
                 <h1>Testcase {{ index }}</h1>
                 <el-form-item label="测试类型">
                     <el-input v-model="record.type"></el-input>
@@ -47,18 +47,18 @@
                 <el-form-item label="确认人">
                     <el-input v-model="record.confirmer"></el-input>
                 </el-form-item>
-                <br/>
+                <br />
                 <el-button type="danger" @click="deleteRecord(index)">删除</el-button>
             </el-form-item>
         </el-form>
         <br>
         <el-row v-show="!disable">
-            <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
-            <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
+            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
         <el-row v-show="check">
-            <el-button type="primary" @click="pass" :disabled = "!disable">通过</el-button>
-            <el-button type="primary" @click="refute" :disabled = "!disable">驳回</el-button>
+            <el-button type="primary" @click="pass" :disabled="!disable">通过</el-button>
+            <el-button type="primary" @click="refute" :disabled="!disable">驳回</el-button>
         </el-row>
     </div>
 </template>
@@ -66,15 +66,32 @@
 <script>
 export default {
     name: 'TestRecordForm',
-    props:['writable','formId','checking'],
+    props: ['writable', 'formId', 'checking'],
     data() {
         return {
-            records: []
+            form: {
+                records: [{
+                    type: '',
+                    description: '',
+                    contract: '',
+                    premise: '',
+                    process: '',
+                    prediction: '',
+                    designer: '',
+                    result: '',
+                    isMatched: false,
+                    bugIndex: '',
+                    executor: '',
+                    date: '',
+                    confirmer: ''
+                }]
+            }
+
         }
     },
     methods: {
         addRecord() {
-            this.records.push({
+            this.form.records.push({
                 type: '',
                 description: '',
                 contract: '',
@@ -91,47 +108,47 @@ export default {
             })
         },
         deleteRecord(index) {
-            this.records.splice(index, 1)
+            this.form.records.splice(index, 1)
         },
-        submit(){
-            if(this.writable){
+        submit() {
+            if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 this.$bus.$emit('submitApplication')
             }
         },
-        save(){
-            if(this.writable){
-                sessionStorage.setItem('applicationForm',JSON.stringify(this.form))
+        save() {
+            if (this.writable) {
+                sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
             }
         },
-        pass(){
+        pass() {
             this.$bus.$emit('passApplication')
         },
-        refute(){
+        refute() {
 
         }
     },
-    computed:{
-        disable(){
-            if(this.writable === 'false'){
+    computed: {
+        disable() {
+            if (this.writable === 'false') {
                 return true
             }
-            else if(this.writable === 'true'){
+            else if (this.writable === 'true') {
                 return false
             }
-            else if(!this.writable){
+            else if (!this.writable) {
                 return true
             }
             return false
         },
-        check(){
-            if(this.checking === 'true'){
+        check() {
+            if (this.checking === 'true') {
                 return true
             }
-            else if(this.checking === 'false'){
+            else if (this.checking === 'false') {
                 return false
             }
-            else if(this.checking){
+            else if (this.checking) {
                 return true
             }
             return false
@@ -141,7 +158,6 @@ export default {
 </script>
 
 <style scoped>
-
 .record-form {
     width: 800px;
     align-items: center;

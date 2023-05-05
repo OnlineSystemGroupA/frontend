@@ -74,7 +74,7 @@
             </el-form-item>
 
             <h2>三、实施测试</h2>
-            <el-form-item v-for="item in form.prework" :key="item.title">
+            <el-form-item v-for="item in form.testment" :key="item.title">
                 <h3>{{ item.title }}</h3>
                 <el-form-item v-for="(content, index) in item.contents" :key="index">
                     <li>{{ content.content }}</li>
@@ -252,11 +252,11 @@ export default {
                                 confirm: false,
                             },
                             {
-                                content: '',
+                                content: '该检查表与本次委托测试归档资料一同归档。',
                                 confirm: false,
                             },
                             {
-                                content: '',
+                                content: '确保归档资料方便查找取阅',
                                 confirm: false,
                             }
                         ]

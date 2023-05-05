@@ -35,19 +35,20 @@
                 <el-col class="col">
                     <el-form-item label="部门">
                         <el-select placeholder="部门" v-model="form.department">
-                            <el-option label="测试部" value="测试部"></el-option>
-                            <el-option label="市场部" value="市场部"></el-option>
-                            <el-option label="审核部" value="审核部"></el-option>
+                            <el-option v-for="department in departments" 
+                            :key="department.value" 
+                            :label="department.label"
+                            :value="department.value"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
                 <el-col class="col">
                     <el-form-item label="职能">
                         <el-select placeholder="职能" v-model="form.position">
-                            <el-option label="部长" value="部长"></el-option>
-                            <el-option label="审核员" value="审核员"></el-option>
-                            <el-option label="测试员" value="测试员"></el-option>
-                            <el-option label="调查员" value="调查员"></el-option>
+                            <el-option v-for="position in positions" 
+                            :key="position.value" 
+                            :label="position.label"
+                            :value="position.value"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
@@ -71,7 +72,7 @@
                     <el-form-item label="电话号码">
                         <el-input placeholder="电话号码" v-model="form.telephone"></el-input>
                     </el-form-item>
-                </el-col>s
+                </el-col>
                 <el-col class="col">
                     <el-form-item label="邮件">
                         <el-input placeholder="邮件" v-model.number="form.email"></el-input>
@@ -102,7 +103,39 @@ export default {
                 qualification: '',
                 telephone:'',
                 phone:''
-            }
+            },
+            departments:[
+                {
+                    label:'测试部',
+                    value:'测试部',
+                },
+                {
+                    label:'审核部',
+                    value:'审核部',
+                },
+                {
+                    label:'市场部',
+                    value:'市场部',
+                }
+            ],
+            positions:[
+                {
+                    label:'部长',
+                    value:'部长',
+                },
+                {
+                    label:'审核员',
+                    value:'审核员',
+                },
+                {
+                    label:'测试员',
+                    value:'测试员',
+                },
+                {
+                    label:'调查员',
+                    value:'调查员',
+                }
+            ]
         }
     },
     methods: {
