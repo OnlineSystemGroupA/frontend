@@ -33,6 +33,7 @@ import ClientCheckApplication from '../pages/Process/ClientCheckApplication'
 import ClientLoadApplication from '../pages/Process/ClientLoadApplication'
 import EmployeeCheckTestWork from '../pages/Process/EmployeeCheckTestWork'
 import TestWorkCheck from '../pages/Forms/TestWorkCheck'
+import WorkArrangeTable from '../pages/Tables/WorkArrangeTable'
 
 const router = new VueRouter({
     routes: [
@@ -405,6 +406,15 @@ const router = new VueRouter({
                             },
                             meta: {title: '查看测试功能'}
                         },
+                        {
+                            name:'workArrangeTable',
+                            path:'workArrangeTable',
+                            component:WorkArrangeTable,
+                            props({query:{work}}){
+                                return{work}
+                            },
+                            meta:{title:'工作安排'}
+                        }
                     ]
                 },
                 {

@@ -1,5 +1,13 @@
 <template>
-    <div class="employeeTable">
+    <div class="table">
+        <h3>工作类型:{{ workType }}</h3>
+        <el-form>
+            <el-form-item label="员工id">
+                <el-input placeholder="员工id" v-model="employeeId"></el-input>
+            </el-form-item>
+        </el-form>
+
+        <el-button>安排</el-button>
         <div style="width: 30%">
             <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
                 <el-button slot="append" icon="el-icon-search"></el-button>
@@ -25,10 +33,14 @@
 </template>
 
 <script>
+//import EmployeeTable from './EmployeeTable.vue'
 export default {
-    name: 'EmployeeTable',
+    name: 'WorkArrangeTable',
+    //components: {EmployeeTable},
+    props: ['work'],
     data() {
         return {
+            employeeId: '',
             keyword:'',
             employeeData: [
                 {
@@ -69,16 +81,31 @@ export default {
             ]
         }
     },
+    /*mounted() {
+        this.$bus.$on('pickEmployee', (employeeId) => {
+            this.employeeId = employeeId
+        })
+    },*/
+    computed: {
+        workType() {
+            if (this.work === 'verification') {
+                return '审核工作'
+            }
+            else {
+                return '测试工作'
+            }
+        }
+    },
     methods:{
         pickEmployee(id){
-            this.$bus.$emit('pickEmployee',id)
+            this.employeeId = id
         }
     }
 }
 </script>
 
 <style scoped>
-.employeeTable {
+.table {
   width: 800px;
   align-items: center;
   border-radius: 30px;
