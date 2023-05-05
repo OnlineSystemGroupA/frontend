@@ -5,12 +5,17 @@
             <el-col style="width:50%">
                 <el-form label-position="left" label-width="80px">
                     <el-form-item label="员工id">
-                        <el-input placeholder="员工id" v-model="employeeId"></el-input>
+                        <el-input placeholder="员工id" v-model="workInfo.employeeId"></el-input>
+                    </el-form-item>
+                    <el-form-item label="任务类型">
+                        <el-select placeholder="工作" v-model="workInfo.work">
+                            <el-option v-for="work in works" :key="work.value" :label="work.label"
+                                :value="work.value"></el-option>
+                        </el-select>
                     </el-form-item>
                 </el-form>
             </el-col>
-
-            <el-col style="width:50%;padding-left: 20%;">
+            <el-col style="width:50%;padding-left: 10%;">
                 <el-button type="primary">安排</el-button>
             </el-col>
 
@@ -48,7 +53,6 @@ export default {
     props: ['work'],
     data() {
         return {
-            employeeId: '',
             keyword: '',
             employeeData: [
                 {
@@ -86,7 +90,11 @@ export default {
                     position: '记录员',
                     email: 'money@163.com'
                 },
-            ]
+            ],
+            workInfo: {
+                employeeId: '',
+                work: '',
+            }
         }
     },
     /*mounted() {
@@ -102,11 +110,45 @@ export default {
             else {
                 return '测试工作'
             }
+        },
+        works() {
+            if (this.work === 'verification') {
+                return [
+                    {
+                        label: '审核申请',
+                        value: '审核申请',
+                    },
+                    {
+                        label: '审核测试方案',
+                        value: '审核测试方案',
+                    },
+                    {
+                        label: '审核测试报告',
+                        value: '审核测试报告',
+                    },
+                    {
+                        label: '测试工作检查',
+                        value: '测试工作检查',
+                    },
+                ]
+            }
+            else {
+                return [
+                    {
+                        label: '制定测试报告',
+                        value: '制定测试报告',
+                    },
+                    {
+                        label: '执行测试',
+                        value: '执行测试',
+                    }
+                ]
+            }
         }
     },
     methods: {
         pickEmployee(id) {
-            this.employeeId = id
+            this.workInfo.employeeId = id
         }
     }
 }

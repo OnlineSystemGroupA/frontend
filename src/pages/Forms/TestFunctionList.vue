@@ -23,7 +23,7 @@
                             <el-input v-model="item.name"></el-input>
                         </el-form-item>
                         <el-form-item label="详细功能描述">
-                            <el-input type="textarea" type = "textarea" v-model="item.description"></el-input>
+                            <el-input type="textarea" v-model="item.description"></el-input>
                         </el-form-item>
                         <hr>
                     </el-form-item>

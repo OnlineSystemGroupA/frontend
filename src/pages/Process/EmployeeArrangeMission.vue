@@ -6,9 +6,7 @@
         <el-button type="primary" @click="checkFunctionList">查看测试功能</el-button>
         <el-button type="primary" @click="arrangeWork('verification')">分配审核任务</el-button>
         <el-button type="primary" @click="arrangeWork('testment')">分配测试任务</el-button>
-        <keep-alive>
-            <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
     </div>
 </template>
 
