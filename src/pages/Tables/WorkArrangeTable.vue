@@ -1,13 +1,21 @@
 <template>
     <div class="table">
         <h3>工作类型:{{ workType }}</h3>
-        <el-form>
-            <el-form-item label="员工id">
-                <el-input placeholder="员工id" v-model="employeeId"></el-input>
-            </el-form-item>
-        </el-form>
+        <el-row>
+            <el-col style="width:50%">
+                <el-form label-position="left" label-width="80px">
+                    <el-form-item label="员工id">
+                        <el-input placeholder="员工id" v-model="employeeId"></el-input>
+                    </el-form-item>
+                </el-form>
+            </el-col>
 
-        <el-button>安排</el-button>
+            <el-col style="width:50%;padding-left: 20%;">
+                <el-button type="primary">安排</el-button>
+            </el-col>
+
+        </el-row>
+
         <div style="width: 30%">
             <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
                 <el-button slot="append" icon="el-icon-search"></el-button>
@@ -16,7 +24,7 @@
         <br>
         <el-table :data="employeeData" border style="width: 100%; height: auto;">
             <el-table-column prop="id" label="id" style="width: 20%">
-                <template slot-scope="scope" >
+                <template slot-scope="scope">
                     <p @click="pickEmployee(scope.row.id)">{{ scope.row.id }}</p>
                 </template>
             </el-table-column>
@@ -41,42 +49,42 @@ export default {
     data() {
         return {
             employeeId: '',
-            keyword:'',
+            keyword: '',
             employeeData: [
                 {
-                    id:'e001',
-                    employeeName:'李四',
-                    department:'市场部',
-                    position:'调查员',
-                    email:'123@132.com'
+                    id: 'e001',
+                    employeeName: '李四',
+                    department: '市场部',
+                    position: '调查员',
+                    email: '123@132.com'
                 },
                 {
-                    id:'e002',
-                    employeeName:'王五',
-                    department:'测试部',
-                    position:'测试员',
-                    email:'wangwu@163.com'
+                    id: 'e002',
+                    employeeName: '王五',
+                    department: '测试部',
+                    position: '测试员',
+                    email: 'wangwu@163.com'
                 },
                 {
-                    id:'e003',
-                    employeeName:'赵六',
-                    department:'审核部',
-                    position:'部长',
-                    email:'leo@163.com'
+                    id: 'e003',
+                    employeeName: '赵六',
+                    department: '审核部',
+                    position: '部长',
+                    email: 'leo@163.com'
                 },
                 {
-                    id:'e004',
-                    employeeName:'何七',
-                    department:'测试部',
-                    position:'部长',
-                    email:'seven@163.com'
+                    id: 'e004',
+                    employeeName: '何七',
+                    department: '测试部',
+                    position: '部长',
+                    email: 'seven@163.com'
                 },
                 {
-                    id:'e005',
-                    employeeName:'钱八',
-                    department:'测试部',
-                    position:'记录员',
-                    email:'money@163.com'
+                    id: 'e005',
+                    employeeName: '钱八',
+                    department: '测试部',
+                    position: '记录员',
+                    email: 'money@163.com'
                 },
             ]
         }
@@ -96,8 +104,8 @@ export default {
             }
         }
     },
-    methods:{
-        pickEmployee(id){
+    methods: {
+        pickEmployee(id) {
             this.employeeId = id
         }
     }
@@ -106,11 +114,11 @@ export default {
 
 <style scoped>
 .table {
-  width: 800px;
-  align-items: center;
-  border-radius: 30px;
-  margin: 30px;
-  padding: 50px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    width: 800px;
+    align-items: center;
+    border-radius: 30px;
+    margin: 30px;
+    padding: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
 </style>

@@ -48,7 +48,8 @@ export default {
             this.$router.push({
                 name:'workArrangeTable',
                 query:{
-                    work:work
+                    work:work,
+                    itemId: this.itemId
                 }
             })
         }
