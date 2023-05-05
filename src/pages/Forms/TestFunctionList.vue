@@ -84,17 +84,17 @@ export default {
             this.form.functions[index].items.push(item)
         },
         removeFunc(func) {
-            var index = this.form.functions.indexOf(func)
+            const index = this.form.functions.indexOf(func);
             //console.log(index)
-            if (index != -1) {
+            if (index !== -1) {
                 this.form.functions.splice(index, 1)
             }
         },
         removeItem(index, item) {
-            if (index != -1) {
-                var index_item = this.form.functions[index].items.indexOf(item)
+            if (index !== -1) {
+                const index_item = this.form.functions[index].items.indexOf(item);
                 //console.log(index, index_item)
-                if (index_item != -1) {
+                if (index_item !== -1) {
                     this.form.functions[index].items.splice(index_item, 1)
                 }
             }
