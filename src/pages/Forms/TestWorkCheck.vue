@@ -84,6 +84,10 @@
                     </el-radio-group>
                 </el-form-item>
             </el-form-item>
+
+            <el-form-item label="检查人">
+                <el-input v-model = "form.checker" placeholder="检查人"></el-input>
+            </el-form-item>
         </el-form>
         <el-row v-show="!disable">
             <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
@@ -257,7 +261,8 @@ export default {
                             }
                         ]
                     }
-                ]
+                ],
+                checker:'',
             }
         }
     },
