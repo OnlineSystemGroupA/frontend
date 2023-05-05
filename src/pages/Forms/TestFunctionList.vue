@@ -3,10 +3,10 @@
         <h1>功能表格</h1>
         <el-form :model="form" ref="form" label-width="100px" class="demo-dynamic" :disabled="disable">
             <el-form-item label="软件名称">
-                <el-input></el-input>
+                <el-input v-model="form.softwareName"></el-input>
             </el-form-item>
             <el-form-item label="版本号">
-                <el-input></el-input>
+                <el-input v-model="form.softwareVersion"></el-input>
             </el-form-item>
 
             <el-form-item v-for="(func, index) in form.functions" :key="func.key" class="func">
@@ -91,17 +91,17 @@ export default {
             this.form.functions[index].items.push(item)
         },
         removeFunc(func) {
-            var index = this.form.functions.indexOf(func)
+            const index = this.form.functions.indexOf(func);
             //console.log(index)
-            if (index != -1) {
+            if (index !== -1) {
                 this.form.functions.splice(index, 1)
             }
         },
         removeItem(index, item) {
-            if (index != -1) {
-                var index_item = this.form.functions[index].items.indexOf(item)
+            if (index !== -1) {
+                const index_item = this.form.functions[index].items.indexOf(item);
                 //console.log(index, index_item)
-                if (index_item != -1) {
+                if (index_item !== -1) {
                     this.form.functions[index].items.splice(index_item, 1)
                 }
             }
