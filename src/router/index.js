@@ -34,6 +34,7 @@ import ClientLoadApplication from '../pages/Process/ClientLoadApplication'
 import EmployeeCheckTestWork from '../pages/Process/EmployeeCheckTestWork'
 import TestWorkCheck from '../pages/Forms/TestWorkCheck'
 import WorkArrangeTable from '../pages/Tables/WorkArrangeTable'
+import ClientVerifyTestReport from '../pages/Process/ClientVerifyTestReport'
 
 const router = new VueRouter({
     routes: [
@@ -189,6 +190,26 @@ const router = new VueRouter({
                             },
                             meta: {title: '测试报告填写'}
                         },
+                    ]
+                },
+                {
+                    name:'clientVerifyTestReport',
+                    path:'clientVerifyTestReport',
+                    component:ClientVerifyTestReport,
+                    props({query:{itemId}}){
+                        return{itemId}
+                    },
+                    meta:{title:'审核测试报告'},
+                    children:[
+                        {
+                            name: 'clientCheckTestReportForm',
+                            path: 'clientCheckTestReportForm',
+                            component: TestReportForm,
+                            props({query:{writable,checking,formId}}){
+                                return{writable,checking,formId}
+                            },
+                            meta: {title: '查看测试报告'}
+                        }
                     ]
                 }
             ]
@@ -442,7 +463,7 @@ const router = new VueRouter({
                             props({query:{writable,checking,formId}}){
                                 return{writable,checking,formId}
                             },
-                            meta: {title: '测试工作检查表'}
+                            meta: {title: '测试工作检查表',isLogin:true}
                         },
                     ]
                 },
