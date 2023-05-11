@@ -16,8 +16,9 @@
                     <el-input v-model="func.title"></el-input>
                     <el-form-item v-for="(item, index_item) in func.items" :key="index_item">
                         <span>
-                            <label>详细功能{{ index_item }} </label> <el-button v-show="!disable"
-                                                                                @click.prevent="removeItem(index, item)">删除详细功能</el-button>
+                            <label>详细功能{{ index_item }} </label>
+                            <el-button v-show="!disable"
+                                       @click.prevent="removeItem(index, item)">删除详细功能</el-button>
                         </span>
                         <el-form-item label="详细功能名称">
                             <el-input v-model="item.name"></el-input>
