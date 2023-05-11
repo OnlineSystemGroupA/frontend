@@ -1,5 +1,5 @@
 <template>
-    <div class="employee" >
+    <div class="employee">
         <el-form label-position="left" label-width="80px">
             <el-row>
                 <el-col class="col">
@@ -26,7 +26,7 @@
                 <el-col class="col">
                     <el-form-item label="生日">
                         <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday"
-                            style="width: 100%;"></el-date-picker>
+                                        style="width: 100%;"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -35,20 +35,20 @@
                 <el-col class="col">
                     <el-form-item label="部门">
                         <el-select placeholder="部门" v-model="form.department">
-                            <el-option v-for="department in departments" 
-                            :key="department.value" 
-                            :label="department.label"
-                            :value="department.value"></el-option>
+                            <el-option v-for="department in departments"
+                                       :key="department.value"
+                                       :label="department.label"
+                                       :value="department.value"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
                 <el-col class="col">
                     <el-form-item label="职能">
                         <el-select placeholder="职能" v-model="form.position">
-                            <el-option v-for="position in positions" 
-                            :key="position.value" 
-                            :label="position.label"
-                            :value="position.value"></el-option>
+                            <el-option v-for="position in positions"
+                                       :key="position.value"
+                                       :label="position.label"
+                                       :value="position.value"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
@@ -101,40 +101,19 @@ export default {
                 position: '',
                 id: '',
                 qualification: '',
-                telephone:'',
-                phone:''
+                telephone: '',
+                phone: ''
             },
-            departments:[
-                {
-                    label:'测试部',
-                    value:'测试部',
-                },
-                {
-                    label:'审核部',
-                    value:'审核部',
-                },
-                {
-                    label:'市场部',
-                    value:'市场部',
-                }
+            departments: [
+                {label: '测试部', value: '测试部',},
+                {label: '审核部', value: '审核部',},
+                {label: '市场部', value: '市场部',}
             ],
-            positions:[
-                {
-                    label:'部长',
-                    value:'部长',
-                },
-                {
-                    label:'审核员',
-                    value:'审核员',
-                },
-                {
-                    label:'测试员',
-                    value:'测试员',
-                },
-                {
-                    label:'调查员',
-                    value:'调查员',
-                }
+            positions: [
+                {label: '部长', value: '部长',},
+                {label: '审核员', value: '审核员',},
+                {label: '测试员', value: '测试员',},
+                {label: '调查员', value: '调查员',}
             ]
         }
     },
@@ -142,26 +121,19 @@ export default {
         submit() {
             if (this.form.name === '') {
                 alert('请输入姓名')
-            }
-            else if (this.form.gender === '') {
+            } else if (this.form.gender === '') {
                 alert('请输入性别')
-            }
-            else if (this.form.birthday === '') {
+            } else if (this.form.birthday === '') {
                 alert('请输入生日')
-            }
-            else if (this.form.hometown === '') {
+            } else if (this.form.hometown === '') {
                 alert('请输入籍贯')
-            }
-            else if (this.form.department === '') {
+            } else if (this.form.department === '') {
                 alert('请输入部门')
-            }
-            else if (this.form.position === '') {
+            } else if (this.form.position === '') {
                 alert('请输入职能')
-            }
-            else if (this.form.id === '') {
+            } else if (this.form.id === '') {
                 alert('请输入员工号')
-            }
-            else if (this.form.qualification === '') {
+            } else if (this.form.qualification === '') {
                 alert('请输入资历')
             }
         }
@@ -178,8 +150,9 @@ export default {
     padding: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
-.col{
-  width: 50%;
-  padding: 10px;
+
+.col {
+    width: 50%;
+    padding: 10px;
 }
 </style>

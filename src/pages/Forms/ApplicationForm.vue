@@ -178,13 +178,13 @@
                     <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
                 </el-form-item>
                 <el-form-item label="中间件:">
-                    <el-input placeholder="中间件" v-model="form.serverMidware"></el-input>
+                    <el-input placeholder="中间件" v-model="form.serverMiddleware"></el-input>
                 </el-form-item>
                 <el-form-item label="其他支撑软件:">
                     <el-input placeholder="其他支撑软件" v-model="form.serverOtherSoftware"></el-input>
                 </el-form-item>
                 <h3>网络环境</h3>
-                <el-input placeholder="网络环境" v-model="form.networkEnviroment"></el-input>
+                <el-input placeholder="网络环境" v-model="form.networkEnvironment"></el-input>
             </el-form-item>
             <hr>
             <el-form-item>
@@ -333,9 +333,9 @@ export default {
                 serverLanguage: '',
                 serverFrame: '',
                 serverDatabase: '',
-                serverMidware: '',
+                serverMiddleware: '',
                 serverOtherSoftware: '',
-                networkEnviroment: '',
+                networkEnvironment: '',
                 cdNum: '',
                 usbNum: '',
                 otherMedium: '',
@@ -356,143 +356,55 @@ export default {
             },
             typeList: [
                 {
-                    value: "系统软件",
-                    label: "系统软件",
+                    value: "系统软件", label: "系统软件",
                     children: [
-                        {
-                            value: "操作系统",
-                            label: "操作系统",
-                        },
-                        {
-                            value: "中文处理系统",
-                            label: "中文处理系统",
-                        },
-                        {
-                            value: "网络系统",
-                            label: "网络系统",
-                        },
-                        {
-                            value: "嵌入式操作系统",
-                            label: "嵌入式操作系统",
-                        },
-                        {
-                            value: "其他",
-                            label: "其他",
-                        },
+                        {value: "操作系统", label: "操作系统"},
+                        {value: "中文处理系统", label: "中文处理系统"},
+                        {value: "网络系统", label: "网络系统"},
+                        {value: "嵌入式操作系统", label: "嵌入式操作系统"},
+                        {value: "其他", label: "其他"},
                     ],
                 },
                 {
-                    label: "支持软件",
-                    value: "支持软件",
+                    label: "支持软件", value: "支持软件",
                     children: [
-                        {
-                            label: "程序设计语言",
-                            value: "程序设计语言",
-                        },
-                        {
-                            label: "数据库系统设计",
-                            value: "数据库系统设计",
-                        },
-                        {
-                            label: "工具软件",
-                            value: "工具软件",
-                        },
-                        {
-                            label: "网络通信软件",
-                            value: "网络通信软件",
-                        },
-                        {
-                            label: "中间件",
-                            value: "中间件",
-                        },
-                        {
-                            label: "其他",
-                            value: "其他",
-                        },
+                        {label: "程序设计语言", value: "程序设计语言"},
+                        {label: "数据库系统设计", value: "数据库系统设计"},
+                        {label: "工具软件", value: "工具软件"},
+                        {label: "网络通信软件", value: "网络通信软件"},
+                        {label: "中间件", value: "中间件"},
+                        {label: "其他", value: "其他"},
                     ],
                 },
                 {
-                    label: "应用软件",
-                    value: "应用软件",
+                    label: "应用软件", value: "应用软件",
                     children: [
-                        {
-                            label: "行业管理软件",
-                            value: "行业管理软件",
-                        },
-                        {
-                            label: "办公软件",
-                            value: "办公软件",
-                        },
-                        {
-                            label: "模式识别软件",
-                            value: "模式识别软件",
-                        },
-                        {
-                            label: "图形图像软件",
-                            value: "图形图像软件",
-                        },
-                        {
-                            label: "控制软件",
-                            value: "控制软件",
-                        },
-                        {
-                            label: "网络应用软件",
-                            value: "网络应用软件",
-                        },
-                        {
-                            label: "信息管理软件",
-                            value: "信息管理软件",
-                        },
-                        {
-                            label: "数据库管理应用软件",
-                            value: "数据库管理应用软件",
-                        },
-                        {
-                            label: "安全与保密软件",
-                            value: "安全与保密软件",
-                        },
-                        {
-                            label: "嵌入式应用软件",
-                            value: "嵌入式应用软件",
-                        },
-                        {
-                            label: "教育软件",
-                            value: "教育软件",
-                        },
-                        {
-                            label: "游戏软件",
-                            value: "游戏软件",
-                        },
-                        {
-                            label: "其他",
-                            value: "其他",
-                        },
+                        {label: "行业管理软件", value: "行业管理软件"},
+                        {label: "办公软件", value: "办公软件"},
+                        {label: "模式识别软件", value: "模式识别软件"},
+                        {label: "图形图像软件", value: "图形图像软件"},
+                        {label: "控制软件", value: "控制软件"},
+                        {label: "网络应用软件", value: "网络应用软件"},
+                        {label: "信息管理软件", value: "信息管理软件"},
+                        {label: "数据库管理应用软件", value: "数据库管理应用软件"},
+                        {label: "安全与保密软件", value: "安全与保密软件"},
+                        {label: "嵌入式应用软件", value: "嵌入式应用软件"},
+                        {label: "教育软件", value: "教育软件"},
+                        {label: "游戏软件", value: "游戏软件"},
+                        {label: "其他", value: "其他"},
                     ],
                 },
                 {
-                    label: "其他",
-                    value: "其他",
+                    label: "其他", value: "其他",
                     children: [
-                        {
-                            label: "其他",
-                            value: "其他",
-                        },
+                        {label: "其他", value: "其他"},
                     ],
                 },
             ],
             frameOptions: [
-                {
-                    value: 'C/S',
-                    label: 'C/S'
-                },
-                {
-                    value: 'B/S',
-                    label: 'B/S'
-                },
-                {
-                    value: '其他',
-                    label: '其他'
-                },
+                {value: 'C/S', label: 'C/S'},
+                {value: 'B/S', label: 'B/S'},
+                {value: '其他', label: '其他'},
             ],
         };
     },

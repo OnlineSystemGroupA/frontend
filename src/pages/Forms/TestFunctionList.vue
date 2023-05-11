@@ -17,7 +17,7 @@
                     <el-form-item v-for="(item, index_item) in func.items" :key="index_item">
                         <span>
                             <label>详细功能{{ index_item }} </label> <el-button v-show="!disable"
-                                @click.prevent="removeItem(index, item)">删除详细功能</el-button>
+                                                                                @click.prevent="removeItem(index, item)">删除详细功能</el-button>
                         </span>
                         <el-form-item label="详细功能名称">
                             <el-input v-model="item.name"></el-input>
@@ -59,10 +59,7 @@ export default {
                     {
                         title: '',
                         items: [
-                            {
-                                name: '',
-                                description: '',
-                            }
+                            {name: '', description: '',}
                         ]
                     }
                 ]
@@ -123,11 +120,9 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -135,11 +130,9 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            }
-            else if (this.checking === 'false') {
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if (this.checking) {
+            } else if (this.checking) {
                 return true
             }
             return false
