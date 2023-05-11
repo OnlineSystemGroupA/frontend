@@ -3,21 +3,18 @@
         <el-container>
             <el-header>Header</el-header>
             <el-container>
-                <el-container>
-                    <el-aside style="width: auto;">
-                        <ClientMenu></ClientMenu>
-                    </el-aside>
-                    <el-main>
-                        <div style="{width:1000px}">
-                            <router-view>
-                            </router-view>
-                        </div>
-                    </el-main>
-                </el-container>
-                <el-footer style="height: auto;">
-                    <PageFooter></PageFooter>
-                </el-footer>
+                <el-aside style="height: 100%;">
+                    <ClientMenu></ClientMenu>
+                </el-aside>
+
+                <el-main>
+                    <div class="main">
+                        <router-view>
+                        </router-view>
+                    </div>
+                </el-main>
             </el-container>
+            <page-footer></page-footer>
         </el-container>
     </div>
 </template>
@@ -36,9 +33,16 @@ export default {
 
 <style scoped>
 .client {
-    width: 1200px;
-    margin: 30px;
+    width: 100%;
+    height: 100%;
     padding: 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.main {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 </style>

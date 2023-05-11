@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>任务分配</h2>
-        <h3>项目号:{{itemId}}</h3>
+        <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="checkApplication">查看申请表格</el-button>
         <el-button type="primary" @click="checkFunctionList">查看测试功能</el-button>
         <el-button type="primary" @click="arrangeWork('verification')">分配审核任务</el-button>
@@ -13,14 +13,14 @@
 <script>
 export default {
     name: 'EmployeeArrangeMission',
-    props:['itemId'],
+    props: ['itemId'],
     data() {
         return {
 
         }
     },
     methods: {
-        checkApplication(){
+        checkApplication() {
             this.$router.push({
                 name: 'readApplicationFormForManager',
                 query: {
@@ -31,7 +31,7 @@ export default {
                 }
             })
         },
-        checkFunctionList(){
+        checkFunctionList() {
             this.$router.push({
                 name: 'readFunctionListForManager',
                 query: {
@@ -42,11 +42,11 @@ export default {
                 }
             })
         },
-        arrangeWork(work){
+        arrangeWork(work) {
             this.$router.push({
-                name:'workArrangeTable',
-                query:{
-                    work:work,
+                name: 'workArrangeTable',
+                query: {
+                    work: work,
                     itemId: this.itemId
                 }
             })

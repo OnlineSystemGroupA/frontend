@@ -35,6 +35,7 @@ import EmployeeCheckTestWork from '../pages/Process/EmployeeCheckTestWork'
 import TestWorkCheck from '../pages/Forms/TestWorkCheck'
 import WorkArrangeTable from '../pages/Tables/WorkArrangeTable'
 import ClientVerifyTestReport from '../pages/Process/ClientVerifyTestReport'
+import ItemDetail from '../pages/Details/ItemDetail'
 
 const router = new VueRouter({
     routes: [
@@ -67,10 +68,52 @@ const router = new VueRouter({
                     name:'ClientItem',
                     path:'ClientItem',
                     component:ClientItemTable,
-                    props({query:{mission}}){
-                        return{mission}
+                    meta:{title:'项目列表'}
+                },
+                {
+                    name:'ClientItemDetail',
+                    path:'ClientItemDetail',
+                    component:ItemDetail,
+                    props({query:{itemId}}){
+                        return{itemId}
                     },
-                    meta:{title:'查看项目'}
+                    meta:{title:'项目详情'}
+                },
+                {
+                    name:'ClientReadApplicationForm',
+                    path:'ClientReadApplicationForm',
+                    component:ApplicationForm,
+                    props({query:{writable,checking,formId}}){
+                        return{writable,checking,formId}
+                    },
+                    meta:{title:'读取申请表'}
+                },
+                {
+                    name:'ClientReadTestFunctionList',
+                    path:'ClientReadTestFunctionList',
+                    component:TestFunctionList,
+                    props({query:{writable,checking,formId}}){
+                        return{writable,checking,formId}
+                    },
+                    meta:{title:'读取测试功能表'}
+                },
+                {
+                    name:'ClientReadApplicationVerifyForm',
+                    path:'ClientReadApplicationVerifyForm',
+                    component:ApplicationVerifyForm,
+                    props({query:{writable,checking,formId}}){
+                        return{writable,checking,formId}
+                    },
+                    meta:{title:'读取申请审核表'}
+                },
+                {
+                    name:'ClientReadTestReportForm',
+                    path:'ClientReadTestReportForm',
+                    component:TestReportForm,
+                    props({query:{writable,checking,formId}}){
+                        return{writable,checking,formId}
+                    },
+                    meta:{title:'读取测试报告'}
                 },
                 {
                     name:'createApplication',
@@ -467,8 +510,6 @@ const router = new VueRouter({
                         },
                     ]
                 },
-                
-                
             ]
         },//员工界面
         {
