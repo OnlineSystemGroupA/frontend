@@ -64,13 +64,9 @@ export default {
                     if (this.logType === "client") {
                         this.axios.post('/api/login', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
                     } else if (this.logType === "admin") {
-                        this.$router.push({
-                            name: "admin",
-                        });
+                        this.axios.post('/api/login', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
                     } else if (this.logType === "employee") {
-                        this.$router.push({
-                            name: "employee",
-                        });
+                        this.axios.post('/api/login', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
                     }
                 } else {
                     alert("登录失败，请正确填写登录信息！")
