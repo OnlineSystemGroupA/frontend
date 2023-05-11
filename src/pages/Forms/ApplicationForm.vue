@@ -1,6 +1,6 @@
 <template>
     <div class="application">
-        <el-form :disabled = "disable">
+        <el-form :disabled="disable">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型">
                 <el-checkbox-group v-model="form.testType">
@@ -8,10 +8,12 @@
                     <el-checkbox label="成果/技术鉴定测试" name="testType"></el-checkbox>
                     <el-checkbox label="专项资金验收测试" name="testType"></el-checkbox>
                 </el-checkbox-group>
-                <el-checkbox v-model="form.chooseOtherTestType"><el-input placeholder="其他"
-                        v-model="form.otherTestType"></el-input></el-checkbox>
+                <el-checkbox v-model="form.chooseOtherTestType">
+                    <el-input placeholder="其他"
+                              v-model="form.otherTestType"></el-input>
+                </el-checkbox>
             </el-form-item>
-            <hr />
+            <hr/>
             <el-form-item label="软件名称">
                 <el-input v-model="form.softwareName" placeholder="软件名称"></el-input>
             </el-form-item>
@@ -38,9 +40,10 @@
                 </el-radio-group>
             </el-form-item>
             <el-form-item label="主要功能及用途简介（限200字）">
-                <el-input type="textarea" v-model="form.description" maxlength="200" placeholder="主要功能及用途"></el-input>
+                <el-input type="textarea" v-model="form.description" maxlength="200"
+                          placeholder="主要功能及用途"></el-input>
             </el-form-item>
-            <hr />
+            <hr/>
             <el-form-item label="测试依据">
                 <el-checkbox-group v-model="form.testStandard">
                     <el-checkbox label="GB/T 25000.51-2016" name="testStandard"></el-checkbox>
@@ -51,10 +54,12 @@
                     <el-checkbox label="NST-03-WI13-2011" name="testStandard"></el-checkbox>
                     <el-checkbox label="NST-03-WI22-2014" name="testStandard"></el-checkbox>
                 </el-checkbox-group>
-                <el-checkbox v-model="form.chooseOtherStandard"><el-input placeholder="其他"
-                        v-model="form.otherStandard"></el-input></el-checkbox>
+                <el-checkbox v-model="form.chooseOtherStandard">
+                    <el-input placeholder="其他"
+                              v-model="form.otherStandard"></el-input>
+                </el-checkbox>
             </el-form-item>
-            <hr />
+            <hr/>
             <el-form-item label="需要测试的指标">
                 <el-checkbox-group v-model="form.testAspects">
                     <el-checkbox label="功能性" name="testAspects"></el-checkbox>
@@ -70,10 +75,12 @@
                     <el-checkbox label="产品说明要求" name="testAspects"></el-checkbox>
                     <el-checkbox label="用户文档集要求" name="testAspects"></el-checkbox>
                 </el-checkbox-group>
-                <el-checkbox v-model="form.chooseOtherAspect"><el-input placeholder="其他"
-                        v-model="form.otherAspect"></el-input></el-checkbox>
+                <el-checkbox v-model="form.chooseOtherAspect">
+                    <el-input placeholder="其他"
+                              v-model="form.otherAspect"></el-input>
+                </el-checkbox>
             </el-form-item>
-            <hr />
+            <hr/>
             <div>
                 <h2>软件规模</h2>
                 <h3>（至少一种）</h3>
@@ -90,27 +97,34 @@
             <div>
                 <div class="block">
                     <span class="demonstration">软件类型:</span>
-                    <el-cascader v-model="form.softwareType" :options="typeList" :props="{ expandTrigger: 'hover' }"></el-cascader>
+                    <el-cascader v-model="form.softwareType" :options="typeList"
+                                 :props="{ expandTrigger: 'hover' }"></el-cascader>
                 </div>
             </div>
-            <hr />
+            <hr/>
             <el-form-item>
                 <h2>运行环境</h2>
                 <h3>客户端</h3>
                 <el-form-item label="操作系统:">
                     <br>
                     <el-row>
-                        <el-checkbox v-model="form.clientSystemWindows">Windows<el-input placeholder="版本" size="small"
-                                v-model="form.clientWindowsVersion"></el-input></el-checkbox>
+                        <el-checkbox v-model="form.clientSystemWindows">Windows
+                            <el-input placeholder="版本" size="small"
+                                      v-model="form.clientWindowsVersion"></el-input>
+                        </el-checkbox>
                         <br>
-                        <el-checkbox v-model="form.clientSystemLinux">Linux<el-input placeholder="版本" size="small"
-                                v-model="form.clientLinuxVersion"></el-input></el-checkbox>
+                        <el-checkbox v-model="form.clientSystemLinux">Linux
+                            <el-input placeholder="版本" size="small"
+                                      v-model="form.clientLinuxVersion"></el-input>
+                        </el-checkbox>
                         <br>
-                        <el-checkbox v-model="form.clientSystemOther">其他<el-input placeholder="其他" size="small"
-                                v-model="form.otherSystem"></el-input></el-checkbox>
+                        <el-checkbox v-model="form.clientSystemOther">其他
+                            <el-input placeholder="其他" size="small"
+                                      v-model="form.otherSystem"></el-input>
+                        </el-checkbox>
                     </el-row>
                 </el-form-item>
-                <el-form label-position="left" label-width="180px" :disabled = "disable">
+                <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
                         <el-input placeholder="内存要求" v-model.number="form.clientMemory"></el-input>
                     </el-form-item>
@@ -126,8 +140,10 @@
                     <br>
                     <el-checkbox v-model="form.UnixServer">Unix/Linux服务器</el-checkbox>
                     <br>
-                    <el-checkbox v-model="form.OtherSever">其他<el-input placeholder="其他"
-                            v-model="form.OtherServerName"></el-input></el-checkbox>
+                    <el-checkbox v-model="form.OtherSever">其他
+                        <el-input placeholder="其他"
+                                  v-model="form.OtherServerName"></el-input>
+                    </el-checkbox>
                 </el-form-item>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
@@ -141,19 +157,32 @@
                     </el-form-item>
                 </el-form>
                 <h4>软件</h4>
-                <el-form-item label="操作系统:"><el-input placeholder="操作系统" v-model="form.serverSystem"></el-input></el-form-item>
-                <el-form-item label="版本:"><el-input placeholder="版本" v-model="form.serverSystemVersion"></el-input></el-form-item>
-                <el-form-item label="编程语言:"><el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input></el-form-item>
+                <el-form-item label="操作系统:">
+                    <el-input placeholder="操作系统" v-model="form.serverSystem"></el-input>
+                </el-form-item>
+                <el-form-item label="版本:">
+                    <el-input placeholder="版本" v-model="form.serverSystemVersion"></el-input>
+                </el-form-item>
+                <el-form-item label="编程语言:">
+                    <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
+                </el-form-item>
                 <el-form-item label="构架:" v-model="form.serverFrame">
                     <br>
                     <el-select v-model="form.serverFrame" placeholder="请选择">
-                        <el-option v-for="item in frameOptions" :key="item.value" :label="item.label" :value="item.value">
+                        <el-option v-for="item in frameOptions" :key="item.value" :label="item.label"
+                                   :value="item.value">
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="数据库:"><el-input placeholder="数据库" v-model="form.serverDatabase"></el-input></el-form-item>
-                <el-form-item label="中间件:"><el-input placeholder="中间件" v-model="form.serverMidware"></el-input></el-form-item>
-                <el-form-item label="其他支撑软件:"><el-input placeholder="其他支撑软件" v-model="form.serverOtherSoftware"></el-input></el-form-item>
+                <el-form-item label="数据库:">
+                    <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
+                </el-form-item>
+                <el-form-item label="中间件:">
+                    <el-input placeholder="中间件" v-model="form.serverMidware"></el-input>
+                </el-form-item>
+                <el-form-item label="其他支撑软件:">
+                    <el-input placeholder="其他支撑软件" v-model="form.serverOtherSoftware"></el-input>
+                </el-form-item>
                 <h3>网络环境</h3>
                 <el-input placeholder="网络环境" v-model="form.networkEnviroment"></el-input>
             </el-form-item>
@@ -163,20 +192,20 @@
                 <h3>软件介质</h3>
                 <el-col :span="8">
                     <el-form-item label="光盘">
-                        <el-input-number controls-position="right"  :min="0"
-                            :max="100000" v-model="form.cdNum"></el-input-number>
+                        <el-input-number controls-position="right" :min="0"
+                                         :max="100000" v-model="form.cdNum"></el-input-number>
                     </el-form-item>
                 </el-col>
                 <el-col :span="8">
                     <el-form-item label="U盘">
-                        <el-input-number controls-position="right"  :min="0"
-                            :max="100000" v-model="form.usbNum"></el-input-number>
+                        <el-input-number controls-position="right" :min="0"
+                                         :max="100000" v-model="form.usbNum"></el-input-number>
                     </el-form-item>
                 </el-col>
                 <el-col :span="8">
                     <el-form-item label="其他">
-                        <el-input-number controls-position="right"  :min="0"
-                            :max="100000" v-model="form.otherMediumNum"></el-input-number>
+                        <el-input-number controls-position="right" :min="0"
+                                         :max="100000" v-model="form.otherMediumNum"></el-input-number>
                         <el-input placeholder="其他" v-model="form.otherMedium"></el-input>
                     </el-form-item>
                 </el-col>
@@ -200,21 +229,37 @@
             <br>
             <el-form-item label="希望完成测试时间：">
                 <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
-                    v-model="form.expectedDate"></el-date-picker>
+                                v-model="form.expectedDate"></el-date-picker>
             </el-form-item>
             <hr>
             <div class="InfoCom">
                 <div class="CompanyInfo">
-                    <el-form label-position="left" label-width="80px" :disabled = "disable">
+                    <el-form label-position="left" label-width="80px" :disabled="disable">
                         <h2>委托单位信息</h2>
-                        <el-form-item label="电话"><el-input placeholder="电话" v-model="form.companyInfo.telephone"></el-input></el-form-item>
-                        <el-form-item label="传真"><el-input placeholder="传真" v-model="form.companyInfo.fax"></el-input></el-form-item>
-                        <el-form-item label="地址"><el-input placeholder="地址" v-model="form.companyInfo.address"></el-input></el-form-item>
-                        <el-form-item label="邮编"><el-input placeholder="邮编" v-model="form.companyInfo.postcode"></el-input></el-form-item>
-                        <el-form-item label="联系人"><el-input placeholder="联系人" v-model="form.companyInfo.contractPerson"></el-input></el-form-item>
-                        <el-form-item label="手机"><el-input placeholder="手机" v-model="form.companyInfo.mobile"></el-input></el-form-item>
-                        <el-form-item label="E-mail"><el-input placeholder="E-mail" v-model="form.companyInfo.email"></el-input></el-form-item>
-                        <el-form-item label="网址"><el-input placeholder="网址" v-model="form.companyInfo.website"></el-input></el-form-item>
+                        <el-form-item label="电话">
+                            <el-input placeholder="电话" v-model="form.companyInfo.telephone"></el-input>
+                        </el-form-item>
+                        <el-form-item label="传真">
+                            <el-input placeholder="传真" v-model="form.companyInfo.fax"></el-input>
+                        </el-form-item>
+                        <el-form-item label="地址">
+                            <el-input placeholder="地址" v-model="form.companyInfo.address"></el-input>
+                        </el-form-item>
+                        <el-form-item label="邮编">
+                            <el-input placeholder="邮编" v-model="form.companyInfo.postcode"></el-input>
+                        </el-form-item>
+                        <el-form-item label="联系人">
+                            <el-input placeholder="联系人" v-model="form.companyInfo.contractPerson"></el-input>
+                        </el-form-item>
+                        <el-form-item label="手机">
+                            <el-input placeholder="手机" v-model="form.companyInfo.mobile"></el-input>
+                        </el-form-item>
+                        <el-form-item label="E-mail">
+                            <el-input placeholder="E-mail" v-model="form.companyInfo.email"></el-input>
+                        </el-form-item>
+                        <el-form-item label="网址">
+                            <el-input placeholder="网址" v-model="form.companyInfo.website"></el-input>
+                        </el-form-item>
                     </el-form>
                 </div>
                 <div class="CompanyInfo">
@@ -229,12 +274,12 @@
             </div>
         </el-form>
         <el-row v-show="!disable">
-            <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
-            <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
+            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
         <el-row v-show="check">
-            <el-button type="primary" @click="pass" :disabled = "!disable">通过</el-button>
-            <el-button type="primary" @click="refute" :disabled = "!disable">驳回</el-button>
+            <el-button type="primary" @click="pass" :disabled="!disable">通过</el-button>
+            <el-button type="primary" @click="refute" :disabled="!disable">驳回</el-button>
         </el-row>
     </div>
 </template>
@@ -242,11 +287,11 @@
 <script>
 export default {
     name: "ApplicationForm",
-    props:['writable','formId','checking'],
+    props: ['writable', 'formId', 'checking'],
     data() {
         return {
             form: {
-                testType:[],
+                testType: [],
                 otherTestType: '',
                 chooseOtherTestType: false,
                 softwareName: "",
@@ -256,10 +301,10 @@ export default {
                 developmentDepartment: "",
                 companyType: "",
                 description: "",
-                testStandard:[],
+                testStandard: [],
                 otherStandard: '',
                 chooseOtherStandard: false,
-                testAspects:[],
+                testAspects: [],
                 otherAspect: '',
                 chooseOtherAspect: false,
                 softwareScale: {
@@ -280,33 +325,33 @@ export default {
                 UnixServer: false,
                 OtherSever: false,
                 OtherServerName: '',
-                serverMemory:'',
-                serverDisk:'',
-                serverOtherRequirement:'',
-                serverSystem:'',
-                serverSystemVersion:'',
-                serverLanguage:'',
-                serverFrame:'',
-                serverDatabase:'',
-                serverMidware:'',
-                serverOtherSoftware:'',
-                networkEnviroment:'',
-                cdNum:'',
-                usbNum:'',
-                otherMedium:'',
-                otherMediumNum:'',
-                documents:'',
-                expireHandle:'',
+                serverMemory: '',
+                serverDisk: '',
+                serverOtherRequirement: '',
+                serverSystem: '',
+                serverSystemVersion: '',
+                serverLanguage: '',
+                serverFrame: '',
+                serverDatabase: '',
+                serverMidware: '',
+                serverOtherSoftware: '',
+                networkEnviroment: '',
+                cdNum: '',
+                usbNum: '',
+                otherMedium: '',
+                otherMediumNum: '',
+                documents: '',
+                expireHandle: '',
                 expectedDate: '',
-                companyInfo:{
-                    telephone:'',
-                    fax:'',
-                    address:'',
-                    postcode:'',
-                    contractPerson:'',
-                    mobile:'',
-                    email:'',
-                    website:'',
+                companyInfo: {
+                    telephone: '',
+                    fax: '',
+                    address: '',
+                    postcode: '',
+                    contractPerson: '',
+                    mobile: '',
+                    email: '',
+                    website: '',
                 }
             },
             typeList: [
@@ -451,54 +496,50 @@ export default {
             ],
         };
     },
-    methods:{
-        submit(){
-            if(this.writable){
+    methods: {
+        submit() {
+            if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 this.$bus.$emit('submitApplication')
             }
         },
-        save(){
-            if(this.writable){
-                sessionStorage.setItem('applicationForm',JSON.stringify(this.form))
+        save() {
+            if (this.writable) {
+                sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
             }
         },
-        pass(){
+        pass() {
             this.$bus.$emit('passApplication')
         },
-        refute(){
+        refute() {
 
         }
     },
-    mounted(){
+    mounted() {
         let stringForm = sessionStorage.getItem('applicationForm')
-        if(stringForm){
+        if (stringForm) {
             console.log(stringForm)
             this.form = JSON.parse(stringForm)
         }
-        
+
     },
-    computed:{
-        disable(){
-            if(this.writable === 'false'){
+    computed: {
+        disable() {
+            if (this.writable === 'false') {
                 return true
-            }
-            else if(this.writable === 'true'){
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if(!this.writable){
+            } else if (!this.writable) {
                 return true
             }
             return false
         },
-        check(){
-            if(this.checking === 'true'){
+        check() {
+            if (this.checking === 'true') {
                 return true
-            }
-            else if(this.checking === 'false'){
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if(this.checking){
+            } else if (this.checking) {
                 return true
             }
             return false

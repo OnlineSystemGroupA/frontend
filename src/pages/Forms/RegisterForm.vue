@@ -1,17 +1,17 @@
 <template>
     <div class="register">
-        <el-form :label-position="labelPosition" label-width="80px" :model="userInfo">
-            <el-form-item label="用户名">
+        <el-form :label-position="labelPosition" ref="registerForm" label-width="80px" :model="userInfo" :rules="rules">
+            <el-form-item label="用户名" prop="username">
                 <el-input v-model="userInfo.username" placeholder="用户名" clearable></el-input>
             </el-form-item>
-            <el-form-item label="邮箱">
-                <el-input v-model="userInfo.mail" placeholder="邮箱" clearable></el-input>
+            <el-form-item label="邮箱" prop="email">
+                <el-input v-model="userInfo.email" placeholder="邮箱" clearable></el-input>
             </el-form-item>
-            <el-form-item label="密码">
+            <el-form-item label="密码" prop="password">
                 <el-input v-model="userInfo.password" placeholder="请输入密码" show-password></el-input>
             </el-form-item>
-            <el-form-item label="确认密码">
-                <el-input v-model="userInfo.certainPassword" placeholder="请再次输入密码" show-password></el-input>
+            <el-form-item label="确认密码" prop="checkPassword">
+                <el-input v-model="userInfo.checkPassword" placeholder="请再次输入密码" show-password></el-input>
             </el-form-item>
         </el-form>
         <el-button type="primary" @click="onSubmit">注册</el-button>
@@ -22,43 +22,84 @@
 export default {
     name: "RegisterForm",
     data() {
+        const valiUsername = (rule, value, callback) => {
+            if (value === "") {
+                callback(new Error("请输入用户名"))
+            }
+            callback()
+        }
+
+        const valiEmail = (rule, value, callback) => {
+            if (value === "") {
+                callback(new Error("请输入邮箱"))
+            }
+            callback()
+        }
+
+        const valiPassword = (rule, value, callback) => {
+            if (value === "") {
+                callback(new Error("请输入密码"))
+            }
+            callback()
+        }
+
+        const valiCheckPassword = (rule, value, callback) => {
+            if (value === "") {
+                callback(new Error("请重新输入密码"))
+            } else if (value !== this.userInfo.password) {
+                callback(new Error("重新输入的密码不一致"))
+            }
+            callback()
+        }
+
         return {
             labelPosition: "top",
             userInfo: {
-                mail: '',
+                email: '',
                 username: '',
                 password: '',
-                certainPassword: ''
+                checkPassword: ''
+            },
+
+            rules: {
+                username: [
+                    {validator: valiUsername, trigger: "blur"}
+                ],
+                email: [
+                    {validator: valiEmail, trigger: "blur"}
+                ],
+                password: [
+                    {validator: valiPassword, trigger: "blur"}
+                ],
+                checkPassword: [
+                    {validator: valiCheckPassword, trigger: "blur"}
+                ]
             }
-        };
+        }
     },
     methods: {
         onSubmit() {
-            if (this.userInfo.username === '') {
-                alert('请输入用户名')
-            } else if (this.userInfo.mail === '') {
-                alert('请输入邮箱')
-            } else if (this.userInfo.password === '') {
-                alert('请输入密码')
-            } else if (this.userInfo.certainPassword !== this.userInfo.password) {
-                alert('两遍密码不一致')
-            } else {
-                let registerData = {
-                    "username": this.userInfo.username,
-                    "email": this.userInfo.mail,
-                    "password": this.userInfo.password
-                }
-                this.axios.post('/api/register', registerData).then(res => {
-                    if (res.data.code === 600) {
-                        alert('注册成功')
-                        this.$router.push({
-                            name: "login"
-                        })
-                    } else if (res.data.code === 601) {
-                        alert('用户名已存在')
+            this.$refs["registerForm"].validate((valid) => {
+                if (valid) {
+                    let registerData = {
+                        "username": this.userInfo.username,
+                        "email": this.userInfo.email,
+                        "password": this.userInfo.password
                     }
-                })
-            }
+                    this.axios.post('/api/register', registerData).then(res => {
+                        if (res.data.code === 600) {
+                            alert('注册成功')
+                            this.$router.push({
+                                name: "login"
+                            })
+                        } else if (res.data.code === 601) {
+                            alert('用户名已存在')
+                        }
+                    })
+                } else {
+                    alert("注册失败，请修改注册信息！")
+                }
+            })
         }
     },
 };
