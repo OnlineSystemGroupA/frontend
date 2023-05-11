@@ -22,27 +22,25 @@
 export default {
     name: "RegisterForm",
     data() {
+        // validators
         const valiUsername = (rule, value, callback) => {
             if (value === "") {
                 callback(new Error("请输入用户名"))
             }
             callback()
         }
-
         const valiEmail = (rule, value, callback) => {
             if (value === "") {
                 callback(new Error("请输入邮箱"))
             }
             callback()
         }
-
         const valiPassword = (rule, value, callback) => {
             if (value === "") {
                 callback(new Error("请输入密码"))
             }
             callback()
         }
-
         const valiCheckPassword = (rule, value, callback) => {
             if (value === "") {
                 callback(new Error("请重新输入密码"))
@@ -79,7 +77,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.$refs["registerForm"].validate((valid) => {
+            this.$refs.registerForm.validate((valid) => {
                 if (valid) {
                     let registerData = {
                         "username": this.userInfo.username,
@@ -97,7 +95,7 @@ export default {
                         }
                     })
                 } else {
-                    alert("注册失败，请修改注册信息！")
+                    alert("注册失败，请正确填写注册信息！")
                 }
             })
         }
