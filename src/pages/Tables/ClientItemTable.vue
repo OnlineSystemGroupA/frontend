@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width: 80%">
         <div style="width: 30%">
             <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
                 <el-button slot="append" icon="el-icon-search"></el-button>
@@ -61,12 +61,12 @@ export default {
     },
     methods:{
         checkItemDetail(id){
-            if(this.mission){
-                this.$router.push({
-                    name:this.mission,
-                    query:{itemId:id}
-                })
-            }
+            
+            this.$router.push({
+                name:'ClientItemDetail',
+                query:{itemId:id}
+            })
+            
         }
     }
 }

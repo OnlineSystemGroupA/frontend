@@ -1,45 +1,22 @@
 <template>
-    <div>
+    <div style="height: 100%;">
         <!--
             <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
                 <el-radio-button :label="false">展开</el-radio-button>
                 <el-radio-button :label="true">收起</el-radio-button>
             </el-radio-group>
         -->
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-            :collapse="isCollapse">
-            <el-submenu index="1">
-                <template slot="title">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">测试申请</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="1-1" @click="createApplication">创建新申请</el-menu-item>
-                    <el-menu-item index="1-2" @click="submittedApplication">查看已提交申请</el-menu-item>
-                    <el-menu-item index="1-3" @click="savedApplication">申请草稿</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="2">
-                <template slot="title">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">查看项目</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="2-1" @click="checkItem">查看项目</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="3">
-                <template slot="title">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">测试</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="2-1">进度查看</el-menu-item>
-                    <el-menu-item index="2-2">测试报告</el-menu-item>
-                    <el-menu-item index="2-3" @click="verifyTestReport">审核测试报告</el-menu-item>
-                    <el-menu-item index="2-4" @click="confirmTestReport">确认测试报告</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
+        <el-menu default-active="1-4-1" 
+        class="el-menu-vertical-demo" 
+        @open="handleOpen" 
+        @close="handleClose"
+        :collapse="isCollapse" 
+        background-color="#6A005F"
+        text-color="#FFFFFF"
+        active-text-color="#FFCC00">
+            <el-menu-item index="1" @click="createApplication"><i class="el-icon-upload2"></i>测试申请</el-menu-item>
+            <el-menu-item index="2" @click="checkItem"><i class="el-icon-s-order"></i>查看项目</el-menu-item>
+            <el-menu-item index="3" ><i class="el-icon-user"></i>个人信息</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -66,17 +43,17 @@ export default {
         submittedApplication(){
             this.$router.push({
                 name:'ClientItem',
-                query:{
+                /*query:{
                     mission:'submittedApplication',
-                }
+                }*/
             })
         },
         savedApplication(){
             this.$router.push({
                 name:'ClientItem',
-                query:{
+                /*query:{
                     mission:'savedApplication',
-                }
+                }*/
             })
         },
         checkItem(){

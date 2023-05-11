@@ -9,7 +9,7 @@
                         </EmployeeMenu>
                     </el-aside>
                     <el-main>
-                        <div style="{width:1000px}">
+                        <div class="main">
                             <router-view>
                             </router-view>
                         </div>
@@ -37,9 +37,16 @@ export default {
 
 <style scoped>
 .employee {
-    width: 1200px;
-    margin: 30px;
+    width: 100%;
+    height:100%;
     padding: 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.main {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 </style>
