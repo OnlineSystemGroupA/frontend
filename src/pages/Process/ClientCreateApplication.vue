@@ -18,27 +18,27 @@ export default {
     name: 'ClientCreateApplication',
     data() {
         return {
-            
+
         }
     },
     mounted() {
-        this.$bus.$on('submitApplication', ()=>{
+        this.$bus.$on('submitApplication', () => {
             this.$router.push({
-                name:'functionList',
-                query:{
-                    writable:true
+                name: 'functionList',
+                query: {
+                    writable: true
                 }
             })
         })
     },
-    computed:{
-        active(){
+    computed: {
+        active() {
             let path = this.$route.path
             //console.log(path)
-            if(path.endsWith('applicationForm')){
+            if (path.endsWith('applicationForm')) {
                 return 1
             }
-            else if(path.endsWith('functionList')){
+            else if (path.endsWith('functionList')) {
                 return 2
             }
             return 0

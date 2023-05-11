@@ -20,11 +20,11 @@ export default {
         }
     },
     methods: {
-        checkTestReport(){
+        checkTestReport() {
             this.$router.push(
                 {
-                    name:'checkTestReportForm',
-                    query:{
+                    name: 'checkTestReportForm',
+                    query: {
                         writable: false,
                         checking: true,
                         formId: this.itemId,
@@ -33,11 +33,11 @@ export default {
                 }
             )
         },
-        writeReportVerification(){
+        writeReportVerification() {
             this.$router.push(
                 {
-                    name:'reportVerifyForm',
-                    query:{
+                    name: 'reportVerifyForm',
+                    query: {
                         writable: true,
                         checking: false,
                         formId: this.itemId,

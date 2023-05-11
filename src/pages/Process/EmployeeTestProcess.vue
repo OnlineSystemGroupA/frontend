@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>项目测验过程</h2>
-        <h3>项目号:{{itemId}}</h3>
+        <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="readTestPlan">查看测试计划</el-button>
         <el-button type="primary" @click="writeTestRecord">填写测试记录</el-button>
         <el-button type="primary" @click="writeTestProblem">填写测试问题表</el-button>
@@ -15,14 +15,14 @@
 <script>
 export default {
     name: "EmployeeTestProcess",
-    props:['itemId'],
+    props: ['itemId'],
     data() {
-        return{
+        return {
 
         }
     },
-    methods:{
-        readTestPlan(){
+    methods: {
+        readTestPlan() {
             this.$router.push({
                 name: 'readTestPlan',
                 query: {
@@ -33,7 +33,7 @@ export default {
                 }
             })
         },
-        writeTestRecord(){
+        writeTestRecord() {
             this.$router.push({
                 name: 'testRecordsForm',
                 query: {
@@ -44,10 +44,10 @@ export default {
                 }
             })
         },
-        writeTestProblem(){
+        writeTestProblem() {
 
         },
-        writeTestReport(){
+        writeTestReport() {
             this.$router.push({
                 name: 'testReportForm',
                 query: {

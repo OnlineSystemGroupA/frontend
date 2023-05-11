@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>项目测试</h2>
-        <h3>项目号:{{itemId}}</h3>
+        <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="checkApplication">查看申请表格</el-button>
         <el-button type="primary" @click="checkFunctionList">查看测试功能</el-button>
         <el-button type="primary" @click="writeTestPlan">创建测试方案</el-button>
@@ -13,14 +13,14 @@
 
 <script>
 export default {
-    name:'EmployeeWriteTestPlan',
-    props:['itemId'],
-    data(){
-        return{
-            
+    name: 'EmployeeWriteTestPlan',
+    props: ['itemId'],
+    data() {
+        return {
+
         }
     },
-    methods:{
+    methods: {
         checkApplication() {
             this.$router.push({
                 name: 'readApplication',
@@ -32,7 +32,7 @@ export default {
                 }
             })
         },
-        checkFunctionList(){
+        checkFunctionList() {
             this.$router.push({
                 name: 'readFunctionList',
                 query: {
@@ -43,9 +43,9 @@ export default {
                 }
             })
         },
-        writeTestPlan(){
+        writeTestPlan() {
             this.$router.push({
-                name:'testPlanForm',
+                name: 'testPlanForm',
                 query: {
                     writable: true,
                     checking: false,

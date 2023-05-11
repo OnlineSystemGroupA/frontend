@@ -1,7 +1,7 @@
 <template>
     <div class="verification">
         <h1>审核信息</h1>
-        <el-form label-position="left" label-width="100px" :disabled = "disable">
+        <el-form label-position="left" label-width="100px" :disabled="disable">
             <el-form-item label="密级">
                 <el-radio-group v-model="form.confidentialLevel">
                     <el-radio label="无密级"></el-radio>
@@ -76,8 +76,8 @@
             </el-form-item>
         </el-form>
         <el-row v-show="!disable">
-            <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
-            <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
+            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
     </div>
 </template>
@@ -85,7 +85,7 @@
 <script>
 export default {
     name: 'ApplicationVerifyForm',
-    props:['writable','formId'],
+    props: ['writable', 'formId'],
     data() {
         return {
             form: {
@@ -104,21 +104,21 @@ export default {
             }
         }
     },
-    methods:{
-        save(){
-            
+    methods: {
+        save() {
+
         },
-        submit(){
+        submit() {
             console.log(JSON.stringify(this.form))
         }
     },
-    computed:{
-        disable(){
+    computed: {
+        disable() {
             //console.log(this.writable)
-            if(this.writable === 'false'){
+            if (this.writable === 'false') {
                 return true
             }
-            else if(!this.writable){
+            else if (!this.writable) {
                 return true
             }
             return false

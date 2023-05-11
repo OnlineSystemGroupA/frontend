@@ -17,7 +17,7 @@ export default {
         }
     },
     methods:{
-        checkTestReport(){
+        checkTestReport() {
             this.$router.push(
                 {
                     name:'clientCheckTestReportForm',

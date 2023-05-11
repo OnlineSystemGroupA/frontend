@@ -99,8 +99,8 @@
             </el-form-item>
         </el-form>
         <el-row v-show="!disable">
-            <el-button type="primary" @click="submit" :disabled = "disable">提交</el-button>
-            <el-button type="primary" @click="save" :disabled = "disable">保存</el-button>
+            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
     </div>
 </template>
@@ -108,7 +108,7 @@
 <script>
 export default {
     name: "ReportVerifyForm",
-    props:['writable','checking','formId'],
+    props: ['writable', 'checking', 'formId'],
     data() {
         return {
             form: {
@@ -131,35 +131,35 @@ export default {
             }
         }
     },
-    method:{
-        submit(){
-            
+    method: {
+        submit() {
+
         },
-        save(){
+        save() {
 
         },
     },
-    computed:{
-        disable(){
-            if(this.writable === 'false'){
+    computed: {
+        disable() {
+            if (this.writable === 'false') {
                 return true
             }
-            else if(this.writable === 'true'){
+            else if (this.writable === 'true') {
                 return false
             }
-            else if(!this.writable){
+            else if (!this.writable) {
                 return true
             }
             return false
         },
-        check(){
-            if(this.checking === 'true'){
+        check() {
+            if (this.checking === 'true') {
                 return true
             }
-            else if(this.checking === 'false'){
+            else if (this.checking === 'false') {
                 return false
             }
-            else if(this.checking){
+            else if (this.checking) {
                 return true
             }
             return false
@@ -177,5 +177,4 @@ export default {
     padding: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
-
 </style>

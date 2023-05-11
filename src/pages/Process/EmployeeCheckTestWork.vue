@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>测试工作检查</h2>
-        <h3>项目号:{{itemId}}</h3>
+        <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="checkTestWork">测试工作检查表</el-button>
         <el-button type="primary" @click="documentReview">软件文档检查表</el-button>
         <keep-alive>
@@ -13,17 +13,17 @@
 <script>
 export default {
     name: 'EmployeeCheckTestWork',
-    props:['itemId'],
+    props: ['itemId'],
     data() {
         return {
 
         }
     },
     methods: {
-        documentReview(){
+        documentReview() {
             this.$router.push(
                 {
-                    name:'documentReviewForm',
+                    name: 'documentReviewForm',
                     query: {
                         writable: true,
                         checking: false,
@@ -33,10 +33,10 @@ export default {
                 }
             )
         },
-        checkTestWork(){
+        checkTestWork() {
             this.$router.push(
                 {
-                    name:'workCheckForm',
+                    name: 'workCheckForm',
                     query: {
                         writable: true,
                         checking: false,

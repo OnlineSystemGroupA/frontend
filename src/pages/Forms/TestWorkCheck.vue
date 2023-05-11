@@ -86,7 +86,7 @@
             </el-form-item>
 
             <el-form-item label="检查人">
-                <el-input v-model = "form.checker" placeholder="检查人"></el-input>
+                <el-input v-model="form.checker" placeholder="检查人"></el-input>
             </el-form-item>
         </el-form>
         <el-row v-show="!disable">
@@ -262,7 +262,7 @@ export default {
                         ]
                     }
                 ],
-                checker:'',
+                checker: '',
             }
         }
     },
@@ -292,22 +292,22 @@ export default {
             return false
         }
     },
-    methods:{
-        submit(){
-            if(this.writable){
+    methods: {
+        submit() {
+            if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 this.$bus.$emit('submitApplication')
             }
         },
-        save(){
-            if(this.writable){
-                sessionStorage.setItem('applicationForm',JSON.stringify(this.form))
+        save() {
+            if (this.writable) {
+                sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
             }
         },
-        pass(){
+        pass() {
             this.$bus.$emit('passApplication')
         },
-        refute(){
+        refute() {
 
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>审核项目申请</h2>
-        <h3>项目号:{{itemId}}</h3>
+        <h3>项目号:{{ itemId }}</h3>
         <el-steps :active="active" finish-status="success">
             <el-step title="步骤 1" description="审核申请报告"></el-step>
             <el-step title="步骤 2" description="审核功能列表"></el-step>

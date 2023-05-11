@@ -1,8 +1,8 @@
 <template>
     <div>
         <h2>查看已提交申请</h2>
-        <h3>项目号:{{itemId}}</h3>
-        <h3>项目状态：{{itemState}}</h3>
+        <h3>项目号:{{ itemId }}</h3>
+        <h3>项目状态：{{ itemState }}</h3>
         <el-button type="primary" @click="editApplicationForm">修改测试申请表</el-button>
         <el-button type="primary" @click="editFunctionList">修改测试功能表</el-button>
         <el-button type="primary" @click="readVerification">查看申请审核表</el-button>
@@ -16,47 +16,47 @@
 <script>
 export default {
     name: 'ClientCheckApplication',
-    props:['itemId'],
+    props: ['itemId'],
     data() {
         return {
-            itemState:'审核中',
+            itemState: '审核中',
         }
     },
     methods: {
-        editApplicationForm(){
+        editApplicationForm() {
             this.$router.push({
-                name:'editApplicationForm',
-                query:{
-                    writable:true,
-                    checking:false,
-                    formId:this.itemId,
-                    itemId:this.itemId
+                name: 'editApplicationForm',
+                query: {
+                    writable: true,
+                    checking: false,
+                    formId: this.itemId,
+                    itemId: this.itemId
                 }
             })
         },
-        editFunctionList(){
+        editFunctionList() {
             this.$router.push({
-                name:'editFunctionList',
-                query:{
-                    writable:true,
-                    checking:false,
-                    formId:this.itemId,
-                    itemId:this.itemId
+                name: 'editFunctionList',
+                query: {
+                    writable: true,
+                    checking: false,
+                    formId: this.itemId,
+                    itemId: this.itemId
                 }
             })
         },
-        readVerification(){
+        readVerification() {
             this.$router.push({
-                name:'readVerification',
-                query:{
-                    writable:false,
-                    checking:false,
-                    formId:this.itemId,
-                    itemId:this.itemId
+                name: 'readVerification',
+                query: {
+                    writable: false,
+                    checking: false,
+                    formId: this.itemId,
+                    itemId: this.itemId
                 }
             })
         },
-        resubmit(){
+        resubmit() {
 
         }
     }
