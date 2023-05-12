@@ -49,6 +49,7 @@
         <div style="margin:20px">
             <h2>测试流程</h2>
             <el-steps :active="active" finish-status="success">
+                <el-step title="申请创建中"></el-step>
                 <el-step title="申请审核中"></el-step>
                 <el-step title="报价生成中"></el-step>
                 <el-step title="合同谈判中"></el-step>
@@ -61,7 +62,7 @@
                 <el-step title="项目已完成"></el-step>
             </el-steps>
             <el-button type="primary" @click="nextStep">下一步</el-button><!--仅测试用-->
-            <el-button type="primary">操作流程</el-button>
+            <el-button type="primary" @click="operateProcess">操作流程</el-button>
         </div>
         <div style="margin:20px">
             <h2>项目表单</h2>
@@ -74,7 +75,8 @@
                 </el-table-column>
                 <el-table-column label="操作" style="width: 25%">
                     <template slot-scope="scope">
-                        <el-button @click="readForm(scope.row)" icon="el-icon-search" size="small" type="primary">查看</el-button>
+                        <el-button @click="readForm(scope.row)" icon="el-icon-search" size="small"
+                            type="primary">查看</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -91,7 +93,7 @@ export default {
             itemInfo: {
                 title: '专用数据库系统',
                 version: '1.2.4',
-                testType:'专项测试申请',
+                testType: '专项测试申请',
                 applicateDate: '2023-5-12',
                 applicant: '张三',
                 company: '沈阳好果汁公司',
@@ -171,45 +173,146 @@ export default {
     methods: {
         nextStep() {
             this.active++;
-            this.active %= 11;
+            if (this.active === 10) {
+                this.active = 11
+            }
+            this.active %= 12;
         },
         readForm(row) {
             console.log(row.title)
-            if(row.title==='测试申请表'){
+            if (!sessionStorage.getItem('logType')) {
+                alert('请登录！')
+                return
+            }
+            let logType = sessionStorage.getItem('logType')
+            if (row.title === '测试申请表') {
+
                 this.$router.push(
                     {
-                        name:'ClientReadApplicationForm',
-                        query:{
-                            writable:false,
-                            checking:false,
-                            formId:this.itemId,
+                        name: logType + 'ReadApplicationForm',
+                        query: {
+                            writable: false,
+                            checking: false,
+                            formId: this.itemId,
+                        }
+                    }
+                )
+
+            }
+            else if (row.title === '测试功能表') {
+                this.$router.push(
+                    {
+                        name: logType + 'ReadTestFunctionList',
+                        query: {
+                            writable: false,
+                            checking: false,
+                            formId: this.itemId,
                         }
                     }
                 )
             }
-            else if(row.title ==='测试功能表'){
+            else if (row.title === '申请审核表') {
                 this.$router.push(
                     {
-                        name:'ClientReadTestFunctionList',
-                        query:{
-                            writable:false,
-                            checking:false,
-                            formId:this.itemId,
+                        name: logType + 'ReadApplicationVerifyForm',
+                        query: {
+                            writable: false,
+                            checking: false,
+                            formId: this.itemId,
                         }
                     }
                 )
             }
-            else if(row.title ==='申请审核表'){
+            else if (row.title === '测试报告表') {
                 this.$router.push(
                     {
-                        name:'ClientReadApplicationVerifyForm',
-                        query:{
-                            writable:false,
-                            checking:false,
-                            formId:this.itemId,
+                        name: logType + 'ReadTestReportForm',
+                        query: {
+                            writable: false,
+                            checking: false,
+                            formId: this.itemId,
                         }
                     }
                 )
+            }
+        },
+        operateProcess() {
+            if (!sessionStorage.getItem('logType')) {
+                alert('请登录！')
+                return
+            }
+            let logType = sessionStorage.getItem('logType')
+            if (this.active === 0) {
+                if (logType === 'client') {
+                    this.$router.push({
+                        name: 'savedApplication',
+                        query:{
+                            itemId:this.itemId
+                        }
+                    })
+                }
+            }
+            else if (this.active === 1) {
+                if (logType === 'client') {
+                    this.$router.push({
+                        name: 'submittedApplication',
+                        query: {
+                            itemId: this.itemId
+                        }
+                    })
+                }
+            }
+            else if (this.active === 2) {
+                console.log('2')
+            }
+            else if (this.active === 3) {
+                console.log('3')
+            }
+            else if (this.active === 4) {
+                if (logType === 'client') {
+                    this.$router.push({
+                        name: 'clientUploadSamples',
+                        query: {
+                            itemId: this.itemId
+                        }
+                    })
+                }
+            }
+            else if (this.active === 5) {
+                console.log('5')
+            }
+            else if (this.active === 6) {
+                console.log('6')
+            }
+            else if (this.active === 7) {
+                if (logType === 'client') {
+                    this.$router.push({
+                        name: 'clientVerifyTestReport',
+                        query: {
+                            itemId: this.itemId
+                        }
+                    })
+                }
+            }
+            else if (this.active === 8) {
+                if (logType === 'client') {
+                    this.$router.push({
+                        name: 'confirmTestReport',
+                        query: {
+                            itemId: this.itemId
+                        }
+                    })
+                }
+            }
+            else if (this.active === 9) {
+                console.log('9')
+            }
+            else if (this.active === 10) {
+                console.log('10')
+                this.active = 11
+            }
+            else if (this.active === 11) {
+                console.log('11')
             }
         }
     }
@@ -223,15 +326,16 @@ export default {
     empty-cells: show;
     border: 1px solid #cbcbcb;
 }
- 
+
 .pure-table caption {
     color: #000;
-    font: italic 85%/1 arial,sans-serif;
+    font: italic 85%/1 arial, sans-serif;
     padding: 1em 0;
     text-align: center;
 }
- 
-.pure-table td,.pure-table th {
+
+.pure-table td,
+.pure-table th {
     border-left: 1px solid #cbcbcb;
     border-width: 0 0 0 1px;
     font-size: inherit;
@@ -239,23 +343,23 @@ export default {
     overflow: visible;
     padding: .5em 1em;
 }
- 
+
 .pure-table thead {
     background-color: #e0e0e0;
     color: #000;
     text-align: left;
     vertical-align: bottom;
 }
- 
+
 .pure-table td {
     background-color: transparent;
 }
- 
-.pure-table-odd td{
+
+.pure-table-odd td {
     background-color: #f2f2f2;
 }
 
-.pure-table-odd th{
+.pure-table-odd th {
     background-color: #f2f2f2;
 }
 </style>

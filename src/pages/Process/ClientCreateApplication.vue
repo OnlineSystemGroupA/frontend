@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 80%;">
+    <div style="width: 90%;">
         <h2>创建新项目</h2>
         <el-steps :active="active" finish-status="success">
             <el-step title="步骤 1" description="阅读说明"></el-step>

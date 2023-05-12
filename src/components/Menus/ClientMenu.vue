@@ -40,43 +40,11 @@ export default {
                 name:'applicationExplanation',
             })
         },
-        submittedApplication(){
-            this.$router.push({
-                name:'ClientItem',
-                /*query:{
-                    mission:'submittedApplication',
-                }*/
-            })
-        },
-        savedApplication(){
-            this.$router.push({
-                name:'ClientItem',
-                /*query:{
-                    mission:'savedApplication',
-                }*/
-            })
-        },
         checkItem(){
             this.$router.push({
-                name:'ClientItem'
+                name:'clientItem'
             })
         },
-        confirmTestReport(){
-            this.$router.push({
-                name:'ClientItem',
-                query:{
-                    mission:'ConfirmTestReport'
-                }
-            })
-        },
-        verifyTestReport(){
-            this.$router.push({
-                name:'ClientItem',
-                query:{
-                    mission:'clientVerifyTestReport'
-                }
-            })
-        }
     }
 }
 </script>

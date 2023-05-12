@@ -21,11 +21,4 @@ export default {
 	flex-direction: column;
 }
 
-.mainpage {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	width: 1200px;
-}
 </style>

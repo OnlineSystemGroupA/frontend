@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width:90%;">
         <h2>查看已保存申请</h2>
         <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="editApplicationForm">修改测试申请表</el-button>

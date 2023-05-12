@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width:90%;">
         <h2>确认测试报告</h2>
         <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="readTestReport">查看测试报告</el-button>

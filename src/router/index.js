@@ -36,6 +36,7 @@ import TestWorkCheck from '../pages/Forms/TestWorkCheck'
 import WorkArrangeTable from '../pages/Tables/WorkArrangeTable'
 import ClientVerifyTestReport from '../pages/Process/ClientVerifyTestReport'
 import ItemDetail from '../pages/Details/ItemDetail'
+import ClientUploadSamples from '../pages/Process/ClientUploadSamples'
 
 const router = new VueRouter({
     routes: [
@@ -65,56 +66,56 @@ const router = new VueRouter({
             meta: {title: '客户'},
             children: [
                 {
-                    name:'ClientItem',
-                    path:'ClientItem',
+                    name:'clientItem',
+                    path:'clientItem',
                     component:ClientItemTable,
                     meta:{title:'项目列表'}
-                },
+                },//项目列表
                 {
-                    name:'ClientItemDetail',
-                    path:'ClientItemDetail',
+                    name:'clientItemDetail',
+                    path:'clientItemDetail',
                     component:ItemDetail,
                     props({query:{itemId}}){
                         return{itemId}
                     },
                     meta:{title:'项目详情'}
-                },
+                },//项目详情
                 {
-                    name:'ClientReadApplicationForm',
-                    path:'ClientReadApplicationForm',
+                    name:'clientReadApplicationForm',
+                    path:'clientReadApplicationForm',
                     component:ApplicationForm,
                     props({query:{writable,checking,formId}}){
                         return{writable,checking,formId}
                     },
                     meta:{title:'读取申请表'}
-                },
+                },//读取申请表
                 {
-                    name:'ClientReadTestFunctionList',
-                    path:'ClientReadTestFunctionList',
+                    name:'clientReadTestFunctionList',
+                    path:'clientReadTestFunctionList',
                     component:TestFunctionList,
                     props({query:{writable,checking,formId}}){
                         return{writable,checking,formId}
                     },
                     meta:{title:'读取测试功能表'}
-                },
+                },//读取测试功能表
                 {
-                    name:'ClientReadApplicationVerifyForm',
-                    path:'ClientReadApplicationVerifyForm',
+                    name:'clientReadApplicationVerifyForm',
+                    path:'clientReadApplicationVerifyForm',
                     component:ApplicationVerifyForm,
                     props({query:{writable,checking,formId}}){
                         return{writable,checking,formId}
                     },
                     meta:{title:'读取申请审核表'}
-                },
+                },//读取审核申请
                 {
-                    name:'ClientReadTestReportForm',
-                    path:'ClientReadTestReportForm',
+                    name:'clientReadTestReportForm',
+                    path:'clientReadTestReportForm',
                     component:TestReportForm,
                     props({query:{writable,checking,formId}}){
                         return{writable,checking,formId}
                     },
                     meta:{title:'读取测试报告'}
-                },
+                },//读取测试报告
                 {
                     name:'createApplication',
                     path:'createApplication',
@@ -147,45 +148,7 @@ const router = new VueRouter({
                             meta: {title: '功能表格'}
                         }
                     ]
-                },
-                {
-                    name:'submittedApplication',
-                    path:'submittedApplication',
-                    component:ClientCheckApplication,
-                    props({query:{itemId}}){
-                        return{itemId}
-                    },
-                    meta:{title:'查看测试报告'},
-                    children:[
-                        {
-                            name: 'editApplicationForm',
-                            path: 'editApplicationForm',
-                            component: ApplicationForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
-                            },
-                            meta: {title: '编辑申请表格'}
-                        },
-                        {
-                            name: 'editFunctionList',
-                            path: 'editFunctionList',
-                            component: TestFunctionList,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
-                            },
-                            meta: {title: '编辑功能表格'}
-                        },
-                        {
-                            name: 'readVerification',
-                            path: 'readVerification',
-                            component: ApplicationVerifyForm,
-                            props({query:{writable,formId}}){
-                                return{writable,formId}
-                            },
-                            meta: {title: '申请审核表格'}
-                        },
-                    ]
-                },
+                },//创建申请             
                 {
                     name:'savedApplication',
                     path:'savedApplication',
@@ -193,7 +156,7 @@ const router = new VueRouter({
                     props({query:{itemId}}){
                         return{itemId}
                     },
-                    meta:{title:'查看测试报告'},
+                    meta:{title:'查看未提交申请'},
                     children:[
                         {
                             name: 'editSavedApplicationForm',
@@ -214,10 +177,57 @@ const router = new VueRouter({
                             meta: {title: '编辑功能表格'}
                         },
                     ]
-                },
+                },//修改未提交申请
                 {
-                    name:'ConfirmTestReport',
-                    path:'ConfirmTestReport',
+                    name: 'submittedApplication',
+                    path: 'submittedApplication',
+                    component: ClientCheckApplication,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '已提交的测试报告' },
+                    children: [
+                        {
+                            name: 'editApplicationForm',
+                            path: 'editApplicationForm',
+                            component: ApplicationForm,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '编辑申请表格' }
+                        },
+                        {
+                            name: 'editFunctionList',
+                            path: 'editFunctionList',
+                            component: TestFunctionList,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '编辑功能表格' }
+                        },
+                        {
+                            name: 'readVerification',
+                            path: 'readVerification',
+                            component: ApplicationVerifyForm,
+                            props({ query: { writable, formId } }) {
+                                return { writable, formId }
+                            },
+                            meta: { title: '申请审核表格' }
+                        },
+                    ]
+                },//修改提交申请
+                {
+                    name: 'clientUploadSamples',
+                    path: 'clientUploadSammples',
+                    component: ClientUploadSamples,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '上传样品' }
+                },//上传样品
+                {
+                    name:'confirmTestReport',
+                    path:'confirmTestReport',
                     component:ClientConfirmReport,
                     props({query:{itemId}}){
                         return{itemId}
@@ -231,10 +241,10 @@ const router = new VueRouter({
                             props({query:{writable,checking,formId}}){
                                 return{writable,checking,formId}
                             },
-                            meta: {title: '测试报告填写'}
+                            meta: {title: '查看测试报告'}
                         },
                     ]
-                },
+                },//确认测试报告
                 {
                     name:'clientVerifyTestReport',
                     path:'clientVerifyTestReport',
@@ -254,7 +264,7 @@ const router = new VueRouter({
                             meta: {title: '查看测试报告'}
                         }
                     ]
-                }
+                }//审核测试报告
             ]
         },//客户界面
         {
@@ -271,7 +281,45 @@ const router = new VueRouter({
                         return{mission}
                     },
                     meta: {title: '查看项目'}
-                },
+                },//查看项目
+                {
+                    name: 'arrangeMission',
+                    path: 'arrangeMission',
+                    component: EmployeeArrangeMission,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '分配任务' },
+                    children: [
+                        {
+                            name: 'readApplicationFormForManager',
+                            path: 'readApplicationFormForManager',
+                            component: ApplicationForm,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '查看申请表格' }
+                        },
+                        {
+                            name: 'readFunctionListForManager',
+                            path: 'readFunctionListForManager',
+                            component: TestFunctionList,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '查看测试功能' }
+                        },
+                        {
+                            name: 'workArrangeTable',
+                            path: 'workArrangeTable',
+                            component: WorkArrangeTable,
+                            props({ query: { work } }) {
+                                return { work }
+                            },
+                            meta: { title: '工作安排' }
+                        }
+                    ]
+                },//测试任务分配
                 {
                     name:'checkApplication',
                     path:'checkApplication',
@@ -309,7 +357,7 @@ const router = new VueRouter({
                             meta: {title: '申请审核表格'}
                         },
                     ]
-                },
+                },//申请审核
                 {
                     name:'writeTestPlan',
                     path:'writeTestPlan',
@@ -346,7 +394,7 @@ const router = new VueRouter({
                         meta: {title: '测试计划'}
                     },
                 ]
-                },
+                },//制定测试计划
                 {
                     name:'verifyTestPlan',
                     path:'verifyTestPlan',
@@ -375,7 +423,7 @@ const router = new VueRouter({
                             meta: {title: '测试方案审核'}
                         },
                     ]
-                },
+                },//审核测试计划
                 {   
                     name:'testProcess',
                     path:'testProcess',
@@ -413,7 +461,7 @@ const router = new VueRouter({
                             meta: {title: '测试报告填写'}
                         }
                     ]
-                },
+                },//测试操作
                 {
                     name:'verifyTestReport',
                     path:'verifyTestReport',
@@ -442,45 +490,7 @@ const router = new VueRouter({
                             meta: {title: '测试报告审核表格'}
                         }
                     ]
-                },
-                {
-                    name:'arrangeMission',
-                    path:'arrangeMission',
-                    component:EmployeeArrangeMission,
-                    props({query:{itemId}}){
-                        return{itemId}
-                    },
-                    meta:{title: '分配任务'},
-                    children:[
-                        {
-                            name: 'readApplicationFormForManager',
-                            path: 'readApplicationFormForManager',
-                            component: ApplicationForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
-                            },
-                            meta: {title: '查看申请表格'}
-                        },
-                        {
-                            name: 'readFunctionListForManager',
-                            path: 'readFunctionListForManager',
-                            component: TestFunctionList,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
-                            },
-                            meta: {title: '查看测试功能'}
-                        },
-                        {
-                            name:'workArrangeTable',
-                            path:'workArrangeTable',
-                            component:WorkArrangeTable,
-                            props({query:{work}}){
-                                return{work}
-                            },
-                            meta:{title:'工作安排'}
-                        }
-                    ]
-                },
+                },//审核测试报告
                 {
                     name:'checkTestWork',
                     path:'checkTestWork',
@@ -509,7 +519,7 @@ const router = new VueRouter({
                             meta: {title: '测试工作检查表',isLogin:true}
                         },
                     ]
-                },
+                },//测试工作检查
             ]
         },//员工界面
         {

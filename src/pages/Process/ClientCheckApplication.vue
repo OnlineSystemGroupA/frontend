@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width:90%;">
         <h2>查看已提交申请</h2>
         <h3>项目号:{{ itemId }}</h3>
         <h3>项目状态：{{ itemState }}</h3>
