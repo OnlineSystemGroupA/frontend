@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width:90%;">
         <h2>项目号:{{itemId}}</h2>
         <h2>上传文件</h2>
         <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/"

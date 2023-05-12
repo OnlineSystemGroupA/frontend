@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h2>任务分配</h2>
+    <div style="width:90%;">
+        <h2>审核测试报告</h2>
         <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="checkTestReport">查看测试报告</el-button>
         <router-view></router-view>
