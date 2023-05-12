@@ -62,11 +62,11 @@ export default {
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
                     if (this.logType === "client") {
-                        this.axios.post('/api/login', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
+                        this.axios.post('/api/auth/login?user-type=client', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
                     } else if (this.logType === "admin") {
-                        this.axios.post('/api/login', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
+                        this.axios.post('/api/auth/login?user-type=admin', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
                     } else if (this.logType === "employee") {
-                        this.axios.post('/api/login', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
+                        this.axios.post('/api/auth/login?user-type=operator', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
                     }
                 } else {
                     alert("登录失败，请正确填写登录信息！")
@@ -75,22 +75,29 @@ export default {
 
         },
         handleLoginResult(res) {
-            if (res.data.code === 600) {
+            console.log(res)
+            if (res.status === 200) {
+                sessionStorage.setItem('tokenHead', res.data.tokenHead)
+                sessionStorage.setItem('tokenStr', res.data.tokenStr)
+                sessionStorage.setItem('logType', this.logType)
                 this.$router.push({
                     name: this.logType
                 })
-            } else if (res.data.code === 601) {
-                alert("不存在该用户")
-            } else if (res.data.code === 602) {
-                alert("账号已封禁")
-            } else if (res.data.code === 603) {
-                alert("账号或密码错误")
-            } else {
-                alert("参数错误")
             }
         },
         handleLoginError(err) {
-            console.log(err)
+            //console.log(err)
+            //console.log(err.response.status)
+            if (err.response.status === 401) {
+                alert('账号或者密码错误')
+            }
+            else if (err.response.status === 403) {
+                alert('账号封禁中')
+            }
+            else if (err.response.status === 404) {
+                alert('不存在该用户')
+            }
+            //alert(err.response.data)
         },
         userRegister() {
             this.$router.push({

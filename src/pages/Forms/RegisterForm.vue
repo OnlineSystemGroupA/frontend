@@ -84,14 +84,21 @@ export default {
                         "email": this.userInfo.email,
                         "password": this.userInfo.password
                     }
-                    this.axios.post('/api/register', registerData).then(res => {
-                        if (res.data.code === 600) {
-                            alert('注册成功')
-                            this.$router.push({
-                                name: "login"
-                            })
-                        } else if (res.data.code === 601) {
-                            alert('用户名已存在')
+                    this.axios.post('/api/auth/register', registerData).then(res => {
+                        console.log(res)
+                        console.log(res.status)
+                        if (res.status === 200) {
+                            alert("注册成功")
+                        }
+                        if (res.status === 409) {
+                            alert("用户名重复")
+                        }
+                        
+                    }).catch(err => {
+                        console.log(err)
+                        console.log(err.response.status)
+                        if (err.response.status === 409) {
+                            alert("用户名重复")
                         }
                     })
                 } else {

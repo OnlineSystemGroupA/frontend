@@ -50,6 +50,7 @@
             <h2>测试流程</h2>
             <el-steps :active="active" finish-status="success">
                 <el-step title="申请审核中"></el-step>
+                <el-step title="报价生成中"></el-step>
                 <el-step title="合同谈判中"></el-step>
                 <el-step title="样品上传中"></el-step>
                 <el-step title="计划制定中"></el-step>
@@ -170,9 +171,9 @@ export default {
     methods: {
         nextStep() {
             this.active++;
-            this.active %= 10;
+            this.active %= 11;
         },
-        readForm(row){
+        readForm(row) {
             console.log(row.title)
             if(row.title==='测试申请表'){
                 this.$router.push(
