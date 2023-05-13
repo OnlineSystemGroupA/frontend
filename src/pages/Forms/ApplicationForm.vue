@@ -3,15 +3,8 @@
         <el-form :disabled="disable">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型">
-                <el-checkbox-group v-model="form.testType">
-                    <el-checkbox label="软件确认测试" name="testType"></el-checkbox>
-                    <el-checkbox label="成果/技术鉴定测试" name="testType"></el-checkbox>
-                    <el-checkbox label="专项资金验收测试" name="testType"></el-checkbox>
-                </el-checkbox-group>
-                <el-checkbox v-model="form.chooseOtherTestType">
-                    <el-input placeholder="其他"
-                              v-model="form.otherTestType"></el-input>
-                </el-checkbox>
+                <br/>
+                <SelectAndCreateTags :default-options="testTypeOptions" option-description="新增一个测试类型"/>
             </el-form-item>
             <hr/>
             <el-form-item label="软件名称">
@@ -30,14 +23,22 @@
                 <el-input v-model="form.developmentDepartment" placeholder="开发单位"></el-input>
             </el-form-item>
             <el-form-item label="单位性质">
-                <el-radio-group v-model="form.companyType">
-                    <el-radio label="内资企业"></el-radio>
-                    <el-radio label="外（合）资企业"></el-radio>
-                    <el-radio label="港澳台（合）资本企业"></el-radio>
-                    <el-radio label="科研院校"></el-radio>
-                    <el-radio label="政府事业团体"></el-radio>
-                    <el-radio label="其他"></el-radio>
-                </el-radio-group>
+                <br/>
+                <el-select
+                    allow-create
+                    v-model="chosenData.orgType"
+                    default-first-option
+                    placeholder="单位性质"
+                    @change="form.orgType = (chosenData.orgType !== '其他'? chosenData.orgType : '')">
+                    <el-option
+                        v-for="item in orgTypeOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    />
+                </el-select>
+                <el-input v-model="form.orgType" placeholder="其他单位性质" class="other-input"
+                          v-if="chosenData.orgType ==='其他'"/>
             </el-form-item>
             <el-form-item label="主要功能及用途简介（限200字）">
                 <el-input type="textarea" v-model="form.description" maxlength="200"
@@ -45,40 +46,14 @@
             </el-form-item>
             <hr/>
             <el-form-item label="测试依据">
-                <el-checkbox-group v-model="form.testStandard">
-                    <el-checkbox label="GB/T 25000.51-2016" name="testStandard"></el-checkbox>
-                    <el-checkbox label="GB/T 25000.10-2016" name="testStandard"></el-checkbox>
-                    <el-checkbox label="GB/T 28452-2012" name="testStandard"></el-checkbox>
-                    <el-checkbox label="GB/T 30961-2014" name="testStandard"></el-checkbox>
-                    <el-checkbox label="NST-03-WI12-2011" name="testStandard"></el-checkbox>
-                    <el-checkbox label="NST-03-WI13-2011" name="testStandard"></el-checkbox>
-                    <el-checkbox label="NST-03-WI22-2014" name="testStandard"></el-checkbox>
-                </el-checkbox-group>
-                <el-checkbox v-model="form.chooseOtherStandard">
-                    <el-input placeholder="其他"
-                              v-model="form.otherStandard"></el-input>
-                </el-checkbox>
+                <br/>
+                <SelectAndCreateTags :default-options="testStandardOptions" option-description="新增一个测试依据"/>
             </el-form-item>
             <hr/>
             <el-form-item label="需要测试的指标">
-                <el-checkbox-group v-model="form.testAspects">
-                    <el-checkbox label="功能性" name="testAspects"></el-checkbox>
-                    <el-checkbox label="可靠性" name="testAspects"></el-checkbox>
-                    <el-checkbox label="易用性" name="testAspects"></el-checkbox>
-                    <el-checkbox label="效率" name="testAspects"></el-checkbox>
-                    <el-checkbox label="可维护性" name="testAspects"></el-checkbox>
-                    <el-checkbox label="可移植性" name="testAspects"></el-checkbox>
-                    <el-checkbox label="代码覆盖度" name="testAspects"></el-checkbox>
-                    <el-checkbox label="缺陷检测率" name="testAspects"></el-checkbox>
-                    <el-checkbox label="代码风格符合度" name="testAspects"></el-checkbox>
-                    <el-checkbox label="代码不符合项检测率" name="testAspects"></el-checkbox>
-                    <el-checkbox label="产品说明要求" name="testAspects"></el-checkbox>
-                    <el-checkbox label="用户文档集要求" name="testAspects"></el-checkbox>
-                </el-checkbox-group>
-                <el-checkbox v-model="form.chooseOtherAspect">
-                    <el-input placeholder="其他"
-                              v-model="form.otherAspect"></el-input>
-                </el-checkbox>
+                <br/>
+                <MultipleCreateAndSelect :default-options="testAspectsOptions" option-description="选择测试指标"
+                                         create-description="其他指标" class=""/>
             </el-form-item>
             <hr/>
             <div>
@@ -97,7 +72,7 @@
             <div>
                 <div class="block">
                     <span class="demonstration">软件类型:</span>
-                    <el-cascader v-model="form.softwareType" :options="typeList"
+                    <el-cascader v-model="form.softwareType" :options="softwareTypeOptions"
                                  :props="{ expandTrigger: 'hover' }"></el-cascader>
                 </div>
             </div>
@@ -136,14 +111,15 @@
                 <h4>硬件</h4>
                 <el-form-item label="架构:">
                     <br>
-                    <el-checkbox v-model="form.PCServer">PC服务器</el-checkbox>
-                    <br>
-                    <el-checkbox v-model="form.UnixServer">Unix/Linux服务器</el-checkbox>
-                    <br>
-                    <el-checkbox v-model="form.OtherSever">其他
-                        <el-input placeholder="其他"
-                                  v-model="form.OtherServerName"></el-input>
-                    </el-checkbox>
+                    <SelectAndCreateTags :default-options="serverArchitectureOptions" option-description="添加一种架构"/>
+<!--                    <el-checkbox v-model="form.PCServer">PC服务器</el-checkbox>-->
+<!--                    <br>-->
+<!--                    <el-checkbox v-model="form.UnixServer">Unix/Linux服务器</el-checkbox>-->
+<!--                    <br>-->
+<!--                    <el-checkbox v-model="form.OtherSever">其他-->
+<!--                        <el-input placeholder="其他"-->
+<!--                                  v-model="form.OtherServerName"></el-input>-->
+<!--                    </el-checkbox>-->
                 </el-form-item>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
@@ -168,11 +144,7 @@
                 </el-form-item>
                 <el-form-item label="构架:" v-model="form.serverFrame">
                     <br>
-                    <el-select v-model="form.serverFrame" placeholder="请选择">
-                        <el-option v-for="item in frameOptions" :key="item.value" :label="item.label"
-                                   :value="item.value">
-                        </el-option>
-                    </el-select>
+                    <SelectAndCreateTags :default-options="frameOptions" option-description="添加一种架构"/>
                 </el-form-item>
                 <el-form-item label="数据库:">
                     <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
@@ -285,8 +257,15 @@
 </template>
 
 <script>
+import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
+import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
+
 export default {
     name: "ApplicationForm",
+    components: {
+        SelectAndCreateTags,
+        MultipleCreateAndSelect
+    },
     props: ['writable', 'formId', 'checking'],
     data() {
         return {
@@ -299,7 +278,7 @@ export default {
                 companyChineseName: "",
                 companyEnglishName: "",
                 developmentDepartment: "",
-                companyType: "",
+                orgType: "",
                 description: "",
                 testStandard: [],
                 otherStandard: '',
@@ -354,7 +333,47 @@ export default {
                     website: '',
                 }
             },
-            typeList: [
+            chosenData: {
+                orgType: '',
+                softwareArchitecture: ''
+            },
+            testTypeOptions: [
+                {value: "软件确认测试", label: "软件确认测试"},
+                {value: "成果/技术鉴定测试", label: "成果/技术鉴定测试"},
+                {value: "专项资金验收测试", label: "专项资金验收测试"}
+            ],
+            testStandardOptions: [
+                {value: "GB/T 25000.51-2016", label: "GB/T 25000.51-2016"},
+                {value: "GB/T 25000.10-2016", label: "GB/T 25000.10-2016"},
+                {value: "GB/T 28452-2012", label: "GB/T 28452-2012"},
+                {value: "GB/T 30961-2014", label: "GB/T 30961-2014"},
+                {value: "NST-03-WI12-2011", label: "NST-03-WI12-2011"},
+                {value: "NST-03-WI13-2011", label: "NST-03-WI13-2011"},
+                {value: "NST-03-WI22-2014", label: "NST-03-WI22-2014"},
+            ],
+            testAspectsOptions: [
+                {value: "功能性", label: "功能性"},
+                {value: "可靠性", label: "可靠性"},
+                {value: "易用性", label: "易用性"},
+                {value: "效率", label: "效率"},
+                {value: "可维护性", label: "可维护性"},
+                {value: "可移植性", label: "可移植性"},
+                {value: "代码覆盖度", label: "代码覆盖度"},
+                {value: "缺陷检测率", label: "缺陷检测率"},
+                {value: "代码风格符合度", label: "代码风格符合度"},
+                {value: "代码不符合项检测率", label: "代码不符合项检测率"},
+                {value: "产品说明要求", label: "产品说明要求"},
+                {value: "用户文档集要求", label: "用户文档集要求"},
+            ],
+            orgTypeOptions: [
+                {value: "内资企业", label: "内资企业"},
+                {value: "外（合）资企业", label: "外（合）资企业"},
+                {value: "港澳台（合）资本企业", label: "港澳台（合）资本企业"},
+                {value: "科研院校", label: "科研院校"},
+                {value: "政府事业团体", label: "政府事业团体"},
+                {label: "其他", value: "其他"}
+            ],
+            softwareTypeOptions: [
                 {
                     value: "系统软件", label: "系统软件",
                     children: [
@@ -403,12 +422,19 @@ export default {
             ],
             frameOptions: [
                 {value: 'C/S', label: 'C/S'},
-                {value: 'B/S', label: 'B/S'},
-                {value: '其他', label: '其他'},
+                {value: 'B/S', label: 'B/S'}
             ],
+            serverArchitectureOptions: [
+                {value: 'PC服务器', label: 'PC服务器'},
+                {value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器'},
+                {value: '其他', label: '其他'},
+            ]
         };
     },
     methods: {
+        handleOrgTypeChange() {
+
+        },
         submit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
@@ -461,6 +487,11 @@ export default {
 </script>
 
 <style scoped>
+.other-input {
+    width: 30%;
+    margin-left: 10px;
+}
+
 .CompanyInfo {
     width: 40%;
     padding: 5%;
