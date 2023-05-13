@@ -1,7 +1,7 @@
 <template>
     <div style="width:90%;">
         <h2>项目详情</h2>
-        <table border style="width:100%; text-align: center;" class="pure-table">
+        <table border style="width:90%; text-align: center;" class="pure-table">
             <tr class="pure-table-odd">
                 <th style="width:25%">项目号</th>
                 <td style="width:25%">{{ itemId }}</td>
@@ -185,38 +185,38 @@ export default {
                 return
             }
             let logType = sessionStorage.getItem('logType')
-            let routerName = ''
+            let routeName = ''
             if (row.title === '测试申请表') {
-                routerName = logType + 'ReadApplicationForm'
+                routeName = logType + 'ReadApplicationForm'
             }
             else if (row.title === '测试功能表') {
-                routerName = logType + 'ReadTestFunctionList'
+                routeName = logType + 'ReadTestFunctionList'
             }
             else if (row.title === '申请审核表') {
-                routerName = logType + 'ReadApplicationVerifyForm'
+                routeName = logType + 'ReadApplicationVerifyForm'
             }
             else if (row.title === '测试计划表') {
-                routerName = logType + 'ReadTestPlanForm'
+                routeName = logType + 'ReadTestPlanForm'
             }
             else if (row.title === '测试计划审核表') {
-                routerName = logType + 'ReadTestPlanVerifyForm'
+                routeName = logType + 'ReadTestPlanVerifyForm'
             }
             else if (row.title === '测试记录表') {
-                routerName = logType + 'ReadTestRecordsForm'
+                routeName = logType + 'ReadTestRecordsForm'
             }
             else if (row.title === '测试报告表') {
-                routerName = logType + 'ReadTestReportForm'
+                routeName = logType + 'ReadTestReportForm'
             }
             else if (row.title === '文档审核表') {
-                routerName = logType + 'ReadDocumentReviewForm'
+                routeName = logType + 'ReadDocumentReviewForm'
             }
             else if (row.title === '测试检查表') {
-                routerName = logType + 'ReadTestWorkCheck'
+                routeName = logType + 'ReadTestWorkCheck'
             }
-            if (routerName) {
+            if (routeName) {
                 this.$router.push(
                     {
-                        name: routerName,
+                        name: routeName,
                         query: {
                             writable: false,
                             checking: false,
@@ -232,24 +232,18 @@ export default {
                 return
             }
             let logType = sessionStorage.getItem('logType')
+            let routeName = ''
             if (this.active === 0) {
                 if (logType === 'client') {
-                    this.$router.push({
-                        name: 'savedApplication',
-                        query: {
-                            itemId: this.itemId
-                        }
-                    })
+                    routeName = 'savedApplication'
                 }
             }
             else if (this.active === 1) {
                 if (logType === 'client') {
-                    this.$router.push({
-                        name: 'submittedApplication',
-                        query: {
-                            itemId: this.itemId
-                        }
-                    })
+                    routeName = 'submittedApplication'
+                }
+                else if (logType === 'employee') {
+                    routeName = 'checkApplication'
                 }
             }
             else if (this.active === 2) {
@@ -260,42 +254,45 @@ export default {
             }
             else if (this.active === 4) {
                 if (logType === 'client') {
-                    this.$router.push({
-                        name: 'clientUploadSamples',
-                        query: {
-                            itemId: this.itemId
-                        }
-                    })
+                    routeName = 'clientUploadSamples'
+                }
+                else if (logType === 'employee') {
+                    routeName = 'checkApplication'
                 }
             }
             else if (this.active === 5) {
-                console.log('5')
+                if (logType === 'employee') {
+                    routeName = 'writeTestPlan'
+                    if (sessionStorage.getItem('work') === 'verification') {
+                        routeName = 'verifyTestPlan'
+                    }
+                }
             }
             else if (this.active === 6) {
-                console.log('6')
+                if (logType === 'employee') {
+                    routeName = 'testProcess'
+                }
             }
             else if (this.active === 7) {
                 if (logType === 'client') {
-                    this.$router.push({
-                        name: 'clientVerifyTestReport',
-                        query: {
-                            itemId: this.itemId
-                        }
-                    })
+                    routeName = 'clientVerifyTestReport'
+                }
+                else if (logType === 'employee') {
+                    routeName = 'editTestReport'
+                    if (sessionStorage.getItem('work') === 'verification') {
+                        routeName = 'verifyTestReport'
+                    }
                 }
             }
             else if (this.active === 8) {
                 if (logType === 'client') {
-                    this.$router.push({
-                        name: 'confirmTestReport',
-                        query: {
-                            itemId: this.itemId
-                        }
-                    })
+                    routeName =  'confirmTestReport'
                 }
             }
             else if (this.active === 9) {
-                console.log('9')
+                if (logType === 'employee') {
+                    routeName = 'checkTestWork'
+                }
             }
             else if (this.active === 10) {
                 console.log('10')
@@ -303,6 +300,14 @@ export default {
             }
             else if (this.active === 11) {
                 console.log('11')
+            }
+            if (routeName) {
+                this.$router.push({
+                    name: routeName,
+                    query: {
+                        itemId: this.itemId
+                    }
+                })
             }
         }
     }

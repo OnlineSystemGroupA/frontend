@@ -15,7 +15,7 @@
         text-color="#FFFFFF"
         active-text-color="#FFCC00">
             <el-menu-item index="1" @click="createApplication"><i class="el-icon-upload2"></i>测试申请</el-menu-item>
-            <el-menu-item index="2" @click="checkItem"><i class="el-icon-s-order"></i>查看项目</el-menu-item>
+            <el-menu-item index="2" @click="checkItem"><i class="el-icon-search"></i>查看项目</el-menu-item>
             <el-menu-item index="3" ><i class="el-icon-user"></i>个人信息</el-menu-item>
         </el-menu>
     </div>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width:90%;">
         <h2>审核项目申请</h2>
         <h3>项目号:{{ itemId }}</h3>
         <el-steps :active="active" finish-status="success">

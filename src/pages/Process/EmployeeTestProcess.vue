@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div style="width:90%;">
         <h2>项目测验过程</h2>
         <h3>项目号:{{ itemId }}</h3>
-        <el-button type="primary" @click="readTestPlan">查看测试计划</el-button>
+        <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
         <el-button type="primary" @click="writeTestRecord">填写测试记录</el-button>
         <el-button type="primary" @click="writeTestProblem">填写测试问题表</el-button>
         <el-button type="primary" @click="writeTestReport">填写测试报告</el-button>
@@ -22,15 +22,10 @@ export default {
         }
     },
     methods: {
-        readTestPlan() {
+        checkItemDetail(id) {
             this.$router.push({
-                name: 'readTestPlan',
-                query: {
-                    writable: false,
-                    checking: false,
-                    formId: this.itemId,
-                    itemId: this.itemId
-                }
+                name: 'clientItemDetail',
+                query: { itemId: id }
             })
         },
         writeTestRecord() {

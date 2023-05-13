@@ -7,15 +7,21 @@
         </div>
         <br />
         <el-table :data="itemList" border style="width: 100%; height: auto;">
-            <el-table-column prop="id" label="项目号" style="width: 20%">
+            <el-table-column prop="id" label="项目号" style="width: 16%">
                 <template slot-scope="scope">
                     <p @click="checkItemDetail(scope.row.id)">{{ scope.row.id }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="title" label="项目名称" style="width: 20%"> </el-table-column>
-            <el-table-column prop="date" label="创建时间" style="width: 20%"> </el-table-column>
-            <el-table-column prop="client" label="申请人" style="width: 20%"> </el-table-column>
-            <el-table-column prop="state" label="项目状态" style="width: 20%"> </el-table-column>
+            <el-table-column prop="title" label="项目名称" style="width: 16%"> </el-table-column>
+            <el-table-column prop="date" label="创建时间" style="width: 16%"> </el-table-column>
+            <el-table-column prop="client" label="申请人" style="width: 16%"> </el-table-column>
+            <el-table-column prop="state" label="项目状态" style="width: 16%"> </el-table-column>
+            <el-table-column label="操作" style="width:20%">
+                <template slot-scope="scope">
+                    <el-button @click="checkItemDetail(scope.row.id)" icon="el-icon-search" size="small"
+                        type="primary">查看项目</el-button>
+                </template>
+            </el-table-column>
         </el-table>
     </div>
 </template>
@@ -58,7 +64,6 @@ export default {
             ]
         }
     },
-    props: ['mission'],
     methods: {
         checkItemDetail(id) {
             this.$router.push({

@@ -1,7 +1,8 @@
 <template>
-    <div>
+    <div style="width:90%;"> 
         <h2>测试工作检查</h2>
         <h3>项目号:{{ itemId }}</h3>
+        <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
         <el-button type="primary" @click="checkTestWork">测试工作检查表</el-button>
         <el-button type="primary" @click="documentReview">软件文档检查表</el-button>
         <keep-alive>
@@ -20,6 +21,12 @@ export default {
         }
     },
     methods: {
+        checkItemDetail(id) {
+            this.$router.push({
+                name: 'clientItemDetail',
+                query: { itemId: id }
+            })
+        },
         documentReview() {
             this.$router.push(
                 {

@@ -37,25 +37,27 @@ import WorkArrangeTable from '../pages/Tables/WorkArrangeTable'
 import ClientVerifyTestReport from '../pages/Process/ClientVerifyTestReport'
 import ItemDetail from '../pages/Details/ItemDetail'
 import ClientUploadSamples from '../pages/Process/ClientUploadSamples'
+import ItemForArrange from '../pages/Tables/ItemForArrange'
+import EmployeeEditTestReport from '../pages/Process/EmployeeEditTestReport'
 
 const router = new VueRouter({
     routes: [
         {
-            name:"index",
-            path:'/',
-            component:LoginPage,
-            children:[
+            name: "index",
+            path: '/',
+            component: LoginPage,
+            children: [
                 {
                     name: 'register',//name属性可以用来简化路由的跳转，但是to要写成对象式的
                     path: '/register',
                     component: RegisterForm,
-                    meta: {title: '注册'}
+                    meta: { title: '注册' }
                 },
                 {
                     name: 'login',
                     path: '/login',
                     component: LoginForm,
-                    meta: {title: '登录'},
+                    meta: { title: '登录' },
                 }
             ]
         },//登录界面
@@ -63,118 +65,118 @@ const router = new VueRouter({
             name: 'client',
             path: '/client',
             component: ClientPage,
-            meta: {title: '客户界面'},
+            meta: { title: '客户界面' },
             children: [
                 {
-                    name:'clientItem',
-                    path:'clientItem',
-                    component:ClientItemTable,
-                    meta:{title:'项目列表'}
+                    name: 'clientItem',
+                    path: 'clientItem',
+                    component: ClientItemTable,
+                    meta: { title: '项目列表' }
                 },//项目列表
                 {
-                    name:'clientItemDetail',
-                    path:'clientItemDetail',
-                    component:ItemDetail,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    name: 'clientItemDetail',
+                    path: 'clientItemDetail',
+                    component: ItemDetail,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title:'项目详情'}
+                    meta: { title: '项目详情' }
                 },//项目详情
                 {
-                    name:'clientReadApplicationForm',
-                    path:'clientReadApplicationForm',
-                    component:ApplicationForm,
-                    props({query:{writable,checking,formId}}){
-                        return{writable,checking,formId}
+                    name: 'clientReadApplicationForm',
+                    path: 'clientReadApplicationForm',
+                    component: ApplicationForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
                     },
-                    meta:{title:'读取申请表'}
+                    meta: { title: '读取申请表' }
                 },//读取申请表
                 {
-                    name:'clientReadTestFunctionList',
-                    path:'clientReadTestFunctionList',
-                    component:TestFunctionList,
-                    props({query:{writable,checking,formId}}){
-                        return{writable,checking,formId}
+                    name: 'clientReadTestFunctionList',
+                    path: 'clientReadTestFunctionList',
+                    component: TestFunctionList,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
                     },
-                    meta:{title:'读取测试功能表'}
+                    meta: { title: '读取测试功能表' }
                 },//读取测试功能表
                 {
-                    name:'clientReadApplicationVerifyForm',
-                    path:'clientReadApplicationVerifyForm',
-                    component:ApplicationVerifyForm,
-                    props({query:{writable,checking,formId}}){
-                        return{writable,checking,formId}
+                    name: 'clientReadApplicationVerifyForm',
+                    path: 'clientReadApplicationVerifyForm',
+                    component: ApplicationVerifyForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
                     },
-                    meta:{title:'读取申请审核表'}
+                    meta: { title: '读取申请审核表' }
                 },//读取审核申请
                 {
-                    name:'clientReadTestReportForm',
-                    path:'clientReadTestReportForm',
-                    component:TestReportForm,
-                    props({query:{writable,checking,formId}}){
-                        return{writable,checking,formId}
+                    name: 'clientReadTestReportForm',
+                    path: 'clientReadTestReportForm',
+                    component: TestReportForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
                     },
-                    meta:{title:'读取测试报告'}
+                    meta: { title: '读取测试报告' }
                 },//读取测试报告
                 {
-                    name:'createApplication',
-                    path:'createApplication',
-                    component:ClientCreateApplication,
-                    meta:{title: '创建申请'},
-                    children:[
+                    name: 'createApplication',
+                    path: 'createApplication',
+                    component: ClientCreateApplication,
+                    meta: { title: '创建申请' },
+                    children: [
                         {
-                            name:"applicationExplanation",
-                            path:"",
-                            component:ApplicationExplanation,
-                            meta:{title:"申请说明"}
+                            name: "applicationExplanation",
+                            path: "",
+                            component: ApplicationExplanation,
+                            meta: { title: "申请说明" }
 
                         },
                         {
                             name: 'applicationForm',
                             path: 'applicationForm',
                             component: ApplicationForm,
-                            props({query:{writable}}){
-                                return{writable}
+                            props({ query: { writable } }) {
+                                return { writable }
                             },
-                            meta: {title: '申请表格'}
+                            meta: { title: '申请表格' }
                         },
                         {
                             name: 'functionList',
                             path: 'functionList',
                             component: TestFunctionList,
-                            props({query:{writable}}){
-                                return{writable}
+                            props({ query: { writable } }) {
+                                return { writable }
                             },
-                            meta: {title: '功能表格'}
+                            meta: { title: '功能表格' }
                         }
                     ]
                 },//创建申请             
                 {
-                    name:'savedApplication',
-                    path:'savedApplication',
-                    component:ClientLoadApplication,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    name: 'savedApplication',
+                    path: 'savedApplication',
+                    component: ClientLoadApplication,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title:'查看未提交申请'},
-                    children:[
+                    meta: { title: '查看未提交申请' },
+                    children: [
                         {
                             name: 'editSavedApplicationForm',
                             path: 'editSavedApplicationForm',
                             component: ApplicationForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '编辑申请表格'}
+                            meta: { title: '编辑申请表格' }
                         },
                         {
                             name: 'editSavedFunctionList',
                             path: 'editSavedFunctionList',
                             component: TestFunctionList,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '编辑功能表格'}
+                            meta: { title: '编辑功能表格' }
                         },
                     ]
                 },//修改未提交申请
@@ -226,42 +228,42 @@ const router = new VueRouter({
                     meta: { title: '上传样品' }
                 },//上传样品
                 {
-                    name:'confirmTestReport',
-                    path:'confirmTestReport',
-                    component:ClientConfirmReport,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    name: 'confirmTestReport',
+                    path: 'confirmTestReport',
+                    component: ClientConfirmReport,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title:'确认测试报告'},
-                    children:[
+                    meta: { title: '确认测试报告' },
+                    children: [
                         {
                             name: 'readTestReportForm',
                             path: 'readTestReportForm',
                             component: TestReportForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '查看测试报告'}
+                            meta: { title: '查看测试报告' }
                         },
                     ]
                 },//确认测试报告
                 {
-                    name:'clientVerifyTestReport',
-                    path:'clientVerifyTestReport',
-                    component:ClientVerifyTestReport,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    name: 'clientVerifyTestReport',
+                    path: 'clientVerifyTestReport',
+                    component: ClientVerifyTestReport,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title:'审核测试报告'},
-                    children:[
+                    meta: { title: '审核测试报告' },
+                    children: [
                         {
                             name: 'clientCheckTestReportForm',
                             path: 'clientCheckTestReportForm',
                             component: TestReportForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '查看测试报告'}
+                            meta: { title: '查看测试报告' }
                         }
                     ]
                 }//审核测试报告
@@ -271,17 +273,20 @@ const router = new VueRouter({
             name: 'employee',
             path: '/employee',
             component: EmployeePage,
-            meta: {title: '员工界面'},
+            meta: { title: '员工界面' },
             children: [
                 {
-                    name:'employeeItem',
-                    path:'employeeItem',
-                    component:EmployeeItemTable,
-                    props({query:{mission}}){
-                        return{mission}
-                    },
-                    meta: {title: '查看项目'}
+                    name: 'employeeItem',
+                    path: 'employeeItem',
+                    component: EmployeeItemTable,
+                    meta: { title: '查看项目' }
                 },//查看项目
+                {
+                    name: 'arrangeItem',
+                    path: 'arrangeItem',
+                    component: ItemForArrange,
+                    meta: { title: '项目分配情况' }
+                },//项目分配情况
                 {
                     name: 'employeeItemDetail',
                     path: 'employeeItemDetail',
@@ -382,24 +387,6 @@ const router = new VueRouter({
                     meta: { title: '分配任务' },
                     children: [
                         {
-                            name: 'readApplicationFormForManager',
-                            path: 'readApplicationFormForManager',
-                            component: ApplicationForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
-                            },
-                            meta: { title: '查看申请表格' }
-                        },
-                        {
-                            name: 'readFunctionListForManager',
-                            path: 'readFunctionListForManager',
-                            component: TestFunctionList,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
-                            },
-                            meta: { title: '查看测试功能' }
-                        },
-                        {
                             name: 'workArrangeTable',
                             path: 'workArrangeTable',
                             component: WorkArrangeTable,
@@ -411,230 +398,224 @@ const router = new VueRouter({
                     ]
                 },//测试任务分配
                 {
-                    name:'checkApplication',
-                    path:'checkApplication',
-                    component:EmployeeCheckApplication,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    name: 'checkApplication',
+                    path: 'checkApplication',
+                    component: EmployeeCheckApplication,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title: '申请详情'},
-                    children:[
+                    meta: { title: '申请详情' },
+                    children: [
                         {
                             name: 'checkApplicationForm',
                             path: 'checkApplicationForm',
                             component: ApplicationForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '查看申请表格'}
+                            meta: { title: '查看申请表格' }
                         },
                         {
                             name: 'checkFunctionList',
                             path: 'checkFunctionList',
                             component: TestFunctionList,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '查看测试功能'}
+                            meta: { title: '查看测试功能' }
                         },
                         {
                             name: 'applicationVerifyForm',
                             path: 'applicationVerifyForm',
                             component: ApplicationVerifyForm,
-                            props({query:{writable,formId}}){
-                                return{writable,formId}
+                            props({ query: { writable, formId } }) {
+                                return { writable, formId }
                             },
-                            meta: {title: '申请审核表格'}
+                            meta: { title: '申请审核表格' }
                         },
                     ]
                 },//申请审核
                 {
-                    name:'writeTestPlan',
-                    path:'writeTestPlan',
-                    component:EmployeeWriteTestPlan,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    name: 'writeTestPlan',
+                    path: 'writeTestPlan',
+                    component: EmployeeWriteTestPlan,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title:'创建测试计划'},
-                    children:[{
-                        name: 'readApplication',
-                        path: 'readApplication',
-                        component: ApplicationForm,
-                        props({query:{writable,checking,formId}}){
-                            return{writable,checking,formId}
+                    meta: { title: '创建测试计划' },
+                    children: [
+                        {
+                            name: 'testPlanForm',
+                            path: 'testPlanForm',
+                            component: TestPlanForm,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '测试计划' }
                         },
-                        meta: {title: '阅读申请表格'}
-                    },
-                    {
-                        name: 'readFunctionList',
-                        path: 'readFunctionList',
-                        component: TestFunctionList,
-                        props({query:{writable,checking,formId}}){
-                            return{writable,checking,formId}
-                        },
-                        meta: {title: '阅读测试功能'}
-                    },
-                    {
-                        name: 'testPlanForm',
-                        path: 'testPlanForm',
-                        component: TestPlanForm,
-                        props({query:{writable,checking,formId}}){
-                            return{writable,checking,formId}
-                        },
-                        meta: {title: '测试计划'}
-                    },
-                ]
+                    ]
                 },//制定测试计划
                 {
-                    name:'verifyTestPlan',
-                    path:'verifyTestPlan',
-                    component:EmployeeVerifyTestPlan,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    name: 'verifyTestPlan',
+                    path: 'verifyTestPlan',
+                    component: EmployeeVerifyTestPlan,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title:'审核测试计划'},
-                    children:[
+                    meta: { title: '审核测试计划' },
+                    children: [
                         {
                             name: 'checkTestPlanForm',
                             path: 'checkTestPlanForm',
                             component: TestPlanForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '查看测试计划'}
+                            meta: { title: '查看测试计划' }
                         },
                         {
                             name: 'testPlanVerifyForm',
                             path: 'testPlanVerifyForm',
                             component: TestPlanVerifyForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '测试方案审核'}
+                            meta: { title: '测试方案审核' }
                         },
                     ]
                 },//审核测试计划
-                {   
-                    name:'testProcess',
-                    path:'testProcess',
-                    component:EmployeeTestProcess,
-                    props({query:{itemId}}){
-                        return{itemId}
+                {
+                    name: 'testProcess',
+                    path: 'testProcess',
+                    component: EmployeeTestProcess,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title:'测试过程'},
-                    children:[
-                        {
-                            name:'readTestPlan',
-                            path:'readTestPlan',
-                            component: TestPlanForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
-                            },
-                            meta: {title: '查看测试计划'}
-                        },
+                    meta: { title: '测试过程' },
+                    children: [
                         {
                             name: 'testRecordsForm',
                             path: 'testRecordsForm',
                             component: TestRecordsForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '软件测试记录'}
+                            meta: { title: '软件测试记录' }
                         },
                         {
                             name: 'testReportForm',
                             path: 'testReportForm',
                             component: TestReportForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '测试报告填写'}
+                            meta: { title: '测试报告填写' }
                         }
                     ]
                 },//测试操作
                 {
-                    name:'verifyTestReport',
-                    path:'verifyTestReport',
+                    name: 'verifyTestReport',
+                    path: 'verifyTestReport',
                     component: EmployeeVerifyTestReport,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title:'审核测试报告'},
-                    children:[
+                    meta: { title: '审核测试报告' },
+                    children: [
                         {
                             name: 'checkTestReportForm',
                             path: 'checkTestReportForm',
                             component: TestReportForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '查看测试报告'}
+                            meta: { title: '查看测试报告' }
                         },
                         {
                             name: 'reportVerifyForm',
                             path: 'reportVerifyForm',
                             component: ReportVerifyForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '测试报告审核表格'}
+                            meta: { title: '测试报告审核表格' }
                         }
                     ]
                 },//审核测试报告
                 {
-                    name:'checkTestWork',
-                    path:'checkTestWork',
-                    component:EmployeeCheckTestWork,
-                    props({query:{itemId}}){
-                        return{itemId}
+                    name:'editTestReport',
+                    path:'editTestReport',
+                    component: EmployeeEditTestReport,
+                    props({ query: { itemId } }) {
+                        return { itemId }
                     },
-                    meta:{title: '检查测试工作'},
-                    children:[
+                    meta: { title: '编辑测试报告' },
+                    children: [
+                        {
+                            name: 'editTestReportForm',
+                            path: 'editTestReportForm',
+                            component: TestReportForm,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '编辑测试报告' }
+                        }
+                    ]
+                },//编辑测试报告
+                {
+                    name: 'checkTestWork',
+                    path: 'checkTestWork',
+                    component: EmployeeCheckTestWork,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '检查测试工作' },
+                    children: [
                         {
                             name: 'documentReviewForm',
                             path: 'documentReviewForm',
                             component: DocumentReviewForm,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '软件文档评审表'}
+                            meta: { title: '软件文档评审表' }
                         },
                         {
-                            name:'workCheckForm',
-                            path:'workCheckForm',
-                            component:TestWorkCheck,
-                            props({query:{writable,checking,formId}}){
-                                return{writable,checking,formId}
+                            name: 'workCheckForm',
+                            path: 'workCheckForm',
+                            component: TestWorkCheck,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
                             },
-                            meta: {title: '测试工作检查表',isLogin:true}
+                            meta: { title: '测试工作检查表', isLogin: true }
                         },
                     ]
                 },//测试工作检查
             ]
         },//员工界面
         {
-            name:'admin',
-            path:'/admin',
+            name: 'admin',
+            path: '/admin',
             component: AdminPage,
-            meta: {title: '管理员界面'},
-            children:[
+            meta: { title: '管理员界面' },
+            children: [
                 {
-                    name:'clientTable',
-                    path:'clientTable',
-                    component:ClientTable,
-                    meta:{title:'用户列表'}
+                    name: 'clientTable',
+                    path: 'clientTable',
+                    component: ClientTable,
+                    meta: { title: '用户列表' }
                 },
                 {
-                    name:'employeeTable',
-                    path:'employeeTable',
-                    component:EmployeeTable,
-                    meta:{title:'员工列表'}
+                    name: 'employeeTable',
+                    path: 'employeeTable',
+                    component: EmployeeTable,
+                    meta: { title: '员工列表' }
                 },
                 {
-                    name:'employeeInfoForm',
-                    path:'employeeInfoForm',
-                    component:EmployeeInfoForm,
-                    meta:{title:'新员工信息'}
+                    name: 'employeeInfoForm',
+                    path: 'employeeInfoForm',
+                    component: EmployeeInfoForm,
+                    meta: { title: '新员工信息' }
                 }
             ]
         }//管理员界面

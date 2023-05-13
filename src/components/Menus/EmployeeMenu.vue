@@ -8,8 +8,8 @@
             background-color="#6A005F"
             text-color="#FFFFFF"
             active-text-color="#FFCC00">
-            <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-upload2"></i>分配任务</el-menu-item>
-            <el-menu-item index="2" @click="checkItem"><i class="el-icon-s-order"></i>查看项目</el-menu-item>
+            <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-s-order"></i>分配任务</el-menu-item>
+            <el-menu-item index="2" @click="checkItem"><i class="el-icon-search"></i>查看项目</el-menu-item>
             <el-menu-item index="3" ><i class="el-icon-user"></i>个人信息</el-menu-item>
         </el-menu>
     </div>
@@ -31,7 +31,9 @@ export default {
             console.log(key, keyPath);
         },
         arrangeMission() {
-
+            this.$router.push({
+                name: 'arrangeItem',
+            })
         },
         checkItem() {
             this.$router.push({

@@ -1,10 +1,9 @@
 <template>
-    <div style="width:90%;"> 
-        <h2>测试计划审核</h2>
+    <div style="width:90%;">
+        <h2>修改测试报告</h2>
         <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
-        <el-button type="priamry" @click="checkTestPlan">查看测试计划</el-button>
-        <el-button type="priamry" @click="verfiyTestPlan">填写审核表格</el-button>
+        <el-button type="primary" @click="editTestReportForm">修改测试报告</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -13,13 +12,13 @@
 
 <script>
 export default {
-    name: 'EmployeeVerifyTestPlan',
+    name: "EmployeeEditTestReport",
+    props: ['itemId'],
     data() {
         return {
 
         }
     },
-    props: ['itemId'],
     methods: {
         checkItemDetail(id) {
             this.$router.push({
@@ -27,20 +26,9 @@ export default {
                 query: { itemId: id }
             })
         },
-        checkTestPlan() {
+        editTestReportForm() {
             this.$router.push({
-                name: 'checkTestPlanForm',
-                query: {
-                    writable: false,
-                    checking: true,
-                    formId: this.itemId,
-                    itemId: this.itemId
-                }
-            })
-        },
-        verfiyTestPlan() {
-            this.$router.push({
-                name: 'testPlanVerifyForm',
+                name: 'editTestReportForm',
                 query: {
                     writable: true,
                     checking: false,
@@ -48,7 +36,7 @@ export default {
                     itemId: this.itemId
                 }
             })
-        }
+        },
     }
 }
 </script>
