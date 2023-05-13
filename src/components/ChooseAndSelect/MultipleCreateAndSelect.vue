@@ -10,7 +10,7 @@
             :placeholder="optionDescription"
         >
             <li>
-                <el-input v-model="newOption" class="el-add-input">
+                <el-input v-model="newOption" class="el-add-input" :placeholder="createDescription">
                     <template #suffix>
                         <el-button type="text" @click="addNewOption">添加</el-button>
                     </template>
@@ -44,8 +44,9 @@ export default {
      * ]
      *
      * optionDescription: string
+     * createDescription: string
      */
-    props: ["defaultOptions", "optionDescription"],
+    props: ["defaultOptions", "optionDescription", "createDescription"],
 
     data() {
         return {
@@ -56,16 +57,19 @@ export default {
     },
     methods: {
         addNewOption() {
-            this.createdOptions.push(
-                {value: this.newOption, label: this.newOption}
-            );
+            let inputValue = this.newOption
+            if (inputValue) {
+                this.createdOptions.push(
+                    {value: inputValue, label: inputValue}
+                );
+            }
             this.newOption = "";
         }
     }
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .el-add-input {
     width: 90%;
     margin-left: 5%;
@@ -74,14 +78,14 @@ export default {
     /*/deep/ .el-input__inner {*/
     /*    width: 80%;*/
     /*}*/
-    /*/deep/ .el-input__suffix {*/
-    /*    width: 20%;*/
-    /*}*/
+    /deep/ .el-input__suffix {
+        width: 10%;
+        margin-right: 10%;
+    }
 }
 
 .select-options {
-    width: 200px;
-    margin-left: 10px;
+    width: 300px;
     vertical-align: bottom;
 }
 </style>
