@@ -179,54 +179,44 @@ export default {
             this.active %= 12;
         },
         readForm(row) {
-            console.log(row.title)
+            //console.log(row.title)
             if (!sessionStorage.getItem('logType')) {
                 alert('请登录！')
                 return
             }
             let logType = sessionStorage.getItem('logType')
+            let routerName = ''
             if (row.title === '测试申请表') {
-
-                this.$router.push(
-                    {
-                        name: logType + 'ReadApplicationForm',
-                        query: {
-                            writable: false,
-                            checking: false,
-                            formId: this.itemId,
-                        }
-                    }
-                )
-
+                routerName = logType + 'ReadApplicationForm'
             }
             else if (row.title === '测试功能表') {
-                this.$router.push(
-                    {
-                        name: logType + 'ReadTestFunctionList',
-                        query: {
-                            writable: false,
-                            checking: false,
-                            formId: this.itemId,
-                        }
-                    }
-                )
+                routerName = logType + 'ReadTestFunctionList'
             }
             else if (row.title === '申请审核表') {
-                this.$router.push(
-                    {
-                        name: logType + 'ReadApplicationVerifyForm',
-                        query: {
-                            writable: false,
-                            checking: false,
-                            formId: this.itemId,
-                        }
-                    }
-                )
+                routerName = logType + 'ReadApplicationVerifyForm'
+            }
+            else if (row.title === '测试计划表') {
+                routerName = logType + 'ReadTestPlanForm'
+            }
+            else if (row.title === '测试计划审核表') {
+                routerName = logType + 'ReadTestPlanVerifyForm'
+            }
+            else if (row.title === '测试记录表') {
+                routerName = logType + 'ReadTestRecordsForm'
             }
             else if (row.title === '测试报告表') {
+                routerName = logType + 'ReadTestReportForm'
+            }
+            else if (row.title === '文档审核表') {
+                routerName = logType + 'ReadDocumentReviewForm'
+            }
+            else if (row.title === '测试检查表') {
+                routerName = logType + 'ReadTestWorkCheck'
+            }
+            if (routerName) {
                 this.$router.push(
                     {
-                        name: logType + 'ReadTestReportForm',
+                        name: routerName,
                         query: {
                             writable: false,
                             checking: false,
@@ -246,8 +236,8 @@ export default {
                 if (logType === 'client') {
                     this.$router.push({
                         name: 'savedApplication',
-                        query:{
-                            itemId:this.itemId
+                        query: {
+                            itemId: this.itemId
                         }
                     })
                 }

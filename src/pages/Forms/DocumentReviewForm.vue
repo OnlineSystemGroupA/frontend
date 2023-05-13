@@ -20,7 +20,7 @@
 				<el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
 					v-model="form.finishDate"></el-date-picker>
 			</el-form-item>
-			<el-form label-width="100px" label-position="left">
+			<el-form label-width="100px" label-position="left" :disabled='disable'>
 				<h2>一.软件说明部分审评</h2>
 				<el-form-item v-for="(review, index) in form.reviewsOnExplanation" :key="index">
 					<h3>{{ index + 1 }}-{{ review.title }}</h3>
@@ -41,7 +41,7 @@
 					</el-form-item>
 				</el-form-item>
 			</el-form>
-			<el-form label-width="100px" label-position="left">
+			<el-form label-width="100px" label-position="left" :disabled='disable'>
 				<h2>二.软件文档集审评</h2>
 				<el-form-item v-for="(review, index) in form.reviewsOnDocuments" :key="index">
 					<h3>{{ index + 1 }}-{{ review.title }}</h3>
