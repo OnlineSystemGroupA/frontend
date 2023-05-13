@@ -1,48 +1,16 @@
 <template>
     <div>
-        <!--
-            <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-                <el-radio-button :label="false">展开</el-radio-button>
-                <el-radio-button :label="true">收起</el-radio-button>
-            </el-radio-group>
-        -->
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-                 :collapse="isCollapse">
-            <el-submenu index="1">
-                <template slot="title">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">所有任务</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="1-1">查看项目列表</el-menu-item>
-                    <el-menu-item index="1-2" @click="arrangeMission">分配任务</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="2">
-                <template slot="title">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">审核任务</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="2-1" @click="checkApplication">查看申请项</el-menu-item>
-                    <el-menu-item index="2-2">查看已拒绝项目</el-menu-item>
-                    <el-menu-item index="2-3" @click="verifyTestPlan">测试方案审核</el-menu-item>
-                    <el-menu-item index="2-4" @click="verifyReport">测试报告审核</el-menu-item>
-                    <el-menu-item index="2-5" @click="checkTestWork">检查测试工作</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="3">
-                <template slot="title">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">测试任务</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="3-1" @click="checkTestItems">查看测试项目</el-menu-item>
-                    <el-menu-item index="3-2">查看完成项目</el-menu-item>
-                    <el-menu-item index="3-3" @click="writeTestPlan">测试方案填写</el-menu-item>
-                    <el-menu-item index="3-4" @click="testProcess">测试进度填写</el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
+        <el-menu default-active="1-4-1" 
+            class="el-menu-vertical-demo" 
+            @open="handleOpen" 
+            @close="handleClose"
+            :collapse="isCollapse" 
+            background-color="#6A005F"
+            text-color="#FFFFFF"
+            active-text-color="#FFCC00">
+            <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-upload2"></i>分配任务</el-menu-item>
+            <el-menu-item index="2" @click="checkItem"><i class="el-icon-s-order"></i>查看项目</el-menu-item>
+            <el-menu-item index="3" ><i class="el-icon-user"></i>个人信息</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -62,63 +30,12 @@ export default {
         handleClose(key, keyPath) {
             console.log(key, keyPath);
         },
-        checkApplication(){
-            this.$router.push({
-                name:'EmployeeItem',
-                query:{
-                    mission:'checkApplication'
-                }
-            })
+        arrangeMission() {
+
         },
-        checkTestItems(){
-            
-        },
-        writeTestPlan(){
+        checkItem() {
             this.$router.push({
-                name:'EmployeeItem',
-                query:{
-                    mission:'writeTestPlan'
-                }
-            })
-        },
-        verifyTestPlan(){
-            this.$router.push({
-                name:'EmployeeItem',
-                query:{
-                    mission:'verifyTestPlan'
-                }
-            })
-        },
-        testProcess(){
-            this.$router.push({
-                name:'EmployeeItem',
-                query:{
-                    mission:'testProcess'
-                }
-            })
-        },
-        verifyReport(){
-            this.$router.push({
-                name:'EmployeeItem',
-                query:{
-                    mission:'verifyTestReport'
-                }
-            })
-        },
-        arrangeMission(){
-            this.$router.push({
-                name:'EmployeeItem',
-                query:{
-                    mission:'arrangeMission'
-                }
-            })
-        },
-        checkTestWork(){
-            this.$router.push({
-                name:'EmployeeItem',
-                query:{
-                    mission:'checkTestWork'
-                }
+                name: 'employeeItem',
             })
         }
     }

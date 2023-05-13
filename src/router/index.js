@@ -63,7 +63,7 @@ const router = new VueRouter({
             name: 'client',
             path: '/client',
             component: ClientPage,
-            meta: {title: '客户'},
+            meta: {title: '客户界面'},
             children: [
                 {
                     name:'clientItem',
@@ -271,17 +271,107 @@ const router = new VueRouter({
             name: 'employee',
             path: '/employee',
             component: EmployeePage,
-            meta: {title: '员工'},
+            meta: {title: '员工界面'},
             children: [
                 {
-                    name:'EmployeeItem',
-                    path:'EmployeeItem',
+                    name:'employeeItem',
+                    path:'employeeItem',
                     component:EmployeeItemTable,
                     props({query:{mission}}){
                         return{mission}
                     },
                     meta: {title: '查看项目'}
                 },//查看项目
+                {
+                    name: 'employeeItemDetail',
+                    path: 'employeeItemDetail',
+                    component: ItemDetail,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '项目详情' }
+                },//项目详情
+                {
+                    name: 'employeeReadApplicationForm',
+                    path: 'employeeReadApplicationForm',
+                    component: ApplicationForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取申请表' }
+                },//读取申请表
+                {
+                    name: 'employeeReadTestFunctionList',
+                    path: 'employeeReadTestFunctionList',
+                    component: TestFunctionList,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试功能表' }
+                },//读取测试功能表
+                {
+                    name: 'employeeReadApplicationVerifyForm',
+                    path: 'employeeReadApplicationVerifyForm',
+                    component: ApplicationVerifyForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取申请审核表' }
+                },//读取审核申请
+                {
+                    name: 'employeeReadTestPlanForm',
+                    path: 'employeeReadTestPlanForm',
+                    component: TestPlanForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试计划' }
+                },//读取测试计划表
+                {
+                    name: 'employeeReadTestPlanVerifyForm',
+                    path: 'employeeReadTestPlanVerifyForm',
+                    component: TestPlanVerifyForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试计划审核表' }
+                },//读取测试计划审核表
+                {
+                    name: 'employeeReadTestRecordsForm',
+                    path: 'employeeReadTestRecordsForm',
+                    component: TestRecordsForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试记录表' }
+                },//读取测试记录表
+                {
+                    name: 'employeeReadTestReportForm',
+                    path: 'employeeReadTestReportForm',
+                    component: TestReportForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试报告' }
+                },//读取测试报告
+                {
+                    name: 'employeeReadDocumentReviewForm',
+                    path: 'employeeReadDocumentReviewForm',
+                    component: DocumentReviewForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取文档检查表' }
+                },//读取文档检查表
+                {
+                    name: 'employeeReadTestWorkCheck',
+                    path: 'employeeReadTestWorkCheck',
+                    component: TestWorkCheck,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试工作检查表' }
+                },//读取测试工作检查表
                 {
                     name: 'arrangeMission',
                     path: 'arrangeMission',
@@ -526,7 +616,7 @@ const router = new VueRouter({
             name:'admin',
             path:'/admin',
             component: AdminPage,
-            meta: {title: '管理员'},
+            meta: {title: '管理员界面'},
             children:[
                 {
                     name:'clientTable',
