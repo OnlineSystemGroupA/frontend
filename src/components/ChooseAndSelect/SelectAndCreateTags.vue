@@ -10,7 +10,7 @@
             {{ tag.length > 50 ? tag.substring(0, 49) + '...' : tag }}
         </el-tag>
         <el-select
-            class="select-new-tag"
+            class="select-option"
             v-model="newTag"
             ref="tagSelect"
             filterable
@@ -31,8 +31,19 @@
 
 <script>
 export default {
-    name: 'ChooseAndCreateTags',
+    name: 'SelectAndCreateTags',
+    /**
+     * defaultOptions: array of {value, label}
+     * e.g. [
+     *     {value: "option1", label:"option1"},
+     *     {value: "option2", label:"option2"},
+     *     {value: "option3", label:"option3"},
+     * ]
+     *
+     * optionDescription: string
+     */
     props: ["defaultOptions", "optionDescription"],
+
     data() {
         return {
             dynamicTags: [],
@@ -63,20 +74,20 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .el-tag {
     height: 32px;
     margin-right: 10px;
     margin-top: 5px
 }
 
-.select-new-tag {
+.select-option {
     width: 200px;
     margin-left: 10px;
     margin-top: 5px;
     vertical-align: bottom;
 
-    .el-input__inner {
+    /deep/ .el-input__inner {
         height: 32px;
     }
 }
