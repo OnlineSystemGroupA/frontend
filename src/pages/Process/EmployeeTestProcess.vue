@@ -24,7 +24,7 @@ export default {
     methods: {
         checkItemDetail(id) {
             this.$router.push({
-                name: 'clientItemDetail',
+                name: 'employeeItemDetail',
                 query: { itemId: id }
             })
         },
