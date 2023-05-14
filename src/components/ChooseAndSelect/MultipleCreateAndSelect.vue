@@ -3,7 +3,7 @@
         <el-select
             class="select-options"
             v-model="selectedOptions"
-            ref="tagSelect"
+            @change="onChange"
             multiple
             collapse-tags
             default-first-option
@@ -36,6 +36,7 @@
 export default {
     name: 'MultipleCreateAndSelect',
     /**
+     * options: array of string
      * defaultOptions: array of {value, label}
      * e.g. [
      *     {value: "option1", label:"option1"},
@@ -46,13 +47,17 @@ export default {
      * optionDescription: string
      * createDescription: string
      */
+    model: {
+        prop: 'options',
+        event: 'change'
+    },
     props: ["defaultOptions", "optionDescription", "createDescription"],
 
     data() {
         return {
             selectedOptions: [],
             createdOptions: [],
-            newOption: "",
+            newOption: '',
         }
     },
     methods: {
@@ -64,6 +69,10 @@ export default {
                 );
             }
             this.newOption = "";
+        },
+
+        onChange(){
+            this.$emit('change', this.selectedOptions)
         }
     }
 }
@@ -78,6 +87,7 @@ export default {
     /*/deep/ .el-input__inner {*/
     /*    width: 80%;*/
     /*}*/
+
     /deep/ .el-input__suffix {
         width: 10%;
         margin-right: 10%;
@@ -85,7 +95,8 @@ export default {
 }
 
 .select-options {
-    width: 300px;
+    width: 200px;
+    margin-left: 10px;
     vertical-align: bottom;
 }
 </style>

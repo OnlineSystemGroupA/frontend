@@ -4,7 +4,7 @@
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型">
                 <br/>
-                <SelectAndCreateTags :default-options="testTypeOptions" option-description="新增一个测试类型"/>
+                <SelectAndCreateTags v-model="form.testType" :default-options="testTypeOptions" option-description="新增一个测试类型"/>
             </el-form-item>
             <hr/>
             <el-form-item label="软件名称">
@@ -47,12 +47,12 @@
             <hr/>
             <el-form-item label="测试依据">
                 <br/>
-                <SelectAndCreateTags :default-options="testStandardOptions" option-description="新增一个测试依据"/>
+                <SelectAndCreateTags v-model="form.testStandard" :default-options="testStandardOptions" option-description="新增一个测试依据"/>
             </el-form-item>
             <hr/>
             <el-form-item label="需要测试的指标">
                 <br/>
-                <MultipleCreateAndSelect :default-options="testAspectsOptions" option-description="选择测试指标"
+                <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions" option-description="选择测试指标"
                                          create-description="其他指标" class=""/>
             </el-form-item>
             <hr/>
@@ -111,15 +111,7 @@
                 <h4>硬件</h4>
                 <el-form-item label="架构:">
                     <br>
-                    <SelectAndCreateTags :default-options="serverArchitectureOptions" option-description="添加一种架构"/>
-<!--                    <el-checkbox v-model="form.PCServer">PC服务器</el-checkbox>-->
-<!--                    <br>-->
-<!--                    <el-checkbox v-model="form.UnixServer">Unix/Linux服务器</el-checkbox>-->
-<!--                    <br>-->
-<!--                    <el-checkbox v-model="form.OtherSever">其他-->
-<!--                        <el-input placeholder="其他"-->
-<!--                                  v-model="form.OtherServerName"></el-input>-->
-<!--                    </el-checkbox>-->
+                    <SelectAndCreateTags v-model="form.serverArchitectures" :default-options="serverArchitectureOptions" option-description="添加一种架构"/>
                 </el-form-item>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
@@ -142,9 +134,9 @@
                 <el-form-item label="编程语言:">
                     <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
                 </el-form-item>
-                <el-form-item label="构架:" v-model="form.serverFrame">
+                <el-form-item label="构架:">
                     <br>
-                    <SelectAndCreateTags :default-options="frameOptions" option-description="添加一种架构"/>
+                    <SelectAndCreateTags v-model="form.serverFrame" :default-options="frameOptions" option-description="添加一种构架"/>
                 </el-form-item>
                 <el-form-item label="数据库:">
                     <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
@@ -300,10 +292,7 @@ export default {
                 otherSystem: '',
                 clientMemory: '',
                 clientOtherRequirement: '',
-                PCServer: false,
-                UnixServer: false,
-                OtherSever: false,
-                OtherServerName: '',
+                serverArchitectures: [],
                 serverMemory: '',
                 serverDisk: '',
                 serverOtherRequirement: '',
@@ -426,15 +415,11 @@ export default {
             ],
             serverArchitectureOptions: [
                 {value: 'PC服务器', label: 'PC服务器'},
-                {value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器'},
-                {value: '其他', label: '其他'},
+                {value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器'}
             ]
         };
     },
     methods: {
-        handleOrgTypeChange() {
-
-        },
         submit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
