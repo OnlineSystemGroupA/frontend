@@ -67,13 +67,13 @@ const router = new VueRouter({
             name: 'client',
             path: '/client',
             component: ClientPage,
-            meta: { title: '客户界面' },
+            meta: { title: '客户界面', logType:'client' },
             children: [
                 {
                     name: 'clientItem',
                     path: 'clientItem',
                     component: ClientItemTable,
-                    meta: { title: '项目列表' }
+                    meta: { title: '项目列表', logType: 'client' }
                 },//项目列表
                 {
                     name: 'clientItemDetail',
@@ -82,7 +82,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '项目详情' }
+                    meta: { title: '项目详情', logType: 'client' }
                 },//项目详情
                 {
                     name: 'clientReadApplicationForm',
@@ -91,7 +91,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取申请表' }
+                    meta: { title: '读取申请表', logType: 'client' }
                 },//读取申请表
                 {
                     name: 'clientReadTestFunctionList',
@@ -100,7 +100,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取测试功能表' }
+                    meta: { title: '读取测试功能表', logType: 'client' }
                 },//读取测试功能表
                 {
                     name: 'clientReadApplicationVerifyForm',
@@ -109,7 +109,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取申请审核表' }
+                    meta: { title: '读取申请审核表', logType: 'client' }
                 },//读取审核申请
                 {
                     name: 'clientReadTestReportForm',
@@ -118,19 +118,19 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取测试报告' }
+                    meta: { title: '读取测试报告', logType: 'client' }
                 },//读取测试报告
                 {
                     name: 'createApplication',
                     path: 'createApplication',
                     component: ClientCreateApplication,
-                    meta: { title: '创建申请' },
+                    meta: { title: '创建申请', logType: 'client' },
                     children: [
                         {
                             name: "applicationExplanation",
                             path: "",
                             component: ApplicationExplanation,
-                            meta: { title: "申请说明" }
+                            meta: { title: "申请说明", logType: 'client' }
 
                         },
                         {
@@ -140,7 +140,7 @@ const router = new VueRouter({
                             props({ query: { writable } }) {
                                 return { writable }
                             },
-                            meta: { title: '申请表格' }
+                            meta: { title: '申请表格', logType: 'client' }
                         },
                         {
                             name: 'functionList',
@@ -149,7 +149,7 @@ const router = new VueRouter({
                             props({ query: { writable } }) {
                                 return { writable }
                             },
-                            meta: { title: '功能表格' }
+                            meta: { title: '功能表格', logType: 'client' }
                         }
                     ]
                 },//创建申请             
@@ -160,7 +160,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '查看未提交申请' },
+                    meta: { title: '查看未提交申请' ,logType: 'client' },
                     children: [
                         {
                             name: 'editSavedApplicationForm',
@@ -169,7 +169,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '编辑申请表格' }
+                            meta: { title: '编辑申请表格', logType: 'client' }
                         },
                         {
                             name: 'editSavedFunctionList',
@@ -178,7 +178,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '编辑功能表格' }
+                            meta: { title: '编辑功能表格', logType: 'client' }
                         },
                     ]
                 },//修改未提交申请
@@ -189,7 +189,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '已提交的测试报告' },
+                    meta: { title: '已提交的测试报告', logType: 'client' },
                     children: [
                         {
                             name: 'editApplicationForm',
@@ -198,7 +198,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '编辑申请表格' }
+                            meta: { title: '编辑申请表格', logType: 'client' }
                         },
                         {
                             name: 'editFunctionList',
@@ -207,7 +207,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '编辑功能表格' }
+                            meta: { title: '编辑功能表格', logType: 'client' }
                         },
                         {
                             name: 'readVerification',
@@ -216,7 +216,7 @@ const router = new VueRouter({
                             props({ query: { writable, formId } }) {
                                 return { writable, formId }
                             },
-                            meta: { title: '申请审核表格' }
+                            meta: { title: '申请审核表格', logType: 'client' }
                         },
                     ]
                 },//修改提交申请
@@ -227,7 +227,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '查看报价' }
+                    meta: { title: '查看报价', logType: 'client' }
                 },//查看报价
                 {
                     name: 'clientUploadSamples',
@@ -236,7 +236,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '上传样品' }
+                    meta: { title: '上传样品', logType: 'client' }
                 },//上传样品
                 {
                     name: 'confirmTestReport',
@@ -245,7 +245,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '确认测试报告' },
+                    meta: { title: '确认测试报告', logType: 'client' },
                     children: [
                         {
                             name: 'readTestReportForm',
@@ -254,7 +254,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '查看测试报告' }
+                            meta: { title: '查看测试报告', logType: 'client' }
                         },
                     ]
                 },//确认测试报告
@@ -265,7 +265,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '审核测试报告' },
+                    meta: { title: '审核测试报告', logType: 'client' },
                     children: [
                         {
                             name: 'clientCheckTestReportForm',
@@ -274,7 +274,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '查看测试报告' }
+                            meta: { title: '查看测试报告', logType: 'client' }
                         }
                     ]
                 }//审核测试报告
@@ -284,19 +284,19 @@ const router = new VueRouter({
             name: 'employee',
             path: '/employee',
             component: EmployeePage,
-            meta: { title: '员工界面' },
+            meta: { title: '员工界面', logType: 'employee' },
             children: [
                 {
                     name: 'employeeItem',
                     path: 'employeeItem',
                     component: EmployeeItemTable,
-                    meta: { title: '查看项目' }
+                    meta: { title: '查看项目', logType: 'employee' }
                 },//查看项目
                 {
                     name: 'arrangeItem',
                     path: 'arrangeItem',
                     component: ItemForArrange,
-                    meta: { title: '项目分配情况' }
+                    meta: { title: '项目分配情况', logType: 'employee' }
                 },//项目分配情况
                 {
                     name: 'employeeItemDetail',
@@ -305,7 +305,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '项目详情' }
+                    meta: { title: '项目详情', logType: 'employee' }
                 },//项目详情
                 {
                     name: 'employeeReadApplicationForm',
@@ -314,7 +314,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取申请表' }
+                    meta: { title: '读取申请表', logType: 'employee' }
                 },//读取申请表
                 {
                     name: 'employeeReadTestFunctionList',
@@ -323,7 +323,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取测试功能表' }
+                    meta: { title: '读取测试功能表', logType: 'employee' }
                 },//读取测试功能表
                 {
                     name: 'employeeReadApplicationVerifyForm',
@@ -332,7 +332,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取申请审核表' }
+                    meta: { title: '读取申请审核表', logType: 'employee' }
                 },//读取审核申请
                 {
                     name: 'employeeReadTestPlanForm',
@@ -341,7 +341,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取测试计划' }
+                    meta: { title: '读取测试计划', logType: 'employee' }
                 },//读取测试计划表
                 {
                     name: 'employeeReadTestPlanVerifyForm',
@@ -350,7 +350,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取测试计划审核表' }
+                    meta: { title: '读取测试计划审核表', logType: 'employee' }
                 },//读取测试计划审核表
                 {
                     name: 'employeeReadTestRecordsForm',
@@ -359,7 +359,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取测试记录表' }
+                    meta: { title: '读取测试记录表', logType: 'employee' }
                 },//读取测试记录表
                 {
                     name: 'employeeReadTestReportForm',
@@ -368,7 +368,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取测试报告' }
+                    meta: { title: '读取测试报告', logType: 'employee' }
                 },//读取测试报告
                 {
                     name: 'employeeReadDocumentReviewForm',
@@ -377,7 +377,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取文档检查表' }
+                    meta: { title: '读取文档检查表', logType: 'employee' }
                 },//读取文档检查表
                 {
                     name: 'employeeReadTestWorkCheck',
@@ -386,7 +386,7 @@ const router = new VueRouter({
                     props({ query: { writable, checking, formId } }) {
                         return { writable, checking, formId }
                     },
-                    meta: { title: '读取测试工作检查表' }
+                    meta: { title: '读取测试工作检查表', logType: 'employee' }
                 },//读取测试工作检查表
                 {
                     name: 'arrangeMission',
@@ -395,7 +395,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '分配任务' },
+                    meta: { title: '分配任务', logType: 'employee' },
                     children: [
                         {
                             name: 'workArrangeTable',
@@ -404,7 +404,7 @@ const router = new VueRouter({
                             props({ query: { work } }) {
                                 return { work }
                             },
-                            meta: { title: '工作安排' }
+                            meta: { title: '工作安排', logType: 'employee' }
                         }
                     ]
                 },//测试任务分配
@@ -415,7 +415,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '申请详情' },
+                    meta: { title: '申请详情', logType: 'employee' },
                     children: [
                         {
                             name: 'checkApplicationForm',
@@ -424,7 +424,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '查看申请表格' }
+                            meta: { title: '查看申请表格', logType: 'employee' }
                         },
                         {
                             name: 'checkFunctionList',
@@ -433,7 +433,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '查看测试功能' }
+                            meta: { title: '查看测试功能', logType: 'employee' }
                         },
                         {
                             name: 'applicationVerifyForm',
@@ -442,7 +442,7 @@ const router = new VueRouter({
                             props({ query: { writable, formId } }) {
                                 return { writable, formId }
                             },
-                            meta: { title: '申请审核表格' }
+                            meta: { title: '申请审核表格', logType: 'employee' }
                         },
                     ]
                 },//申请审核
@@ -453,7 +453,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '提出报价' }
+                    meta: { title: '提出报价', logType: 'employee' }
                 },//提出报价
                 {
                     name: 'writeTestPlan',
@@ -462,7 +462,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '创建测试计划' },
+                    meta: { title: '创建测试计划', logType: 'employee' },
                     children: [
                         {
                             name: 'testPlanForm',
@@ -471,7 +471,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '测试计划' }
+                            meta: { title: '测试计划', logType: 'employee' }
                         },
                     ]
                 },//制定测试计划
@@ -482,7 +482,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '审核测试计划' },
+                    meta: { title: '审核测试计划', logType: 'employee' },
                     children: [
                         {
                             name: 'checkTestPlanForm',
@@ -491,7 +491,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '查看测试计划' }
+                            meta: { title: '查看测试计划', logType: 'employee' }
                         },
                         {
                             name: 'testPlanVerifyForm',
@@ -500,7 +500,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '测试方案审核' }
+                            meta: { title: '测试方案审核', logType: 'employee' }
                         },
                     ]
                 },//审核测试计划
@@ -511,7 +511,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '测试过程' },
+                    meta: { title: '测试过程', logType: 'employee' },
                     children: [
                         {
                             name: 'testRecordsForm',
@@ -520,7 +520,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '软件测试记录' }
+                            meta: { title: '软件测试记录', logType: 'employee' }
                         },
                         {
                             name: 'testReportForm',
@@ -529,7 +529,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '测试报告填写' }
+                            meta: { title: '测试报告填写', logType: 'employee' }
                         }
                     ]
                 },//测试操作
@@ -540,7 +540,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '审核测试报告' },
+                    meta: { title: '审核测试报告', logType: 'employee' },
                     children: [
                         {
                             name: 'checkTestReportForm',
@@ -549,7 +549,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '查看测试报告' }
+                            meta: { title: '查看测试报告', logType: 'employee' }
                         },
                         {
                             name: 'reportVerifyForm',
@@ -558,18 +558,18 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '测试报告审核表格' }
+                            meta: { title: '测试报告审核表格', logType: 'employee' }
                         }
                     ]
                 },//审核测试报告
                 {
-                    name:'editTestReport',
-                    path:'editTestReport',
+                    name: 'editTestReport',
+                    path: 'editTestReport',
                     component: EmployeeEditTestReport,
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '编辑测试报告' },
+                    meta: { title: '编辑测试报告', logType: 'employee' },
                     children: [
                         {
                             name: 'editTestReportForm',
@@ -578,7 +578,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '编辑测试报告' }
+                            meta: { title: '编辑测试报告', logType: 'employee' }
                         }
                     ]
                 },//编辑测试报告
@@ -589,7 +589,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '检查测试工作' },
+                    meta: { title: '检查测试工作', logType: 'employee' },
                     children: [
                         {
                             name: 'documentReviewForm',
@@ -598,7 +598,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '软件文档评审表' }
+                            meta: { title: '软件文档评审表', logType: 'employee' }
                         },
                         {
                             name: 'workCheckForm',
@@ -607,7 +607,8 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '测试工作检查表', isLogin: true }
+                            meta: { title: '测试工作检查表', logType: 'employee'}
+
                         },
                     ]
                 },//测试工作检查
@@ -617,53 +618,51 @@ const router = new VueRouter({
             name: 'admin',
             path: '/admin',
             component: AdminPage,
-            meta: { title: '管理员界面' },
+            meta: { title: '管理员界面', logType: 'admin' },
             children: [
                 {
                     name: 'clientTable',
                     path: 'clientTable',
                     component: ClientTable,
-                    meta: { title: '用户列表' }
+                    meta: { title: '用户列表', logType: 'admin' }
                 },
                 {
                     name: 'employeeTable',
                     path: 'employeeTable',
                     component: EmployeeTable,
-                    meta: { title: '员工列表' }
+                    meta: { title: '员工列表' ,logType: 'admin' }
                 },
                 {
                     name: 'employeeInfoForm',
                     path: 'employeeInfoForm',
                     component: EmployeeInfoForm,
-                    meta: { title: '新员工信息' }
+                    meta: { title: '新员工信息', logType: 'admin' }
                 }
             ]
         }//管理员界面
     ]
 })
 
-/*
+
 router.beforeEach((to,from,next)=>{
     console.log(to.name)
-    //if(to.name === 'news' || to.name === 'message')`
-    if(to.meta.isAuth){
-        if(localStorage.getItem('school') === 'NJU'){
+    if(to.meta.logType){
+        if (sessionStorage.getItem('logType') === to.meta.logType){//验证登录类型是否正确
             next()
         }
         else{
-            alert('学校名不对！')
+            alert('未登录或登录类型错误')
+            router.push({
+                name:'index'
+            })
         }
     }
     else{
-        console.log('Can pass the gurader')
         next()
     }
 })//全局前置路由守卫————路由切换之前或者初始化的时候被调用
 
-router.afterEach((to,from)=>{
-    document.title = to.meta.title
-})//后置路由守卫，在切换之后调用
-*/
+
 router.afterEach((to) => {
     document.title = to.meta.title || "测试系统"
 })
