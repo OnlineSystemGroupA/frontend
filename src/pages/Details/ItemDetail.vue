@@ -247,7 +247,12 @@ export default {
                 }
             }
             else if (this.active === 2) {
-                console.log('2')
+                if (logType === 'client') {
+                    routeName = 'clientAcceptQuotation'
+                }
+                else if (logType === 'employee') {
+                    routeName = 'offerQuotation'
+                }
             }
             else if (this.active === 3) {
                 console.log('3')

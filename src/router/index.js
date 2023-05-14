@@ -39,6 +39,8 @@ import ItemDetail from '../pages/Details/ItemDetail'
 import ClientUploadSamples from '../pages/Process/ClientUploadSamples'
 import ItemForArrange from '../pages/Tables/ItemForArrange'
 import EmployeeEditTestReport from '../pages/Process/EmployeeEditTestReport'
+import EmployeeQuotation from '../pages/Process/EmployeeQuotation'
+import ClientAcceptQuotation from '../pages/Process/ClientAcceptQuotation'
 
 const router = new VueRouter({
     routes: [
@@ -218,6 +220,15 @@ const router = new VueRouter({
                         },
                     ]
                 },//修改提交申请
+                {
+                    name: 'clientAcceptQuotation',
+                    path: 'clientAcceptQuotation',
+                    component: ClientAcceptQuotation,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '查看报价' }
+                },//查看报价
                 {
                     name: 'clientUploadSamples',
                     path: 'clientUploadSammples',
@@ -435,6 +446,15 @@ const router = new VueRouter({
                         },
                     ]
                 },//申请审核
+                {
+                    name: 'offerQuotation',
+                    path: 'offerQuotation',
+                    component: EmployeeQuotation,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '提出报价' }
+                },//提出报价
                 {
                     name: 'writeTestPlan',
                     path: 'writeTestPlan',
