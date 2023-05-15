@@ -89,7 +89,7 @@ export default {
 .el-tag {
     height: 32px;
     margin-right: 10px;
-    margin-top: 5px
+    margin-top: 5px;
 }
 
 .select-option {

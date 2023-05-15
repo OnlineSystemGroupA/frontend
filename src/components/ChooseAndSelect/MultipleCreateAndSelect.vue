@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-select
-            class="select-options"
+            class="multiple-select"
             v-model="selectedOptions"
             @change="onChange"
             multiple
@@ -71,7 +71,7 @@ export default {
             this.newOption = "";
         },
 
-        onChange(){
+        onChange() {
             this.$emit('change', this.selectedOptions)
         }
     }
@@ -84,19 +84,19 @@ export default {
     margin-left: 5%;
     margin-right: 3%;
 
-    /*/deep/ .el-input__inner {*/
-    /*    width: 80%;*/
-    /*}*/
-
     /deep/ .el-input__suffix {
         width: 10%;
         margin-right: 10%;
     }
 }
 
-.select-options {
+.multiple-select {
     width: 200px;
     margin-left: 10px;
     vertical-align: bottom;
+
+    /deep/ .el-select__tags .el-tag {
+        max-width: 60%;
+    }
 }
 </style>
