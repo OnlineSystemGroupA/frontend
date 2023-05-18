@@ -6,8 +6,14 @@
                 <el-radio-button :label="true">收起</el-radio-button>
             </el-radio-group>
         -->
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-            :collapse="isCollapse">
+        <el-menu default-active="1-4-1" 
+        class="el-menu-vertical-demo"
+        @open="handleOpen" 
+        @close="handleClose"
+        :collapse="isCollapse" 
+        background-color="#6A005F" 
+        text-color="#FFFFFF" 
+        active-text-color="#FFCC00">
             <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-document"></i>
@@ -22,11 +28,10 @@
             <el-submenu index="2">
                 <template slot="title">
                     <i class="el-icon-document"></i>
-                    <span slot="title">查看表格</span>
+                    <span slot="title">查看项目</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="2-1">按项目查看</el-menu-item>
-                    <el-menu-item index="2-2">按类型查看</el-menu-item>
+                    <el-menu-item index="2-1" @click="checkItem">查看项目表格</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -35,32 +40,37 @@
 
 <script>
 export default {
-    name:'AdminMenu',
+    name: 'AdminMenu',
     data() {
         return {
             isCollapse: false
         };
     },
-    methods:{
+    methods: {
         handleOpen(key, keyPath) {
             console.log(key, keyPath);
         },
         handleClose(key, keyPath) {
             console.log(key, keyPath);
         },
-        viewClient(){
+        viewClient() {
             this.$router.push({
-                name:'clientTable'
+                name: 'clientTable'
             })
         },
-        viewEmployee(){
+        viewEmployee() {
             this.$router.push({
-                name:'employeeTable'
+                name: 'employeeTable'
             })
         },
-        addEmployee(){
+        addEmployee() {
             this.$router.push({
-                name:'employeeInfoForm'
+                name: 'employeeInfoForm'
+            })
+        },
+        checkItem() {
+            this.$router.push({
+                name:'adminItemTable'
             })
         }
     }

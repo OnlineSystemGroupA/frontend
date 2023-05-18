@@ -7,13 +7,18 @@
 		</div>
 		<br />
 		<el-table :data="clientData" border style="width: 100%; height: auto;">
-			<el-table-column prop="id" label="id" width="180"> </el-table-column>
-			<el-table-column prop="userName" label="用户名" width="180">
+			<el-table-column prop="id" label="id" style="width: 20%; height: auto;">
+				<template slot-scope="scope">
+					<p @click="pickEmployee(scope.row.id)">{{ scope.row.id }}</p>
+				</template>
 			</el-table-column>
-			<el-table-column prop="company" label="单位/公司" width="180">
+			<el-table-column prop="userName" label="用户名" style="width: 20%; height: auto;">
 			</el-table-column>
-			<el-table-column prop="email" label="邮箱" width="180"> </el-table-column>
-			<el-table-column prop="address" label="地址" width="180">
+			<el-table-column prop="company" label="单位/公司" style="width: 20%; height: auto;">
+			</el-table-column>
+			<el-table-column prop="email" label="邮箱" style="width: 20%; height: auto;">
+			</el-table-column>
+			<el-table-column prop="address" label="地址" style="width: 20%; height: auto;">
 			</el-table-column>
 		</el-table>
 	</div>
@@ -62,7 +67,7 @@ export default {
 
 <style scoped>
 .clientTable {
-	width: 800px;
+	width: 80%;
 	align-items: center;
 	border-radius: 30px;
 	margin: 30px;

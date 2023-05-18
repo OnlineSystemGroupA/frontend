@@ -41,6 +41,7 @@ import ItemForArrange from '../pages/Tables/ItemForArrange'
 import EmployeeEditTestReport from '../pages/Process/EmployeeEditTestReport'
 import EmployeeQuotation from '../pages/Process/EmployeeQuotation'
 import ClientAcceptQuotation from '../pages/Process/ClientAcceptQuotation'
+import AdminItemTable from '../pages/Tables/AdminItemTable'
 
 const router = new VueRouter({
     routes: [
@@ -625,19 +626,116 @@ const router = new VueRouter({
                     path: 'clientTable',
                     component: ClientTable,
                     meta: { title: '用户列表', logType: 'admin' }
-                },
+                },//用户列表
                 {
                     name: 'employeeTable',
                     path: 'employeeTable',
                     component: EmployeeTable,
                     meta: { title: '员工列表' ,logType: 'admin' }
-                },
+                },//员工类表
                 {
                     name: 'employeeInfoForm',
                     path: 'employeeInfoForm',
                     component: EmployeeInfoForm,
                     meta: { title: '新员工信息', logType: 'admin' }
-                }
+                },//添加新员工
+                {
+                    name: 'adminItemTable',
+                    path: 'AdminItemTable',
+                    component: AdminItemTable,
+                    meta: { title: '项目列表', logType: 'admin' }
+                },//项目列表
+                {
+                    name: 'adminItemDetail',
+                    path: 'adminItemDetail',
+                    component: ItemDetail,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '项目详情', logType: 'admin' }
+                },//项目详情
+                {
+                    name: 'adminReadApplicationForm',
+                    path: 'adminReadApplicationForm',
+                    component: ApplicationForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取申请表', logType: 'admin' }
+                },//读取申请表
+                {
+                    name: 'adminReadTestFunctionList',
+                    path: 'adminReadTestFunctionList',
+                    component: TestFunctionList,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试功能表', logType: 'admin' }
+                },//读取测试功能表
+                {
+                    name: 'adminReadApplicationVerifyForm',
+                    path: 'adminReadApplicationVerifyForm',
+                    component: ApplicationVerifyForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取申请审核表', logType: 'admin' }
+                },//读取审核申请
+                {
+                    name: 'adminReadTestPlanForm',
+                    path: 'adminReadTestPlanForm',
+                    component: TestPlanForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试计划', logType: 'admin' }
+                },//读取测试计划表
+                {
+                    name: 'adminReadTestPlanVerifyForm',
+                    path: 'adminReadTestPlanVerifyForm',
+                    component: TestPlanVerifyForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试计划审核表', logType: 'admin' }
+                },//读取测试计划审核表
+                {
+                    name: 'adminReadTestRecordsForm',
+                    path: 'adminReadTestRecordsForm',
+                    component: TestRecordsForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试记录表', logType: 'admin' }
+                },//读取测试记录表
+                {
+                    name: 'adminReadTestReportForm',
+                    path: 'adminReadTestReportForm',
+                    component: TestReportForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试报告', logType: 'admin' }
+                },//读取测试报告
+                {
+                    name: 'adminReadDocumentReviewForm',
+                    path: 'adminReadDocumentReviewForm',
+                    component: DocumentReviewForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取文档检查表', logType: 'admin' }
+                },//读取文档检查表
+                {
+                    name: 'adminReadTestWorkCheck',
+                    path: 'adminReadTestWorkCheck',
+                    component: TestWorkCheck,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试工作检查表', logType: 'admin' }
+                },//读取测试工作检查表
+
             ]
         }//管理员界面
     ]

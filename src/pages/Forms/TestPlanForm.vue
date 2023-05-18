@@ -1,7 +1,7 @@
 <template>
     <div class="test_plan">
         <h1>测试方案</h1>
-        <el-form label-position="left" label-width="80px" :disabled = "disable">
+        <el-form label-position="left" label-width="80px" :disabled="disable">
             <el-form-item label="版本号">
                 <el-input v-model="form.version" placeholder="版本号"></el-input>
             </el-form-item>
@@ -104,7 +104,7 @@
 <script>
 export default {
     name: 'TestPlanForm',
-    props: ['writable', 'checking','formId'],
+    props: ['writable', 'checking', 'formId'],
     data() {
         return {
             form: {

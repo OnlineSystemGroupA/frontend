@@ -85,8 +85,8 @@ export default {
                         "password": this.userInfo.password
                     }
                     this.axios.post('/api/auth/register', registerData).then(res => {
-                        console.log(res)
-                        console.log(res.status)
+                        //console.log(res)
+                        //console.log(res.status)
                         if (res.status === 200) {
                             alert("注册成功")
                         }
@@ -95,8 +95,8 @@ export default {
                         }
                         
                     }).catch(err => {
-                        console.log(err)
-                        console.log(err.response.status)
+                        //console.log(err)
+                        //console.log(err.response.status)
                         if (err.response.status === 409) {
                             alert("用户名重复")
                         }

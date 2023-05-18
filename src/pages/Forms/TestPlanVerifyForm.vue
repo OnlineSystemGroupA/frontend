@@ -22,7 +22,8 @@
                     <el-radio :label="false">否</el-radio>
                 </el-radio-group>
                 <el-form-item label="不通过原因">
-                    <el-input type="textarea" v-model="item.explanation" placeholder="不通过原因" :disabled="item.passOrNot"></el-input>
+                    <el-input type="textarea" v-model="item.explanation" placeholder="不通过原因"
+                        :disabled="item.passOrNot"></el-input>
                 </el-form-item>
             </el-form-item>
             <h2>审评意见</h2>
@@ -118,7 +119,7 @@ export default {
             }
         }
     },
-    methods:{
+    methods: {
         submit() {
             console.log(JSON.stringify(this.form))
         },
