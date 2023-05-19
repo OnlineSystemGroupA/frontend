@@ -84,23 +84,22 @@
                 <h2>运行环境</h2>
                 <h3>客户端</h3>
                 <el-form-item label="操作系统:">
-                    <br>
-                    <el-row>
-                        <el-checkbox v-model="form.clientSystemWindows">Windows
-                            <el-input placeholder="版本" size="small"
-                                      v-model="form.clientWindowsVersion"></el-input>
-                        </el-checkbox>
-                        <br>
-                        <el-checkbox v-model="form.clientSystemLinux">Linux
-                            <el-input placeholder="版本" size="small"
-                                      v-model="form.clientLinuxVersion"></el-input>
-                        </el-checkbox>
-                        <br>
-                        <el-checkbox v-model="form.clientSystemOther">其他
-                            <el-input placeholder="其他" size="small"
-                                      v-model="form.otherSystem"></el-input>
-                        </el-checkbox>
-                    </el-row>
+                    <br/>
+                    <el-form label-position="left" label-width="15%">
+                        <el-form-item v-for="clientSystem in form.clientSystems"
+                                      :key="clientSystem.vforKey"
+                                      :label="clientSystem.systemName"
+                                      style="margin-top:5px">
+                            <el-input v-model="clientSystem.version" placeholder="系统版本"
+                                      style="width:30%"></el-input>
+                            <el-button type="danger"
+                                       @click="form.clientSystems.splice(form.clientSystems.indexOf(clientSystem),1)"
+                                       icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
+                        </el-form-item>
+                    </el-form>
+                    <el-input v-model="newClientSystem" placeholder="其他操作系统"
+                              style="width:20%;margin-top:10px;margin-right:5px"/>
+                    <el-button @click="addClientSystem" type="primary">添加</el-button>
                 </el-form-item>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
@@ -251,6 +250,7 @@
 <script>
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
+import {nanoid} from "nanoid";
 
 export default {
     name: "ApplicationForm",
@@ -284,12 +284,10 @@ export default {
                     codeLines: "",
                 },
                 softwareType: "",
-                clientSystemWindows: false,
-                clientSystemLinux: false,
-                clientSystemOther: false,
-                clientWindowsVersion: '',
-                clientLinuxVersion: '',
-                otherSystem: '',
+                clientSystems: [
+                    {systemName: 'Windows', version: '', vforKey: nanoid(6)},
+                    {systemName: 'Linux', version: '', vforKey: nanoid(6)}
+                ],
                 clientMemory: '',
                 clientOtherRequirement: '',
                 serverArchitectures: [],
@@ -323,6 +321,7 @@ export default {
                 }
             },
             newMedium: '',
+            newClientSystem: '',
             chosenData: {
                 orgType: '',
                 softwareArchitecture: ''
@@ -423,9 +422,22 @@ export default {
     methods: {
         addMedia() {
             if (this.newMedium !== '') {
-                this.form.media.push({medium: this.newMedium, num: 0});
-                this.newMedium = '';
+                if (this.form.media.findIndex(medium => {
+                    return medium.medium === this.newMedium
+                }) === -1) {
+                    this.form.media.push({medium: this.newMedium, num: 0});
+                    this.newMedium = '';
+                } else {
+                    alert("重复的介质类型！");
+                }
             }
+        },
+        addClientSystem() {
+            if (this.newClientSystem !== '') {
+                this.form.clientSystems.push({systemName: this.newClientSystem, version: '', vforKey: nanoid(6)});
+                this.newClientSystem = '';
+            }
+            return 0;
         },
         submit() {
             if (this.writable) {
