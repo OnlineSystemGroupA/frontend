@@ -63,13 +63,13 @@ export default {
         },
 
         handleInputConfirm() {
-            let inputValue = this.newTag;
+            let inputValue = this.newTag.trim();
             if (inputValue) {
                 if (this.dynamicTags.indexOf(inputValue) !== -1) {
                     this.handleDuplicateTag(inputValue);
                 }
                 this.dynamicTags.push(inputValue);
-                this.onChange()
+                this.onChange();
             }
             this.newTag = '';
         },
@@ -79,7 +79,7 @@ export default {
         },
 
         onChange(){
-            this.$emit('change', this.dynamicTags)
+            this.$emit('change', this.dynamicTags);
         }
     }
 }

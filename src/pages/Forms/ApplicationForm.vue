@@ -171,7 +171,7 @@
                 </el-form>
                 <el-input v-model="newMedium" placeholder="其他介质"
                           style="width:20%;margin-top:10px;margin-right:5px"/>
-                <el-button @click="addMedia" type="primary">添加</el-button>
+                <el-button @click="addMedium" type="primary">添加</el-button>
                 <h3>文档资料</h3>
                 <el-input type="textarea" placeholder="文档资料" v-model="form.documents"></el-input>
                 <h6>
@@ -420,10 +420,11 @@ export default {
         };
     },
     methods: {
-        addMedia() {
+        addMedium() {
             if (this.newMedium !== '') {
+                let trimmedNewMedium = this.newMedium.trim();
                 if (this.form.media.findIndex(medium => {
-                    return medium.medium === this.newMedium
+                    return medium.medium === trimmedNewMedium
                 }) === -1) {
                     this.form.media.push({medium: this.newMedium, num: 0});
                     this.newMedium = '';
@@ -434,7 +435,7 @@ export default {
         },
         addClientSystem() {
             if (this.newClientSystem !== '') {
-                this.form.clientSystems.push({systemName: this.newClientSystem, version: '', vforKey: nanoid(6)});
+                this.form.clientSystems.push({systemName: this.newClientSystem.trim(), version: '', vforKey: nanoid(6)});
                 this.newClientSystem = '';
             }
             return 0;

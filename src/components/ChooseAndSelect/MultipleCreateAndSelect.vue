@@ -62,7 +62,7 @@ export default {
     },
     methods: {
         addNewOption() {
-            let inputValue = this.newOption
+            let inputValue = this.newOption.trim();
             if (inputValue) {
                 this.createdOptions.push(
                     {value: inputValue, label: inputValue}
@@ -72,7 +72,7 @@ export default {
         },
 
         onChange() {
-            this.$emit('change', this.selectedOptions)
+            this.$emit('change', this.selectedOptions);
         }
     }
 }
