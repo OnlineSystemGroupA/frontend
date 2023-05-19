@@ -94,7 +94,6 @@ export default {
 
 .select-option {
     width: 200px;
-    margin-left: 10px;
     margin-top: 5px;
     vertical-align: bottom;
 

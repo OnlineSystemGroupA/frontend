@@ -76,7 +76,7 @@
                 <div class="block">
                     <span class="demonstration">软件类型:</span>
                     <el-cascader v-model="form.softwareType" :options="softwareTypeOptions"
-                                 :props="{ expandTrigger: 'hover' }"></el-cascader>
+                                 :props="{ expandTrigger: 'hover' }" style="margin-left:10px"></el-cascader>
                 </div>
             </div>
             <hr/>
@@ -101,30 +101,31 @@
                               style="width:20%;margin-top:10px;margin-right:5px"/>
                     <el-button @click="addClientSystem" type="primary">添加</el-button>
                 </el-form-item>
+                <br/>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model.number="form.clientMemory"></el-input>
+                        <el-input placeholder="内存要求" v-model.number="form.clientMemory" style="margin-top:5px"></el-input>
                     </el-form-item>
                     <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"></el-input>
+                        <el-input placeholder="其他要求" v-model="form.clientOtherRequirement" style="margin-top:5px"></el-input>
                     </el-form-item>
                 </el-form>
                 <h3>服务器端</h3>
                 <h4>硬件</h4>
                 <el-form-item label="架构:">
-                    <br>
+                    <br/>
                     <SelectAndCreateTags v-model="form.serverArchitectures" :default-options="serverArchitectureOptions"
                                          option-description="添加一种架构"/>
                 </el-form-item>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model="form.serverMemory"></el-input>
+                        <el-input placeholder="内存要求" v-model="form.serverMemory" style="margin-top:5px"></el-input>
                     </el-form-item>
                     <el-form-item label="硬盘要求（单位MB）:">
-                        <el-input placeholder="硬盘要求" v-model="form.serverDisk"></el-input>
+                        <el-input placeholder="硬盘要求" v-model="form.serverDisk" style="margin-top:5px"></el-input>
                     </el-form-item>
                     <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"></el-input>
+                        <el-input placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
                     </el-form-item>
                 </el-form>
                 <h4>软件</h4>
@@ -138,7 +139,7 @@
                     <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
                 </el-form-item>
                 <el-form-item label="构架:">
-                    <br>
+                    <br/>
                     <SelectAndCreateTags v-model="form.serverFrame" :default-options="frameOptions"
                                          option-description="添加一种构架"/>
                 </el-form-item>
@@ -175,10 +176,12 @@
                 <h3>文档资料</h3>
                 <el-input type="textarea" placeholder="文档资料" v-model="form.documents"></el-input>
                 <h6>
-                    注：1、需求文档（例如：项目计划任务书、需求分析报告、合同等）（验收、鉴定测试必须）
-                    <br>
+                    注：
+                    <br/>
+                    1、需求文档（例如：项目计划任务书、需求分析报告、合同等）（验收、鉴定测试必须）
+                    <br/>
                     2、用户文档（例如：用户手册、用户指南等）（必须）
-                    <br>
+                    <br/>
                     3、操作文档（例如：操作员手册、安装手册、诊断手册、支持手册等）（验收项目必须）
                 </h6>
                 <h3>提交的样品（硬拷贝资料、硬件）五年保存期满</h3>
@@ -189,7 +192,7 @@
                     </el-radio-group>
                 </el-form-item>
             </el-form-item>
-            <br>
+            <br/>
             <el-form-item label="希望完成测试时间：">
                 <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
                                 v-model="form.expectedDate"></el-date-picker>

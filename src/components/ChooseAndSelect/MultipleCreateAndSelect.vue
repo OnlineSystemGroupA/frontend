@@ -92,7 +92,6 @@ export default {
 
 .multiple-select {
     width: 200px;
-    margin-left: 10px;
     vertical-align: bottom;
 
     /deep/ .el-select__tags .el-tag {
