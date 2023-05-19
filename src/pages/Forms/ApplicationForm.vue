@@ -4,7 +4,8 @@
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型">
                 <br/>
-                <SelectAndCreateTags v-model="form.testType" :default-options="testTypeOptions" option-description="新增一个测试类型"/>
+                <SelectAndCreateTags v-model="form.testType" :default-options="testTypeOptions"
+                                     option-description="新增一个测试类型"/>
             </el-form-item>
             <hr/>
             <el-form-item label="软件名称">
@@ -47,13 +48,15 @@
             <hr/>
             <el-form-item label="测试依据">
                 <br/>
-                <SelectAndCreateTags v-model="form.testStandard" :default-options="testStandardOptions" option-description="新增一个测试依据"/>
+                <SelectAndCreateTags v-model="form.testStandard" :default-options="testStandardOptions"
+                                     option-description="新增一个测试依据"/>
             </el-form-item>
             <hr/>
             <el-form-item label="需要测试的指标">
                 <br/>
-                <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions" option-description="选择测试指标"
-                                         create-description="其他指标" class=""/>
+                <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions"
+                                         option-description="选择测试指标"
+                                         create-description="其他指标"/>
             </el-form-item>
             <hr/>
             <div>
@@ -65,7 +68,7 @@
                 <el-form-item label="功能点数">
                     <el-input v-model="form.softwareScale.functionPoint" placeholder="功能点数"></el-input>
                 </el-form-item>
-                <el-form-item label="代码行数(不包括注释行、空行)">
+                <el-form-item label="代码行数（不包括注释行、空行）">
                     <el-input v-model="form.softwareScale.codeLines" placeholder="代码行数"></el-input>
                 </el-form-item>
             </div>
@@ -111,7 +114,8 @@
                 <h4>硬件</h4>
                 <el-form-item label="架构:">
                     <br>
-                    <SelectAndCreateTags v-model="form.serverArchitectures" :default-options="serverArchitectureOptions" option-description="添加一种架构"/>
+                    <SelectAndCreateTags v-model="form.serverArchitectures" :default-options="serverArchitectureOptions"
+                                         option-description="添加一种架构"/>
                 </el-form-item>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
@@ -136,7 +140,8 @@
                 </el-form-item>
                 <el-form-item label="构架:">
                     <br>
-                    <SelectAndCreateTags v-model="form.serverFrame" :default-options="frameOptions" option-description="添加一种构架"/>
+                    <SelectAndCreateTags v-model="form.serverFrame" :default-options="frameOptions"
+                                         option-description="添加一种构架"/>
                 </el-form-item>
                 <el-form-item label="数据库:">
                     <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
@@ -154,25 +159,20 @@
             <el-form-item>
                 <h2>样品和数量</h2>
                 <h3>软件介质</h3>
-                <el-col :span="8">
-                    <el-form-item label="光盘">
+                <el-form label-position="left" label-width="15%">
+                    <el-form-item v-for="medium in form.media"
+                                  :key="medium.medium"
+                                  :label="medium.medium"
+                                  style="margin-top:5px">
                         <el-input-number controls-position="right" :min="0"
-                                         :max="100000" v-model="form.cdNum"></el-input-number>
+                                         :max="100000" v-model="medium.num"></el-input-number>
+                        <el-button type="danger" @click="form.media.splice(form.media.indexOf(medium),1)"
+                                   icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
                     </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                    <el-form-item label="U盘">
-                        <el-input-number controls-position="right" :min="0"
-                                         :max="100000" v-model="form.usbNum"></el-input-number>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                    <el-form-item label="其他">
-                        <el-input-number controls-position="right" :min="0"
-                                         :max="100000" v-model="form.otherMediumNum"></el-input-number>
-                        <el-input placeholder="其他" v-model="form.otherMedium"></el-input>
-                    </el-form-item>
-                </el-col>
+                </el-form>
+                <el-input v-model="newMedium" placeholder="其他介质"
+                          style="width:20%;margin-top:10px;margin-right:5px"/>
+                <el-button @click="addMedia" type="primary">添加</el-button>
                 <h3>文档资料</h3>
                 <el-input type="textarea" placeholder="文档资料" v-model="form.documents"></el-input>
                 <h6>
@@ -304,10 +304,10 @@ export default {
                 serverMiddleware: '',
                 serverOtherSoftware: '',
                 networkEnvironment: '',
-                cdNum: '',
-                usbNum: '',
-                otherMedium: '',
-                otherMediumNum: '',
+                media: [
+                    {medium: "光盘", num: 0},
+                    {medium: "U盘", num: 0}
+                ],
                 documents: '',
                 expireHandle: '',
                 expectedDate: '',
@@ -322,6 +322,7 @@ export default {
                     website: '',
                 }
             },
+            newMedium: '',
             chosenData: {
                 orgType: '',
                 softwareArchitecture: ''
@@ -420,6 +421,12 @@ export default {
         };
     },
     methods: {
+        addMedia() {
+            if (this.newMedium !== '') {
+                this.form.media.push({medium: this.newMedium, num: 0});
+                this.newMedium = '';
+            }
+        },
         submit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
