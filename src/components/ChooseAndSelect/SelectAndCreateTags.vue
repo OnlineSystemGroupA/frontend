@@ -33,6 +33,7 @@
 export default {
     name: 'SelectAndCreateTags',
     /**
+     * options: array of string
      * defaultOptions: array of {value, label}
      * e.g. [
      *     {value: "option1", label:"option1"},
@@ -42,6 +43,10 @@ export default {
      *
      * optionDescription: string
      */
+    model: {
+        prop: 'options',
+        event: 'change'
+    },
     props: ["defaultOptions", "optionDescription"],
 
     data() {
@@ -54,21 +59,27 @@ export default {
     methods: {
         handleClose(tag) {
             this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+            this.onChange()
         },
 
         handleInputConfirm() {
-            let inputValue = this.newTag;
+            let inputValue = this.newTag.trim();
             if (inputValue) {
                 if (this.dynamicTags.indexOf(inputValue) !== -1) {
                     this.handleDuplicateTag(inputValue);
                 }
                 this.dynamicTags.push(inputValue);
+                this.onChange();
             }
             this.newTag = '';
         },
 
         handleDuplicateTag(tag) {
             this.handleClose(tag);
+        },
+
+        onChange(){
+            this.$emit('change', this.dynamicTags);
         }
     }
 }
@@ -78,7 +89,7 @@ export default {
 .el-tag {
     height: 32px;
     margin-right: 10px;
-    margin-top: 5px
+    margin-top: 5px;
 }
 
 .select-option {

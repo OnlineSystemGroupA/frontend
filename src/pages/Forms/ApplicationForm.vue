@@ -4,7 +4,8 @@
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型">
                 <br/>
-                <SelectAndCreateTags :default-options="testTypeOptions" option-description="新增一个测试类型"/>
+                <SelectAndCreateTags v-model="form.testType" :default-options="testTypeOptions"
+                                     option-description="新增一个测试类型"/>
             </el-form-item>
             <hr/>
             <el-form-item label="软件名称">
@@ -47,13 +48,15 @@
             <hr/>
             <el-form-item label="测试依据">
                 <br/>
-                <SelectAndCreateTags :default-options="testStandardOptions" option-description="新增一个测试依据"/>
+                <SelectAndCreateTags v-model="form.testStandard" :default-options="testStandardOptions"
+                                     option-description="新增一个测试依据"/>
             </el-form-item>
             <hr/>
             <el-form-item label="需要测试的指标">
                 <br/>
-                <MultipleCreateAndSelect :default-options="testAspectsOptions" option-description="选择测试指标"
-                                         create-description="其他指标" class=""/>
+                <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions"
+                                         option-description="选择测试指标"
+                                         create-description="其他指标"/>
             </el-form-item>
             <hr/>
             <div>
@@ -65,7 +68,7 @@
                 <el-form-item label="功能点数">
                     <el-input v-model="form.softwareScale.functionPoint" placeholder="功能点数"></el-input>
                 </el-form-item>
-                <el-form-item label="代码行数(不包括注释行、空行)">
+                <el-form-item label="代码行数（不包括注释行、空行）">
                     <el-input v-model="form.softwareScale.codeLines" placeholder="代码行数"></el-input>
                 </el-form-item>
             </div>
@@ -73,7 +76,7 @@
                 <div class="block">
                     <span class="demonstration">软件类型:</span>
                     <el-cascader v-model="form.softwareType" :options="softwareTypeOptions"
-                                 :props="{ expandTrigger: 'hover' }"></el-cascader>
+                                 :props="{ expandTrigger: 'hover' }" style="margin-left:10px"></el-cascader>
                 </div>
             </div>
             <hr/>
@@ -81,55 +84,48 @@
                 <h2>运行环境</h2>
                 <h3>客户端</h3>
                 <el-form-item label="操作系统:">
-                    <br>
-                    <el-row>
-                        <el-checkbox v-model="form.clientSystemWindows">Windows
-                            <el-input placeholder="版本" size="small"
-                                      v-model="form.clientWindowsVersion"></el-input>
-                        </el-checkbox>
-                        <br>
-                        <el-checkbox v-model="form.clientSystemLinux">Linux
-                            <el-input placeholder="版本" size="small"
-                                      v-model="form.clientLinuxVersion"></el-input>
-                        </el-checkbox>
-                        <br>
-                        <el-checkbox v-model="form.clientSystemOther">其他
-                            <el-input placeholder="其他" size="small"
-                                      v-model="form.otherSystem"></el-input>
-                        </el-checkbox>
-                    </el-row>
+                    <br/>
+                    <el-form label-position="left" label-width="15%">
+                        <el-form-item v-for="clientSystem in form.clientSystems"
+                                      :key="clientSystem.vforKey"
+                                      :label="clientSystem.systemName"
+                                      style="margin-top:5px">
+                            <el-input v-model="clientSystem.version" placeholder="系统版本"
+                                      style="width:30%"></el-input>
+                            <el-button type="danger"
+                                       @click="form.clientSystems.splice(form.clientSystems.indexOf(clientSystem),1)"
+                                       icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
+                        </el-form-item>
+                    </el-form>
+                    <el-input v-model="newClientSystem" placeholder="其他操作系统"
+                              style="width:20%;margin-top:10px;margin-right:5px"/>
+                    <el-button @click="addClientSystem" type="primary">添加</el-button>
                 </el-form-item>
+                <br/>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model.number="form.clientMemory"></el-input>
+                        <el-input placeholder="内存要求" v-model.number="form.clientMemory" style="margin-top:5px"></el-input>
                     </el-form-item>
                     <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"></el-input>
+                        <el-input placeholder="其他要求" v-model="form.clientOtherRequirement" style="margin-top:5px"></el-input>
                     </el-form-item>
                 </el-form>
                 <h3>服务器端</h3>
                 <h4>硬件</h4>
                 <el-form-item label="架构:">
-                    <br>
-                    <SelectAndCreateTags :default-options="serverArchitectureOptions" option-description="添加一种架构"/>
-<!--                    <el-checkbox v-model="form.PCServer">PC服务器</el-checkbox>-->
-<!--                    <br>-->
-<!--                    <el-checkbox v-model="form.UnixServer">Unix/Linux服务器</el-checkbox>-->
-<!--                    <br>-->
-<!--                    <el-checkbox v-model="form.OtherSever">其他-->
-<!--                        <el-input placeholder="其他"-->
-<!--                                  v-model="form.OtherServerName"></el-input>-->
-<!--                    </el-checkbox>-->
+                    <br/>
+                    <SelectAndCreateTags v-model="form.serverArchitectures" :default-options="serverArchitectureOptions"
+                                         option-description="添加一种架构"/>
                 </el-form-item>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model="form.serverMemory"></el-input>
+                        <el-input placeholder="内存要求" v-model="form.serverMemory" style="margin-top:5px"></el-input>
                     </el-form-item>
                     <el-form-item label="硬盘要求（单位MB）:">
-                        <el-input placeholder="硬盘要求" v-model="form.serverDisk"></el-input>
+                        <el-input placeholder="硬盘要求" v-model="form.serverDisk" style="margin-top:5px"></el-input>
                     </el-form-item>
                     <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"></el-input>
+                        <el-input placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
                     </el-form-item>
                 </el-form>
                 <h4>软件</h4>
@@ -142,9 +138,10 @@
                 <el-form-item label="编程语言:">
                     <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
                 </el-form-item>
-                <el-form-item label="构架:" v-model="form.serverFrame">
-                    <br>
-                    <SelectAndCreateTags :default-options="frameOptions" option-description="添加一种架构"/>
+                <el-form-item label="构架:">
+                    <br/>
+                    <SelectAndCreateTags v-model="form.serverFrame" :default-options="frameOptions"
+                                         option-description="添加一种构架"/>
                 </el-form-item>
                 <el-form-item label="数据库:">
                     <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
@@ -162,32 +159,29 @@
             <el-form-item>
                 <h2>样品和数量</h2>
                 <h3>软件介质</h3>
-                <el-col :span="8">
-                    <el-form-item label="光盘">
+                <el-form label-position="left" label-width="15%">
+                    <el-form-item v-for="medium in form.media"
+                                  :key="medium.medium"
+                                  :label="medium.medium"
+                                  style="margin-top:5px">
                         <el-input-number controls-position="right" :min="0"
-                                         :max="100000" v-model="form.cdNum"></el-input-number>
+                                         :max="100000" v-model="medium.num"></el-input-number>
+                        <el-button type="danger" @click="form.media.splice(form.media.indexOf(medium),1)"
+                                   icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
                     </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                    <el-form-item label="U盘">
-                        <el-input-number controls-position="right" :min="0"
-                                         :max="100000" v-model="form.usbNum"></el-input-number>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                    <el-form-item label="其他">
-                        <el-input-number controls-position="right" :min="0"
-                                         :max="100000" v-model="form.otherMediumNum"></el-input-number>
-                        <el-input placeholder="其他" v-model="form.otherMedium"></el-input>
-                    </el-form-item>
-                </el-col>
+                </el-form>
+                <el-input v-model="newMedium" placeholder="其他介质"
+                          style="width:20%;margin-top:10px;margin-right:5px"/>
+                <el-button @click="addMedium" type="primary">添加</el-button>
                 <h3>文档资料</h3>
                 <el-input type="textarea" placeholder="文档资料" v-model="form.documents"></el-input>
                 <h6>
-                    注：1、需求文档（例如：项目计划任务书、需求分析报告、合同等）（验收、鉴定测试必须）
-                    <br>
+                    注：
+                    <br/>
+                    1、需求文档（例如：项目计划任务书、需求分析报告、合同等）（验收、鉴定测试必须）
+                    <br/>
                     2、用户文档（例如：用户手册、用户指南等）（必须）
-                    <br>
+                    <br/>
                     3、操作文档（例如：操作员手册、安装手册、诊断手册、支持手册等）（验收项目必须）
                 </h6>
                 <h3>提交的样品（硬拷贝资料、硬件）五年保存期满</h3>
@@ -198,7 +192,7 @@
                     </el-radio-group>
                 </el-form-item>
             </el-form-item>
-            <br>
+            <br/>
             <el-form-item label="希望完成测试时间：">
                 <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
                                 v-model="form.expectedDate"></el-date-picker>
@@ -259,6 +253,7 @@
 <script>
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
+import {nanoid} from "nanoid";
 
 export default {
     name: "ApplicationForm",
@@ -292,18 +287,13 @@ export default {
                     codeLines: "",
                 },
                 softwareType: "",
-                clientSystemWindows: false,
-                clientSystemLinux: false,
-                clientSystemOther: false,
-                clientWindowsVersion: '',
-                clientLinuxVersion: '',
-                otherSystem: '',
+                clientSystems: [
+                    {systemName: 'Windows', version: '', vforKey: nanoid(6)},
+                    {systemName: 'Linux', version: '', vforKey: nanoid(6)}
+                ],
                 clientMemory: '',
                 clientOtherRequirement: '',
-                PCServer: false,
-                UnixServer: false,
-                OtherSever: false,
-                OtherServerName: '',
+                serverArchitectures: [],
                 serverMemory: '',
                 serverDisk: '',
                 serverOtherRequirement: '',
@@ -315,10 +305,10 @@ export default {
                 serverMiddleware: '',
                 serverOtherSoftware: '',
                 networkEnvironment: '',
-                cdNum: '',
-                usbNum: '',
-                otherMedium: '',
-                otherMediumNum: '',
+                media: [
+                    {medium: "光盘", num: 0},
+                    {medium: "U盘", num: 0}
+                ],
                 documents: '',
                 expireHandle: '',
                 expectedDate: '',
@@ -333,6 +323,8 @@ export default {
                     website: '',
                 }
             },
+            newMedium: '',
+            newClientSystem: '',
             chosenData: {
                 orgType: '',
                 softwareArchitecture: ''
@@ -426,14 +418,30 @@ export default {
             ],
             serverArchitectureOptions: [
                 {value: 'PC服务器', label: 'PC服务器'},
-                {value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器'},
-                {value: '其他', label: '其他'},
+                {value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器'}
             ]
         };
     },
     methods: {
-        handleOrgTypeChange() {
-
+        addMedium() {
+            if (this.newMedium !== '') {
+                let trimmedNewMedium = this.newMedium.trim();
+                if (this.form.media.findIndex(medium => {
+                    return medium.medium === trimmedNewMedium
+                }) === -1) {
+                    this.form.media.push({medium: this.newMedium, num: 0});
+                    this.newMedium = '';
+                } else {
+                    alert("重复的介质类型！");
+                }
+            }
+        },
+        addClientSystem() {
+            if (this.newClientSystem !== '') {
+                this.form.clientSystems.push({systemName: this.newClientSystem.trim(), version: '', vforKey: nanoid(6)});
+                this.newClientSystem = '';
+            }
+            return 0;
         },
         submit() {
             if (this.writable) {
