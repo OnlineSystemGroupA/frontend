@@ -9,6 +9,18 @@ import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
 
+axios.interceptors.request.use(config => {
+    // 如果存在 token，请求携带这个 token
+    console.log('寻找token')
+    if (window.sessionStorage.getItem('tokenStr')) {
+        config.headers['Authorization'] = window.sessionStorage.getItem('tokenHead') + window.sessionStorage.getItem('tokenStr');
+        console.log(config)
+    }
+    return config;
+}, error => {
+    console.log(error);
+})
+
 Vue.use(VueRouter);
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
@@ -20,3 +32,4 @@ new Vue({
         Vue.prototype.$bus = this	//安装全局事件总线
     }
 }).$mount('#app')
+
