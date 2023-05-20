@@ -1,36 +1,38 @@
 <template>
     <div class="application">
-        <el-form :disabled="disable">
+        <el-form :model="form" ref="form" :disabled="disable" :rules="rules">
             <h1>软件项目委托测试申请书</h1>
-            <el-form-item label="测试类型">
+            <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
                 <br/>
-                <SelectAndCreateTags v-model="form.testType" :default-options="testTypeOptions"
-                                     option-description="新增一个测试类型"/>
+                <SelectAndCreateTags v-model="form.testTypes"
+                                     :default-options="testTypeOptions"
+                                     option-description="新增一个测试类型"
+                                     @change="emitChangeEvent('testTypes', form.testTypes)"
+                                     @blur="emitBlurEvent('testTypes', form.testTypes)"/>
             </el-form-item>
             <hr/>
-            <el-form-item label="软件名称">
+            <el-form-item label="软件名称" prop="softwareName">
                 <el-input v-model="form.softwareName" placeholder="软件名称"></el-input>
             </el-form-item>
-            <el-form-item label="版本号">
+            <el-form-item label="版本号" prop="softwareVersion">
                 <el-input v-model="form.softwareVersion" placeholder="版本号"></el-input>
             </el-form-item>
-            <el-form-item label="委托单位（中文）">
+            <el-form-item label="委托单位（中文）" prop="companyChineseName">
                 <el-input v-model="form.companyChineseName" placeholder="委托单位（中文）"></el-input>
             </el-form-item>
-            <el-form-item label="委托单位（英文）">
+            <el-form-item label="委托单位（英文）" prop="companyEnglishName">
                 <el-input v-model="form.companyEnglishName" placeholder="委托单位（英文）"></el-input>
             </el-form-item>
-            <el-form-item label="开发单位">
+            <el-form-item label="开发单位" prop="developmentDepartment">
                 <el-input v-model="form.developmentDepartment" placeholder="开发单位"></el-input>
             </el-form-item>
-            <el-form-item label="单位性质">
+            <el-form-item label="单位性质" ref="companyType" prop="companyType" class="is-required">
                 <br/>
                 <el-select
-                    allow-create
-                    v-model="chosenData.orgType"
-                    default-first-option
+                    v-model="chosenData.companyType"
                     placeholder="单位性质"
-                    @change="form.orgType = (chosenData.orgType !== '其他'? chosenData.orgType : '')">
+                    @blur="emitBlurEvent('companyType', chosenData.companyType, true)"
+                    @change="form.companyType = (chosenData.companyType !== '其他'? chosenData.companyType : '')">
                     <el-option
                         v-for="item in orgTypeOptions"
                         :key="item.value"
@@ -38,30 +40,34 @@
                         :value="item.value"
                     />
                 </el-select>
-                <el-input v-model="form.orgType" placeholder="其他单位性质" class="other-input"
-                          v-if="chosenData.orgType ==='其他'"/>
+                <el-input v-model="form.companyType" placeholder="其他单位性质" class="other-input"
+                          v-if="chosenData.companyType ==='其他'"/>
             </el-form-item>
-            <el-form-item label="主要功能及用途简介（限200字）">
+            <el-form-item label="主要功能及用途简介（限200字）" prop="description">
                 <el-input type="textarea" v-model="form.description" maxlength="200"
                           placeholder="主要功能及用途"></el-input>
             </el-form-item>
             <hr/>
-            <el-form-item label="测试依据">
+            <el-form-item label="测试依据" ref="testStandards" prop="testStandards">
                 <br/>
-                <SelectAndCreateTags v-model="form.testStandard" :default-options="testStandardOptions"
-                                     option-description="新增一个测试依据"/>
+                <SelectAndCreateTags v-model="form.testStandards"
+                                     :default-options="testStandardOptions"
+                                     option-description="新增一个测试依据"
+                                     @change="emitChangeEvent('testStandards', form.testStandards)"
+                                     @blur="emitBlurEvent('testStandards', form.testStandards)"/>
             </el-form-item>
             <hr/>
-            <el-form-item label="需要测试的指标">
+            <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
                 <br/>
                 <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions"
                                          option-description="选择测试指标"
-                                         create-description="其他指标"/>
+                                         create-description="其他指标"
+                                         @change="emitChangeEvent('testAspects', form.testAspects)"
+                                         @blur="emitBlurEvent('testAspects', form.testAspects)"/>
             </el-form-item>
             <hr/>
-            <el-form-item>
-                <h2>软件规模</h2>
-                <h3>（至少一种）</h3>
+            <el-form-item label="软件规模（至少一种）" ref="softwareScales" prop="softwareScales">
+                <br/>
                 <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
                              @change="handleScaleChange(scale, $event)"></el-checkbox>
                 <br/>
@@ -76,11 +82,15 @@
                 </el-form>
             </el-form-item>
             <br/>
-            <el-form-item>
+            <el-form-item ref="softwareType" prop="softwareType">
                 <div class="block">
                     <span class="demonstration">软件类型:</span>
-                    <el-cascader v-model="form.softwareType" :options="softwareTypeOptions"
-                                 :props="{ expandTrigger: 'hover' }" style="margin-left:10px"></el-cascader>
+                    <el-cascader v-model="form.softwareType"
+                                 :options="softwareTypeOptions"
+                                 :props="{ expandTrigger: 'hover' }"
+                                 @change="emitChangeEvent('softwareType', form.softwareType)"
+                                 @blur="emitBlurEvent('softwareType', form.softwareType, true)"
+                                 style="margin-left:10px"></el-cascader>
                 </div>
             </el-form-item>
             <hr/>
@@ -275,24 +285,31 @@ export default {
     },
     props: ['writable', 'formId', 'checking'],
     data() {
+        const valiChosenCompanyType = (rule, value, callback) => {
+            if (this.chosenData.companyType === "") {
+                callback(new Error("请选择单位性质"));
+            }
+            callback();
+        };
+        const valiCompanyType = (rule, value, callback) => {
+            if (this.chosenData.companyType === "其他" && this.form.companyType === "") {
+                callback(new Error("请填写其他单位性质"));
+            }
+            callback();
+        };
+
         return {
             form: {
-                testType: [],
-                otherTestType: '',
-                chooseOtherTestType: false,
+                testTypes: [],
                 softwareName: "",
                 softwareVersion: "",
                 companyChineseName: "",
                 companyEnglishName: "",
                 developmentDepartment: "",
-                orgType: "",
+                companyType: "",
                 description: "",
-                testStandard: [],
-                otherStandard: '',
-                chooseOtherStandard: false,
+                testStandards: [],
                 testAspects: [],
-                otherAspect: '',
-                chooseOtherAspect: false,
                 softwareScales: [],
                 softwareType: "",
                 clientSystems: [
@@ -331,10 +348,50 @@ export default {
                     website: '',
                 }
             },
+            rules: {
+                testTypes: [
+                    {type: 'array', required: true, message: '请添加至少一个测试类型', trigger: ['blur', 'change']}
+                ],
+                softwareName: [
+                    {required: true, message: '请填写软件名称', trigger: 'blur'}
+                ],
+                softwareVersion: [
+                    {required: true, message: '请填写软件版本', trigger: 'blur'}
+                ],
+                companyChineseName: [
+                    {required: true, message: '请填写委托单位（中文）', trigger: 'blur'}
+                ],
+                companyEnglishName: [
+                    {required: true, message: '请填写委托单位（英文）', trigger: 'blur'}
+                ],
+                developmentDepartment: [
+                    {required: true, message: '请填写开发单位', trigger: 'blur'}
+                ],
+                companyType: [
+                    {validator: valiChosenCompanyType, trigger: ['blur', 'change']},
+                    {validator: valiCompanyType, trigger: 'blur'}
+                ],
+                description: [
+                    {required: true, message: '请填写主要功能及用途简介', trigger: 'blur'}
+                ],
+                testStandards: [
+                    {type: 'array', required: true, message: '请添加至少一个测试依据', trigger: ['blur', 'change']}
+                ],
+                testAspects: [
+                    {type: 'array', required: true, message: '请添加至少一个测试指标', trigger: ['blur', 'change']}
+                ],
+                softwareScales: [
+                    {type: 'array', required: true, message: '请填写至少一个软件规模', trigger: 'change'}
+                ],
+                softwareType: [
+                    {required: true, message: '请选择软件类型', trigger: ['blur', 'change']}
+                ],
+            },
+
             newMedium: '',
             newClientSystem: '',
             chosenData: {
-                orgType: '',
+                companyType: '',
                 softwareArchitecture: ''
             },
             testTypeOptions: [
@@ -430,8 +487,20 @@ export default {
                 {value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器'}
             ]
         };
-    },
+    }
+    ,
     methods: {
+        emitBlurEvent(ref, value, withDelay = false) {
+            if (withDelay) {
+                setTimeout(() => this.$refs[ref].$emit('el.form.blur', value), 50);
+            } else {
+                this.$refs[ref].$emit('el.form.blur', value);
+            }
+        },
+        emitChangeEvent(ref, value) {
+            this.$refs[ref].$emit('el.form.change', value);
+        },
+
         handleScaleChange(scaleOption, event) {
             if (event === true) {
                 this.form.softwareScales.splice(this.scaleOptions.indexOf(scaleOption), 0,
@@ -441,6 +510,7 @@ export default {
                     return scale.name === scaleOption
                 }), 1)
             }
+            this.emitChangeEvent('softwareScales', this.form.softwareScales);
         },
         addMedium() {
             if (this.newMedium !== '') {
@@ -454,7 +524,8 @@ export default {
                     alert("重复的介质类型！");
                 }
             }
-        },
+        }
+        ,
         addClientSystem() {
             if (this.newClientSystem !== '') {
                 this.form.clientSystems.push({
@@ -465,25 +536,31 @@ export default {
                 this.newClientSystem = '';
             }
             return 0;
-        },
+        }
+        ,
+
         submit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 this.$bus.$emit('submitApplication')
             }
-        },
+        }
+        ,
         save() {
             if (this.writable) {
                 sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
             }
-        },
+        }
+        ,
         pass() {
             this.$bus.$emit('passApplication')
-        },
+        }
+        ,
         refute() {
 
         }
-    },
+    }
+    ,
     mounted() {
         let stringForm = sessionStorage.getItem('applicationForm')
         if (stringForm) {
@@ -491,7 +568,8 @@ export default {
             this.form = JSON.parse(stringForm)
         }
 
-    },
+    }
+    ,
     computed: {
         disable() {
             if (this.writable === 'false') {
@@ -502,7 +580,8 @@ export default {
                 return true
             }
             return false
-        },
+        }
+        ,
         check() {
             if (this.checking === 'true') {
                 return true

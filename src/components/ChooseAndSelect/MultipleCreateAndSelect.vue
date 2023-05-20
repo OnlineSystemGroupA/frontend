@@ -50,7 +50,7 @@ export default {
      */
     model: {
         prop: 'options',
-        event: ['change', 'blur']
+        event: 'change'
     },
     props: ["defaultOptions", "optionDescription", "createDescription"],
 
