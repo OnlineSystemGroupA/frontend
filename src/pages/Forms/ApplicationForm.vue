@@ -59,7 +59,7 @@
                                          create-description="其他指标"/>
             </el-form-item>
             <hr/>
-            <div>
+            <el-form-item>
                 <h2>软件规模</h2>
                 <h3>（至少一种）</h3>
                 <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
@@ -74,15 +74,15 @@
                                          style="width:30%"></el-input-number>
                     </el-form-item>
                 </el-form>
-            </div>
+            </el-form-item>
             <br/>
-            <div>
+            <el-form-item>
                 <div class="block">
                     <span class="demonstration">软件类型:</span>
                     <el-cascader v-model="form.softwareType" :options="softwareTypeOptions"
                                  :props="{ expandTrigger: 'hover' }" style="margin-left:10px"></el-cascader>
                 </div>
-            </div>
+            </el-form-item>
             <hr/>
             <el-form-item>
                 <h2>运行环境</h2>
@@ -108,8 +108,9 @@
                 <br/>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model.number="form.clientMemory"
-                                  style="margin-top:5px"></el-input>
+                        <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
+                                         v-model.number="form.clientMemory"
+                                         style="margin-top:5px"></el-input-number>
                     </el-form-item>
                     <el-form-item label="其他要求:">
                         <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
@@ -125,10 +126,14 @@
                 </el-form-item>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model="form.serverMemory" style="margin-top:5px"></el-input>
+                        <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
+                                         v-model="form.serverMemory"
+                                         style="margin-top:5px"></el-input-number>
                     </el-form-item>
                     <el-form-item label="硬盘要求（单位MB）:">
-                        <el-input placeholder="硬盘要求" v-model="form.serverDisk" style="margin-top:5px"></el-input>
+                        <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="硬盘要求"
+                                         v-model="form.serverDisk"
+                                         style="margin-top:5px"></el-input-number>
                     </el-form-item>
                     <el-form-item label="其他要求:">
                         <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
@@ -297,8 +302,8 @@ export default {
                 clientMemory: '',
                 clientOtherRequirement: '',
                 serverArchitectures: [],
-                serverMemory: '',
-                serverDisk: '',
+                serverMemory: 0,
+                serverDisk: 0,
                 serverOtherRequirement: '',
                 serverSystem: '',
                 serverSystemVersion: '',
