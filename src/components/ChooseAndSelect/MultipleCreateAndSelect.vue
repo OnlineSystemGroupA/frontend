@@ -4,6 +4,7 @@
             class="multiple-select"
             v-model="selectedOptions"
             @change="onChange"
+            @blur="onBlur"
             multiple
             collapse-tags
             default-first-option
@@ -49,7 +50,7 @@ export default {
      */
     model: {
         prop: 'options',
-        event: 'change'
+        event: ['change', 'blur']
     },
     props: ["defaultOptions", "optionDescription", "createDescription"],
 
@@ -73,6 +74,10 @@ export default {
 
         onChange() {
             this.$emit('change', this.selectedOptions);
+        },
+
+        onBlur() {
+            setTimeout(() => this.$emit('blur'), 25);
         }
     }
 }
