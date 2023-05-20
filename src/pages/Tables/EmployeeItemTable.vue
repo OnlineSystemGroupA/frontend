@@ -70,7 +70,19 @@ export default {
                 name: 'employeeItemDetail',
                 query: { itemId: id }
             })
+        },
+        handleResult(res) {
+            if (res.status === 200) {
+                console.log(res.data)
+            }
+        },
+        handleError(err) {
+            console.log(err.response.data)
+            alert(err.response.data)
         }
+    },
+    mounted() {
+        this.axios.get('/api/workflow/tasks').then(this.handleResult, this.handleError)
     }
 }
 </script>
