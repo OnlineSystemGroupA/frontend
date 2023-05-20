@@ -62,16 +62,20 @@
             <div>
                 <h2>软件规模</h2>
                 <h3>（至少一种）</h3>
-                <el-form-item label="功能数（到最后一级菜单）">
-                    <el-input v-model="form.softwareScale.functionNum" placeholder="功能数"></el-input>
-                </el-form-item>
-                <el-form-item label="功能点数">
-                    <el-input v-model="form.softwareScale.functionPoint" placeholder="功能点数"></el-input>
-                </el-form-item>
-                <el-form-item label="代码行数（不包括注释行、空行）">
-                    <el-input v-model="form.softwareScale.codeLines" placeholder="代码行数"></el-input>
-                </el-form-item>
+                <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
+                             @change="handleScaleChange(scale, $event)"></el-checkbox>
+                <br/>
+                <el-form label-position="left" label-width="30%">
+                    <el-form-item v-for="scale in form.softwareScales"
+                                  :key="scale.name"
+                                  :label="scale.name"
+                                  style="margin-top:5px">
+                        <el-input-number :controls="false" v-model="scale.scale" :placeholder="scale.description"
+                                         style="width:30%"></el-input-number>
+                    </el-form-item>
+                </el-form>
             </div>
+            <br/>
             <div>
                 <div class="block">
                     <span class="demonstration">软件类型:</span>
@@ -104,10 +108,12 @@
                 <br/>
                 <el-form label-position="left" label-width="180px" :disabled="disable">
                     <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model.number="form.clientMemory" style="margin-top:5px"></el-input>
+                        <el-input placeholder="内存要求" v-model.number="form.clientMemory"
+                                  style="margin-top:5px"></el-input>
                     </el-form-item>
                     <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.clientOtherRequirement" style="margin-top:5px"></el-input>
+                        <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
+                                  style="margin-top:5px"></el-input>
                     </el-form-item>
                 </el-form>
                 <h3>服务器端</h3>
@@ -125,7 +131,8 @@
                         <el-input placeholder="硬盘要求" v-model="form.serverDisk" style="margin-top:5px"></el-input>
                     </el-form-item>
                     <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
+                        <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
+                                  style="margin-top:5px"></el-input>
                     </el-form-item>
                 </el-form>
                 <h4>软件</h4>
@@ -281,11 +288,7 @@ export default {
                 testAspects: [],
                 otherAspect: '',
                 chooseOtherAspect: false,
-                softwareScale: {
-                    functionNum: "",
-                    functionPoint: "",
-                    codeLines: "",
-                },
+                softwareScales: [],
                 softwareType: "",
                 clientSystems: [
                     {systemName: 'Windows', version: '', vforKey: nanoid(6)},
@@ -365,6 +368,7 @@ export default {
                 {value: "政府事业团体", label: "政府事业团体"},
                 {label: "其他", value: "其他"}
             ],
+            scaleOptions: ['功能数（到最后一级菜单）', '功能点数', '代码行数（不包括注释行、空行）'],
             softwareTypeOptions: [
                 {
                     value: "系统软件", label: "系统软件",
@@ -423,6 +427,16 @@ export default {
         };
     },
     methods: {
+        handleScaleChange(scaleOption, event) {
+            if (event === true) {
+                this.form.softwareScales.splice(this.scaleOptions.indexOf(scaleOption), 0,
+                    {name: scaleOption, scale: 0});
+            } else {
+                this.form.softwareScales.splice(this.form.softwareScales.findIndex(scale => {
+                    return scale.name === scaleOption
+                }), 1)
+            }
+        },
         addMedium() {
             if (this.newMedium !== '') {
                 let trimmedNewMedium = this.newMedium.trim();
@@ -438,7 +452,11 @@ export default {
         },
         addClientSystem() {
             if (this.newClientSystem !== '') {
-                this.form.clientSystems.push({systemName: this.newClientSystem.trim(), version: '', vforKey: nanoid(6)});
+                this.form.clientSystems.push({
+                    systemName: this.newClientSystem.trim(),
+                    version: '',
+                    vforKey: nanoid(6)
+                });
                 this.newClientSystem = '';
             }
             return 0;
