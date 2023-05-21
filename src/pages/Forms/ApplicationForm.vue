@@ -1,11 +1,14 @@
 <template>
     <div class="application">
-        <el-form :disabled="disable">
+        <el-form :model="form" ref="form" :disabled="disable" :rules="rules">
             <h1>软件项目委托测试申请书</h1>
-            <el-form-item label="测试类型">
-                <br />
-                <SelectAndCreateTags v-model="form.testType" :default-options="testTypeOptions"
-                    option-description="新增一个测试类型" />
+            <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
+                <br/>
+                <SelectAndCreateTags v-model="form.testTypes"
+                                     :default-options="testTypeOptions"
+                                     option-description="新增一个测试类型"
+                                     @change="emitChangeEvent('testTypes', form.testTypes)"
+                                     @blur="emitBlurEvent('testTypes', form.testTypes)"/>
             </el-form-item>
             <hr />
             <table style="width:100%; text-align: left;">
@@ -38,20 +41,27 @@
                 <el-input v-model="form.orgType" placeholder="其他单位性质" class="other-input"
                     v-if="chosenData.orgType === '其他'" />
             </el-form-item>
-            <el-form-item label="主要功能及用途简介（限200字）">
-                <el-input type="textarea" v-model="form.description" maxlength="200" placeholder="主要功能及用途"></el-input>
+            <el-form-item label="主要功能及用途简介（限200字）" prop="description">
+                <el-input type="textarea" v-model="form.description" maxlength="200"
+                          placeholder="主要功能及用途"></el-input>
             </el-form-item>
-            <hr />
-            <el-form-item label="测试依据">
-                <br />
-                <SelectAndCreateTags v-model="form.testStandard" :default-options="testStandardOptions"
-                    option-description="新增一个测试依据" />
+            <hr/>
+            <el-form-item label="测试依据" ref="testStandards" prop="testStandards">
+                <br/>
+                <SelectAndCreateTags v-model="form.testStandards"
+                                     :default-options="testStandardOptions"
+                                     option-description="新增一个测试依据"
+                                     @change="emitChangeEvent('testStandards', form.testStandards)"
+                                     @blur="emitBlurEvent('testStandards', form.testStandards)"/>
             </el-form-item>
-            <hr />
-            <el-form-item label="需要测试的指标">
-                <br />
+            <hr/>
+            <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
+                <br/>
                 <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions"
-                    option-description="选择测试指标" create-description="其他指标" />
+                                         option-description="选择测试指标"
+                                         create-description="其他指标"
+                                         @change="emitChangeEvent('testAspects', form.testAspects)"
+                                         @blur="emitBlurEvent('testAspects', form.testAspects)"/>
             </el-form-item>
             <hr />
             <div>
@@ -263,29 +273,32 @@ export default {
     },
     props: ['writable', 'formId', 'checking'],
     data() {
+        const valiChosenCompanyType = (rule, value, callback) => {
+            if (this.chosenData.companyType === "") {
+                callback(new Error("请选择单位性质"));
+            }
+            callback();
+        };
+        const valiCompanyType = (rule, value, callback) => {
+            if (this.chosenData.companyType === "其他" && this.form.companyType === "") {
+                callback(new Error("请填写其他单位性质"));
+            }
+            callback();
+        };
+
         return {
             form: {
-                testType: [],
-                otherTestType: '',
-                chooseOtherTestType: false,
+                testTypes: [],
                 softwareName: "",
                 softwareVersion: "",
                 companyChineseName: "",
                 companyEnglishName: "",
                 developmentDepartment: "",
-                orgType: "",
+                companyType: "",
                 description: "",
-                testStandard: [],
-                otherStandard: '',
-                chooseOtherStandard: false,
+                testStandards: [],
                 testAspects: [],
-                otherAspect: '',
-                chooseOtherAspect: false,
-                softwareScale: {
-                    functionNum: "",
-                    functionPoint: "",
-                    codeLines: "",
-                },
+                softwareScales: [],
                 softwareType: "",
                 clientSystems: [
                     { systemName: 'Windows', version: '', vforKey: nanoid(6) },
@@ -294,8 +307,8 @@ export default {
                 clientMemory: '',
                 clientOtherRequirement: '',
                 serverArchitectures: [],
-                serverMemory: '',
-                serverDisk: '',
+                serverMemory: 0,
+                serverDisk: 0,
                 serverOtherRequirement: '',
                 serverSystem: '',
                 serverSystemVersion: '',
@@ -323,10 +336,50 @@ export default {
                     website: '',
                 }
             },
+            rules: {
+                testTypes: [
+                    {type: 'array', required: true, message: '请添加至少一个测试类型', trigger: ['blur', 'change']}
+                ],
+                softwareName: [
+                    {required: true, message: '请填写软件名称', trigger: 'blur'}
+                ],
+                softwareVersion: [
+                    {required: true, message: '请填写软件版本', trigger: 'blur'}
+                ],
+                companyChineseName: [
+                    {required: true, message: '请填写委托单位（中文）', trigger: 'blur'}
+                ],
+                companyEnglishName: [
+                    {required: true, message: '请填写委托单位（英文）', trigger: 'blur'}
+                ],
+                developmentDepartment: [
+                    {required: true, message: '请填写开发单位', trigger: 'blur'}
+                ],
+                companyType: [
+                    {validator: valiChosenCompanyType, trigger: ['blur', 'change']},
+                    {validator: valiCompanyType, trigger: 'blur'}
+                ],
+                description: [
+                    {required: true, message: '请填写主要功能及用途简介', trigger: 'blur'}
+                ],
+                testStandards: [
+                    {type: 'array', required: true, message: '请添加至少一个测试依据', trigger: ['blur', 'change']}
+                ],
+                testAspects: [
+                    {type: 'array', required: true, message: '请添加至少一个测试指标', trigger: ['blur', 'change']}
+                ],
+                softwareScales: [
+                    {type: 'array', required: true, message: '请填写至少一个软件规模', trigger: 'change'}
+                ],
+                softwareType: [
+                    {required: true, message: '请选择软件类型', trigger: ['blur', 'change']}
+                ],
+            },
+
             newMedium: '',
             newClientSystem: '',
             chosenData: {
-                orgType: '',
+                companyType: '',
                 softwareArchitecture: ''
             },
             testTypeOptions: [
@@ -365,6 +418,7 @@ export default {
                 { value: "政府事业团体", label: "政府事业团体" },
                 { label: "其他", value: "其他" }
             ],
+            scaleOptions: ['功能数（到最后一级菜单）', '功能点数', '代码行数（不包括注释行、空行）'],
             softwareTypeOptions: [
                 {
                     value: "系统软件", label: "系统软件",
@@ -421,8 +475,31 @@ export default {
                 { value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器' }
             ]
         };
-    },
+    }
+    ,
     methods: {
+        emitBlurEvent(ref, value, withDelay = false) {
+            if (withDelay) {
+                setTimeout(() => this.$refs[ref].$emit('el.form.blur', value), 50);
+            } else {
+                this.$refs[ref].$emit('el.form.blur', value);
+            }
+        },
+        emitChangeEvent(ref, value) {
+            this.$refs[ref].$emit('el.form.change', value);
+        },
+
+        handleScaleChange(scaleOption, event) {
+            if (event === true) {
+                this.form.softwareScales.splice(this.scaleOptions.indexOf(scaleOption), 0,
+                    {name: scaleOption, scale: 0});
+            } else {
+                this.form.softwareScales.splice(this.form.softwareScales.findIndex(scale => {
+                    return scale.name === scaleOption
+                }), 1)
+            }
+            this.emitChangeEvent('softwareScales', this.form.softwareScales);
+        },
         addMedium() {
             if (this.newMedium !== '') {
                 let trimmedNewMedium = this.newMedium.trim();
@@ -435,32 +512,39 @@ export default {
                     alert("重复的介质类型！");
                 }
             }
-        },
+        }
+        ,
         addClientSystem() {
             if (this.newClientSystem !== '') {
-                this.form.clientSystems.push({ systemName: this.newClientSystem.trim(), version: '', vforKey: nanoid(6) });
+                this.form.clientSystems.push({systemName: this.newClientSystem.trim(), version: '', vforKey: nanoid(6)});
                 this.newClientSystem = '';
             }
             return 0;
-        },
+        }
+        ,
+
         submit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 this.$bus.$emit('submitApplication')
             }
-        },
+        }
+        ,
         save() {
             if (this.writable) {
                 sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
             }
-        },
+        }
+        ,
         pass() {
             this.$bus.$emit('passApplication')
-        },
+        }
+        ,
         refute() {
 
         }
-    },
+    }
+    ,
     mounted() {
         let stringForm = sessionStorage.getItem('applicationForm')
         if (stringForm) {
@@ -468,7 +552,8 @@ export default {
             this.form = JSON.parse(stringForm)
         }
 
-    },
+    }
+    ,
     computed: {
         disable() {
             if (this.writable === 'false') {
@@ -479,7 +564,8 @@ export default {
                 return true
             }
             return false
-        },
+        }
+        ,
         check() {
             if (this.checking === 'true') {
                 return true

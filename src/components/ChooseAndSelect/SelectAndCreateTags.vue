@@ -18,6 +18,7 @@
             default-first-option
             :placeholder="optionDescription"
             @change="handleInputConfirm"
+            @blur="onBlur"
         >
             <el-option
                 v-for="item in defaultOptions"
@@ -78,8 +79,12 @@ export default {
             this.handleClose(tag);
         },
 
-        onChange(){
+        onChange() {
             this.$emit('change', this.dynamicTags);
+        },
+
+        onBlur() {
+            setTimeout(() => this.$emit('blur'), 25);
         }
     }
 }
