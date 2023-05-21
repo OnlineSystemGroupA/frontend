@@ -80,7 +80,7 @@ export default {
                 sessionStorage.setItem('tokenHead', res.data.tokenHead)
                 sessionStorage.setItem('tokenStr', res.data.tokenStr)
                 sessionStorage.setItem('logType', this.logType)
-                this.$router.push({
+                this.$router.replace({
                     name: this.logType
                 })
             }
@@ -100,7 +100,7 @@ export default {
             //alert(err.response.data)
         },
         userRegister() {
-            this.$router.push({
+            this.$router.replace({
                 name: "register",
             });
         },

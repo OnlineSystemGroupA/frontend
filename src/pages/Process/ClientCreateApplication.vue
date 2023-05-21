@@ -23,7 +23,7 @@ export default {
     },
     mounted() {
         this.$bus.$on('submitApplication', () => {
-            this.$router.push({
+            this.$router.replace({
                 name: 'functionList',
                 query: {
                     writable: true

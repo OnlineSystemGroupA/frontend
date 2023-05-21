@@ -28,7 +28,13 @@ export default {
 			})
 		}
 	},
-
+	mounted() {
+		if (sessionStorage.getItem('logType')) {
+			this.$router.push({
+				name: sessionStorage.getItem('logType')
+			})
+		}
+	}
 }
 </script>
 

@@ -42,7 +42,7 @@ export default {
             if (res.status === 200) {
                 console.log('你创建了一个流程！')
                 console.log(res.data.processId)
-                this.$router.push({
+                this.$router.replace({
                     name: 'applicationForm',
                     query: {
                         writable: true

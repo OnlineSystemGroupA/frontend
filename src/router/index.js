@@ -42,6 +42,9 @@ import EmployeeEditTestReport from '../pages/Process/EmployeeEditTestReport'
 import EmployeeQuotation from '../pages/Process/EmployeeQuotation'
 import ClientAcceptQuotation from '../pages/Process/ClientAcceptQuotation'
 import AdminItemTable from '../pages/Tables/AdminItemTable'
+import ClientDetail from '../pages/Details/ClientDetail'
+import UserInfoForm from '../pages/Forms/UserInfoForm'
+import ChangePassword from '../pages/Forms/ChangePassword'
 
 const router = new VueRouter({
     routes: [
@@ -68,7 +71,7 @@ const router = new VueRouter({
             name: 'client',
             path: '/client',
             component: ClientPage,
-            meta: { title: '客户界面', logType:'client' },
+            meta: { title: '客户界面', logType: 'client' },
             children: [
                 {
                     name: 'clientItem',
@@ -76,6 +79,26 @@ const router = new VueRouter({
                     component: ClientItemTable,
                     meta: { title: '项目列表', logType: 'client' }
                 },//项目列表
+                {
+                    name: 'clientDetail',
+                    path: 'clientDetail',
+                    component: ClientDetail,
+                    meta: { title: '个人信息', logType: 'client' },
+                    children: [
+                        {
+                            name: 'userInfoForm',
+                            path: 'userInfoForm',
+                            component: UserInfoForm,
+                            meta: { title: '修改个人信息', logType: 'client' }
+                        },
+                        {
+                            name: 'clientChangePassword',
+                            path: 'clientChangePassword',
+                            component: ChangePassword,
+                            meta: { title: '修改密码', logType: 'client' }
+                        }
+                    ]
+                },//个人信息
                 {
                     name: 'clientItemDetail',
                     path: 'clientItemDetail',
@@ -161,7 +184,7 @@ const router = new VueRouter({
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '查看未提交申请' ,logType: 'client' },
+                    meta: { title: '查看未提交申请', logType: 'client' },
                     children: [
                         {
                             name: 'editSavedApplicationForm',
@@ -608,7 +631,7 @@ const router = new VueRouter({
                             props({ query: { writable, checking, formId } }) {
                                 return { writable, checking, formId }
                             },
-                            meta: { title: '测试工作检查表', logType: 'employee'}
+                            meta: { title: '测试工作检查表', logType: 'employee' }
 
                         },
                     ]
@@ -631,7 +654,7 @@ const router = new VueRouter({
                     name: 'employeeTable',
                     path: 'employeeTable',
                     component: EmployeeTable,
-                    meta: { title: '员工列表' ,logType: 'admin' }
+                    meta: { title: '员工列表', logType: 'admin' }
                 },//员工类表
                 {
                     name: 'employeeInfoForm',
@@ -742,20 +765,29 @@ const router = new VueRouter({
 })
 
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
     console.log(to.name)
-    if(to.meta.logType){
-        if (sessionStorage.getItem('logType') === to.meta.logType){//验证登录类型是否正确
+    if (to.meta.logType) {
+        if (sessionStorage.getItem('logType') === to.meta.logType) {//验证登录类型是否正确
             next()
         }
-        else{
+        else {
             alert('未登录或登录类型错误')
-            router.push({
-                name:'index'
+            if (sessionStorage.getItem('tokenHead')) {
+                sessionStorage.removeItem('tokenHead')
+            }
+            if (sessionStorage.getItem('tokenStr')) {
+                sessionStorage.removeItem('tokenStr')
+            }
+            if (sessionStorage.getItem('logType')) {
+                sessionStorage.removeItem('logType')
+            }
+            router.replace({
+                name: 'index'
             })
         }
     }
-    else{
+    else {
         next()
     }
 })//全局前置路由守卫————路由切换之前或者初始化的时候被调用
