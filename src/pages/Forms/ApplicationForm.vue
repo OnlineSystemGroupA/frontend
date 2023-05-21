@@ -65,24 +65,21 @@
             </el-form-item>
             <hr />
             <div>
-                <h2>软件规模</h2>
-                <h3>（至少一种）</h3>
-                <table style="width:100%; text-align: left;">
-                    <tr>
-                        <th>功能数（到最后一级菜单）</th>
-                        <td><el-input v-model="form.softwareScale.functionNum" placeholder="功能数"></el-input></td>
-                        <th>功能点数</th>
-                        <td><el-input v-model="form.softwareScale.functionPoint" placeholder="功能点数"></el-input></td>
-                    </tr>
-
-                    <tr>
-                        <th>代码行数（不包括注释行、空行）</th>
-                        <td> <el-input v-model="form.softwareScale.codeLines" placeholder="代码行数"></el-input></td>
-                        <th>软件类型</th>
-                        <td><el-cascader v-model="form.softwareType" :options="softwareTypeOptions"
-                                :props="{ expandTrigger: 'hover' }" style="margin-left:10px"></el-cascader></td>
-                    </tr>
-                </table>
+                <el-form-item label="软件规模（至少一种）" ref="softwareScales" prop="softwareScales">
+                    <br/>
+                    <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
+                                 @change="handleScaleChange(scale, $event)"></el-checkbox>
+                    <br/>
+                    <el-form label-position="left" label-width="30%">
+                        <el-form-item v-for="scale in form.softwareScales"
+                                      :key="scale.name"
+                                      :label="scale.name"
+                                      style="margin-top:5px">
+                            <el-input-number :controls="false" v-model="scale.scale" :placeholder="scale.description"
+                                             style="width:30%"></el-input-number>
+                        </el-form-item>
+                    </el-form>
+                </el-form-item>
             </div>
             <hr />
             <el-form-item>
