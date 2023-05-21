@@ -45,6 +45,7 @@ import AdminItemTable from '../pages/Tables/AdminItemTable'
 import ClientDetail from '../pages/Details/ClientDetail'
 import UserInfoForm from '../pages/Forms/UserInfoForm'
 import ChangePassword from '../pages/Forms/ChangePassword'
+import EmployeeDetail from '../pages/Details/EmployeeDetail'
 
 const router = new VueRouter({
     routes: [
@@ -316,6 +317,20 @@ const router = new VueRouter({
                     component: EmployeeItemTable,
                     meta: { title: '查看项目', logType: 'employee' }
                 },//查看项目
+                {
+                    name: 'employeeDetail',
+                    path: 'employeeDetail',
+                    component: EmployeeDetail,
+                    meta: { title: '员工信息', logType: 'employee' },
+                    children: [
+                        {
+                            name: 'employeeChangePassword',
+                            path: 'employeeChangePassword',
+                            component: ChangePassword,
+                            meta:{title:'修改密码', logType:'employee'}
+                        }
+                    ]
+                },//个人信息
                 {
                     name: 'arrangeItem',
                     path: 'arrangeItem',

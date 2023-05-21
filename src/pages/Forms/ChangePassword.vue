@@ -1,8 +1,8 @@
 <template>
     <div class="password">
-        <el-form :label-position="labelPosition" ref="loginForm" label-width="80px">
-            <el-form-item label="原密码" prop="CurrentPassword">
-                <el-input v-model="CurrentPassword" placeholder="请输入原密码" show-password></el-input>
+        <el-form :label-position="'left'" label-width="80px">
+            <el-form-item label="原密码" prop="currentPassword">
+                <el-input v-model="currentPassword" placeholder="请输入原密码" show-password></el-input>
             </el-form-item>
             <el-form-item label="新密码" prop="newPassword">
                 <el-input v-model="newPassword" placeholder="请输入新密码" show-password></el-input>
@@ -31,15 +31,11 @@ export default {
     methods: {
         submit() {
             alert('修改成功')
-            this.$router.replace({
-                name: 'clientDetail'
-            })
+            this.$bus.$emit('changePassword')
         },
         cancel() {
             alert('取消修改')
-            this.$router.replace({
-                name: 'clientDetail'
-            })
+            this.$bus.$emit('changePassword')
         }
     }
 }

@@ -34,6 +34,7 @@
                     <el-menu-item index="2-1" @click="checkItem">查看项目表格</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
+            <el-menu-item index="4" @click="logOut"><i class="el-icon-back"></i>登出</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -71,6 +72,20 @@ export default {
         checkItem() {
             this.$router.push({
                 name:'adminItemTable'
+            })
+        },
+        logOut() {
+            if (sessionStorage.getItem('tokenHead')) {
+                sessionStorage.removeItem('tokenHead')
+            }
+            if (sessionStorage.getItem('tokenStr')) {
+                sessionStorage.removeItem('tokenStr')
+            }
+            if (sessionStorage.getItem('logType')) {
+                sessionStorage.removeItem('logType')
+            }
+            this.$router.replace({
+                name: 'index'
             })
         }
     }

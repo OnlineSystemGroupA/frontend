@@ -63,6 +63,16 @@ export default {
                 name:'clientChangePassword'
             })
         }
+    },
+    mounted() {
+        this.$bus.$on('changePassword', () => {
+            this.$router.push(
+                { name: 'clientDetail' }
+            )
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('changePassword')
     }
 }
 </script>
