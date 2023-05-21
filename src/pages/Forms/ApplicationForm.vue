@@ -3,185 +3,185 @@
         <el-form :disabled="disable">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型">
-                <br/>
+                <br />
                 <SelectAndCreateTags v-model="form.testType" :default-options="testTypeOptions"
-                                     option-description="新增一个测试类型"/>
+                    option-description="新增一个测试类型" />
             </el-form-item>
-            <hr/>
-            <el-form-item label="软件名称">
-                <el-input v-model="form.softwareName" placeholder="软件名称"></el-input>
-            </el-form-item>
-            <el-form-item label="版本号">
-                <el-input v-model="form.softwareVersion" placeholder="版本号"></el-input>
-            </el-form-item>
-            <el-form-item label="委托单位（中文）">
-                <el-input v-model="form.companyChineseName" placeholder="委托单位（中文）"></el-input>
-            </el-form-item>
-            <el-form-item label="委托单位（英文）">
-                <el-input v-model="form.companyEnglishName" placeholder="委托单位（英文）"></el-input>
-            </el-form-item>
-            <el-form-item label="开发单位">
-                <el-input v-model="form.developmentDepartment" placeholder="开发单位"></el-input>
-            </el-form-item>
+            <hr />
+            <table style="width:100%; text-align: left;">
+                <tr style="width:100%">
+                    <th>软件名称</th>
+                    <td> <el-input v-model="form.softwareName" placeholder="软件名称"></el-input></td>
+                    <th>版本号</th>
+                    <td><el-input v-model="form.softwareVersion" placeholder="版本号"></el-input></td>
+                </tr>
+
+                <tr>
+                    <th>委托单位（中文）</th>
+                    <td><el-input v-model="form.companyChineseName" placeholder="委托单位（中文）"></el-input></td>
+                    <th>委托单位（英文）</th>
+                    <td><el-input v-model="form.companyEnglishName" placeholder="委托单位（英文）"></el-input></td>
+                </tr>
+
+                <tr>
+                    <th>开发单位</th>
+                    <td><el-input v-model="form.developmentDepartment" placeholder="开发单位"></el-input></td>
+                </tr>
+            </table>
+
             <el-form-item label="单位性质">
-                <br/>
-                <el-select
-                    allow-create
-                    v-model="chosenData.orgType"
-                    default-first-option
-                    placeholder="单位性质"
-                    @change="form.orgType = (chosenData.orgType !== '其他'? chosenData.orgType : '')">
-                    <el-option
-                        v-for="item in orgTypeOptions"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                    />
+                <br />
+                <el-select allow-create v-model="chosenData.orgType" default-first-option placeholder="单位性质"
+                    @change="form.orgType = (chosenData.orgType !== '其他' ? chosenData.orgType : '')">
+                    <el-option v-for="item in orgTypeOptions" :key="item.value" :label="item.label" :value="item.value" />
                 </el-select>
                 <el-input v-model="form.orgType" placeholder="其他单位性质" class="other-input"
-                          v-if="chosenData.orgType ==='其他'"/>
+                    v-if="chosenData.orgType === '其他'" />
             </el-form-item>
             <el-form-item label="主要功能及用途简介（限200字）">
-                <el-input type="textarea" v-model="form.description" maxlength="200"
-                          placeholder="主要功能及用途"></el-input>
+                <el-input type="textarea" v-model="form.description" maxlength="200" placeholder="主要功能及用途"></el-input>
             </el-form-item>
-            <hr/>
+            <hr />
             <el-form-item label="测试依据">
-                <br/>
+                <br />
                 <SelectAndCreateTags v-model="form.testStandard" :default-options="testStandardOptions"
-                                     option-description="新增一个测试依据"/>
+                    option-description="新增一个测试依据" />
             </el-form-item>
-            <hr/>
+            <hr />
             <el-form-item label="需要测试的指标">
-                <br/>
+                <br />
                 <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions"
-                                         option-description="选择测试指标"
-                                         create-description="其他指标"/>
+                    option-description="选择测试指标" create-description="其他指标" />
             </el-form-item>
-            <hr/>
+            <hr />
             <div>
                 <h2>软件规模</h2>
                 <h3>（至少一种）</h3>
-                <el-form-item label="功能数（到最后一级菜单）">
-                    <el-input v-model="form.softwareScale.functionNum" placeholder="功能数"></el-input>
-                </el-form-item>
-                <el-form-item label="功能点数">
-                    <el-input v-model="form.softwareScale.functionPoint" placeholder="功能点数"></el-input>
-                </el-form-item>
-                <el-form-item label="代码行数（不包括注释行、空行）">
-                    <el-input v-model="form.softwareScale.codeLines" placeholder="代码行数"></el-input>
-                </el-form-item>
+                <table style="width:100%; text-align: left;">
+                    <tr>
+                        <th>功能数（到最后一级菜单）</th>
+                        <td><el-input v-model="form.softwareScale.functionNum" placeholder="功能数"></el-input></td>
+                        <th>功能点数</th>
+                        <td><el-input v-model="form.softwareScale.functionPoint" placeholder="功能点数"></el-input></td>
+                    </tr>
+
+                    <tr>
+                        <th>代码行数（不包括注释行、空行）</th>
+                        <td> <el-input v-model="form.softwareScale.codeLines" placeholder="代码行数"></el-input></td>
+                        <th>软件类型</th>
+                        <td><el-cascader v-model="form.softwareType" :options="softwareTypeOptions"
+                                :props="{ expandTrigger: 'hover' }" style="margin-left:10px"></el-cascader></td>
+                    </tr>
+                </table>
             </div>
-            <div>
-                <div class="block">
-                    <span class="demonstration">软件类型:</span>
-                    <el-cascader v-model="form.softwareType" :options="softwareTypeOptions"
-                                 :props="{ expandTrigger: 'hover' }" style="margin-left:10px"></el-cascader>
-                </div>
-            </div>
-            <hr/>
+            <hr />
             <el-form-item>
                 <h2>运行环境</h2>
                 <h3>客户端</h3>
                 <el-form-item label="操作系统:">
-                    <br/>
+                    <br />
                     <el-form label-position="left" label-width="15%">
-                        <el-form-item v-for="clientSystem in form.clientSystems"
-                                      :key="clientSystem.vforKey"
-                                      :label="clientSystem.systemName"
-                                      style="margin-top:5px">
-                            <el-input v-model="clientSystem.version" placeholder="系统版本"
-                                      style="width:30%"></el-input>
+                        <el-form-item v-for="clientSystem in form.clientSystems" :key="clientSystem.vforKey"
+                            :label="clientSystem.systemName" style="margin-top:5px">
+                            <el-input v-model="clientSystem.version" placeholder="系统版本" style="width:30%"></el-input>
                             <el-button type="danger"
-                                       @click="form.clientSystems.splice(form.clientSystems.indexOf(clientSystem),1)"
-                                       icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
+                                @click="form.clientSystems.splice(form.clientSystems.indexOf(clientSystem), 1)"
+                                icon="el-icon-delete" circle plain size=mini style="margin-left:5%" />
                         </el-form-item>
                     </el-form>
                     <el-input v-model="newClientSystem" placeholder="其他操作系统"
-                              style="width:20%;margin-top:10px;margin-right:5px"/>
+                        style="width:20%;margin-top:10px;margin-right:5px" />
                     <el-button @click="addClientSystem" type="primary">添加</el-button>
                 </el-form-item>
-                <br/>
-                <el-form label-position="left" label-width="180px" :disabled="disable">
-                    <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model.number="form.clientMemory" style="margin-top:5px"></el-input>
-                    </el-form-item>
-                    <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.clientOtherRequirement" style="margin-top:5px"></el-input>
-                    </el-form-item>
-                </el-form>
+                <br />
+
+                <table style="width:100%; text-align: left;">
+                    <tr>
+                        <th>内存要求（单位MB）</th>
+                        <td><el-input placeholder="内存要求" v-model.number="form.clientMemory" style="margin-top:5px"></el-input>
+                        </td>
+                        <th>其他要求:</th>
+                        <td><el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
+                                style="margin-top:5px"></el-input></td>
+                    </tr>
+                </table>
+
                 <h3>服务器端</h3>
                 <h4>硬件</h4>
                 <el-form-item label="架构:">
-                    <br/>
+                    <br />
                     <SelectAndCreateTags v-model="form.serverArchitectures" :default-options="serverArchitectureOptions"
-                                         option-description="添加一种架构"/>
+                        option-description="添加一种架构" />
                 </el-form-item>
-                <el-form label-position="left" label-width="180px" :disabled="disable">
-                    <el-form-item label="内存要求（单位MB）:">
-                        <el-input placeholder="内存要求" v-model="form.serverMemory" style="margin-top:5px"></el-input>
-                    </el-form-item>
-                    <el-form-item label="硬盘要求（单位MB）:">
-                        <el-input placeholder="硬盘要求" v-model="form.serverDisk" style="margin-top:5px"></el-input>
-                    </el-form-item>
-                    <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
-                    </el-form-item>
-                </el-form>
+                <table style="width:100%; text-align: left;">
+                    <tr>
+                        <th>内存要求（单位MB）:</th>
+                        <td><el-input placeholder="内存要求" v-model="form.serverMemory" style="margin-top:5px"></el-input></td>
+                        <th>硬盘要求（单位MB）:</th>
+                        <td><el-input placeholder="硬盘要求" v-model="form.serverDisk" style="margin-top:5px"></el-input></td>
+                    </tr>
+                </table>
+
+                <el-form-item label="其他要求:">
+                    <el-input type = "textarea" placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
+                </el-form-item>
+
                 <h4>软件</h4>
-                <el-form-item label="操作系统:">
-                    <el-input placeholder="操作系统" v-model="form.serverSystem"></el-input>
-                </el-form-item>
-                <el-form-item label="版本:">
-                    <el-input placeholder="版本" v-model="form.serverSystemVersion"></el-input>
-                </el-form-item>
-                <el-form-item label="编程语言:">
-                    <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
-                </el-form-item>
+                <table style="width:100%; text-align: left;">
+                    <tr>
+                        <th>操作系统:</th>
+                        <td><el-input placeholder="操作系统" v-model="form.serverSystem"></el-input></td>
+                        <th>版本:</th>
+                        <td><el-input placeholder="版本" v-model="form.serverSystemVersion"></el-input></td>
+                    </tr>
+                    <tr>
+                        <th>编程语言:</th>
+                        <td><el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input></td>
+                        <th>数据库:</th>
+                        <td><el-input placeholder="数据库" v-model="form.serverDatabase"></el-input></td>
+                    </tr>
+
+                    <tr>
+                        <th>中间件:</th>
+                        <td><el-input placeholder="中间件" v-model="form.serverMiddleware"></el-input></td>
+                        <th>其他支撑软件</th>
+                        <td><el-input placeholder="其他支撑软件" v-model="form.serverOtherSoftware"></el-input></td>
+                    </tr>
+                </table>
+              
                 <el-form-item label="构架:">
-                    <br/>
+                    <br />
                     <SelectAndCreateTags v-model="form.serverFrame" :default-options="frameOptions"
-                                         option-description="添加一种构架"/>
+                        option-description="添加一种构架" />
                 </el-form-item>
-                <el-form-item label="数据库:">
-                    <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
-                </el-form-item>
-                <el-form-item label="中间件:">
-                    <el-input placeholder="中间件" v-model="form.serverMiddleware"></el-input>
-                </el-form-item>
-                <el-form-item label="其他支撑软件:">
-                    <el-input placeholder="其他支撑软件" v-model="form.serverOtherSoftware"></el-input>
-                </el-form-item>
+
                 <h3>网络环境</h3>
-                <el-input placeholder="网络环境" v-model="form.networkEnvironment"></el-input>
+                <el-input type="textarea" placeholder="网络环境" v-model="form.networkEnvironment"></el-input>
             </el-form-item>
             <hr>
             <el-form-item>
                 <h2>样品和数量</h2>
                 <h3>软件介质</h3>
                 <el-form label-position="left" label-width="15%">
-                    <el-form-item v-for="medium in form.media"
-                                  :key="medium.medium"
-                                  :label="medium.medium"
-                                  style="margin-top:5px">
-                        <el-input-number controls-position="right" :min="0"
-                                         :max="100000" v-model="medium.num"></el-input-number>
-                        <el-button type="danger" @click="form.media.splice(form.media.indexOf(medium),1)"
-                                   icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
+                    <el-form-item v-for="medium in form.media" :key="medium.medium" :label="medium.medium"
+                        style="margin-top:5px">
+                        <el-input-number controls-position="right" :min="0" :max="100000"
+                            v-model="medium.num"></el-input-number>
+                        <el-button type="danger" @click="form.media.splice(form.media.indexOf(medium), 1)"
+                            icon="el-icon-delete" circle plain size=mini style="margin-left:5%" />
                     </el-form-item>
                 </el-form>
-                <el-input v-model="newMedium" placeholder="其他介质"
-                          style="width:20%;margin-top:10px;margin-right:5px"/>
+                <el-input v-model="newMedium" placeholder="其他介质" style="width:20%;margin-top:10px;margin-right:5px" />
                 <el-button @click="addMedium" type="primary">添加</el-button>
                 <h3>文档资料</h3>
                 <el-input type="textarea" placeholder="文档资料" v-model="form.documents"></el-input>
                 <h6>
                     注：
-                    <br/>
+                    <br />
                     1、需求文档（例如：项目计划任务书、需求分析报告、合同等）（验收、鉴定测试必须）
-                    <br/>
+                    <br />
                     2、用户文档（例如：用户手册、用户指南等）（必须）
-                    <br/>
+                    <br />
                     3、操作文档（例如：操作员手册、安装手册、诊断手册、支持手册等）（验收项目必须）
                 </h6>
                 <h3>提交的样品（硬拷贝资料、硬件）五年保存期满</h3>
@@ -192,10 +192,10 @@
                     </el-radio-group>
                 </el-form-item>
             </el-form-item>
-            <br/>
+            <br />
             <el-form-item label="希望完成测试时间：">
                 <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
-                                v-model="form.expectedDate"></el-date-picker>
+                    v-model="form.expectedDate"></el-date-picker>
             </el-form-item>
             <hr>
             <div class="InfoCom">
@@ -253,7 +253,7 @@
 <script>
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 
 export default {
     name: "ApplicationForm",
@@ -288,8 +288,8 @@ export default {
                 },
                 softwareType: "",
                 clientSystems: [
-                    {systemName: 'Windows', version: '', vforKey: nanoid(6)},
-                    {systemName: 'Linux', version: '', vforKey: nanoid(6)}
+                    { systemName: 'Windows', version: '', vforKey: nanoid(6) },
+                    { systemName: 'Linux', version: '', vforKey: nanoid(6) }
                 ],
                 clientMemory: '',
                 clientOtherRequirement: '',
@@ -306,8 +306,8 @@ export default {
                 serverOtherSoftware: '',
                 networkEnvironment: '',
                 media: [
-                    {medium: "光盘", num: 0},
-                    {medium: "U盘", num: 0}
+                    { medium: "光盘", num: 0 },
+                    { medium: "U盘", num: 0 }
                 ],
                 documents: '',
                 expireHandle: '',
@@ -330,95 +330,95 @@ export default {
                 softwareArchitecture: ''
             },
             testTypeOptions: [
-                {value: "软件确认测试", label: "软件确认测试"},
-                {value: "成果/技术鉴定测试", label: "成果/技术鉴定测试"},
-                {value: "专项资金验收测试", label: "专项资金验收测试"}
+                { value: "软件确认测试", label: "软件确认测试" },
+                { value: "成果/技术鉴定测试", label: "成果/技术鉴定测试" },
+                { value: "专项资金验收测试", label: "专项资金验收测试" }
             ],
             testStandardOptions: [
-                {value: "GB/T 25000.51-2016", label: "GB/T 25000.51-2016"},
-                {value: "GB/T 25000.10-2016", label: "GB/T 25000.10-2016"},
-                {value: "GB/T 28452-2012", label: "GB/T 28452-2012"},
-                {value: "GB/T 30961-2014", label: "GB/T 30961-2014"},
-                {value: "NST-03-WI12-2011", label: "NST-03-WI12-2011"},
-                {value: "NST-03-WI13-2011", label: "NST-03-WI13-2011"},
-                {value: "NST-03-WI22-2014", label: "NST-03-WI22-2014"},
+                { value: "GB/T 25000.51-2016", label: "GB/T 25000.51-2016" },
+                { value: "GB/T 25000.10-2016", label: "GB/T 25000.10-2016" },
+                { value: "GB/T 28452-2012", label: "GB/T 28452-2012" },
+                { value: "GB/T 30961-2014", label: "GB/T 30961-2014" },
+                { value: "NST-03-WI12-2011", label: "NST-03-WI12-2011" },
+                { value: "NST-03-WI13-2011", label: "NST-03-WI13-2011" },
+                { value: "NST-03-WI22-2014", label: "NST-03-WI22-2014" },
             ],
             testAspectsOptions: [
-                {value: "功能性", label: "功能性"},
-                {value: "可靠性", label: "可靠性"},
-                {value: "易用性", label: "易用性"},
-                {value: "效率", label: "效率"},
-                {value: "可维护性", label: "可维护性"},
-                {value: "可移植性", label: "可移植性"},
-                {value: "代码覆盖度", label: "代码覆盖度"},
-                {value: "缺陷检测率", label: "缺陷检测率"},
-                {value: "代码风格符合度", label: "代码风格符合度"},
-                {value: "代码不符合项检测率", label: "代码不符合项检测率"},
-                {value: "产品说明要求", label: "产品说明要求"},
-                {value: "用户文档集要求", label: "用户文档集要求"},
+                { value: "功能性", label: "功能性" },
+                { value: "可靠性", label: "可靠性" },
+                { value: "易用性", label: "易用性" },
+                { value: "效率", label: "效率" },
+                { value: "可维护性", label: "可维护性" },
+                { value: "可移植性", label: "可移植性" },
+                { value: "代码覆盖度", label: "代码覆盖度" },
+                { value: "缺陷检测率", label: "缺陷检测率" },
+                { value: "代码风格符合度", label: "代码风格符合度" },
+                { value: "代码不符合项检测率", label: "代码不符合项检测率" },
+                { value: "产品说明要求", label: "产品说明要求" },
+                { value: "用户文档集要求", label: "用户文档集要求" },
             ],
             orgTypeOptions: [
-                {value: "内资企业", label: "内资企业"},
-                {value: "外（合）资企业", label: "外（合）资企业"},
-                {value: "港澳台（合）资本企业", label: "港澳台（合）资本企业"},
-                {value: "科研院校", label: "科研院校"},
-                {value: "政府事业团体", label: "政府事业团体"},
-                {label: "其他", value: "其他"}
+                { value: "内资企业", label: "内资企业" },
+                { value: "外（合）资企业", label: "外（合）资企业" },
+                { value: "港澳台（合）资本企业", label: "港澳台（合）资本企业" },
+                { value: "科研院校", label: "科研院校" },
+                { value: "政府事业团体", label: "政府事业团体" },
+                { label: "其他", value: "其他" }
             ],
             softwareTypeOptions: [
                 {
                     value: "系统软件", label: "系统软件",
                     children: [
-                        {value: "操作系统", label: "操作系统"},
-                        {value: "中文处理系统", label: "中文处理系统"},
-                        {value: "网络系统", label: "网络系统"},
-                        {value: "嵌入式操作系统", label: "嵌入式操作系统"},
-                        {value: "其他", label: "其他"},
+                        { value: "操作系统", label: "操作系统" },
+                        { value: "中文处理系统", label: "中文处理系统" },
+                        { value: "网络系统", label: "网络系统" },
+                        { value: "嵌入式操作系统", label: "嵌入式操作系统" },
+                        { value: "其他", label: "其他" },
                     ],
                 },
                 {
                     label: "支持软件", value: "支持软件",
                     children: [
-                        {label: "程序设计语言", value: "程序设计语言"},
-                        {label: "数据库系统设计", value: "数据库系统设计"},
-                        {label: "工具软件", value: "工具软件"},
-                        {label: "网络通信软件", value: "网络通信软件"},
-                        {label: "中间件", value: "中间件"},
-                        {label: "其他", value: "其他"},
+                        { label: "程序设计语言", value: "程序设计语言" },
+                        { label: "数据库系统设计", value: "数据库系统设计" },
+                        { label: "工具软件", value: "工具软件" },
+                        { label: "网络通信软件", value: "网络通信软件" },
+                        { label: "中间件", value: "中间件" },
+                        { label: "其他", value: "其他" },
                     ],
                 },
                 {
                     label: "应用软件", value: "应用软件",
                     children: [
-                        {label: "行业管理软件", value: "行业管理软件"},
-                        {label: "办公软件", value: "办公软件"},
-                        {label: "模式识别软件", value: "模式识别软件"},
-                        {label: "图形图像软件", value: "图形图像软件"},
-                        {label: "控制软件", value: "控制软件"},
-                        {label: "网络应用软件", value: "网络应用软件"},
-                        {label: "信息管理软件", value: "信息管理软件"},
-                        {label: "数据库管理应用软件", value: "数据库管理应用软件"},
-                        {label: "安全与保密软件", value: "安全与保密软件"},
-                        {label: "嵌入式应用软件", value: "嵌入式应用软件"},
-                        {label: "教育软件", value: "教育软件"},
-                        {label: "游戏软件", value: "游戏软件"},
-                        {label: "其他", value: "其他"},
+                        { label: "行业管理软件", value: "行业管理软件" },
+                        { label: "办公软件", value: "办公软件" },
+                        { label: "模式识别软件", value: "模式识别软件" },
+                        { label: "图形图像软件", value: "图形图像软件" },
+                        { label: "控制软件", value: "控制软件" },
+                        { label: "网络应用软件", value: "网络应用软件" },
+                        { label: "信息管理软件", value: "信息管理软件" },
+                        { label: "数据库管理应用软件", value: "数据库管理应用软件" },
+                        { label: "安全与保密软件", value: "安全与保密软件" },
+                        { label: "嵌入式应用软件", value: "嵌入式应用软件" },
+                        { label: "教育软件", value: "教育软件" },
+                        { label: "游戏软件", value: "游戏软件" },
+                        { label: "其他", value: "其他" },
                     ],
                 },
                 {
                     label: "其他", value: "其他",
                     children: [
-                        {label: "其他", value: "其他"},
+                        { label: "其他", value: "其他" },
                     ],
                 },
             ],
             frameOptions: [
-                {value: 'C/S', label: 'C/S'},
-                {value: 'B/S', label: 'B/S'}
+                { value: 'C/S', label: 'C/S' },
+                { value: 'B/S', label: 'B/S' }
             ],
             serverArchitectureOptions: [
-                {value: 'PC服务器', label: 'PC服务器'},
-                {value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器'}
+                { value: 'PC服务器', label: 'PC服务器' },
+                { value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器' }
             ]
         };
     },
@@ -429,7 +429,7 @@ export default {
                 if (this.form.media.findIndex(medium => {
                     return medium.medium === trimmedNewMedium
                 }) === -1) {
-                    this.form.media.push({medium: this.newMedium, num: 0});
+                    this.form.media.push({ medium: this.newMedium, num: 0 });
                     this.newMedium = '';
                 } else {
                     alert("重复的介质类型！");
@@ -438,7 +438,7 @@ export default {
         },
         addClientSystem() {
             if (this.newClientSystem !== '') {
-                this.form.clientSystems.push({systemName: this.newClientSystem.trim(), version: '', vforKey: nanoid(6)});
+                this.form.clientSystems.push({ systemName: this.newClientSystem.trim(), version: '', vforKey: nanoid(6) });
                 this.newClientSystem = '';
             }
             return 0;

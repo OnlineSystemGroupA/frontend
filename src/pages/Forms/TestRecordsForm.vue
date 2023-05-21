@@ -5,48 +5,58 @@
         <el-form label-width="120px" label-position="left" :disabled="disable">
             <el-form-item v-for="(record, index) in form.records" :key="index" class="record">
                 <h1>Testcase {{ index }}</h1>
-                <el-form-item label="测试类型">
-                    <el-input v-model="record.type"></el-input>
-                </el-form-item>
-                <el-form-item label="设计说明">
-                    <el-input v-model="record.description"></el-input>
-                </el-form-item>
-                <el-form-item label="规约说明">
-                    <el-input v-model="record.contract"></el-input>
-                </el-form-item>
-                <el-form-item label="前提条件">
-                    <el-input v-model="record.premise"></el-input>
-                </el-form-item>
-                <el-form-item label="执行过程">
-                    <el-input v-model="record.process"></el-input>
-                </el-form-item>
-                <el-form-item label="预期结果">
-                    <el-input v-model="record.prediction"></el-input>
-                </el-form-item>
-                <el-form-item label="设计者">
-                    <el-input v-model="record.designer"></el-input>
-                </el-form-item>
-                <el-form-item label="实际结果">
-                    <el-input v-model="record.result"></el-input>
-                </el-form-item>
-                <el-form-item label="一致性">
-                    <el-radio-group v-model="record.isMatched">
-                        <el-radio :label="true">是</el-radio>
-                        <el-radio :label="false">否</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="相关 bug 编号">
-                    <el-input v-model="record.bugIndex"></el-input>
-                </el-form-item>
-                <el-form-item label="执行者">
-                    <el-input v-model="record.executor"></el-input>
-                </el-form-item>
-                <el-form-item label="执行测试时间">
-                    <el-input v-model="record.date"></el-input>
-                </el-form-item>
-                <el-form-item label="确认人">
-                    <el-input v-model="record.confirmer"></el-input>
-                </el-form-item>
+                <table>
+                    <tr>
+                        <th>测试类型</th>
+                        <td><el-input v-model="record.type"></el-input></td>
+                        <th>设计说明</th>
+                        <td><el-input v-model="record.description"></el-input></td>
+                    </tr>
+
+                    <tr>
+                        <th>规约说明</th>
+                        <td> <el-input v-model="record.contract"></el-input></td>
+                        <th>前提条件</th>
+                        <td><el-input v-model="record.premise"></el-input></td>
+                    </tr>
+
+                    <tr>
+                        <th>执行过程</th>
+                        <td><el-input v-model="record.process"></el-input></td>
+                        <th>预期结果</th>
+                        <td><el-input v-model="record.prediction"></el-input></td>
+                    </tr>
+
+                    <tr>
+                        <th>设计者</th>
+                        <td><el-input v-model="record.designer"></el-input></td>
+                        <th>实际结果</th>
+                        <td><el-input v-model="record.result"></el-input></td>
+                    </tr>
+
+                    <tr>
+                        <th>一致性</th>
+                        <td>
+                            <el-radio-group v-model="record.isMatched">
+                                <el-radio :label="true">是</el-radio>
+                                <el-radio :label="false">否</el-radio>
+                            </el-radio-group>
+                        </td>
+                        <th>相关 bug 编号</th>
+                        <td><el-input v-model="record.bugIndex"></el-input></td>
+                    </tr>
+
+                    <tr>
+                        <th>执行者</th>
+                        <td><el-input v-model="record.executor"></el-input></td>
+                        <th>执行测试时间</th>
+                        <td><el-input v-model="record.date"></el-input></td>
+                    </tr>
+
+                    <th>确认人</th>
+                    <td><el-input v-model="record.confirmer"></el-input></td>
+                </table>
+
                 <br />
                 <el-button type="danger" @click="deleteRecord(index)">删除</el-button>
             </el-form-item>
