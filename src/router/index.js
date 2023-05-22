@@ -666,11 +666,29 @@ const router = new VueRouter({
                     meta: { title: '用户列表', logType: 'admin' }
                 },//用户列表
                 {
+                    name: 'clientDetailForAdmin',
+                    path: 'clientDetailForAdmin',
+                    component: ClientDetail,
+                    props({ query: { clientId } }) {
+                        return {clientId}
+                    },
+                    meta:{ title: '用户信息', logType: 'admin' }
+                },//用户信息
+                {
                     name: 'employeeTable',
                     path: 'employeeTable',
                     component: EmployeeTable,
                     meta: { title: '员工列表', logType: 'admin' }
                 },//员工类表
+                {
+                    name: 'employeeDetailForAdmin',
+                    path: 'employeeDetailForAdmin',
+                    component: EmployeeDetail,
+                    props({ query: { employeeId } }) {
+                        return { employeeId }
+                    },
+                    meta: { title: '员工信息', logType: 'admin' }
+                },//员工信息
                 {
                     name: 'employeeInfoForm',
                     path: 'employeeInfoForm',

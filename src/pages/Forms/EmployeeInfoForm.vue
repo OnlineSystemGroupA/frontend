@@ -5,22 +5,9 @@
                 <tr>
                     <th style="width:25%">姓名</th>
                     <td style="width:25%"><el-input placeholder="姓名" v-model="form.name"></el-input> </td>
-                    <th style="width:25%">性别</th>
+                    <th style="width:25%">职员号</th>
                     <td style="width:25%">
-                        <el-select placeholder="性别" v-model="form.gender">
-                            <el-option label="男" value="男"></el-option>
-                            <el-option label="女" value="女"></el-option>
-                        </el-select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th style="width:25%">籍贯</th>
-                    <td style="width:25%"> <el-input v-model="form.hometown" placeholder="籍贯"></el-input></td>
-                    <th style="width:25%">生日</th>
-                    <td style="width:25%">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday"
-                            style="width: 100%;"></el-date-picker>
+                        <el-input placeholder="职员号" v-model="form.id"></el-input>
                     </td>
                 </tr>
 
@@ -42,24 +29,13 @@
                 </tr>
 
                 <tr>
-                        <th style="width:25%">职员号</th>
-                        <td style="width:25%">
-                            <el-input placeholder="职员号" v-model="form.id"></el-input>
-                        </td>
-                        <th style="width:25%">资历</th>
-                        <td style="width:25%">
-                            <el-input placeholder="资历" v-model.number="form.qualification"></el-input>
-                        </td>
-                    </tr>
-
-                <tr>
                     <th style="width:25%">电话号码</th>
                     <td style="width:25%">
                         <el-input placeholder="电话号码" v-model="form.telephone"></el-input>
                     </td>
-                    <th style="width:25%">邮件</th>
+                    <th style="width:25%">邮箱地址</th>
                     <td style="width:25%">
-                        <el-input placeholder="邮件" v-model.number="form.email"></el-input>
+                        <el-input placeholder="邮箱地址" v-model.number="form.e_mail"></el-input>
                     </td>
                 </tr>
             </table>
@@ -78,15 +54,11 @@ export default {
         return {
             form: {
                 name: '',
-                gender: '',
-                birthday: '',
-                hometown: '',
                 department: '',
                 position: '',
                 id: '',
-                qualification: '',
                 telephone: '',
-                phone: ''
+                e_mail: ''
             },
             departments: [
                 { label: '测试部', value: '测试部', },
@@ -103,23 +75,7 @@ export default {
     },
     methods: {
         submit() {
-            if (this.form.name === '') {
-                alert('请输入姓名')
-            } else if (this.form.gender === '') {
-                alert('请输入性别')
-            } else if (this.form.birthday === '') {
-                alert('请输入生日')
-            } else if (this.form.hometown === '') {
-                alert('请输入籍贯')
-            } else if (this.form.department === '') {
-                alert('请输入部门')
-            } else if (this.form.position === '') {
-                alert('请输入职能')
-            } else if (this.form.id === '') {
-                alert('请输入员工号')
-            } else if (this.form.qualification === '') {
-                alert('请输入资历')
-            }
+            
         }
     }
 }

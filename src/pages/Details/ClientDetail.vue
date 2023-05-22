@@ -10,25 +10,33 @@
             </tr>
 
             <tr>
+                <th>创建时间</th>
+                <td>{{ userInfo.date }}</td>
+                <th>性别</th>
+                <td>{{ userInfo.gender }}</td>
+            </tr>
+
+            <tr class="pure-table-odd">
                 <th>联系电话</th>
                 <td>{{ userInfo.telephone }}</td>
                 <th>电子邮箱</th>
                 <td>{{ userInfo.e_mail }}</td>
             </tr>
 
-            <tr class="pure-table-odd">
+            <tr>
                 <th>公司</th>
                 <td>{{ userInfo.company }}</td>
                 <th>公司地址</th>
                 <td>{{ userInfo.address }}</td>
             </tr>
+
         </table>
         <br>
-        <el-row>
-            <el-button type="primary" @click="editInfo">
+        <el-row >
+            <el-button type="primary" @click="editInfo" v-if="show">
                 修改信息
             </el-button>
-            <el-button type="primary" @click="changePassword">
+            <el-button type="primary" @click="changePassword" v-if="show">
                 修改密码
             </el-button>
         </el-row>
@@ -40,6 +48,7 @@
 <script>
 export default {
     name: 'ClientDetail',
+    props: ['clientID'],
     data() {
         return {
             userInfo: {
@@ -49,6 +58,8 @@ export default {
                 telephone: '123456789',
                 company: '杰威尔公司',
                 address: '台湾省高雄市xx街道xx号',
+                date: '2023-06-12',
+                gender: '男',
             }
         }
     },
@@ -60,15 +71,25 @@ export default {
         },
         changePassword() {
             this.$router.push({
-                name:'clientChangePassword'
+                name: 'clientChangePassword'
             })
+        }
+    },
+    computed: {
+        show() {
+            if (sessionStorage.getItem('logType') === 'client') {
+                return true
+            }
+            return false
         }
     },
     mounted() {
         this.$bus.$on('changePassword', () => {
-            this.$router.push(
-                { name: 'clientDetail' }
-            )
+            if (sessionStorage.getItem('logType') === 'client') {
+                this.$router.push(
+                    { name: 'clientDetail' }
+                )
+            }
         })
     },
     beforeDestroy() {
