@@ -266,6 +266,7 @@
 <script>
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
+import applicationForm from "../../assets/jsons/applicationForm"
 import {nanoid} from "nanoid";
 
 export default {
@@ -553,12 +554,9 @@ export default {
     }
     ,
     mounted() {
-        let stringForm = sessionStorage.getItem('applicationForm')
-        if (stringForm) {
-            console.log(stringForm)
-            this.form = JSON.parse(stringForm)
-        }
-
+        
+        console.log(applicationForm)
+        this.form = applicationForm
     }
     ,
     computed: {
