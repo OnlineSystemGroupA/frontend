@@ -1,6 +1,6 @@
 <template>
     <div class="application">
-        <el-form :model="form" ref="form" :disabled="disable" :rules="rules">
+        <el-form label-position="left" :model="form" ref="form" :disabled="disable" :rules="rules">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
                 <br/>
@@ -71,15 +71,14 @@
                 <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
                              @change="handleScaleChange(scale, $event)"></el-checkbox>
                 <br/>
-                <el-form label-position="left" label-width="30%">
-                    <el-form-item v-for="scale in form.softwareScales"
-                                  :key="scale.name"
-                                  :label="scale.name"
-                                  style="margin-top:5px">
-                        <el-input-number :controls="false" v-model="scale.scale" :placeholder="scale.description"
-                                         style="width:30%"></el-input-number>
-                    </el-form-item>
-                </el-form>
+                <el-form-item v-for="scale in form.softwareScales"
+                              :key="scale.name"
+                              :label="scale.name"
+                              label-width="30%"
+                              style="margin-top:5px">
+                    <el-input-number :controls="false" v-model="scale.scale" :placeholder="scale.description"
+                                     style="width:30%"></el-input-number>
+                </el-form-item>
             </el-form-item>
             <br/>
             <el-form-item ref="softwareType" prop="softwareType">
@@ -99,34 +98,31 @@
                 <h3>客户端</h3>
                 <el-form-item label="操作系统:">
                     <br/>
-                    <el-form label-position="left" label-width="15%">
-                        <el-form-item v-for="clientSystem in form.clientSystems"
-                                      :key="clientSystem.vforKey"
-                                      :label="clientSystem.systemName"
-                                      style="margin-top:5px">
-                            <el-input v-model="clientSystem.version" placeholder="系统版本"
-                                      style="width:30%"></el-input>
-                            <el-button type="danger"
-                                       @click="form.clientSystems.splice(form.clientSystems.indexOf(clientSystem),1)"
-                                       icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
-                        </el-form-item>
-                    </el-form>
+                    <el-form-item v-for="clientSystem in form.clientSystems"
+                                  :key="clientSystem.vforKey"
+                                  :label="clientSystem.systemName"
+                                  label-width="15%"
+                                  style="margin-top:5px">
+                        <el-input v-model="clientSystem.version" placeholder="系统版本"
+                                  style="width:30%"></el-input>
+                        <el-button type="danger"
+                                   @click="form.clientSystems.splice(form.clientSystems.indexOf(clientSystem),1)"
+                                   icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
+                    </el-form-item>
                     <el-input v-model="newClientSystem" placeholder="其他操作系统"
                               style="width:20%;margin-top:10px;margin-right:5px"/>
                     <el-button @click="addClientSystem" type="primary">添加</el-button>
                 </el-form-item>
                 <br/>
-                <el-form label-position="left" label-width="180px" :disabled="disable">
-                    <el-form-item label="内存要求（单位MB）:">
-                        <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
-                                         v-model.number="form.clientMemory"
-                                         style="margin-top:5px"></el-input-number>
-                    </el-form-item>
-                    <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
-                                  style="margin-top:5px"></el-input>
-                    </el-form-item>
-                </el-form>
+                <el-form-item label="内存要求（单位MB）:" label-width="20%">
+                    <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
+                                     v-model.number="form.clientMemory"
+                                     style="margin-top:5px"></el-input-number>
+                </el-form-item>
+                <el-form-item label="其他要求:" label-width="20%">
+                    <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
+                              style="margin-top:5px"></el-input>
+                </el-form-item>
                 <h3>服务器端</h3>
                 <h4>硬件</h4>
                 <el-form-item label="架构:">
@@ -134,22 +130,20 @@
                     <SelectAndCreateTags v-model="form.serverArchitectures" :default-options="serverArchitectureOptions"
                                          option-description="添加一种架构"/>
                 </el-form-item>
-                <el-form label-position="left" label-width="180px" :disabled="disable">
-                    <el-form-item label="内存要求（单位MB）:">
-                        <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
-                                         v-model="form.serverMemory"
-                                         style="margin-top:5px"></el-input-number>
-                    </el-form-item>
-                    <el-form-item label="硬盘要求（单位MB）:">
-                        <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="硬盘要求"
-                                         v-model="form.serverDisk"
-                                         style="margin-top:5px"></el-input-number>
-                    </el-form-item>
-                    <el-form-item label="其他要求:">
-                        <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
-                                  style="margin-top:5px"></el-input>
-                    </el-form-item>
-                </el-form>
+                <el-form-item label="内存要求（单位MB）:" label-width="20%">
+                    <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
+                                     v-model="form.serverMemory"
+                                     style="margin-top:5px"></el-input-number>
+                </el-form-item>
+                <el-form-item label="硬盘要求（单位MB）:" label-width="20%">
+                    <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="硬盘要求"
+                                     v-model="form.serverDisk"
+                                     style="margin-top:5px"></el-input-number>
+                </el-form-item>
+                <el-form-item label="其他要求:" label-width="20%">
+                    <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
+                              style="margin-top:5px"></el-input>
+                </el-form-item>
                 <h4>软件</h4>
                 <el-form-item label="操作系统:">
                     <el-input placeholder="操作系统" v-model="form.serverSystem"></el-input>
@@ -181,17 +175,16 @@
             <el-form-item>
                 <h2>样品和数量</h2>
                 <h3>软件介质</h3>
-                <el-form label-position="left" label-width="15%">
-                    <el-form-item v-for="medium in form.media"
-                                  :key="medium.medium"
-                                  :label="medium.medium"
-                                  style="margin-top:5px">
-                        <el-input-number controls-position="right" :min="0"
-                                         :max="100000" v-model="medium.num"></el-input-number>
-                        <el-button type="danger" @click="form.media.splice(form.media.indexOf(medium),1)"
-                                   icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
-                    </el-form-item>
-                </el-form>
+                <el-form-item v-for="medium in form.media"
+                              :key="medium.medium"
+                              :label="medium.medium"
+                              label-width="15%"
+                              style="margin-top:5px">
+                    <el-input-number controls-position="right" :min="0"
+                                     :max="100000" v-model="medium.num"></el-input-number>
+                    <el-button type="danger" @click="form.media.splice(form.media.indexOf(medium),1)"
+                               icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
+                </el-form-item>
                 <el-input v-model="newMedium" placeholder="其他介质"
                           style="width:20%;margin-top:10px;margin-right:5px"/>
                 <el-button @click="addMedium" type="primary">添加</el-button>
@@ -222,33 +215,31 @@
             <hr>
             <div class="InfoCom">
                 <div class="CompanyInfo">
-                    <el-form label-position="left" label-width="80px" :disabled="disable">
-                        <h2>委托单位信息</h2>
-                        <el-form-item label="电话">
-                            <el-input placeholder="电话" v-model="form.companyInfo.telephone"></el-input>
-                        </el-form-item>
-                        <el-form-item label="传真">
-                            <el-input placeholder="传真" v-model="form.companyInfo.fax"></el-input>
-                        </el-form-item>
-                        <el-form-item label="地址">
-                            <el-input placeholder="地址" v-model="form.companyInfo.address"></el-input>
-                        </el-form-item>
-                        <el-form-item label="邮编">
-                            <el-input placeholder="邮编" v-model="form.companyInfo.postcode"></el-input>
-                        </el-form-item>
-                        <el-form-item label="联系人">
-                            <el-input placeholder="联系人" v-model="form.companyInfo.contractPerson"></el-input>
-                        </el-form-item>
-                        <el-form-item label="手机">
-                            <el-input placeholder="手机" v-model="form.companyInfo.mobile"></el-input>
-                        </el-form-item>
-                        <el-form-item label="E-mail">
-                            <el-input placeholder="E-mail" v-model="form.companyInfo.email"></el-input>
-                        </el-form-item>
-                        <el-form-item label="网址">
-                            <el-input placeholder="网址" v-model="form.companyInfo.website"></el-input>
-                        </el-form-item>
-                    </el-form>
+                    <h2>委托单位信息</h2>
+                    <el-form-item label="电话" label-width="20%">
+                        <el-input placeholder="电话" v-model="form.companyInfo.telephone"></el-input>
+                    </el-form-item>
+                    <el-form-item label="传真" label-width="20%">
+                        <el-input placeholder="传真" v-model="form.companyInfo.fax"></el-input>
+                    </el-form-item>
+                    <el-form-item label="地址" label-width="20%">
+                        <el-input placeholder="地址" v-model="form.companyInfo.address"></el-input>
+                    </el-form-item>
+                    <el-form-item label="邮编" label-width="20%">
+                        <el-input placeholder="邮编" v-model="form.companyInfo.postcode"></el-input>
+                    </el-form-item>
+                    <el-form-item label="联系人" label-width="20%">
+                        <el-input placeholder="联系人" v-model="form.companyInfo.contractPerson"></el-input>
+                    </el-form-item>
+                    <el-form-item label="手机" label-width="20%">
+                        <el-input placeholder="手机" v-model="form.companyInfo.mobile"></el-input>
+                    </el-form-item>
+                    <el-form-item label="E-mail" label-width="20%">
+                        <el-input placeholder="E-mail" v-model="form.companyInfo.email"></el-input>
+                    </el-form-item>
+                    <el-form-item label="网址" label-width="20%">
+                        <el-input placeholder="网址" v-model="form.companyInfo.website"></el-input>
+                    </el-form-item>
                 </div>
                 <div class="CompanyInfo">
                     <h2>软件测试中心联系方式</h2>
