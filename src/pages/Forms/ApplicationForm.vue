@@ -609,8 +609,16 @@ export default {
             this.form.clientSystems.splice(this.form.clientSystems.indexOf(clientSystem), 1);
             this.emitBlurEvent('media', this.form.clientSystems);
         },
-
-        submit() {
+        submit(){
+            this.$refs.form.validate((valid)=>{
+                if(valid){
+                    this.doSubmit();
+                }else{
+                    alert("申请表不符合要求，请修改申请表！");
+                }
+            })
+        },
+        doSubmit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 this.$bus.$emit('submitApplication')
