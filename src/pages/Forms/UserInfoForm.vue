@@ -16,6 +16,13 @@
             <el-form-item label="公司地址" prop="address">
                 <el-input v-model="userInfo.address" placeholder="请输入公司地址" clearable=""></el-input>
             </el-form-item>
+            
+            <el-form-item label="性别">
+                <el-radio-group v-model="userInfo.gender">
+                    <el-radio label = "男"></el-radio>
+                    <el-radio label = "女"></el-radio>
+                </el-radio-group>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submit">修改</el-button>
                 <el-button type="primary" @click="cancel">取消</el-button>
@@ -36,6 +43,7 @@ export default {
                 telephone: '123456789',
                 company: '杰威尔公司',
                 address: '台湾省高雄市xx街道xx号',
+                gender:'男'
             }
         }
     },

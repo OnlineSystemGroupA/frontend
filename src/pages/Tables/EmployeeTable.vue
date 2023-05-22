@@ -71,7 +71,12 @@ export default {
     },
     methods:{
         pickEmployee(id){
-            this.$bus.$emit('pickEmployee',id)
+            this.$router.push({
+                name: 'employeeDetailForAdmin',
+                query: {
+                    employeeId:id
+                }
+            })
         }
     }
 }

@@ -9,7 +9,7 @@
 		<el-table :data="clientData" border style="width: 100%; height: auto;">
 			<el-table-column prop="id" label="id" style="width: 20%; height: auto;">
 				<template slot-scope="scope">
-					<p @click="pickEmployee(scope.row.id)">{{ scope.row.id }}</p>
+					<p @click="pickClient(scope.row.id)">{{ scope.row.id }}</p>
 				</template>
 			</el-table-column>
 			<el-table-column prop="userName" label="用户名" style="width: 20%; height: auto;">
@@ -62,6 +62,16 @@ export default {
 			],
 		};
 	},
+	methods: {
+		pickClient(id) {
+			this.$router.push({
+				name: 'clientDetailForAdmin',
+				query: {
+					clientId: id
+				}
+			})
+		}
+	}
 };
 </script>
 
