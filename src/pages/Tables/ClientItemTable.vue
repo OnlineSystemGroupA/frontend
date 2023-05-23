@@ -12,7 +12,7 @@
                     <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.processId }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="startUser" label="项目名称" style="width: 16%"> </el-table-column>
+            <el-table-column prop="title" label="项目名称" style="width: 16%"> </el-table-column>
             <el-table-column prop="startDate" label="创建时间" style="width: 16%"> </el-table-column>
             <el-table-column prop="assignee" label="负责人" style="width: 16%"> </el-table-column>
             <el-table-column prop="taskName" label="项目状态" style="width: 16%"> </el-table-column>
@@ -36,28 +36,28 @@ export default {
             itemList: [
                 {
                     processId: '001',
-                    startUser: '网购平台后台测试',
+                    title: '网购平台后台测试',
                     startDate: '2022-12-04',
                     assignee: '张三',
                     taskName: '审核中',
                 },
                 {
                     processId: '002',
-                    startUser: '网页游戏测试',
+                    title: '网页游戏测试',
                     startDate: '2022-11-05',
                     assignee: '梅林',
                     taskName: '进行中',
                 },
                 {
                     processId: '003',
-                    startUser: '专用数据库',
+                    title: '专用数据库',
                     startDate: '2022-10-15',
                     assignee: '麦克劳德',
                     taskName: '已完成',
                 },
                 {
                     processId: '004',
-                    startUser: '证券交易平台',
+                    title: '证券交易平台',
                     startDate: '2022-7-15',
                     assignee: '莫德雷德',
                     taskName: '已完成',
@@ -85,8 +85,8 @@ export default {
             alert(err.response.data)
         }
     },
-    mounted(){
-        this.axios.get('/api/workflow/processes').then(this.handleResult,this.handleError)
+    mounted() {
+        this.axios.get('/api/workflow/processes').then(this.handleResult, this.handleError)
     }
 }
 </script>
