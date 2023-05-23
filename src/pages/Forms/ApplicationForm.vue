@@ -11,38 +11,56 @@
                                      @blur="emitBlurEvent('testTypes', form.testTypes)"/>
             </el-form-item>
             <hr/>
-            <el-form-item label="软件名称" prop="softwareName">
-                <el-input v-model="form.softwareName" placeholder="软件名称"></el-input>
-            </el-form-item>
-            <el-form-item label="版本号" prop="softwareVersion">
-                <el-input v-model="form.softwareVersion" placeholder="版本号"></el-input>
-            </el-form-item>
-            <el-form-item label="委托单位（中文）" prop="companyChineseName">
-                <el-input v-model="form.companyChineseName" placeholder="委托单位（中文）"></el-input>
-            </el-form-item>
-            <el-form-item label="委托单位（英文）" prop="companyEnglishName">
-                <el-input v-model="form.companyEnglishName" placeholder="委托单位（英文）"></el-input>
-            </el-form-item>
-            <el-form-item label="开发单位" prop="developmentDepartment">
-                <el-input v-model="form.developmentDepartment" placeholder="开发单位"></el-input>
-            </el-form-item>
-            <el-form-item label="单位性质" ref="companyType" prop="companyType" class="is-required">
-                <br/>
-                <el-select
-                    v-model="chosenData.companyType"
-                    placeholder="单位性质"
-                    @blur="emitBlurEvent('companyType', chosenData.companyType, true)"
-                    @change="form.companyType = (chosenData.companyType !== '其他'? chosenData.companyType : '')">
-                    <el-option
-                        v-for="item in orgTypeOptions"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                    />
-                </el-select>
-                <el-input v-model="form.companyType" placeholder="其他单位性质" class="other-input"
-                          v-if="chosenData.companyType ==='其他'"/>
-            </el-form-item>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="软件名称" prop="softwareName">
+                        <el-input v-model="form.softwareName" placeholder="软件名称"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="版本号" prop="softwareVersion">
+                        <el-input v-model="form.softwareVersion" placeholder="版本号"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="委托单位（中文）" prop="companyChineseName">
+                        <el-input v-model="form.companyChineseName" placeholder="委托单位（中文）"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="委托单位（英文）" prop="companyEnglishName">
+                        <el-input v-model="form.companyEnglishName" placeholder="委托单位（英文）"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="开发单位" prop="developmentDepartment">
+                        <el-input v-model="form.developmentDepartment" placeholder="开发单位"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="单位性质" ref="companyType" prop="companyType" class="is-required">
+                        <br/>
+                        <el-select
+                            v-model="chosenData.companyType"
+                            placeholder="单位性质"
+                            @blur="emitBlurEvent('companyType', chosenData.companyType, true)"
+                            @change="form.companyType = (chosenData.companyType !== '其他'? chosenData.companyType : '')">
+                            <el-option
+                                v-for="item in orgTypeOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
+                        </el-select>
+                        <el-input v-model="form.companyType" placeholder="其他单位性质" class="other-input"
+                                  v-if="chosenData.companyType ==='其他'"/>
+                    </el-form-item>
+                </el-col>
+            </el-row>
             <el-form-item label="主要功能及用途简介（限200字）" prop="description">
                 <el-input type="textarea" v-model="form.description" maxlength="200"
                           placeholder="主要功能及用途"></el-input>
@@ -133,27 +151,39 @@
                                      @change="emitChangeEvent('serverNames', form.serverNames)"
                                      @blur="emitBlurEvent('serverNames', form.serverNames)"/>
             </el-form-item>
-            <el-form-item label="内存要求（单位MB）:" label-width="20%">
-                <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
-                                 v-model="form.serverMemory"
-                                 style="margin-top:5px"></el-input-number>
-            </el-form-item>
-            <el-form-item label="硬盘要求（单位MB）:" label-width="20%">
-                <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="硬盘要求"
-                                 v-model="form.serverDisk"
-                                 style="margin-top:5px"></el-input-number>
-            </el-form-item>
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="内存要求（单位MB）:" label-width="40%">
+                        <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
+                                         v-model="form.serverMemory"
+                                         style="margin-top:5px"></el-input-number>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="硬盘要求（单位MB）:" label-width="40%">
+                        <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="硬盘要求"
+                                         v-model="form.serverDisk"
+                                         style="margin-top:5px"></el-input-number>
+                    </el-form-item>
+                </el-col>
+            </el-row>
             <el-form-item label="其他要求:" label-width="20%">
                 <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
                           style="margin-top:5px"></el-input>
             </el-form-item>
             <h4>软件</h4>
-            <el-form-item label="操作系统:" prop="serverSystem">
-                <el-input placeholder="操作系统" v-model="form.serverSystem"></el-input>
-            </el-form-item>
-            <el-form-item label="版本:" prop="serverSystemVersion">
-                <el-input placeholder="版本" v-model="form.serverSystemVersion"></el-input>
-            </el-form-item>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="操作系统:" prop="serverSystem">
+                        <el-input placeholder="操作系统" v-model="form.serverSystem"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="版本:" prop="serverSystemVersion">
+                        <el-input placeholder="版本" v-model="form.serverSystemVersion"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
             <el-form-item label="编程语言:" prop="serverLanguage">
                 <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
             </el-form-item>
@@ -162,12 +192,18 @@
                 <SelectAndCreateTags v-model="form.serverFrames" :default-options="frameOptions"
                                      option-description="添加一种构架"/>
             </el-form-item>
-            <el-form-item label="数据库:" prop="serverDatabase">
-                <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
-            </el-form-item>
-            <el-form-item label="中间件:" prop="serverMiddleware">
-                <el-input placeholder="中间件" v-model="form.serverMiddleware"></el-input>
-            </el-form-item>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="数据库:" prop="serverDatabase">
+                        <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="中间件:" prop="serverMiddleware">
+                        <el-input placeholder="中间件" v-model="form.serverMiddleware"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
             <el-form-item label="其他支撑软件:">
                 <el-input placeholder="其他支撑软件" v-model="form.serverOtherSoftware"></el-input>
             </el-form-item>
@@ -195,7 +231,7 @@
                 <el-button @click="addMedium" type="primary">添加</el-button>
             </el-form-item>
             <h3>文档资料</h3>
-            <el-form-item prop="documents">
+            <el-form-item label="文档资料" prop="documents" class="is-required">
                 <el-input type="textarea" placeholder="文档资料" v-model="form.documents"></el-input>
             </el-form-item>
             <h6>
@@ -255,7 +291,7 @@
                     <h4>电话： 86-25-89683467, 86-25-89683670</h4>
                     <h4>传真： 86-25-89686596</h4>
                     <h4>网址： http://keysoftlab.nju.edu.cn</h4>
-                    <h4>E_mail: keysoftlab@nju.edu.cn</h4>
+                    <h4>E-mail: keysoftlab@nju.edu.cn</h4>
                 </div>
             </div>
         </el-form>
