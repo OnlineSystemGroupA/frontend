@@ -181,28 +181,34 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-form-item label="编程语言:" prop="serverLanguage">
-                <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
-            </el-form-item>
-            <el-form-item label="构架:" prop="serverFrames" ref="serverFrames">
-                <br/>
-                <SelectAndCreateTags v-model="form.serverFrames" :default-options="frameOptions"
-                                     option-description="添加一种构架"/>
-            </el-form-item>
             <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="编程语言:" prop="serverLanguage">
+                        <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
+                    </el-form-item>
+                </el-col>
                 <el-col :span="12">
                     <el-form-item label="数据库:" prop="serverDatabase">
                         <el-input placeholder="数据库" v-model="form.serverDatabase"></el-input>
                     </el-form-item>
                 </el-col>
+            </el-row>
+            <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="中间件:" prop="serverMiddleware">
                         <el-input placeholder="中间件" v-model="form.serverMiddleware"></el-input>
                     </el-form-item>
                 </el-col>
+                <el-col :span="12">
+                    <el-form-item label="其他支撑软件:">
+                        <el-input placeholder="其他支撑软件" v-model="form.serverOtherSoftware"></el-input>
+                    </el-form-item>
+                </el-col>
             </el-row>
-            <el-form-item label="其他支撑软件:">
-                <el-input placeholder="其他支撑软件" v-model="form.serverOtherSoftware"></el-input>
+            <el-form-item label="构架:" prop="serverFrames" ref="serverFrames">
+                <br/>
+                <SelectAndCreateTags v-model="form.serverFrames" :default-options="frameOptions"
+                                     option-description="添加一种构架"/>
             </el-form-item>
             <h3>网络环境</h3>
             <el-form-item label="网络环境" prop="networkEnvironment">
