@@ -207,8 +207,11 @@
             </el-row>
             <el-form-item label="构架:" prop="serverFrames" ref="serverFrames">
                 <br/>
-                <SelectAndCreateTags v-model="form.serverFrames" :default-options="frameOptions"
-                                     option-description="添加一种构架"/>
+                <SelectAndCreateTags v-model="form.serverFrames"
+                                     :default-options="frameOptions"
+                                     option-description="添加一种构架"
+                                     @change="emitChangeEvent('serverFrames', form.serverFrames)"
+                                     @blur="emitBlurEvent('serverFrames', form.serverFrames)"/>
             </el-form-item>
             <h3>网络环境</h3>
             <el-form-item label="网络环境" prop="networkEnvironment">
