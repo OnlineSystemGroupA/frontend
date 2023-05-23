@@ -82,7 +82,7 @@ export default {
         }
     },
     mounted() {
-        this.axios.get('/api/workflow/tasks').then(this.handleResult, this.handleError)
+        this.axios.get('/api/workflow/processes').then(this.handleResult, this.handleError)
     }
 }
 </script>
