@@ -99,16 +99,13 @@
                 </el-form-item>
             </el-form-item>
             <br/>
-            <el-form-item ref="softwareType" prop="softwareType">
+            <el-form-item label="软件类型" ref="softwareType" prop="softwareType" class="is-required">
                 <div class="block">
-                    <span class="demonstration">软件类型:</span>
                     <el-cascader v-model="form.softwareType"
                                  :options="softwareTypeOptions"
                                  :props="{ expandTrigger: 'hover' }"
                                  @change="emitChangeEvent('softwareType', form.softwareType)"
-                                 @blur="emitBlurEvent('softwareType', form.softwareType, true)"
-                                 style="margin-left:10px;"
-                                 class="is-required"></el-cascader>
+                                 style="margin-left:10px;"></el-cascader>
                 </div>
             </el-form-item>
             <hr/>
@@ -419,7 +416,7 @@ export default {
                     {type: 'array', required: true, message: '请填写至少一个软件规模', trigger: 'change'}
                 ],
                 softwareType: [
-                    {required: true, message: '请选择软件类型', trigger: ['blur', 'change']}
+                    {type: 'array', required: true, message: '请选择软件类型', trigger: 'change'}
                 ],
                 clientSystems: [
                     {type: 'array', required: true, message: '请添加至少一个客户端系统', trigger: 'blur'}
@@ -598,6 +595,7 @@ export default {
             }
         },
         emitChangeEvent(ref, value) {
+            console.log(value);
             this.$refs[ref].$emit('el.form.change', value);
         },
 
