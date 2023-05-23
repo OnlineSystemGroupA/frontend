@@ -72,11 +72,11 @@
                              @change="handleScaleChange(scale, $event)"></el-checkbox>
                 <br/>
                 <el-form-item v-for="scale in form.softwareScales"
-                              :key="scale.name"
-                              :label="scale.name"
+                              :key="scale.scaleDescription"
+                              :label="scale.scaleDescription"
                               label-width="30%"
                               style="margin-top:5px">
-                    <el-input-number :controls="false" v-model="scale.scale" :placeholder="scale.description"
+                    <el-input-number :controls="false" v-model="scale.scale"
                                      style="width:30%"></el-input-number>
                 </el-form-item>
             </el-form-item>
@@ -100,7 +100,7 @@
                 <br/>
                 <el-form-item v-for="(clientSystem) in form.clientSystems"
                               :key="clientSystem.vforKey"
-                              :label="clientSystem.systemName"
+                              :label="clientSystem.system"
                               label-width="15%"
                               style="margin-top:5px">
                     <el-input v-model="clientSystem.version" placeholder="系统版本"
@@ -125,13 +125,13 @@
             </el-form-item>
             <h3>服务器端</h3>
             <h4>硬件</h4>
-            <el-form-item label="架构:" prop="serverArchitectures" ref="serverArchitectures">
+            <el-form-item label="架构:" prop="serverNames" ref="serverNames">
                 <br/>
-                <SelectAndCreateTags v-model="form.serverArchitectures"
-                                     :default-options="serverArchitectureOptions"
+                <SelectAndCreateTags v-model="form.serverNames"
+                                     :default-options="serverNameOptions"
                                      option-description="添加一种架构"
-                                     @change="emitChangeEvent('serverArchitectures', form.serverArchitectures)"
-                                     @blur="emitBlurEvent('serverArchitectures', form.serverArchitectures)"/>
+                                     @change="emitChangeEvent('serverNames', form.serverNames)"
+                                     @blur="emitBlurEvent('serverNames', form.serverNames)"/>
             </el-form-item>
             <el-form-item label="内存要求（单位MB）:" label-width="20%">
                 <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
@@ -157,9 +157,9 @@
             <el-form-item label="编程语言:" prop="serverLanguage">
                 <el-input placeholder="编程语言" v-model="form.serverLanguage"></el-input>
             </el-form-item>
-            <el-form-item label="构架:" prop="serverFrame" ref="serverFrame">
+            <el-form-item label="构架:" prop="serverFrames" ref="serverFrames">
                 <br/>
-                <SelectAndCreateTags v-model="form.serverFrame" :default-options="frameOptions"
+                <SelectAndCreateTags v-model="form.serverFrames" :default-options="frameOptions"
                                      option-description="添加一种构架"/>
             </el-form-item>
             <el-form-item label="数据库:" prop="serverDatabase">
@@ -180,8 +180,8 @@
             <h3>软件介质</h3>
             <el-form-item prop="media" ref="media" class="is-required">
                 <el-form-item v-for="medium in form.media"
-                              :key="medium.medium"
-                              :label="medium.medium"
+                              :key="medium.mediumType"
+                              :label="medium.mediumType"
                               label-width="15%"
                               style="margin-top:5px">
                     <el-input-number controls-position="right" :min="0"
@@ -312,26 +312,26 @@ export default {
                 softwareScales: [],
                 softwareType: "",
                 clientSystems: [
-                    {systemName: 'Windows', version: '', vforKey: nanoid(6)},
-                    {systemName: 'Linux', version: '', vforKey: nanoid(6)}
+                    {system: 'Windows', version: '', vforKey: nanoid(6)},
+                    {system: 'Linux', version: '', vforKey: nanoid(6)}
                 ],
                 clientMemory: '',
                 clientOtherRequirement: '',
-                serverArchitectures: [],
+                serverNames: [],
                 serverMemory: 0,
                 serverDisk: 0,
                 serverOtherRequirement: '',
                 serverSystem: '',
                 serverSystemVersion: '',
                 serverLanguage: '',
-                serverFrame: [],
+                serverFrames: [],
                 serverDatabase: '',
                 serverMiddleware: '',
                 serverOtherSoftware: '',
                 networkEnvironment: '',
                 media: [
-                    {medium: "光盘", num: 0},
-                    {medium: "U盘", num: 0}
+                    {mediumType: "光盘", num: 0},
+                    {mediumType: "U盘", num: 0}
                 ],
                 documents: '',
                 expireHandle: '',
@@ -388,7 +388,7 @@ export default {
                 clientSystems: [
                     {type: 'array', required: true, message: '请添加至少一个客户端系统', trigger: 'blur'}
                 ],
-                serverArchitectures: [
+                serverNames: [
                     {type: 'array', required: true, message: '请添加至少一个服务器架构', trigger: 'change'}
                 ],
                 serverSystem: [
@@ -400,7 +400,7 @@ export default {
                 serverLanguage: [
                     {required: true, message: '请填写软件编程语言', trigger: 'blur'}
                 ],
-                serverFrame: [
+                serverFrames: [
                     {type: 'array', required: true, message: '请添加至少一个软件构架', trigger: 'change'}
                 ],
                 serverDatabase: [
@@ -546,7 +546,7 @@ export default {
                 {value: 'C/S', label: 'C/S'},
                 {value: 'B/S', label: 'B/S'}
             ],
-            serverArchitectureOptions: [
+            serverNameOptions: [
                 {value: 'PC服务器', label: 'PC服务器'},
                 {value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器'}
             ]
@@ -568,10 +568,10 @@ export default {
         handleScaleChange(scaleOption, event) {
             if (event === true) {
                 this.form.softwareScales.splice(this.scaleOptions.indexOf(scaleOption), 0,
-                    {name: scaleOption, scale: 0});
+                    {scaleDescription: scaleOption, scale: 0});
             } else {
                 this.form.softwareScales.splice(this.form.softwareScales.findIndex(scale => {
-                    return scale.name === scaleOption
+                    return scale.scaleDescription === scaleOption
                 }), 1)
             }
             this.emitChangeEvent('softwareScales', this.form.softwareScales);
@@ -580,9 +580,9 @@ export default {
             if (this.newMedium !== '') {
                 let trimmedNewMedium = this.newMedium.trim();
                 if (this.form.media.findIndex(medium => {
-                    return medium.medium === trimmedNewMedium
+                    return medium.mediumType === trimmedNewMedium
                 }) === -1) {
-                    this.form.media.push({medium: this.newMedium, num: 0});
+                    this.form.media.push({mediumType: this.newMedium, num: 0});
                     this.newMedium = '';
                 } else {
                     alert("重复的介质类型！");
@@ -598,23 +598,23 @@ export default {
         addClientSystem() {
             if (this.newClientSystem !== '') {
                 this.form.clientSystems.push({
-                    systemName: this.newClientSystem.trim(),
+                    system: this.newClientSystem.trim(),
                     version: '',
                     vforKey: nanoid(6)
                 });
                 this.newClientSystem = '';
-                this.emitBlurEvent("clientSystems", this.form.media);
+                this.emitBlurEvent("clientSystems", this.form.newClientSystem);
             }
         },
         deleteClientSystem(clientSystem) {
             this.form.clientSystems.splice(this.form.clientSystems.indexOf(clientSystem), 1);
             this.emitBlurEvent('media', this.form.clientSystems);
         },
-        submit(){
-            this.$refs.form.validate((valid)=>{
-                if(valid){
+        submit() {
+            this.$refs.form.validate((valid) => {
+                if (valid) {
                     this.doSubmit();
-                }else{
+                } else {
                     alert("申请表不符合要求，请修改申请表！");
                 }
             })
