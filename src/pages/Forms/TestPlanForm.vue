@@ -102,6 +102,7 @@
 </template>
 
 <script>
+import testPlanForm from '../../assets/jsons/testPlanForm.json'
 export default {
     name: 'TestPlanForm',
     props: ['writable', 'checking', 'formId'],
@@ -218,6 +219,10 @@ export default {
             }
             return false
         },
+    },
+    mounted() {
+        console.log(testPlanForm)
+        this.form = (testPlanForm)
     }
 }
 </script>

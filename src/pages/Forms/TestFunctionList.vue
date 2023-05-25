@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import functionList from '../../assets/jsons/functionList.json'
 export default {
     name: 'TestFunctionList',
     props: ['writable', 'checking', 'formId'],
@@ -138,6 +139,10 @@ export default {
             }
             return false
         }
+    },
+    mounted() {
+        console.log(functionList)
+        this.form = functionList
     }
 }
 </script>

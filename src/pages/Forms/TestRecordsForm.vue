@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import testRecords from '../../assets/jsons/testRecordsForm.json'
 export default {
     name: 'TestRecordForm',
     props: ['writable', 'formId', 'checking'],
@@ -163,6 +164,10 @@ export default {
             }
             return false
         }
+    },
+    mounted() {
+        console.log(testRecords)
+        this.form = testRecords
     }
 }
 </script>

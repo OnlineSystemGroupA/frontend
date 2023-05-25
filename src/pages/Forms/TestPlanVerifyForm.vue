@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import testPlanVerification from '../../assets/jsons/testPlanVerificationForm.json'
 export default {
     name: 'TestPlanVerifyForm',
     props: ['writable', 'formId'],
@@ -146,6 +147,10 @@ export default {
             }
             return false
         }
+    },
+    mounted() {
+        console.log(testPlanVerification)
+        this.form = testPlanVerification
     }
 }
 </script>

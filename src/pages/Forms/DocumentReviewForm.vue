@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import documentReviewForm from '../../assets/jsons/documentReviewForm.json'
 export default {
 	name: 'DocumentReviewForm',
 	props: ['writable', 'formId', 'checking'],
@@ -373,6 +374,10 @@ export default {
 			}
 			return false
 		}
+	},
+	mounted() {
+		console.log(documentReviewForm)
+		this.form = documentReviewForm
 	}
 }
 </script>

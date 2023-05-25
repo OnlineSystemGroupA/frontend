@@ -140,22 +140,22 @@
                 <el-col class="col">
                     <h3>委托单位联系方式</h3>
                     <el-form-item label="电话">
-                        <el-input placeholder="电话"></el-input>
+                        <el-input placeholder="电话" v-model="form.telephone"></el-input>
                     </el-form-item>
                     <el-form-item label="传真">
-                        <el-input placeholder="传真"></el-input>
+                        <el-input placeholder="传真" v-model="form.fax"></el-input>
                     </el-form-item>
                     <el-form-item label="地址">
-                        <el-input placeholder="地址"></el-input>
+                        <el-input placeholder="地址" v-model="form.address"></el-input>
                     </el-form-item>
-                    <el-form-item label="传真">
-                        <el-input placeholder="传真"></el-input>
+                    <el-form-item label="网址">
+                        <el-input placeholder="网址" v-model="form.website"></el-input>
                     </el-form-item>
                     <el-form-item label="联系人">
-                        <el-input placeholder="联系人"></el-input>
+                        <el-input placeholder="联系人" v-model="form.contract"></el-input>
                     </el-form-item>
                     <el-form-item label="E-mail">
-                        <el-input placeholder="E-mail"></el-input>
+                        <el-input placeholder="E-mail" v-model="form.email"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col class="col">
@@ -252,7 +252,7 @@
             </div>
             <div>
                 <h3>网络环境</h3>
-                <el-input type="textarea" placeholder="网络环境"></el-input>
+                <el-input type="textarea" placeholder="网络环境" v-model="form.networkEnvironment"></el-input>
             </div>
             <h2>二、测试依据和参考资料</h2>
             <div>
@@ -392,6 +392,7 @@
 </template>
 
 <script>
+import testReportForm from '../../assets/jsons/testReportForm.json'
 export default {
     name: 'TestReportForm',
     props: ['writable', 'formId', 'checking'],
@@ -411,6 +412,12 @@ export default {
                 testStandard: '',
                 sampleList: '',
                 testConclusion: '',
+                telephone: '',
+                fax: '',
+                address:'',
+                website: '',
+                contract: '',
+                email: '',
                 compiler: '',
                 compilerTime: '',
                 reviewer: '',
@@ -451,6 +458,7 @@ export default {
                         version: ''
                     }
                 },
+                networkEnvironment:'',
                 testStandardList: [{ standard: '' },],
                 referenceList: [{ reference: '' },],
                 functionTest: [{ functionModule: '', functionRequirement: '', testResult: '' }],
@@ -590,6 +598,10 @@ export default {
             }
             return false
         }
+    },
+    mounted() {
+        console.log(testReportForm)
+        this.form = testReportForm
     }
 }
 </script>
