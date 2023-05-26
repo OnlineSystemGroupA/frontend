@@ -1,4 +1,3 @@
-
 var randomjson = require('randomjson');
 
 var generateApplication = function () {
@@ -13,27 +12,29 @@ var generateApplication = function () {
         "description": "<@chinese{0,310}>",
         "testStandards<@{1,10}>": ["<@string{4,20}>"],
         "testAspects<@{1,10}>": ["<@string{4,20}>"],
-        "softwareScales": [],
-        "softwareType": "<@string{4,20}>",
+        "softwareScales": [
+            {"scaleDescription": "<@string{4,20}>", "scale": "<@[1-20000]>"},
+        ],
+        "softwareType": ["<@string{4,20}>", "<@string{4,20}>"],
         "clientSystems<@{1,3}>": [
-            { "systemName": "<@string{4,20}>", "version": "<@string{4,20}>", "vforKey": "<@string{4,20}>" },
+            {"systemName": "<@string{4,20}>", "version": "<@string{4,20}>", "vforKey": "<@string{4,20}>"},
         ],
         "clientMemory": "<@[1-20000]>",
         "clientOtherRequirement": "<@string{4,120}>",
-        "serverArchitectures@<{1,3}>": ["<@string{4,20}>"],
+        "serverNames<@{1,10}>": ["<@string{4,20}>"],
         "serverMemory": "<@[1-20000]>",
         "serverDisk": "<@[1-20000]>",
         "serverOtherRequirement": "<@string{4,120}>",
         "serverSystem": "<@string{4,20}>",
         "serverSystemVersion": "<@string{4,20}>",
         "serverLanguage": "<@string{4,20}>",
-        "serverFrame": "<@string{4,20}>",
+        "serverFrames": ["<@string{4,20}>"],
         "serverDatabase": "<@string{4,20}>",
         "serverMiddleware": "<@string{4,20}>",
         "serverOtherSoftware": "<@string{4,20}>",
         "networkEnvironment": "<@string{4,20}>",
         "media<@{1,9}>": [
-            { "medium": "<@string{4,20}>", "num": "<@[1-20]>" },
+            {"medium": "<@string{4,20}>", "num": "<@[1-20]>"},
         ],
         "documents": "<@string{4,200}>",
         "expireHandle": "由本中心销毁",
@@ -63,9 +64,7 @@ var generateApplication = function () {
 }
 
 var generateApplicationVerification = function () {
-    var applicationVerificationModelJson = {
-
-    }
+    var applicationVerificationModelJson = {}
 }
 
 var generateFunctionList = function () {
@@ -335,14 +334,38 @@ var generateTestReport = function () {
             }
         },
         "networkEnvironment": '<@string{4,20}>',
-        "testStandardList<@{2,7}>": [{ "standard": '<@string{4,20}>' },],
-        "referenceList<@{2,7}>": [{ "reference": '<@string{4,20}>' },],
-        "functionTest<@{2,7}>": [{ "functionModule": '<@string{4,20}>', "functionRequirement": '<@string{4,20}>', "testResult": '<@string{4,20}>' }],
-        "efficiencyTest<@{2,7}>": [{ "property": '<@string{4,20}>', "testExplanation": '<@string{4,20}>', "testResult": '<@string{4,20}>' }],
-        "portabilityTest<@{2,7}>": [{ "property": '<@string{4,20}>', "testExplanation": '<@string{4,20}>', "testResult": '<@string{4,20}>' }],
-        "usabilityTest<@{2,7}>": [{ "property": '<@string{4,20}>', "testExplanation": '<@string{4,20}>', "testResult": '<@string{4,20}>' }],
-        "reliabilityTest<@{2,7}>": [{ "property": '<@string{4,20}>', "testExplanation": '<@string{4,20}>', "testResult": '<@string{4,20}>' }],
-        "maintainabilityTest<@{2,7}>": [{ "property": '<@string{4,20}>', "testExplanation": '<@string{4,20}>', "testResult": '<@string{4,20}>' }]
+        "testStandardList<@{2,7}>": [{"standard": '<@string{4,20}>'},],
+        "referenceList<@{2,7}>": [{"reference": '<@string{4,20}>'},],
+        "functionTest<@{2,7}>": [{
+            "functionModule": '<@string{4,20}>',
+            "functionRequirement": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "efficiencyTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "portabilityTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "usabilityTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "reliabilityTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "maintainabilityTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }]
     }
     var testReportJson = randomjson(testReportModelJson)
     console.log(testReportJson)
