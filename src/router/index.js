@@ -47,6 +47,7 @@ import UserInfoForm from '../pages/Forms/UserInfoForm'
 import ChangePassword from '../pages/Forms/ChangePassword'
 import EmployeeDetail from '../pages/Details/EmployeeDetail'
 import ClientAuthorityTable from '../pages/Tables/ClientAuthorityTable'
+import EditEmployeeInfoForm from '../pages/Forms/EditEmployeeInfoForm'
 
 const router = new VueRouter({
     routes: [
@@ -699,7 +700,18 @@ const router = new VueRouter({
                     props({ query: { employeeId } }) {
                         return { employeeId }
                     },
-                    meta: { title: '员工信息', logType: 'admin' }
+                    meta: { title: '员工信息', logType: 'admin' },
+                    children: [
+                        {
+                            name: 'editEmployeeInfo',
+                            path: 'editEmployeeInfor',
+                            component: EditEmployeeInfoForm,
+                            props({ query: { employeeId } }) {
+                                return { employeeId }
+                            },
+                            meta: { title: '修改员工信息', logType: 'admin' },
+                        }
+                    ]
                 },//员工信息
                 {
                     name: 'employeeInfoForm',

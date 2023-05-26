@@ -58,6 +58,14 @@ export default {
             this.$router.push({
                 name:"employeeChangePassword"
             })
+        },
+        editInfo() {
+            this.$router.push({
+                name: "editEmployeeInfo",
+                query: {
+                    employeeId:this.employeeId
+                }
+            })  
         }
     },
     computed:{

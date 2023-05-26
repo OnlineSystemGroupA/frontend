@@ -4,8 +4,8 @@
             <el-form-item label="真实姓名" prop="realName">
                 <el-input v-model="userInfo.realName" placeholder="请输入真实姓名" clearable></el-input>
             </el-form-item>
-            <el-form-item label="电子游戏" prop="e_mail">
-                <el-input v-model="userInfo.e_mail" placeholder="请输入电子邮箱" clearable=""></el-input>
+            <el-form-item label="电子邮件" prop="email">
+                <el-input v-model="userInfo.email" placeholder="请输入电子邮箱" clearable=""></el-input>
             </el-form-item>
             <el-form-item label="联系电话" prop="telephone">
                 <el-input v-model="userInfo.telephone" placeholder="请输入联系电话" clearable=""></el-input>
@@ -39,7 +39,7 @@ export default {
             userInfo: {
                 username: '杰伦',
                 realName: '周杰伦',
-                e_mail: 'jielun@qq.com',
+                email: 'jielun@qq.com',
                 telephone: '123456789',
                 company: '杰威尔公司',
                 address: '台湾省高雄市xx街道xx号',
@@ -67,7 +67,7 @@ export default {
 
 <style scoped>
 .userInfo {
-    width: 400px;
+    width: 40%;
     align-items: center;
     border-radius: 30px;
     margin: 30px;
