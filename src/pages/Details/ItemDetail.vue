@@ -204,6 +204,9 @@ export default {
             else if (row.title === '测试记录表') {
                 routeName = logType + 'ReadTestRecordsForm'
             }
+             else if (row.title === '测试问题表') {
+                routeName = logType + 'ReadTestProblemForm'
+            }
             else if (row.title === '测试报告表') {
                 routeName = logType + 'ReadTestReportForm'
             }
