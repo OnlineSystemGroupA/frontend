@@ -1,12 +1,12 @@
 <template>
     <div class="layout">
         <el-container>
-            <el-header>Header</el-header>
+            <el-header class="header">Header</el-header>
             <el-container>
-                <el-container>
-                    <el-aside style="width: auto;">
-                        <slot name="menu"></slot>
-                    </el-aside>
+                <el-aside width="13%" class="aside">
+                    <slot name="menu"></slot>
+                </el-aside>
+                <el-container class="main-container">
                     <el-main>
                         <div class="main">
                             <router-view>
@@ -14,21 +14,16 @@
                         </div>
                     </el-main>
                 </el-container>
-                <el-footer style="height: auto;">
-                    <PageFooter></PageFooter>
-                </el-footer>
             </el-container>
         </el-container>
     </div>
 </template>
 
 <script>
-import PageFooter from '../../components/Footers/PageFooter.vue'
 
 export default {
     name: 'UserLayout',
     components: {
-        PageFooter
     }
 }
 </script>
@@ -36,15 +31,25 @@ export default {
 <style scoped>
 .layout {
     width: 100%;
-    height: 100%;
-    padding: 5%;
+    height: 100vh;
+}
+
+.main-container {
+    height: calc(100vh - 60px);
+    overflow-y: auto;
 }
 
 .main {
-    width: auto;
+    width: 85%;
+    margin-left: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.aside {
+    height: calc(100vh - 60px);
+    overflow-y: auto;
 }
 </style>

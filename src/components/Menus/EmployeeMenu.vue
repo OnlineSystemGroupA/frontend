@@ -66,7 +66,6 @@ export default {
 
 <style scoped>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
+    height: 100%;
 }
 </style>
