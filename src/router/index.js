@@ -46,6 +46,7 @@ import ClientDetail from '../pages/Details/ClientDetail'
 import UserInfoForm from '../pages/Forms/UserInfoForm'
 import ChangePassword from '../pages/Forms/ChangePassword'
 import EmployeeDetail from '../pages/Details/EmployeeDetail'
+import ClientAuthorityTable from '../pages/Tables/ClientAuthorityTable'
 
 const router = new VueRouter({
     routes: [
@@ -672,7 +673,18 @@ const router = new VueRouter({
                     props({ query: { clientId } }) {
                         return {clientId}
                     },
-                    meta:{ title: '用户信息', logType: 'admin' }
+                    meta: { title: '用户信息', logType: 'admin' },
+                    children: [
+                        {
+                            name: 'editClientAuthority',
+                            path: 'editClientAuthority',
+                            component: ClientAuthorityTable,
+                            props({ query: { clientId } }) {
+                                return { clientId }
+                            },
+                            meta: {title:'用户权限', logType:'admin'}
+                        }
+                    ]
                 },//用户信息
                 {
                     name: 'employeeTable',

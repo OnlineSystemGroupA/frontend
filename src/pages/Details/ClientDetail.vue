@@ -39,6 +39,9 @@
             <el-button type="primary" @click="changePassword" v-if="show">
                 修改密码
             </el-button>
+            <el-button type="primary" @click="editAuthority" :v-if="!show">
+                修改权限
+            </el-button>
         </el-row>
 
         <router-view></router-view>
@@ -48,7 +51,7 @@
 <script>
 export default {
     name: 'ClientDetail',
-    props: ['clientID'],
+    props: ['clientId'],
     data() {
         return {
             userInfo: {
@@ -72,6 +75,14 @@ export default {
         changePassword() {
             this.$router.push({
                 name: 'clientChangePassword'
+            })
+        },
+        editAuthority() {
+            this.$router.push({
+                name: 'editClientAuthority',
+                query: {
+                    clientId:this.clientId,
+                }
             })
         }
     },
