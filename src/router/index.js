@@ -48,6 +48,7 @@ import ChangePassword from '../pages/Forms/ChangePassword'
 import EmployeeDetail from '../pages/Details/EmployeeDetail'
 import ClientAuthorityTable from '../pages/Tables/ClientAuthorityTable'
 import EditEmployeeInfoForm from '../pages/Forms/EditEmployeeInfoForm'
+import TestProblemForm from '../pages/Forms/TestProblemForm'
 
 const router = new VueRouter({
     routes: [
@@ -403,6 +404,15 @@ const router = new VueRouter({
                     meta: { title: '读取测试记录表', logType: 'employee' }
                 },//读取测试记录表
                 {
+                    name: 'employeeReadTestProblemForm',
+                    path: 'employeeReadTestProblemForm',
+                    component: TestProblemForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试问题表', logType: 'employee' }
+                },//读取测试问题表
+                {
                     name: 'employeeReadTestReportForm',
                     path: 'employeeReadTestReportForm',
                     component: TestReportForm,
@@ -571,6 +581,15 @@ const router = new VueRouter({
                                 return { writable, checking, formId }
                             },
                             meta: { title: '测试报告填写', logType: 'employee' }
+                        },
+                        {
+                            name: 'testProblemForm',
+                            path: 'testProblemForm',
+                            component: TestProblemForm,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '测试问题列表', logType: 'employee' }
                         }
                     ]
                 },//测试操作
@@ -788,6 +807,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取测试记录表', logType: 'admin' }
                 },//读取测试记录表
+                {
+                    name: 'adminReadTestProblemForm',
+                    path: 'adminReadTestProblemForm',
+                    component: TestProblemForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试问题表', logType: 'admin' }
+                },//读取测试问题表
                 {
                     name: 'adminReadTestReportForm',
                     path: 'adminReadTestReportForm',

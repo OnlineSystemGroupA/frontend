@@ -40,7 +40,15 @@ export default {
             })
         },
         writeTestProblem() {
-
+            this.$router.push({
+                name: 'testProblemForm',
+                query: {
+                    writable: true,
+                    checking: false,
+                    formId: this.itemId,
+                    itemId: this.itemId
+                }
+            })
         },
         writeTestReport() {
             this.$router.push({
