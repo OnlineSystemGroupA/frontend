@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height: 100%;">
         <el-menu default-active="1-4-1" 
             class="el-menu-vertical-demo" 
             @open="handleOpen" 
