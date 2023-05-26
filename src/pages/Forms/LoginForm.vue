@@ -2,13 +2,15 @@
     <div class="login">
         <el-form :label-position="labelPosition" ref="loginForm" label-width="80px" :model="userInfo" :rules="rules">
             <el-form-item label="账号或者邮箱" prop="username">
-                <el-input v-model="userInfo.username" placeholder="请输入账号" clearable></el-input>
+                <el-input v-model="userInfo.username" placeholder="请输入账号" @keyup.enter.native="onSubmit"
+                          clearable></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-                <el-input v-model="userInfo.password" placeholder="请输入密码" show-password></el-input>
+                <el-input v-model="userInfo.password" placeholder="请输入密码" @keyup.enter.native="onSubmit"
+                          show-password></el-input>
             </el-form-item>
             <el-form-item>
-                <el-radio-group v-model="logType">
+                <el-radio-group v-model="logType" @change="onChangeLoginTye">
                     <el-radio label="client">客户</el-radio>
                     <el-radio label="employee">员工</el-radio>
                     <el-radio label="admin">管理员</el-radio>
@@ -58,6 +60,9 @@ export default {
         };
     },
     methods: {
+        onChangeLoginTye() {
+            this.$nextTick(this.$refs.loginForm.clearValidate)
+        },
         onSubmit() {
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
@@ -90,11 +95,9 @@ export default {
             //console.log(err.response.status)
             if (err.response.status === 401) {
                 alert('账号或者密码错误')
-            }
-            else if (err.response.status === 403) {
+            } else if (err.response.status === 403) {
                 alert('账号封禁中')
-            }
-            else if (err.response.status === 404) {
+            } else if (err.response.status === 404) {
                 alert('不存在该用户')
             }
             //alert(err.response.data)

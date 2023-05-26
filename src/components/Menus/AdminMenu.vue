@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height: 100%;">
         <!--
             <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
                 <el-radio-button :label="false">展开</el-radio-button>
