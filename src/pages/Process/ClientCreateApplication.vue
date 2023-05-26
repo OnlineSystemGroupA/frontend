@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 90%;">
+    <div style="width: 100%">
         <h2>创建新项目</h2>
         <el-steps :active="active" finish-status="success">
             <el-step title="步骤 1" description="阅读说明"></el-step>
@@ -17,9 +17,7 @@
 export default {
     name: 'ClientCreateApplication',
     data() {
-        return {
-
-        }
+        return {}
     },
     mounted() {
         this.$bus.$on('submitApplication', () => {
@@ -37,8 +35,7 @@ export default {
             //console.log(path)
             if (path.endsWith('applicationForm')) {
                 return 1
-            }
-            else if (path.endsWith('functionList')) {
+            } else if (path.endsWith('functionList')) {
                 return 2
             }
             return 0
