@@ -33,7 +33,7 @@ var generateApplication = function () {
         "serverOtherSoftware": "<@string{4,20}>",
         "networkEnvironment": "<@string{4,20}>",
         "media<@{1,9}>": [
-            { "medium": "<@string{4,20}>", "num": "<@[1-20]>" },
+            { "mediumType": "<@string{4,20}>", "num": "<@[1-20]>" },
         ],
         "documents": "<@string{4,200}>",
         "expireHandle": "由本中心销毁",
@@ -60,12 +60,6 @@ var generateApplication = function () {
         console.log("写入成功");
     })
 
-}
-
-var generateApplicationVerification = function () {
-    var applicationVerificationModelJson = {
-
-    }
 }
 
 var generateFunctionList = function () {
@@ -626,6 +620,34 @@ var generateDocumentReviewForm = function () {
     const path = require('path')
     let dir = path.join('../assets/jsons/documentReviewForm.json')//存入路径
     fs.writeFile(dir, documentReviewArray, 'utf8', (err) => {
+        console.log("写入成功");
+    })
+}
+
+var generateProblemForm = function () {
+    var problemFromModelJson = {
+        "problemList<@{3,6}>": [
+            {
+                index: '<@string{4,20}>',
+                description: '<@string{4,20}>',
+                relatedRequirementItem: '<@string{4,20}>',
+                initialCondition: '<@string{4,20}>',
+                operationRoute: '<@string{4,20}>',
+                relatedCase: '<@string{4,20}>',
+                discoveredTime: '<@string{4,20}>',
+                personInCharge: '<@string{4,20}>',
+                editSuggestion: '<@string{4,20}>',
+                vforKey: '<@string{4,20}>'
+            }
+        ]
+    }
+    var testProblemJson = randomjson(testProblemModelJson)
+    console.log(testProblemJson)
+    var testProblemArray = JSON.stringify(testProblemJson)
+    const fs = require('fs')
+    const path = require('path')
+    let dir = path.join('../assets/jsons/testProblemForm.json')//存入路径
+    fs.writeFile(dir, testProblemArray, 'utf8', (err) => {
         console.log("写入成功");
     })
 }
