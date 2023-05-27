@@ -650,7 +650,7 @@ var generateDocumentReviewForm = function () {
 }
 
 var generateProblemForm = function () {
-    var problemFromModelJson = {
+    var testProblemModelJson = {
         "problemList<@{3,6}>": [
             {
                 index: '<@string{4,20}>',
@@ -659,7 +659,7 @@ var generateProblemForm = function () {
                 initialCondition: '<@string{4,20}>',
                 operationRoute: '<@string{4,20}>',
                 relatedCase: '<@string{4,20}>',
-                discoveredTime: '<@string{4,20}>',
+                discoveredTime: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
                 personInCharge: '<@string{4,20}>',
                 editSuggestion: '<@string{4,20}>',
                 vforKey: '<@string{4,20}>'
@@ -684,3 +684,4 @@ generateTestPlan()
 generateTestRecords()
 generateTestPlanVerification()
 generateDocumentReviewForm()
+generateProblemForm()
