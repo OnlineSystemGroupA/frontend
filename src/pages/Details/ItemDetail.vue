@@ -57,8 +57,8 @@
                 <el-step title="计划制定中"></el-step>
                 <el-step title="测试进行中"></el-step>
                 <el-step title="报告审核中"></el-step>
-                <el-step title="用户确认中"></el-step>
                 <el-step title="归档处理中"></el-step>
+                <el-step title="用户确认中"></el-step>
                 <el-step title="项目已完成"></el-step>
             </el-steps>
             <el-button type="primary" @click="nextStep">下一步</el-button><!--仅测试用-->
@@ -293,13 +293,13 @@ export default {
                 }
             }
             else if (this.active === 8) {
-                if (logType === 'client') {
-                    routeName =  'confirmTestReport'
+                if (logType === 'employee') {
+                    routeName = 'checkTestWork'
                 }
             }
             else if (this.active === 9) {
-                if (logType === 'employee') {
-                    routeName = 'checkTestWork'
+                if (logType === 'client') {
+                    routeName =  'confirmTestReport'
                 }
             }
             else if (this.active === 10) {
