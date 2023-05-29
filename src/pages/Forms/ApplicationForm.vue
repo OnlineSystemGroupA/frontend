@@ -1,6 +1,6 @@
 <template>
     <div class="application">
-        <el-form label-position="left" :model="form" ref="form" :disabled="disable" :rules="rules">
+        <el-form label-position="left" size="small" :model="form" ref="form" :disabled="disable" :rules="rules">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
                 <br/>
