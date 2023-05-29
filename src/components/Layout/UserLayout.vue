@@ -44,7 +44,8 @@ export default {
     justify-content: center;
     flex-direction: column;
     background-color: #6A005F;
-    border-bottom: 2px solid #895984;
+    z-index: 1;
+    box-shadow: 0 0 5px 0 #000000;
 }
 
 .main-container {
