@@ -49,6 +49,7 @@ import EmployeeDetail from '../pages/Details/EmployeeDetail'
 import ClientAuthorityTable from '../pages/Tables/ClientAuthorityTable'
 import EditEmployeeInfoForm from '../pages/Forms/EditEmployeeInfoForm'
 import TestProblemForm from '../pages/Forms/TestProblemForm'
+import EmployeeReviewSample from '../pages/Process/EmployeeReviewSample'
 
 const router = new VueRouter({
     routes: [
@@ -506,6 +507,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '提出报价', logType: 'employee' }
                 },//提出报价
+                {
+                    path: 'reviewSample',
+                    name: 'reviewSample',
+                    component: EmployeeReviewSample,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '检查样品', logType: 'employee' }
+                },//检查样品
                 {
                     name: 'writeTestPlan',
                     path: 'writeTestPlan',

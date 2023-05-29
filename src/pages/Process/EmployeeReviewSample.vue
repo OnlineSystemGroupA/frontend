@@ -1,9 +1,10 @@
 <template>
-    <div style="width:90%;"> 
-        <h2>测试工作检查</h2>
+    <div style="width:90%;">
+        <h2>检查测试样品</h2>
         <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
-        <el-button type="primary" @click="documentReview">软件文档检查表</el-button>
+        <el-button type="primary" @click="download">下载文件</el-button>
+        <el-button type="primary" @click="documentReview">文档检查表</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -12,7 +13,7 @@
 
 <script>
 export default {
-    name: 'EmployeeCheckTestWork',
+    name: 'EmployeeReviewSample',
     props: ['itemId'],
     data() {
         return {
@@ -26,10 +27,13 @@ export default {
                 query: { itemId: id }
             })
         },
-        checkTestWork() {
+        download() {
+
+        },
+        documentReview() {
             this.$router.push(
                 {
-                    name: 'workCheckForm',
+                    name: 'documentReviewForm',
                     query: {
                         writable: true,
                         checking: false,
@@ -38,7 +42,7 @@ export default {
                     }
                 }
             )
-        }
+        },
     }
 }
 </script>

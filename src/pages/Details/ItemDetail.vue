@@ -265,7 +265,7 @@ export default {
                     routeName = 'clientUploadSamples'
                 }
                 else if (logType === 'employee') {
-                    routeName = 'checkApplication'
+                    routeName = 'reviewSample'
                 }
             }
             else if (this.active === 5) {
