@@ -39,7 +39,7 @@
             <el-button type="primary" @click="changePassword" v-if="show">
                 修改密码
             </el-button>
-            <el-button type="primary" @click="editAuthority" :v-if="!show">
+            <el-button type="primary" @click="editAuthority" v-if="!show">
                 修改权限
             </el-button>
         </el-row>
