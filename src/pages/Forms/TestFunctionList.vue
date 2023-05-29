@@ -1,39 +1,102 @@
 <template>
-    <div class="func_list">
+    <div class="func-list">
         <h1>功能表格</h1>
-        <el-form :model="form" ref="form" label-width="100px" class="demo-dynamic" :disabled="disable">
-            <el-form-item label="软件名称">
-                <el-input v-model="form.softwareName"></el-input>
-            </el-form-item>
-            <el-form-item label="版本号">
-                <el-input v-model="form.softwareVersion"></el-input>
-            </el-form-item>
-
-            <el-form-item v-for="(func, index) in form.functions" :key="func.key" class="func">
-
-                <h2>功能{{ index }}</h2>
-                <el-form-item label="功能名称">
-                    <el-input v-model="func.title"></el-input>
-                    <el-form-item v-for="(item, index_item) in func.items" :key="index_item">
-                        <span>
-                            <label>详细功能{{ index_item }} </label>
-                            <el-button v-show="!disable"
-                                       @click.prevent="removeItem(index, item)">删除详细功能</el-button>
-                        </span>
-                        <el-form-item label="详细功能名称">
-                            <el-input v-model="item.name"></el-input>
-                        </el-form-item>
-                        <el-form-item label="详细功能描述">
-                            <el-input type="textarea" v-model="item.description"></el-input>
-                        </el-form-item>
-                        <hr>
+        <el-form :model="form" ref="form" :disabled="disable">
+            <el-row :gutter="20">
+                <el-col :span="11">
+                    <el-form-item label="软件名称" label-width="25%">
+                        <el-input v-model="form.softwareName" style="width: 75%"></el-input>
                     </el-form-item>
-                </el-form-item>
-                <el-button v-show="!disable" @click.prevent="removeFunc(func)">删除</el-button>
-                <el-button v-show="!disable" @click="addItem(index)">添加功能</el-button>
-            </el-form-item>
-            <el-button v-show="!disable" @click="addFunc">添加表项</el-button>
-            <br>
+                </el-col>
+                <el-col :span="11">
+                    <el-form-item label="版本号" label-width="25%">
+                        <el-input v-model="form.softwareVersion" style="width: 75%"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <hr/>
+            <el-table :data="form.functions"
+                      ref="functionTable"
+                      @row-click="onFuncRowClick"
+                      :row-class-name="funcRowClassName"
+                      style="width: 100%">
+                <el-table-column type="expand">
+                    <template slot-scope="func">
+                        <div class="table-dropdown">
+                            <el-form-item>
+                                <el-form-item label="功能名称">
+                                    <el-input v-model="func.row.title" placeholder="功能名称"
+                                              style="width: 60%"></el-input>
+                                </el-form-item>
+                                <el-table :data="func.row.items" @row-click="row=>onItemRowClick(func.row.index, row)"
+                                          style="width: 80%" :ref="'itemTable' + func.row.index">
+                                    <el-table-column type="expand">
+                                        <template slot-scope="item">
+                                            <div class="table-dropdown">
+                                                <el-form-item label="详细功能名称">
+                                                    <el-input v-model="item.row.name" placeholder="详细功能名称"
+                                                              style="width: 60%"></el-input>
+                                                </el-form-item>
+                                                <el-form-item v-model="item.row.name" label="详细功能描述"
+                                                              style="margin-top: 10px">
+                                                    <el-input v-model="item.row.description"
+                                                              type="textarea"
+                                                              :autosize="{minRows: 4, maxRows: 8}"
+                                                              resize='none'
+                                                              placeholder="详细功能描述"
+                                                              style="width: 60%"></el-input>
+                                                </el-form-item>
+                                            </div>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="详细功能名称" prop="name"/>
+                                    <el-table-column align="right">
+                                        <template slot="header">
+                                            <el-button
+                                                size="mini"
+                                                type="primary"
+                                                plain
+                                                circle
+                                                icon="el-icon-plus"
+                                                @click.native.stop="addItem(func.row.index)"/>
+                                        </template>
+                                        <template slot-scope="item">
+                                            <el-button
+                                                size="mini"
+                                                type="danger"
+                                                plain
+                                                circle
+                                                icon="el-icon-delete"
+                                                @click.native.stop="removeItem(func.row.title, item.row.name)"/>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </el-form-item>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="功能名称" prop="title"/>
+                <el-table-column align="right">
+                    <template slot="header">
+                        <el-button
+                            size="mini"
+                            type="primary"
+                            plain
+                            circle
+                            icon="el-icon-plus"
+                            @click.native.stop="addFunc"/>
+                    </template>
+                    <template slot-scope="func">
+                        <el-button
+                            size="mini"
+                            type="danger"
+                            plain
+                            circle
+                            icon="el-icon-delete"
+                            @click.native.stop="removeFunc(func.row)"/>
+                    </template>
+                </el-table-column>
+            </el-table>
         </el-form>
         <br>
         <el-row v-show="!disable">
@@ -49,6 +112,8 @@
 
 <script>
 import functionList from '../../assets/jsons/functionList.json'
+import {nanoid} from "nanoid";
+
 export default {
     name: 'TestFunctionList',
     props: ['writable', 'checking', 'formId'],
@@ -61,50 +126,63 @@ export default {
                     {
                         title: '',
                         items: [
-                            {name: '', description: '',}
+                            {name: '', description: ''}
                         ]
                     }
-                ]
-            }
+                ],
+                key: nanoid(6)
+            },
+            expands: [],
+            newFuncTitle: ''
         }
     },
     methods: {
         addFunc() {
             const func = {
                 title: '',
-                items: [
-                    {
-                        name: '',
-                        description: '',
-                    }
-                ]
-            }
-            this.form.functions.push(func)
+                items: []
+            };
+            this.form.functions.push(func);
         },
         addItem(index) {
             const item = {
                 name: '',
-                description: '',
-                key: Date.now()
+                description: ''
             }
             this.form.functions[index].items.push(item)
         },
         removeFunc(func) {
             const index = this.form.functions.indexOf(func);
-            //console.log(index)
             if (index !== -1) {
                 this.form.functions.splice(index, 1)
             }
         },
-        removeItem(index, item) {
-            if (index !== -1) {
-                const index_item = this.form.functions[index].items.indexOf(item);
-                //console.log(index, index_item)
-                if (index_item !== -1) {
-                    this.form.functions[index].items.splice(index_item, 1)
+        removeItem(title, name) {
+            let funcIndex = this.form.functions.findIndex((func) => {
+                return func.title === title
+            });
+            if (funcIndex !== -1) {
+                const itemIndex = this.form.functions[funcIndex].items.findIndex((item) => {
+                    return item.name === name
+                });
+                if (itemIndex !== -1) {
+                    this.form.functions[funcIndex].items.splice(itemIndex, 1)
                 }
             }
         },
+
+        onFuncRowClick(row) {
+            this.$refs.functionTable.toggleRowExpansion(row);
+        },
+
+        onItemRowClick(index, row) {
+            this.$refs['itemTable' + index].toggleRowExpansion(row);
+        },
+
+        funcRowClassName({row, rowIndex}) {
+            row.index = rowIndex;
+        },
+
         submit() {
 
         },
@@ -115,6 +193,10 @@ export default {
             this.$bus.$emit('passFunction')
         },
         refute() {
+
+        },
+
+        doNothing() {
 
         }
     },
@@ -143,26 +225,26 @@ export default {
     mounted() {
         console.log(functionList)
         this.form = functionList
-    }
+    },
 }
 </script>
 
-<style scoped>
-.func_list {
+<style lang="less">
+.func-list {
     width: 800px;
     align-items: center;
-    border-radius: 30px;
     margin: 5%;
     padding: 5%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
 
-.func {
-    width: 600px;
-    align-items: center;
-    border-radius: 3px;
-    margin: 5%;
-    padding: 5%;
-    border: 1px solid black;
+.table-dropdown {
+    width: 100%;
+    margin-left: 10%;
 }
+
+.add-func {
+    margin-bottom: 30px;
+}
+
 </style>
