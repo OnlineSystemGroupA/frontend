@@ -1,7 +1,9 @@
 <template>
     <div class="layout">
         <el-container>
-            <el-header class="header">Header</el-header>
+            <el-header class="user-header">
+                <UserHeader/>
+            </el-header>
             <el-container>
                 <el-aside width="13%" class="aside">
                     <slot name="menu"></slot>
@@ -21,9 +23,12 @@
 
 <script>
 
+import UserHeader from "@/components/Headers/UserHeader.vue";
+
 export default {
     name: 'UserLayout',
     components: {
+        UserHeader
     }
 }
 </script>
@@ -32,6 +37,14 @@ export default {
 .layout {
     width: 100%;
     height: 100vh;
+}
+
+.user-header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #6A005F;
+    border-bottom: 2px solid #895984;
 }
 
 .main-container {
