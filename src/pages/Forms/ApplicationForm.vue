@@ -62,7 +62,11 @@
                 </el-col>
             </el-row>
             <el-form-item label="主要功能及用途简介（限200字）" prop="description">
-                <el-input type="textarea" v-model="form.description" maxlength="200"
+                <el-input type="textarea"
+                          :autosize="{minRows: 4, maxRows: 8}"
+                          resize='none'
+                          v-model="form.description"
+                          maxlength="200"
                           placeholder="主要功能及用途"></el-input>
             </el-form-item>
             <hr/>
