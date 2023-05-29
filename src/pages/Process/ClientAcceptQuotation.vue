@@ -2,9 +2,7 @@
     <div style="width:90%;">
         <h2>查看报价</h2>
         <h3>项目号:{{ itemId }}</h3>
-        <h3>报价：{{ quotation }} 元</h3>
-        <h3>报价理由：{{ reason }}</h3>
-        
+        <QuotationForm :writable="false" :form-id="itemId" :checking="false"></QuotationForm>
         <el-form>
             <el-form-item label="接受意见">
                 <el-radio-group v-model="acceptOrNot">
@@ -21,9 +19,13 @@
 </template>
 
 <script>
+import QuotationForm from '../Forms/QuotationForm.vue';
 export default {
     name: 'ClientAcceptQuotation',
     props: ['itemId'],
+    components: {
+        QuotationForm
+    },
     data() {
         return {
             quotation: '114514',
