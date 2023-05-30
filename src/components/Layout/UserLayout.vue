@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .layout {
     width: 100%;
     height: 100vh;
@@ -65,5 +65,11 @@ export default {
 .aside {
     height: calc(100vh - 60px);
     overflow-y: auto;
+    z-index: 1;
+    box-shadow: 0 0 5px 0 #000000;
+
+    /deep/ .el-menu{
+        border-right: 0;
+    }
 }
 </style>
