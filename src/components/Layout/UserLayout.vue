@@ -43,8 +43,8 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: #6A005F;
-    z-index: 1;
+    background-color: var(--theme-color);
+    z-index: 10;
     box-shadow: 0 0 5px 0 #000000;
 }
 
@@ -65,7 +65,7 @@ export default {
 .aside {
     height: calc(100vh - 60px);
     overflow-y: auto;
-    z-index: 1;
+    z-index: 5;
     box-shadow: 0 0 5px 0 #000000;
 
     /deep/ .el-menu{

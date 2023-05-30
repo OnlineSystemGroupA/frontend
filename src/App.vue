@@ -15,6 +15,7 @@ export default {
 
 <style scoped>
 .app {
+    --theme-color: #106EBE;
 	display: flex;
 	justify-content: center;
 	align-items: center;

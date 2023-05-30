@@ -11,7 +11,7 @@
                  @open="handleOpen"
                  @close="handleClose"
                  :collapse="isCollapse"
-                 background-color="#6A005F"
+                 background-color="var(--theme-color)"
                  text-color="#FFFFFF"
                  active-text-color="#FFCC00">
             <el-submenu index="1">
