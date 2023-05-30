@@ -5,7 +5,7 @@
             @open="handleOpen" 
             @close="handleClose"
             :collapse="isCollapse" 
-            background-color="#6A005F"
+            background-color="var(--theme-color)"
             text-color="#FFFFFF"
             active-text-color="#FFCC00">
             <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-s-order"></i>分配任务</el-menu-item>
