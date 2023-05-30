@@ -132,6 +132,12 @@ export default {
                     available: true,
                 },
                 {
+                    title: '测试合同表',
+                    date: '2023-5-11',
+                    state: '已通过',
+                    available: true,
+                },
+                {
                     title: '测试计划表',
                     date: '2023-5-11',
                     state: '已通过',
@@ -209,6 +215,9 @@ export default {
             }
             else if (row.title === '测试报价表') {
                 routeName = logType + 'ReadQuotationForm'
+            }
+            else if (row.title === '测试合同表') {
+                routeName = logType + 'ReadContractForm'
             }
             else if (row.title === '测试计划表') {
                 routeName = logType + 'ReadTestPlanForm'
@@ -288,7 +297,12 @@ export default {
                 }
             }
             else if (this.active === 3) {
-                console.log('3')
+                if (logType === 'client') {
+                    routeName = 'clientContract'
+                }
+                else if (logType === 'employee') {
+                    routeName = 'employeeContract'
+                }
             }
             else if (this.active === 4) {
                 if (logType === 'client') {
