@@ -160,12 +160,10 @@ export default {
 
 <style scoped>
 .record-form {
-    width: 90%;
-    align-items: center;
-    border-radius: 30px;
-    margin: 30px;
-    padding: 50px;
+    width: 94%;
+    margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 5%;
 }
 
 .record {

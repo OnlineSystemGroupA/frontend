@@ -50,6 +50,7 @@ import ClientAuthorityTable from '../pages/Tables/ClientAuthorityTable'
 import EditEmployeeInfoForm from '../pages/Forms/EditEmployeeInfoForm'
 import TestProblemForm from '../pages/Forms/TestProblemForm'
 import EmployeeReviewSample from '../pages/Process/EmployeeReviewSample'
+import QuotationForm from '../pages/Forms/QuotationForm'
 
 const router = new VueRouter({
     routes: [
@@ -132,6 +133,15 @@ const router = new VueRouter({
                     meta: { title: '读取测试功能表', logType: 'client' }
                 },//读取测试功能表
                 {
+                    name: 'clientReadQuotationForm',
+                    path: 'clientReadQuotationForm',
+                    component: QuotationForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取报价表', logType: 'client' }
+                },//读取报价
+                {
                     name: 'clientReadApplicationVerifyForm',
                     path: 'clientReadApplicationVerifyForm',
                     component: ApplicationVerifyForm,
@@ -141,6 +151,24 @@ const router = new VueRouter({
                     meta: { title: '读取申请审核表', logType: 'client' }
                 },//读取审核申请
                 {
+                    name: 'clientReadTestRecordsForm',
+                    path: 'clientReadTestRecordsForm',
+                    component: TestRecordsForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试记录表', logType: 'client' }
+                },//读取测试记录表
+                {
+                    name: 'clientReadTestProblemForm',
+                    path: 'clientReadTestProblemForm',
+                    component: TestProblemForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取测试问题表', logType: 'client' }
+                },//读取测试问题表
+                {
                     name: 'clientReadTestReportForm',
                     path: 'clientReadTestReportForm',
                     component: TestReportForm,
@@ -149,6 +177,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取测试报告', logType: 'client' }
                 },//读取测试报告
+                {
+                    name: 'clientReadDocumentReviewForm',
+                    path: 'clientReadDocumentReviewForm',
+                    component: DocumentReviewForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取文档检查表', logType: 'client' }
+                },//读取文档检查表
                 {
                     name: 'createApplication',
                     path: 'createApplication',
@@ -378,6 +415,15 @@ const router = new VueRouter({
                     meta: { title: '读取申请审核表', logType: 'employee' }
                 },//读取审核申请
                 {
+                    name: 'employeeReadQuotationForm',
+                    path: 'employeeReadQuotationForm',
+                    component: QuotationForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取报价表', logType: 'employee' }
+                },//读取报价
+                {
                     name: 'employeeReadTestPlanForm',
                     path: 'employeeReadTestPlanForm',
                     component: TestPlanForm,
@@ -422,6 +468,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取测试报告', logType: 'employee' }
                 },//读取测试报告
+                {
+                    name: 'employeeReadReportVerifyForm',
+                    path: 'employeeReadReportVerifyForm',
+                    component: ReportVerifyForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取报告审核', logType: 'employee' }
+                },//读取报告审核
                 {
                     name: 'employeeReadDocumentReviewForm',
                     path: 'employeeReadDocumentReviewForm',
@@ -791,6 +846,15 @@ const router = new VueRouter({
                     meta: { title: '读取申请审核表', logType: 'admin' }
                 },//读取审核申请
                 {
+                    name: 'adminReadQuotationForm',
+                    path: 'adminReadQuotationForm',
+                    component: QuotationForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取报价表', logType: 'admin' }
+                },//读取报价
+                {
                     name: 'adminReadTestPlanForm',
                     path: 'adminReadTestPlanForm',
                     component: TestPlanForm,
@@ -835,6 +899,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取测试报告', logType: 'admin' }
                 },//读取测试报告
+                {
+                    name: 'adminReadReportVerifyForm',
+                    path: 'adminReadReportVerifyForm',
+                    component: ReportVerifyForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取报告审核', logType: 'admin' }
+                },//读取报告审核
                 {
                     name: 'adminReadDocumentReviewForm',
                     path: 'adminReadDocumentReviewForm',

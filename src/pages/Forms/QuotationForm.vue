@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="quotation">
         <h2>报价单</h2>
         <el-form :label-position="labelPosition" label-width="100px" :disabled="disable">
             <el-row>
@@ -115,6 +115,12 @@ export default {
 </script>
 
 <style scoped>
+.quotation{
+    width: 94%;
+    margin-top: 2%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 5%;
+}
 .pure-table {
     border-collapse: collapse;
     border-spacing: 0;

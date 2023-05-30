@@ -231,11 +231,10 @@ export default {
 
 <style lang="less">
 .func-list {
-    width: 800px;
-    align-items: center;
-    margin: 5%;
-    padding: 5%;
+   width: 94%;
+    margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 5%;
 }
 
 .table-dropdown {

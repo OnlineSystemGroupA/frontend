@@ -126,6 +126,12 @@ export default {
                     available: true,
                 },
                 {
+                    title: '测试报价表',
+                    date: '2023-5-11',
+                    state: '已通过',
+                    available: true,
+                },
+                {
                     title: '测试计划表',
                     date: '2023-5-11',
                     state: '已通过',
@@ -151,6 +157,12 @@ export default {
                 },
                 {
                     title: '测试报告表',
+                    date: '2023-5-11',
+                    state: '已通过',
+                    available: true,
+                },
+                {
+                    title: '报告审核表',
                     date: '2023-5-11',
                     state: '已通过',
                     available: true,
@@ -195,11 +207,20 @@ export default {
             else if (row.title === '申请审核表') {
                 routeName = logType + 'ReadApplicationVerifyForm'
             }
+            else if (row.title === '测试报价表') {
+                routeName = logType + 'ReadQuotationForm'
+            }
             else if (row.title === '测试计划表') {
                 routeName = logType + 'ReadTestPlanForm'
+                if (logType === 'client') {
+                    return
+                }
             }
             else if (row.title === '测试计划审核表') {
                 routeName = logType + 'ReadTestPlanVerifyForm'
+                if (logType === 'client') {
+                    return
+                }
             }
             else if (row.title === '测试记录表') {
                 routeName = logType + 'ReadTestRecordsForm'
@@ -210,11 +231,20 @@ export default {
             else if (row.title === '测试报告表') {
                 routeName = logType + 'ReadTestReportForm'
             }
+            else if (row.title === '报告审核表') {
+                routeName = logType + 'ReadReportVerifyForm'
+                if (logType === 'client') {
+                    return
+                }
+            }
             else if (row.title === '文档审核表') {
                 routeName = logType + 'ReadDocumentReviewForm'
             }
             else if (row.title === '测试检查表') {
                 routeName = logType + 'ReadTestWorkCheck'
+                if (logType === 'client') {
+                    return
+                }
             }
             if (routeName) {
                 this.$router.push(
