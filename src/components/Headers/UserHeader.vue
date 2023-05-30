@@ -43,11 +43,11 @@ export default {
 <style scoped lang="less">
 .breadcrumb {
     /deep/ .el-breadcrumb__inner {
-        color: #FFFFFF;
+        color: #FFFFFF !important;
     }
 
     /deep/ .el-breadcrumb__inner:hover {
-        color: #FFFFFF;
+        color: #FFFFFF !important;
     }
 }
 </style>

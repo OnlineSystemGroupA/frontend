@@ -6,7 +6,9 @@ import VueRouter from 'vue-router';
 import router from './router';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import './assets/theme/index.css'
 
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 axios.interceptors.request.use(config => {
