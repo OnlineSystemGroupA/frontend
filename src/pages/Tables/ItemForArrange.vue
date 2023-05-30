@@ -18,7 +18,7 @@
             <el-table-column prop="taskName" label="项目状态" style="width: 16%"> </el-table-column>
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
-                    <el-button @click="itemArrange(scope.row.id)" icon="el-icon-search" size="small"
+                    <el-button @click="itemArrange(scope.row.processId)" icon="el-icon-search" size="small"
                         type="primary">分配任务</el-button>
                 </template>
             </el-table-column>
