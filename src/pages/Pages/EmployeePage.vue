@@ -1,7 +1,7 @@
 <template>
     <UserLayout>
         <template #menu>
-            <EmployeeMenu/>
+            <EmployeeMenu></EmployeeMenu>
         </template>
     </UserLayout>
 </template>
