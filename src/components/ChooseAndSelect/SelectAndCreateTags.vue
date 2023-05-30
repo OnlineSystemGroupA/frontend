@@ -5,8 +5,7 @@
             v-for="tag in dynamicTags"
             closable
             :disable-transitions="false"
-            @close="handleClose(tag)"
-        >
+            @close="handleClose(tag)">
             {{ tag.length > 50 ? tag.substring(0, 49) + '...' : tag }}
         </el-tag>
         <el-select
@@ -18,14 +17,12 @@
             default-first-option
             :placeholder="optionDescription"
             @change="handleInputConfirm"
-            @blur="onBlur"
-        >
+            @blur="onBlur">
             <el-option
                 v-for="item in defaultOptions"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value"
-            />
+                :value="item.value"></el-option>
         </el-select>
     </div>
 </template>

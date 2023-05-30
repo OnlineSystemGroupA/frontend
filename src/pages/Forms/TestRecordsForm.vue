@@ -57,7 +57,7 @@
                     <td><el-input v-model="record.confirmer"></el-input></td>
                 </table>
 
-                <br />
+                <br>
                 <el-button type="danger" @click="deleteRecord(index)">删除</el-button>
             </el-form-item>
         </el-form>

@@ -14,7 +14,7 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-            <hr/>
+            <hr>
             <el-table :data="form.functions"
                       ref="functionTable"
                       @row-click="onFuncRowClick"
@@ -49,7 +49,7 @@
                                             </div>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="详细功能名称" prop="name"/>
+                                    <el-table-column label="详细功能名称" prop="name"></el-table-column>
                                     <el-table-column align="right">
                                         <template slot="header">
                                             <el-button
@@ -58,7 +58,7 @@
                                                 plain
                                                 circle
                                                 icon="el-icon-plus"
-                                                @click.native.stop="addItem(func.row.index)"/>
+                                                @click.native.stop="addItem(func.row.index)"></el-button>
                                         </template>
                                         <template slot-scope="item">
                                             <el-button
@@ -67,7 +67,7 @@
                                                 plain
                                                 circle
                                                 icon="el-icon-delete"
-                                                @click.native.stop="removeItem(func.row.title, item.row.name)"/>
+                                                @click.native.stop="removeItem(func.row.title, item.row.name)"></el-button>
                                         </template>
                                     </el-table-column>
                                 </el-table>
@@ -75,7 +75,7 @@
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column label="功能名称" prop="title"/>
+                <el-table-column label="功能名称" prop="title"></el-table-column>
                 <el-table-column align="right">
                     <template slot="header">
                         <el-button
@@ -84,7 +84,7 @@
                             plain
                             circle
                             icon="el-icon-plus"
-                            @click.native.stop="addFunc"/>
+                            @click.native.stop="addFunc"></el-button>
                     </template>
                     <template slot-scope="func">
                         <el-button
@@ -93,7 +93,7 @@
                             plain
                             circle
                             icon="el-icon-delete"
-                            @click.native.stop="removeFunc(func.row)"/>
+                            @click.native.stop="removeFunc(func.row)"></el-button>
                     </template>
                 </el-table-column>
             </el-table>

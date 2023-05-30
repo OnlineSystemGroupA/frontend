@@ -3,14 +3,14 @@
         <el-form label-position="left" size="small" :model="form" ref="form" :disabled="disable" :rules="rules">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
-                <br/>
+                <br>
                 <SelectAndCreateTags v-model="form.testTypes"
                                      :default-options="testTypeOptions"
                                      option-description="新增一个测试类型"
                                      @change="emitChangeEvent('testTypes', form.testTypes)"
-                                     @blur="emitBlurEvent('testTypes', form.testTypes)"/>
+                                     @blur="emitBlurEvent('testTypes', form.testTypes)"></SelectAndCreateTags>
             </el-form-item>
-            <hr/>
+            <hr>
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="软件名称" prop="softwareName">
@@ -43,7 +43,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="单位性质" ref="companyType" prop="companyType" class="is-required">
-                        <br/>
+                        <br>
                         <el-select
                             v-model="chosenData.companyType"
                             placeholder="单位性质"
@@ -53,11 +53,10 @@
                                 v-for="item in orgTypeOptions"
                                 :key="item.value"
                                 :label="item.label"
-                                :value="item.value"
-                            />
+                                :value="item.value"></el-option>
                         </el-select>
                         <el-input v-model="form.companyType" placeholder="其他单位性质" class="other-input"
-                                  v-if="chosenData.companyType ==='其他'"/>
+                                  v-if="chosenData.companyType ==='其他'"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -69,30 +68,30 @@
                           maxlength="200"
                           placeholder="主要功能及用途"></el-input>
             </el-form-item>
-            <hr/>
+            <hr>
             <el-form-item label="测试依据" ref="testStandards" prop="testStandards">
-                <br/>
+                <br>
                 <SelectAndCreateTags v-model="form.testStandards"
                                      :default-options="testStandardOptions"
                                      option-description="新增一个测试依据"
                                      @change="emitChangeEvent('testStandards', form.testStandards)"
-                                     @blur="emitBlurEvent('testStandards', form.testStandards)"/>
+                                     @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
             </el-form-item>
-            <hr/>
+            <hr>
             <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
-                <br/>
+                <br>
                 <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions"
                                          option-description="选择测试指标"
                                          create-description="其他指标"
                                          @change="emitChangeEvent('testAspects', form.testAspects)"
-                                         @blur="emitBlurEvent('testAspects', form.testAspects)"/>
+                                         @blur="emitBlurEvent('testAspects', form.testAspects)"></MultipleCreateAndSelect>
             </el-form-item>
-            <hr/>
+            <hr>
             <el-form-item label="软件规模（至少一种）" ref="softwareScales" prop="softwareScales">
-                <br/>
+                <br>
                 <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
                              @change="handleScaleChange(scale, $event)"></el-checkbox>
-                <br/>
+                <br>
                 <el-form-item v-for="scale in form.softwareScales"
                               :key="scale.scaleDescription"
                               :label="scale.scaleDescription"
@@ -102,7 +101,7 @@
                                      style="width:30%"></el-input-number>
                 </el-form-item>
             </el-form-item>
-            <br/>
+            <br>
             <el-form-item label="软件类型" ref="softwareType" prop="softwareType" class="is-required">
                 <div class="block">
                     <el-cascader v-model="form.softwareType"
@@ -112,11 +111,11 @@
                                  style="margin-left:10px;"></el-cascader>
                 </div>
             </el-form-item>
-            <hr/>
+            <hr>
             <h2>运行环境</h2>
             <h3>客户端</h3>
             <el-form-item label="操作系统:" prop="clientSystems" ref="clientSystems" class="is-required">
-                <br/>
+                <br>
                 <el-form-item v-for="(clientSystem) in form.clientSystems"
                               :key="clientSystem.vforKey"
                               :label="clientSystem.system"
@@ -126,13 +125,13 @@
                               style="width:30%"></el-input>
                     <el-button type="danger"
                                @click="deleteClientSystem(clientSystem)"
-                               icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
+                               icon="el-icon-delete" circle plain size=mini style="margin-left:5%"></el-button>
                 </el-form-item>
                 <el-input v-model="newClientSystem" placeholder="其他操作系统"
-                          style="width:20%;margin-top:10px;margin-right:5px"/>
+                          style="width:20%;margin-top:10px;margin-right:5px"></el-input>
                 <el-button @click="addClientSystem" type="primary">添加</el-button>
             </el-form-item>
-            <br/>
+            <br>
             <el-form-item label="内存要求（单位MB）:" label-width="20%">
                 <el-input-number :controls="false" :precision="1" :step="0.1" placeholder="内存要求"
                                  v-model.number="form.clientMemory"
@@ -145,12 +144,12 @@
             <h3>服务器端</h3>
             <h4>硬件</h4>
             <el-form-item label="架构:" prop="serverNames" ref="serverNames">
-                <br/>
+                <br>
                 <SelectAndCreateTags v-model="form.serverNames"
                                      :default-options="serverNameOptions"
                                      option-description="添加一种架构"
                                      @change="emitChangeEvent('serverNames', form.serverNames)"
-                                     @blur="emitBlurEvent('serverNames', form.serverNames)"/>
+                                     @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
             </el-form-item>
             <el-row>
                 <el-col :span="12">
@@ -210,12 +209,12 @@
                 </el-col>
             </el-row>
             <el-form-item label="构架:" prop="serverFrames" ref="serverFrames">
-                <br/>
+                <br>
                 <SelectAndCreateTags v-model="form.serverFrames"
                                      :default-options="frameOptions"
                                      option-description="添加一种构架"
                                      @change="emitChangeEvent('serverFrames', form.serverFrames)"
-                                     @blur="emitBlurEvent('serverFrames', form.serverFrames)"/>
+                                     @blur="emitBlurEvent('serverFrames', form.serverFrames)"></SelectAndCreateTags>
             </el-form-item>
             <h3>网络环境</h3>
             <el-form-item label="网络环境" prop="networkEnvironment">
@@ -234,10 +233,10 @@
                                      :max="100000" v-model="medium.num"></el-input-number>
                     <el-button type="danger"
                                @click="deleteMedium(medium)"
-                               icon="el-icon-delete" circle plain size=mini style="margin-left:5%"/>
+                               icon="el-icon-delete" circle plain size=mini style="margin-left:5%"></el-button>
                 </el-form-item>
                 <el-input v-model="newMedium" placeholder="其他介质"
-                          style="width:20%;margin-top:10px;margin-right:5px"/>
+                          style="width:20%;margin-top:10px;margin-right:5px"></el-input>
                 <el-button @click="addMedium" type="primary">添加</el-button>
             </el-form-item>
             <h3>文档资料</h3>
@@ -246,11 +245,11 @@
             </el-form-item>
             <h6>
                 注：
-                <br/>
+                <br>
                 1、需求文档（例如：项目计划任务书、需求分析报告、合同等）（验收、鉴定测试必须）
-                <br/>
+                <br>
                 2、用户文档（例如：用户手册、用户指南等）（必须）
-                <br/>
+                <br>
                 3、操作文档（例如：操作员手册、安装手册、诊断手册、支持手册等）（验收项目必须）
             </h6>
             <h3>提交的样品（硬拷贝资料、硬件）五年保存期满</h3>
@@ -260,7 +259,7 @@
                     <el-radio label="退还给我们"></el-radio>
                 </el-radio-group>
             </el-form-item>
-            <br/>
+            <br>
             <el-form-item label="希望完成测试时间：" prop="expectedDate">
                 <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
                                 v-model="form.expectedDate"></el-date-picker>
