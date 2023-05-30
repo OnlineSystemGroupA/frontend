@@ -17,7 +17,7 @@ var generateApplication = function () {
         ],
         "softwareType": ["<@string{4,20}>", "<@string{4,20}>"],
         "clientSystems<@{1,3}>": [
-            {"systemName": "<@string{4,20}>", "version": "<@string{4,20}>", "vforKey": "<@string{4,20}>"},
+            {"system": "<@string{4,20}>", "version": "<@string{4,20}>", "vforKey": "<@string{4,20}>"},
         ],
         "clientMemory": "<@[1-20000]>",
         "clientOtherRequirement": "<@string{4,120}>",
