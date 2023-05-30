@@ -27,6 +27,9 @@ npm run lint
 委托测试软件功能列表（TestFunctionList）
 ```
 ```
+测试报价表（QuotationForm）
+```
+```
 软件文档评审表（DocumentReviewForm）
 ```
 ```
