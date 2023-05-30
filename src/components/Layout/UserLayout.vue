@@ -2,7 +2,7 @@
     <div class="layout">
         <el-container>
             <el-header class="user-header">
-                <UserHeader/>
+                <UserHeader></UserHeader>
             </el-header>
             <el-container>
                 <el-aside width="13%" class="aside">
