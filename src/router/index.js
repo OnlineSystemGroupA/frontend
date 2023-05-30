@@ -51,6 +51,9 @@ import EditEmployeeInfoForm from '../pages/Forms/EditEmployeeInfoForm'
 import TestProblemForm from '../pages/Forms/TestProblemForm'
 import EmployeeReviewSample from '../pages/Process/EmployeeReviewSample'
 import QuotationForm from '../pages/Forms/QuotationForm'
+import ContractForm from '../pages/Forms/ContractForm'
+import ClientWriteContract from '../pages/Process/ClientWriteContract'
+import EmployeeWriteContract from '../pages/Process/EmployeeWriteContract'
 
 const router = new VueRouter({
     routes: [
@@ -58,6 +61,7 @@ const router = new VueRouter({
             name: "index",
             path: '/',
             component: LoginPage,
+            redirect: '/login',
             children: [
                 {
                     name: 'register',//name属性可以用来简化路由的跳转，但是to要写成对象式的
@@ -141,6 +145,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取报价表', logType: 'client' }
                 },//读取报价
+                {
+                    name: 'clientReadContractForm',
+                    path: 'clientReadContractForm',
+                    component: ContractForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取合同', logType: 'client' }
+                },//读取合同
                 {
                     name: 'clientReadApplicationVerifyForm',
                     path: 'clientReadApplicationVerifyForm',
@@ -296,13 +309,33 @@ const router = new VueRouter({
                     meta: { title: '查看报价', logType: 'client' }
                 },//查看报价
                 {
+                    name: 'clientContract',
+                    path: 'clientContract',
+                    component: ClientWriteContract,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '填写合同', logType: 'client' },
+                    children: [
+                        {
+                            name: 'clientWriteContract',
+                            path: 'clientWriteContract',
+                            component: ContractForm,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '填写合同', logType: 'client' }
+                        },
+                    ]
+                },//填写合同
+                {
                     name: 'clientUploadSamples',
                     path: 'clientUploadSammples',
                     component: ClientUploadSamples,
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '上传样品', logType: 'client' }
+                    meta: { title: '上传样品', logType: 'client' },
                 },//上传样品
                 {
                     name: 'confirmTestReport',
@@ -423,6 +456,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取报价表', logType: 'employee' }
                 },//读取报价
+                {
+                    name: 'employeeReadContractForm',
+                    path: 'employeeReadContractForm',
+                    component: ContractForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取合同', logType: 'employee' }
+                },//读取合同
                 {
                     name: 'employeeReadTestPlanForm',
                     path: 'employeeReadTestPlanForm',
@@ -563,13 +605,44 @@ const router = new VueRouter({
                     meta: { title: '提出报价', logType: 'employee' }
                 },//提出报价
                 {
+                    name: 'employeeContract',
+                    path: 'employeeContract',
+                    component: EmployeeWriteContract,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '填写合同', logType: 'employee' },
+                    children: [
+                        {
+                            name: 'employeeWriteContract',
+                            path: 'employeeWriteContract',
+                            component: ContractForm,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '填写合同', logType: 'employee' }
+                        },
+                    ]
+                },//填写合同
+                {
                     path: 'reviewSample',
                     name: 'reviewSample',
                     component: EmployeeReviewSample,
                     props({ query: { itemId } }) {
                         return { itemId }
                     },
-                    meta: { title: '检查样品', logType: 'employee' }
+                    meta: { title: '检查样品', logType: 'employee' },
+                    children: [
+                        {
+                            name: 'documentReviewForm',
+                            path: 'documentReviewForm',
+                            component: DocumentReviewForm,
+                            props({ query: { writable, checking, formId } }) {
+                                return { writable, checking, formId }
+                            },
+                            meta: { title: '软件文档评审表', logType: 'employee' }
+                        },
+                    ]
                 },//检查样品
                 {
                     name: 'writeTestPlan',
@@ -717,15 +790,6 @@ const router = new VueRouter({
                     meta: { title: '检查测试工作', logType: 'employee' },
                     children: [
                         {
-                            name: 'documentReviewForm',
-                            path: 'documentReviewForm',
-                            component: DocumentReviewForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
-                            },
-                            meta: { title: '软件文档评审表', logType: 'employee' }
-                        },
-                        {
                             name: 'workCheckForm',
                             path: 'workCheckForm',
                             component: TestWorkCheck,
@@ -854,6 +918,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取报价表', logType: 'admin' }
                 },//读取报价
+                {
+                    name: 'adminReadContractForm',
+                    path: 'adminReadContractForm',
+                    component: ContractForm,
+                    props({ query: { writable, checking, formId } }) {
+                        return { writable, checking, formId }
+                    },
+                    meta: { title: '读取合同', logType: 'admin' }
+                },//读取合同
                 {
                     name: 'adminReadTestPlanForm',
                     path: 'adminReadTestPlanForm',

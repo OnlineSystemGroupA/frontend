@@ -1,7 +1,7 @@
 <template>
     <div class="header">
-        <img src="../../assets/img/logo.png">
-        <h1>欢迎使用我们的测试系统</h1>
+        <img src="../../assets/img/logo.png" style="width:20%">
+        <img src="../../assets/img/title.png">
     </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
 
 <style scoped>
 .header{
-    width: 400px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
