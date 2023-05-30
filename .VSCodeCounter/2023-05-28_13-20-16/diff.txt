@@ -1,0 +1,54 @@
+Date : 2023-05-28 13:20:16
+Directory : d:\vue_learn\online-test-system\src
+Total : 16 files,  231 codes, 0 comments, 12 blanks, all 243 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Vue        |         13 |        152 |          0 |         14 |        166 |
+| JavaScript |          2 |         78 |          0 |         -2 |         76 |
+| JSON       |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                             |         16 |        231 |          0 |         12 |        243 |
+| assets                                                                        |          1 |          1 |          0 |          0 |          1 |
+| assets\jsons                                                                  |          1 |          1 |          0 |          0 |          1 |
+| components                                                                    |          4 |         51 |          0 |          6 |         57 |
+| components\Layout                                                             |          1 |         49 |          0 |          6 |         55 |
+| components\Menus                                                              |          3 |          2 |          0 |          0 |          2 |
+| jsonGenerator                                                                 |          1 |         50 |          0 |         -2 |         48 |
+| pages                                                                         |          9 |        101 |          0 |          8 |        109 |
+| pages\Details                                                                 |          1 |          3 |          0 |          0 |          3 |
+| pages\Forms                                                                   |          3 |        172 |          0 |         11 |        183 |
+| pages\Pages                                                                   |          3 |        -81 |          0 |         -1 |        -82 |
+| pages\Process                                                                 |          2 |          7 |          0 |         -2 |          5 |
+| router                                                                        |          1 |         28 |          0 |          0 |         28 |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                      | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\vue_learn\online-test-system\src\assets\jsons\testProblemForm.json         | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\components\Layout\UserLayout.vue          | Vue        |         49 |          0 |          6 |         55 |
+| d:\vue_learn\online-test-system\src\components\Menus\AdminMenu.vue            | Vue        |          4 |          0 |          0 |          4 |
+| d:\vue_learn\online-test-system\src\components\Menus\ClientMenu.vue           | Vue        |         -1 |          0 |          0 |         -1 |
+| d:\vue_learn\online-test-system\src\components\Menus\EmployeeMenu.vue         | Vue        |         -1 |          0 |          0 |         -1 |
+| d:\vue_learn\online-test-system\src\jsonGenerator\generator.js                | JavaScript |         50 |          0 |         -2 |         48 |
+| d:\vue_learn\online-test-system\src\pages\Details\ItemDetail.vue              | Vue        |          3 |          0 |          0 |          3 |
+| d:\vue_learn\online-test-system\src\pages\Forms\ApplicationForm.vue           | Vue        |         -2 |          0 |          0 |         -2 |
+| d:\vue_learn\online-test-system\src\pages\Forms\LoginForm.vue                 | Vue        |          3 |          0 |          0 |          3 |
+| d:\vue_learn\online-test-system\src\pages\Forms\TestProblemForm.vue           | Vue        |        171 |          0 |         11 |        182 |
+| d:\vue_learn\online-test-system\src\pages\Pages\AdminPage.vue                 | Vue        |        -28 |          0 |          0 |        -28 |
+| d:\vue_learn\online-test-system\src\pages\Pages\ClientPage.vue                | Vue        |        -24 |          0 |         -1 |        -25 |
+| d:\vue_learn\online-test-system\src\pages\Pages\EmployeePage.vue              | Vue        |        -29 |          0 |          0 |        -29 |
+| d:\vue_learn\online-test-system\src\pages\Process\ClientCreateApplication.vue | Vue        |         -2 |          0 |         -1 |         -3 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeTestProcess.vue     | Vue        |          9 |          0 |         -1 |          8 |
+| d:\vue_learn\online-test-system\src\router\index.js                           | JavaScript |         28 |          0 |          0 |         28 |
+| Total                                                                         |            |        231 |          0 |         12 |        243 |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

@@ -1,0 +1,116 @@
+Date : 2023-05-30 11:49:56
+Directory : d:\vue_learn\online-test-system\src
+Total : 72 files,  8650 codes, 57 comments, 321 blanks, all 9028 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Vue        |         61 |      6,979 |         56 |        295 |      7,330 |
+| JavaScript |          3 |      1,663 |          1 |         26 |      1,690 |
+| JSON       |          8 |          8 |          0 |          0 |          8 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                       | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                          |         72 |      8,650 |         57 |        321 |      9,028 |
+| . (Files)                                                                                  |          2 |         49 |          1 |         11 |         61 |
+| assets                                                                                     |          8 |          8 |          0 |          0 |          8 |
+| assets\jsons                                                                               |          8 |          8 |          0 |          0 |          8 |
+| components                                                                                 |          9 |        547 |         35 |         43 |        625 |
+| components\ChooseAndSelect                                                                 |          2 |        170 |         23 |         17 |        210 |
+| components\Footers                                                                         |          1 |         18 |          0 |          3 |         21 |
+| components\Headers                                                                         |          2 |         70 |          0 |          9 |         79 |
+| components\Layout                                                                          |          1 |         61 |          0 |          8 |         69 |
+| components\Menus                                                                           |          3 |        228 |         12 |          6 |        246 |
+| jsonGenerator                                                                              |          1 |        676 |          0 |         11 |        687 |
+| pages                                                                                      |         51 |      6,412 |         21 |        247 |      6,680 |
+| pages\Details                                                                              |          3 |        669 |          1 |         34 |        704 |
+| pages\Explanations                                                                         |          1 |         56 |          2 |          5 |         63 |
+| pages\Forms                                                                                |         18 |      4,022 |         10 |        122 |      4,154 |
+| pages\Pages                                                                                |          4 |        106 |          0 |         11 |        117 |
+| pages\Process                                                                              |         17 |        804 |          1 |         53 |        858 |
+| pages\Tables                                                                               |          8 |        755 |          7 |         22 |        784 |
+| router                                                                                     |          1 |        958 |          0 |          9 |        967 |
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                   | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\vue_learn\online-test-system\src\App.vue                                                | Vue        |         20 |          0 |          5 |         25 |
+| d:\vue_learn\online-test-system\src\assets\jsons\applicationForm.json                      | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\assets\jsons\documentReviewForm.json                   | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\assets\jsons\functionList.json                         | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\assets\jsons\testPlanForm.json                         | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\assets\jsons\testPlanVerificationForm.json             | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\assets\jsons\testProblemForm.json                      | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\assets\jsons\testRecordsForm.json                      | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\assets\jsons\testReportForm.json                       | JSON       |          1 |          0 |          0 |          1 |
+| d:\vue_learn\online-test-system\src\components\ChooseAndSelect\MultipleCreateAndSelect.vue | Vue        |         84 |         12 |          8 |        104 |
+| d:\vue_learn\online-test-system\src\components\ChooseAndSelect\SelectAndCreateTags.vue     | Vue        |         86 |         11 |          9 |        106 |
+| d:\vue_learn\online-test-system\src\components\Footers\PageFooter.vue                      | Vue        |         18 |          0 |          3 |         21 |
+| d:\vue_learn\online-test-system\src\components\Headers\LoginHeader.vue                     | Vue        |         23 |          0 |          3 |         26 |
+| d:\vue_learn\online-test-system\src\components\Headers\UserHeader.vue                      | Vue        |         47 |          0 |          6 |         53 |
+| d:\vue_learn\online-test-system\src\components\Layout\UserLayout.vue                       | Vue        |         61 |          0 |          8 |         69 |
+| d:\vue_learn\online-test-system\src\components\Menus\AdminMenu.vue                         | Vue        |         91 |          6 |          2 |         99 |
+| d:\vue_learn\online-test-system\src\components\Menus\ClientMenu.vue                        | Vue        |         68 |          6 |          2 |         76 |
+| d:\vue_learn\online-test-system\src\components\Menus\EmployeeMenu.vue                      | Vue        |         69 |          0 |          2 |         71 |
+| d:\vue_learn\online-test-system\src\jsonGenerator\generator.js                             | JavaScript |        676 |          0 |         11 |        687 |
+| d:\vue_learn\online-test-system\src\main.js                                                | JavaScript |         29 |          1 |          6 |         36 |
+| d:\vue_learn\online-test-system\src\pages\Details\ClientDetail.vue                         | Vue        |        148 |          0 |         14 |        162 |
+| d:\vue_learn\online-test-system\src\pages\Details\EmployeeDetail.vue                       | Vue        |        132 |          0 |         12 |        144 |
+| d:\vue_learn\online-test-system\src\pages\Details\ItemDetail.vue                           | Vue        |        389 |          1 |          8 |        398 |
+| d:\vue_learn\online-test-system\src\pages\Explanations\ApplicationExplanation.vue          | Vue        |         56 |          2 |          5 |         63 |
+| d:\vue_learn\online-test-system\src\pages\Forms\ApplicationForm.vue                        | Vue        |        725 |          0 |         11 |        736 |
+| d:\vue_learn\online-test-system\src\pages\Forms\ApplicationVerifyForm.vue                  | Vue        |        136 |          1 |          4 |        141 |
+| d:\vue_learn\online-test-system\src\pages\Forms\ChangePassword.vue                         | Vue        |         51 |          0 |          2 |         53 |
+| d:\vue_learn\online-test-system\src\pages\Forms\DocumentReviewForm.vue                     | Vue        |        394 |          0 |          3 |        397 |
+| d:\vue_learn\online-test-system\src\pages\Forms\EditEmployeeInfoForm.vue                   | Vue        |         89 |          0 |          6 |         95 |
+| d:\vue_learn\online-test-system\src\pages\Forms\EmployeeInfoForm.vue                       | Vue        |         92 |          0 |          6 |         98 |
+| d:\vue_learn\online-test-system\src\pages\Forms\LoginForm.vue                              | Vue        |        115 |          4 |          4 |        123 |
+| d:\vue_learn\online-test-system\src\pages\Forms\QuotationForm.vue                          | Vue        |        149 |          0 |          7 |        156 |
+| d:\vue_learn\online-test-system\src\pages\Forms\RegisterForm.vue                           | Vue        |        115 |          5 |          5 |        125 |
+| d:\vue_learn\online-test-system\src\pages\Forms\ReportVerifyForm.vue                       | Vue        |        174 |          0 |          4 |        178 |
+| d:\vue_learn\online-test-system\src\pages\Forms\TestFunctionList.vue                       | Vue        |        234 |          0 |         15 |        249 |
+| d:\vue_learn\online-test-system\src\pages\Forms\TestPlanForm.vue                           | Vue        |        233 |          0 |          4 |        237 |
+| d:\vue_learn\online-test-system\src\pages\Forms\TestPlanVerifyForm.vue                     | Vue        |        161 |          0 |          4 |        165 |
+| d:\vue_learn\online-test-system\src\pages\Forms\TestProblemForm.vue                        | Vue        |        169 |          0 |         11 |        180 |
+| d:\vue_learn\online-test-system\src\pages\Forms\TestRecordsForm.vue                        | Vue        |        176 |          0 |         12 |        188 |
+| d:\vue_learn\online-test-system\src\pages\Forms\TestReportForm.vue                         | Vue        |        617 |          0 |          4 |        621 |
+| d:\vue_learn\online-test-system\src\pages\Forms\TestWorkCheck.vue                          | Vue        |        319 |          0 |         16 |        335 |
+| d:\vue_learn\online-test-system\src\pages\Forms\UserInfoForm.vue                           | Vue        |         73 |          0 |          4 |         77 |
+| d:\vue_learn\online-test-system\src\pages\Pages\AdminPage.vue                              | Vue        |         20 |          0 |          3 |         23 |
+| d:\vue_learn\online-test-system\src\pages\Pages\ClientPage.vue                             | Vue        |         20 |          0 |          3 |         23 |
+| d:\vue_learn\online-test-system\src\pages\Pages\EmployeePage.vue                           | Vue        |         20 |          0 |          3 |         23 |
+| d:\vue_learn\online-test-system\src\pages\Pages\LoginPage.vue                              | Vue        |         46 |          0 |          2 |         48 |
+| d:\vue_learn\online-test-system\src\pages\Process\ClientAcceptQuotation.vue                | Vue        |         38 |          0 |          2 |         40 |
+| d:\vue_learn\online-test-system\src\pages\Process\ClientCheckApplication.vue               | Vue        |         56 |          0 |          4 |         60 |
+| d:\vue_learn\online-test-system\src\pages\Process\ClientConfirmReport.vue                  | Vue        |         53 |          0 |          5 |         58 |
+| d:\vue_learn\online-test-system\src\pages\Process\ClientCreateApplication.vue              | Vue        |         44 |          1 |          2 |         47 |
+| d:\vue_learn\online-test-system\src\pages\Process\ClientLoadApplication.vue                | Vue        |         49 |          0 |          4 |         53 |
+| d:\vue_learn\online-test-system\src\pages\Process\ClientUploadSamples.vue                  | Vue        |         35 |          0 |          2 |         37 |
+| d:\vue_learn\online-test-system\src\pages\Process\ClientVerifyTestReport.vue               | Vue        |         34 |          0 |          4 |         38 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeArrangeMission.vue               | Vue        |         38 |          0 |          3 |         41 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeCheckApplication.vue             | Vue        |         77 |          0 |          3 |         80 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeCheckTestWork.vue                | Vue        |         43 |          0 |          3 |         46 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeEditTestReport.vue               | Vue        |         41 |          0 |          3 |         44 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeQuotation.vue                    | Vue        |         34 |          0 |          2 |         36 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeReviewSample.vue                 | Vue        |         46 |          0 |          4 |         50 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeTestProcess.vue                  | Vue        |         65 |          0 |          3 |         68 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeVerifyTestPlan.vue               | Vue        |         53 |          0 |          3 |         56 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeVerifyTestReport.vue             | Vue        |         57 |          0 |          3 |         60 |
+| d:\vue_learn\online-test-system\src\pages\Process\EmployeeWriteTestPlan.vue                | Vue        |         41 |          0 |          3 |         44 |
+| d:\vue_learn\online-test-system\src\pages\Tables\AdminItemTable.vue                        | Vue        |         94 |          0 |          4 |         98 |
+| d:\vue_learn\online-test-system\src\pages\Tables\ClientAuthorityTable.vue                  | Vue        |         57 |          0 |          2 |         59 |
+| d:\vue_learn\online-test-system\src\pages\Tables\ClientItemTable.vue                       | Vue        |         90 |          0 |          4 |         94 |
+| d:\vue_learn\online-test-system\src\pages\Tables\ClientTable.vue                           | Vue        |         85 |          0 |          2 |         87 |
+| d:\vue_learn\online-test-system\src\pages\Tables\EmployeeItemTable.vue                     | Vue        |         89 |          0 |          2 |         91 |
+| d:\vue_learn\online-test-system\src\pages\Tables\EmployeeTable.vue                         | Vue        |         92 |          0 |          2 |         94 |
+| d:\vue_learn\online-test-system\src\pages\Tables\ItemForArrange.vue                        | Vue        |         93 |          0 |          2 |         95 |
+| d:\vue_learn\online-test-system\src\pages\Tables\WorkArrangeTable.vue                      | Vue        |        155 |          7 |          4 |        166 |
+| d:\vue_learn\online-test-system\src\router\index.js                                        | JavaScript |        958 |          0 |          9 |        967 |
+| Total                                                                                      |            |      8,650 |         57 |        321 |      9,028 |
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
