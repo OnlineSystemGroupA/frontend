@@ -167,6 +167,8 @@ export default {
     },
     mounted() {
         console.log(testRecords)
+    },
+    created() {
         this.form = testRecords
     }
 }

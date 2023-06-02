@@ -222,6 +222,8 @@ export default {
     },
     mounted() {
         console.log(testPlanForm)
+    },
+    created() {
         this.form = (testPlanForm)
     }
 }
