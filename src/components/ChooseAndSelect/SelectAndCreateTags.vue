@@ -45,11 +45,11 @@ export default {
         prop: 'options',
         event: 'change'
     },
-    props: ["defaultOptions", "optionDescription"],
+    props: ["options", "defaultOptions", "optionDescription"],
 
     data() {
         return {
-            dynamicTags: [],
+            dynamicTags: this.options,
             inputVisible: false,
             newTag: ''
         };
