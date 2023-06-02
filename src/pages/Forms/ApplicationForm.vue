@@ -685,7 +685,9 @@ export default {
     },
     mounted() {
         console.log(applicationForm)
-        this.form = applicationForm
+    },
+    created() {
+        this.form = applicationForm;
     },
     computed: {
         disable() {

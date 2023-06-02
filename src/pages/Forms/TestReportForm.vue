@@ -22,11 +22,19 @@
             <h3>软件测试中心</h3>
             <ol>
                 <li>本测试报告仅适用于本报告明确指出的委托单位的被测样品及版本。</li>
-                <li>本测试报告是本中心对所测样品进行科学、客观测试的结果，为被测样品提供第三方独立、客观、公正的重要判定依据，也为最终用户选择产品提供参考和帮助</li>
-                <li>未经本中心书面批准，不得复制本报告中的内容（全文复制除外），以免误导他人（尤其是用户）对被测样品做出不准确的评价。</li>
-                <li>在任何情况下，若需引用本测试报告中的结果或数据都应保持其本来的意义，在使用时务必要保持其完整，不得擅自进行增加、修改、伪造，并应征得本中心同意。</li>
+                <li>
+                    本测试报告是本中心对所测样品进行科学、客观测试的结果，为被测样品提供第三方独立、客观、公正的重要判定依据，也为最终用户选择产品提供参考和帮助
+                </li>
+                <li>
+                    未经本中心书面批准，不得复制本报告中的内容（全文复制除外），以免误导他人（尤其是用户）对被测样品做出不准确的评价。
+                </li>
+                <li>
+                    在任何情况下，若需引用本测试报告中的结果或数据都应保持其本来的意义，在使用时务必要保持其完整，不得擅自进行增加、修改、伪造，并应征得本中心同意。
+                </li>
                 <li>本测试报告不得拷贝或复制作为广告材料使用。</li>
-                <li>当被测样品出现版本更新或其它任何改变时，本测试结果不再适用，涉及到的任何技术、模块（或子系统）甚至整个软件都必须按要求进行必要的备案或重新测试，更不能出现将本测试结果应用于低于被测样品版本的情况。</li>
+                <li>
+                    当被测样品出现版本更新或其它任何改变时，本测试结果不再适用，涉及到的任何技术、模块（或子系统）甚至整个软件都必须按要求进行必要的备案或重新测试，更不能出现将本测试结果应用于低于被测样品版本的情况。
+                </li>
                 <li>本报告无编制人员、审核人员、批准人员（授权签字人）签字无效。</li>
                 <li>本报告无本中心章、涂改均无效。</li>
             </ol>
@@ -59,7 +67,7 @@
                 <el-col class="col">
                     <el-form-item label="采样日期">
                         <el-date-picker type="date" placeholder="采样日期" style="width: 100%;"
-                            v-model="form.sampleTime"></el-date-picker>
+                                        v-model="form.sampleTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col class="col">
@@ -71,10 +79,10 @@
             <el-row>
                 <el-form-item label="测试时间">
                     <el-date-picker type="date" placeholder="开始日期" style="width: 45%;"
-                        v-model="form.startTime"></el-date-picker>
+                                    v-model="form.startTime"></el-date-picker>
                     ——
                     <el-date-picker type="date" placeholder="结束日期" style="width: 45%;"
-                        v-model="form.endTime"></el-date-picker>
+                                    v-model="form.endTime"></el-date-picker>
                 </el-form-item>
             </el-row>
             <el-row>
@@ -106,7 +114,7 @@
                 <el-col class="col">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                            v-model="form.complierTime"></el-date-picker>
+                                        v-model="form.complierTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -119,7 +127,7 @@
                 <el-col class="col">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                            v-model="form.reviewerTime"></el-date-picker>
+                                        v-model="form.reviewerTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -132,7 +140,7 @@
                 <el-col class="col">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                            v-model="form.approverTime"></el-date-picker>
+                                        v-model="form.approverTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -189,10 +197,12 @@
                 <el-form-item label="操作系统">
                     <br>
                     <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称" v-model="form.softwareEnvironment.operatingSystem.name"></el-input>
+                        <el-input placeholder="软件名称"
+                                  v-model="form.softwareEnvironment.operatingSystem.name"></el-input>
                     </el-form-item>
                     <el-form-item label="版本">
-                        <el-input placeholder="版本" v-model="form.softwareEnvironment.operatingSystem.version"></el-input>
+                        <el-input placeholder="版本"
+                                  v-model="form.softwareEnvironment.operatingSystem.version"></el-input>
                     </el-form-item>
                 </el-form-item>
                 <el-form-item label="软件1">
@@ -216,28 +226,34 @@
                 <el-form-item label="软件3">
                     <br>
                     <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称" v-model="form.softwareEnvironment.softwareThree.name"></el-input>
+                        <el-input placeholder="软件名称"
+                                  v-model="form.softwareEnvironment.softwareThree.name"></el-input>
                     </el-form-item>
                     <el-form-item label="版本">
-                        <el-input placeholder="版本" v-model="form.softwareEnvironment.softwareThree.version"></el-input>
+                        <el-input placeholder="版本"
+                                  v-model="form.softwareEnvironment.softwareThree.version"></el-input>
                     </el-form-item>
                 </el-form-item>
                 <el-form-item label="辅助工具">
                     <br>
                     <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称" v-model="form.softwareEnvironment.ancillaryTool.name"></el-input>
+                        <el-input placeholder="软件名称"
+                                  v-model="form.softwareEnvironment.ancillaryTool.name"></el-input>
                     </el-form-item>
                     <el-form-item label="版本">
-                        <el-input placeholder="版本" v-model="form.softwareEnvironment.ancillaryTool.version"></el-input>
+                        <el-input placeholder="版本"
+                                  v-model="form.softwareEnvironment.ancillaryTool.version"></el-input>
                     </el-form-item>
                 </el-form-item>
                 <el-form-item label="开发工具">
                     <br>
                     <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称" v-model="form.softwareEnvironment.developmentTool.name"></el-input>
+                        <el-input placeholder="软件名称"
+                                  v-model="form.softwareEnvironment.developmentTool.name"></el-input>
                     </el-form-item>
                     <el-form-item label="版本">
-                        <el-input placeholder="版本" v-model="form.softwareEnvironment.developmentTool.version"></el-input>
+                        <el-input placeholder="版本"
+                                  v-model="form.softwareEnvironment.developmentTool.version"></el-input>
                     </el-form-item>
                 </el-form-item>
                 <el-form-item label="被测试样品">
@@ -312,7 +328,8 @@
             </div>
             <div>
                 <h3>可移植性测试</h3>
-                <el-form-item v-for="(item, index) in form.portabilityTest" :key="index" :label="'可移植性' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.portabilityTest" :key="index"
+                              :label="'可移植性' + (index + 1)">
                     <br>
                     <el-form-item label="测试特性">
                         <el-input placeholder="特性测试" v-model="item.property"></el-input>
@@ -346,7 +363,8 @@
             </div>
             <div>
                 <h3>可靠性测试</h3>
-                <el-form-item v-for="(item, index) in form.reliabilityTest" :key="index" :label="'可靠性' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.reliabilityTest" :key="index"
+                              :label="'可靠性' + (index + 1)">
                     <br>
                     <el-form-item label="测试特性">
                         <el-input placeholder="特性测试" v-model="item.property"></el-input>
@@ -363,7 +381,8 @@
             </div>
             <div>
                 <h3>可维护性测试</h3>
-                <el-form-item v-for="(item, index) in form.maintainabilityTest" :key="index" :label="'可维护性' + (index + 1)">
+                <el-form-item v-for="(item, index) in form.maintainabilityTest" :key="index"
+                              :label="'可维护性' + (index + 1)">
                     <br>
                     <el-form-item label="测试特性">
                         <el-input placeholder="特性测试" v-model="item.property"></el-input>
@@ -393,6 +412,7 @@
 
 <script>
 import testReportForm from '../../assets/jsons/testReportForm.json'
+
 export default {
     name: 'TestReportForm',
     props: ['writable', 'formId', 'checking'],
@@ -414,7 +434,7 @@ export default {
                 testConclusion: '',
                 telephone: '',
                 fax: '',
-                address:'',
+                address: '',
                 website: '',
                 contract: '',
                 email: '',
@@ -458,15 +478,15 @@ export default {
                         version: ''
                     }
                 },
-                networkEnvironment:'',
-                testStandardList: [{ standard: '' },],
-                referenceList: [{ reference: '' },],
-                functionTest: [{ functionModule: '', functionRequirement: '', testResult: '' }],
-                efficiencyTest: [{ property: '', testExplanation: '', testResult: '' }],
-                portabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
-                usabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
-                reliabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
-                maintainabilityTest: [{ property: '', testExplanation: '', testResult: '' }]
+                networkEnvironment: '',
+                testStandardList: [{standard: ''},],
+                referenceList: [{reference: ''},],
+                functionTest: [{functionModule: '', functionRequirement: '', testResult: ''}],
+                efficiencyTest: [{property: '', testExplanation: '', testResult: ''}],
+                portabilityTest: [{property: '', testExplanation: '', testResult: ''}],
+                usabilityTest: [{property: '', testExplanation: '', testResult: ''}],
+                reliabilityTest: [{property: '', testExplanation: '', testResult: ''}],
+                maintainabilityTest: [{property: '', testExplanation: '', testResult: ''}]
             }
         }
     },
@@ -577,11 +597,9 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -589,11 +607,9 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            }
-            else if (this.checking === 'false') {
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if (this.checking) {
+            } else if (this.checking) {
                 return true
             }
             return false
@@ -601,6 +617,8 @@ export default {
     },
     mounted() {
         console.log(testReportForm)
+    },
+    created() {
         this.form = testReportForm
     }
 }

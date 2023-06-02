@@ -195,10 +195,6 @@ export default {
         refute() {
 
         },
-
-        doNothing() {
-
-        }
     },
     computed: {
         disable() {
@@ -224,8 +220,10 @@ export default {
     },
     mounted() {
         console.log(functionList)
-        this.form = functionList
     },
+    created() {
+        this.form = functionList
+    }
 }
 </script>
 

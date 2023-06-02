@@ -377,8 +377,10 @@ export default {
 	},
 	mounted() {
 		console.log(documentReviewForm)
-		this.form = documentReviewForm
-	}
+	},
+    created() {
+        this.form = documentReviewForm
+    }
 }
 </script>
 

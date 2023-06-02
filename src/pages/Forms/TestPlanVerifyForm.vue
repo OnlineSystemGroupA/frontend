@@ -23,7 +23,7 @@
                 </el-radio-group>
                 <el-form-item label="不通过原因">
                     <el-input type="textarea" v-model="item.explanation" placeholder="不通过原因"
-                        :disabled="item.passOrNot"></el-input>
+                              :disabled="item.passOrNot"></el-input>
                 </el-form-item>
             </el-form-item>
             <h2>审评意见</h2>
@@ -43,6 +43,7 @@
 
 <script>
 import testPlanVerification from '../../assets/jsons/testPlanVerificationForm.json'
+
 export default {
     name: 'TestPlanVerifyForm',
     props: ['writable', 'formId'],
@@ -138,11 +139,9 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -150,6 +149,8 @@ export default {
     },
     mounted() {
         console.log(testPlanVerification)
+    },
+    created() {
         this.form = testPlanVerification
     }
 }
