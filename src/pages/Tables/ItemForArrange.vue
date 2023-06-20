@@ -1,11 +1,23 @@
 <template>
-    <div style="width: 80%">
-        <div style="width: 30%">
+    <div class="table">
+        <div>
+            <h2>项目表格</h2>
+        </div>
+        <div style="width: 50%">
+            <h4>查找关键字</h4>
             <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
                 <el-button slot="append" icon="el-icon-search"></el-button>
             </el-input>
         </div>
-        <br />
+        <div>
+            <br>
+            <span>排序</span>
+            <br>
+            <el-radio-group v-model="sortKey">
+                <el-radio v-for="(sort, index) in sortKeys" :key="index" :label="sort.value">{{ sort.label }}</el-radio>
+            </el-radio-group>
+        </div>
+        <br>
         <el-table :data="itemList" border style="width: 100%; height: auto;">
             <el-table-column prop="processId" label="项目号" style="width: 16%">
                 <template slot-scope="scope">
@@ -61,7 +73,35 @@ export default {
                     startUser: '莫德雷德',
                     taskName: '已完成',
                 },
-            ]
+            ],
+            sortKey: 'processId',
+            sortKeys: [
+                {
+                    value: 'processId',
+                    label: '项目号',
+                },
+                {
+                    value: 'title',
+                    label: '项目名称',
+                },
+                {
+                    value: 'startDate',
+                    label: '创建时间',
+                },
+                {
+                    value: 'taskName',
+                    label: '项目状态',
+                },
+                {
+                    value: 'taskName',
+                    label: '项目状态',
+                },
+
+                {
+                    value: 'startUser',
+                    label: '申请人',
+                }
+            ],
         }
     },
     methods: {
@@ -92,4 +132,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.table {
+    width: 94%;
+    margin-top: 2%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 5%;
+}
+</style>

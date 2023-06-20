@@ -1,6 +1,6 @@
 <template>
-	<div class="clientTable">
-		<div style="width: 30%">
+	<div class="table">
+		<div style="width: 50%">
 			<el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
 				<el-button slot="append" icon="el-icon-search"></el-button>
 			</el-input>
@@ -76,12 +76,10 @@ export default {
 </script>
 
 <style scoped>
-.clientTable {
-	width: 80%;
-	align-items: center;
-	border-radius: 30px;
-	margin: 30px;
-	padding: 50px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+.table {
+    width: 94%;
+    margin-top: 2%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 5%;
 }
 </style>
