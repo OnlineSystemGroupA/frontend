@@ -1,6 +1,7 @@
 <template>
     <div class="login">
-        <h4>用户注册</h4>
+        <div style="width:95%;text-align: left;"><a @click="login"><i class="el-icon-arrow-left"></i>返回</a></div>
+        <div><h4>用户注册</h4></div>
         <el-form :label-position="labelPosition" ref="registerForm" label-width="80px" :model="userInfo" :rules="rules">
             <el-form-item label="用户名" prop="username">
                 <el-input v-model="userInfo.username" placeholder="用户名" clearable></el-input>
@@ -21,7 +22,6 @@
       
         <el-row>
             <el-button type="primary" @click="onSubmit">注册</el-button>
-            <el-button @click="login">登录</el-button>
         </el-row>
         
     </div>
@@ -132,15 +132,18 @@ export default {
     align-items: center;
 }
 
-.login el-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.login h4 {
+h4 {
     color: #3086d0;
     font-size: 2rem;
-    margin-top: 1rem;
+    margin-top: 5px;
+}
+
+a {
+    font-size: 16px;
+    color: #666;
+}
+
+a:hover {
+    color: rgb(63, 39, 224);
 }
 </style>

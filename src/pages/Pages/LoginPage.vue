@@ -1,5 +1,5 @@
 <template>
-	<div class="login">
+	<div class="loginPage">
 	
 		<div class="box">
 			<div class="left"><div class="img"><img src="../../assets/img/left.png" width=100% height=100%></div></div>
@@ -36,22 +36,16 @@ export default {
 </script>
 
 <style scoped>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-
-.login {
+.loginPage {
 	width: 100%;
-	height: 720px;
+	height: 760px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	/*background-image: url(../../assets/img/background.jpeg);
-	background-size:cover ;*/
+	background-image: url(../../assets/img/background.jpg);
+	background-size:100% 100%;
 }
 
 .box {
@@ -69,7 +63,7 @@ export default {
     position: relative;
     width: 50%;
     height: 100%;
-    background-color:#3086d0
+    background:rgba(2, 97, 239, 0.258);
 }
 
 .img{
@@ -79,11 +73,11 @@ export default {
 	position: absolute;
 	left: 10%;top:10%;
 }
-
 .box .right {
     display: flex;
     width: 50%;
     flex-direction: column;
     align-items: center;
+	background-color: rgba(255,255,255,60%);
 }
 </style>

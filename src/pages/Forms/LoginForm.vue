@@ -115,17 +115,11 @@ export default {
 </script>
 
 <style scoped>
-.login {
+.login{
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: center;
-}
-
-.login el-form  {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .login h4{
