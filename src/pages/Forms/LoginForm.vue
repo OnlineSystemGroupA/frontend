@@ -1,14 +1,17 @@
 <template>
     <div class="login">
+        <h4>登录</h4>
         <el-form :label-position="labelPosition" ref="loginForm" label-width="80px" :model="userInfo" :rules="rules">
-            <el-form-item label="账号或者邮箱" prop="username">
+            <el-form-item label="账号/邮箱" prop="username">
                 <el-input v-model="userInfo.username" placeholder="请输入账号" @keyup.enter.native="onSubmit"
-                          clearable></el-input>
+                          clearable class="acc"></el-input>
             </el-form-item>
+            <br>
             <el-form-item label="密码" prop="password">
                 <el-input v-model="userInfo.password" placeholder="请输入密码" @keyup.enter.native="onSubmit"
-                          show-password></el-input>
+                          show-password class="acc"></el-input>
             </el-form-item>
+            <br>
             <el-form-item>
                 <el-radio-group v-model="logType" @change="onChangeLoginTye">
                     <el-radio label="client">客户</el-radio>
@@ -43,7 +46,7 @@ export default {
         }
 
         return {
-            labelPosition: "top",
+            labelPosition: "left",
             logType: "client",
             userInfo: {
                 username: "",
@@ -113,11 +116,21 @@ export default {
 
 <style scoped>
 .login {
-    width: 400px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
     align-items: center;
-    border-radius: 30px;
-    margin: 30px;
-    padding: 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.login el-form  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.login h4{
+    color: #3086d0;
+    font-size: 2rem;
+    margin-top: 1rem;
 }
 </style>

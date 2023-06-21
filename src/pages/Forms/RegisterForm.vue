@@ -1,20 +1,29 @@
 <template>
-    <div class="register">
+    <div class="login">
+        <h4>用户注册</h4>
         <el-form :label-position="labelPosition" ref="registerForm" label-width="80px" :model="userInfo" :rules="rules">
             <el-form-item label="用户名" prop="username">
                 <el-input v-model="userInfo.username" placeholder="用户名" clearable></el-input>
             </el-form-item>
+
             <el-form-item label="邮箱" prop="email">
                 <el-input v-model="userInfo.email" placeholder="邮箱" clearable></el-input>
             </el-form-item>
+
             <el-form-item label="密码" prop="password">
                 <el-input v-model="userInfo.password" placeholder="请输入密码" show-password></el-input>
             </el-form-item>
+  
             <el-form-item label="确认密码" prop="checkPassword">
                 <el-input v-model="userInfo.checkPassword" placeholder="请再次输入密码" show-password></el-input>
             </el-form-item>
         </el-form>
-        <el-button type="primary" @click="onSubmit">注册</el-button>
+      
+        <el-row>
+            <el-button type="primary" @click="onSubmit">注册</el-button>
+            <el-button @click="login">登录</el-button>
+        </el-row>
+        
     </div>
 </template>
 
@@ -51,7 +60,7 @@ export default {
         }
 
         return {
-            labelPosition: "top",
+            labelPosition: "left",
             userInfo: {
                 email: '',
                 username: '',
@@ -61,16 +70,16 @@ export default {
 
             rules: {
                 username: [
-                    {validator: valiUsername, trigger: "blur"}
+                    { validator: valiUsername, trigger: "blur" }
                 ],
                 email: [
-                    {validator: valiEmail, trigger: "blur"}
+                    { validator: valiEmail, trigger: "blur" }
                 ],
                 password: [
-                    {validator: valiPassword, trigger: "blur"}
+                    { validator: valiPassword, trigger: "blur" }
                 ],
                 checkPassword: [
-                    {validator: valiCheckPassword, trigger: "blur"}
+                    { validator: valiCheckPassword, trigger: "blur" }
                 ]
             }
         }
@@ -93,7 +102,7 @@ export default {
                         if (res.status === 409) {
                             alert("用户名重复")
                         }
-                        
+
                     }).catch(err => {
                         //console.log(err)
                         //console.log(err.response.status)
@@ -105,21 +114,33 @@ export default {
                     alert("注册失败，请正确填写注册信息！")
                 }
             })
+        },
+        login() {
+            this.$router.push({
+                name: 'login'
+            })
         }
     },
 };
 </script>
 
 <style scoped>
-.register {
-    width: 400px;
-    border-radius: 30px;
-    margin: 30px;
-    padding: 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+.login {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
     flex-direction: column;
+    align-items: center;
+}
+
+.login el-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.login h4 {
+    color: #3086d0;
+    font-size: 2rem;
+    margin-top: 1rem;
 }
 </style>
