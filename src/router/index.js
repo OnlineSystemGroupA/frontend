@@ -87,6 +87,9 @@ const router = new VueRouter({
                     name: 'clientItem',
                     path: 'clientItem',
                     component: ClientItemTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
                     meta: { title: '项目列表', logType: 'client' }
                 },//项目列表
                 {
@@ -389,6 +392,9 @@ const router = new VueRouter({
                     name: 'employeeItem',
                     path: 'employeeItem',
                     component: EmployeeItemTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
                     meta: { title: '查看项目', logType: 'employee' }
                 },//查看项目
                 {
@@ -813,6 +819,9 @@ const router = new VueRouter({
                     name: 'clientTable',
                     path: 'clientTable',
                     component: ClientTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
                     meta: { title: '用户列表', logType: 'admin' }
                 },//用户列表
                 {
@@ -839,8 +848,11 @@ const router = new VueRouter({
                     name: 'employeeTable',
                     path: 'employeeTable',
                     component: EmployeeTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
                     meta: { title: '员工列表', logType: 'admin' }
-                },//员工类表
+                },//员工列表
                 {
                     name: 'employeeDetailForAdmin',
                     path: 'employeeDetailForAdmin',
@@ -871,6 +883,9 @@ const router = new VueRouter({
                     name: 'adminItemTable',
                     path: 'AdminItemTable',
                     component: AdminItemTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
                     meta: { title: '项目列表', logType: 'admin' }
                 },//项目列表
                 {

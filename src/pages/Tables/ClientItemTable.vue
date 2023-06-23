@@ -1,6 +1,8 @@
 <template>
     <div class="table">
-        <div><h2>项目表格</h2></div>
+        <div>
+            <h2>项目表格</h2>
+        </div>
         <div style="width: 50%">
             <h4>查找关键字</h4>
             <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
@@ -12,11 +14,11 @@
             <span>排序</span>
             <br>
             <el-radio-group v-model="sortKey">
-                <el-radio v-for="(sort,index) in sortKeys" :key="index" :label="sort.value">{{ sort.label }}</el-radio>
+                <el-radio v-for="(sort, index) in sortKeys" :key="index" :label="sort.value">{{ sort.label }}</el-radio>
             </el-radio-group>
         </div>
         <br>
-        <el-table :data="itemList" border style="width: 100%; height: auto;">
+        <el-table :data="currentItemList" border style="width: 100%; height: auto;">
             <el-table-column prop="processId" label="项目号" style="width: 16%">
                 <template slot-scope="scope">
                     <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.processId }}</p>
@@ -33,13 +35,19 @@
                 </template>
             </el-table-column>
         </el-table>
+        <div class="block">
+            <br>
+            <el-pagination layout="prev, pager, next" background :current-page="page" :page-count="pageCount"
+                v-on:current-change="(curpage) => { handlePageChange(curpage) }">
+            </el-pagination>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     name: "ClientItemTable",
-    props: ['mission'],
+    props: ['page'],
     data() {
         return {
             keyword: '',
@@ -95,18 +103,284 @@ export default {
                     assignee: '莫德雷德',
                     taskName: '已完成',
                 },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    assignee: '张三',
+                    taskName: '审核中',
+                },
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    assignee: '梅林',
+                    taskName: '进行中',
+                },
+                {
+                    processId: '003',
+                    title: '专用数据库',
+                    startDate: '2022-10-15',
+                    assignee: '麦克劳德',
+                    taskName: '已完成',
+                },
+                {
+                    processId: '004',
+                    title: '证券交易平台',
+                    startDate: '2022-7-15',
+                    assignee: '莫德雷德',
+                    taskName: '已完成',
+                },
             ],
-            
+        }
+    },
+    computed: {
+        pageCount() {
+            var count = Math.floor(this.itemList.length / 10)
+            if (this.itemList.length % 10 !== 0) {
+                count += 1
+            }
+            return count
+        },
+        currentItemList() {
+            var end = this.page * 10
+            var start = end - 10
+            if (end > this.itemList.length) {
+                end = this.itemList.length
+            }
+            return this.itemList.slice(start, end)
         }
     },
     methods: {
         checkItemDetail(processId) {
-
             this.$router.push({
                 name: 'clientItemDetail',
                 query: { itemId: processId }
             })
-
         },
         handleResult(res) {
             if (res.status === 200) {
@@ -117,10 +391,17 @@ export default {
         handleError(err) {
             console.log(err.response.data)
             alert(err.response.data)
+        },
+        handlePageChange(curpage) {
+            this.$router.push({
+                name: 'clientItem',
+                query: { page: curpage }
+
+            })
         }
     },
     mounted() {
-        this.axios.get('/api/workflow/processes').then(this.handleResult, this.handleError)
+        //this.axios.get('/api/workflow/processes').then(this.handleResult, this.handleError)
     }
 }
 </script>

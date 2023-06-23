@@ -6,14 +6,8 @@
                 <el-radio-button :label="true">收起</el-radio-button>
             </el-radio-group>
         -->
-        <el-menu default-active="1-4-1"
-                 class="el-menu-vertical-demo"
-                 @open="handleOpen"
-                 @close="handleClose"
-                 :collapse="isCollapse"
-                 background-color="var(--theme-color)"
-                 text-color="#FFFFFF"
-                 active-text-color="#FFCC00">
+        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+            :collapse="isCollapse" background-color="var(--theme-color)" text-color="#FFFFFF" active-text-color="#FFCC00">
             <el-menu-item index="1" @click="createApplication"><i class="el-icon-upload2"></i>测试申请</el-menu-item>
             <el-menu-item index="2" @click="checkItem"><i class="el-icon-search"></i>查看项目</el-menu-item>
             <el-menu-item index="3" @click="clientDetail"><i class="el-icon-user"></i>个人信息</el-menu-item>
@@ -43,7 +37,8 @@ export default {
         },
         checkItem() {
             this.$router.push({
-                name: 'clientItem'
+                name: 'clientItem',
+                query: { page: 1 }
             })
         },
         clientDetail() {

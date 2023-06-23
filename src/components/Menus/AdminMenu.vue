@@ -56,12 +56,14 @@ export default {
         },
         viewClient() {
             this.$router.push({
-                name: 'clientTable'
+                name: 'clientTable',
+                query: { page: 1 }
             })
         },
         viewEmployee() {
             this.$router.push({
-                name: 'employeeTable'
+                name: 'employeeTable',
+                query: { page: 1 }
             })
         },
         addEmployee() {
@@ -71,7 +73,8 @@ export default {
         },
         checkItem() {
             this.$router.push({
-                name: 'adminItemTable'
+                name: 'adminItemTable',
+                query:{ page : 1 }
             })
         },
         logOut() {
