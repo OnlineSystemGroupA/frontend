@@ -30,6 +30,7 @@ export default {
                 name: 'workArrangeTable',
                 query: {
                     work: work,
+                    page: 1,
                     itemId: this.itemId
                 }
             })

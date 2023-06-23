@@ -415,6 +415,9 @@ const router = new VueRouter({
                     name: 'arrangeItem',
                     path: 'arrangeItem',
                     component: ItemForArrange,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
                     meta: { title: '项目分配情况', logType: 'employee' }
                 },//项目分配情况
                 {
@@ -556,8 +559,8 @@ const router = new VueRouter({
                             name: 'workArrangeTable',
                             path: 'workArrangeTable',
                             component: WorkArrangeTable,
-                            props({ query: { work } }) {
-                                return { work }
+                            props({ query: { work, page } }) {
+                                return { work, page }
                             },
                             meta: { title: '工作安排', logType: 'employee' }
                         }

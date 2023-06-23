@@ -19,18 +19,24 @@
         </div>
         <br>
         <el-table :data="currentItemList" border style="width: 100%; height: auto;">
-            <el-table-column prop="id" label="id" style="width: 20%; height: auto;">
+            <el-table-column prop="id" label="id" style="width: 16%; height: auto;">
                 <template slot-scope="scope">
                     <p @click="pickEmployee(scope.row.id)">{{ scope.row.id }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="employeeName" label="姓名" style="width: 20%; height: auto;">
+            <el-table-column prop="employeeName" label="姓名" style="width: 16%; height: auto;">
             </el-table-column>
-            <el-table-column prop="department" label="部门" style="width: 20%; height: auto;">
+            <el-table-column prop="department" label="部门" style="width: 16%; height: auto;">
             </el-table-column>
-            <el-table-column prop="position" label="职能" style="width: 20%; height: auto;">
+            <el-table-column prop="position" label="职能" style="width: 16%; height: auto;">
             </el-table-column>
-            <el-table-column prop="email" label="邮箱" style="width: 20%; height: auto;">
+            <el-table-column prop="email" label="邮箱" style="width: 16%; height: auto;">
+            </el-table-column>
+            <el-table-column label="操作" style="width:20%">
+                <template slot-scope="scope">
+                    <el-button @click="pickEmployee(scope.row.id)" icon="el-icon-search" size="small"
+                        type="primary">查看员工</el-button>
+                </template>
             </el-table-column>
         </el-table>
         <div class="block">

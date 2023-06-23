@@ -28,6 +28,7 @@ export default {
         arrangeMission() {
             this.$router.push({
                 name: 'arrangeItem',
+                query: { page: 1 }
             })
         },
         checkItem() {
