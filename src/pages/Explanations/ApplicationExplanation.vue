@@ -33,27 +33,17 @@ export default {
     },
     methods:{
         applicationForm() {
-            //this.axios.post('/api/workflow/start').then(this.handleResult, this.handleError)
+            this.axios.post('/api/workflow/start').then(this.handleResult, this.handleError)
 
             //this.$bus.$emit('setWritable',false)
             //console.log('Set writable')
-            this.$router.replace({
-                name: 'applicationForm',
-                query: {
-                    writable: true
-                }
-            })
+            
         },
         handleResult(res) {
             if (res.status === 200) {
                 console.log('你创建了一个流程！')
                 console.log(res.data.processId)
-                this.$router.replace({
-                    name: 'applicationForm',
-                    query: {
-                        writable: true
-                    }
-                })
+                this.$bus.$emit('getId', res.data.processId)
             }
         },
         handleError(err) {

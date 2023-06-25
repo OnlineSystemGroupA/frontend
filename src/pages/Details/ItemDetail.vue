@@ -1,8 +1,8 @@
 <template>
-    <div style="width:90%;">
+    <div class="item">
         <h2>项目详情</h2>
-        <table border style="width:90%; text-align: center;" class="pure-table">
-            <tr class="pure-table-odd">
+        <table border style="width:90%; text-align: center;" class="pure-table" rules=all>
+            <tr>
                 <th style="width:25%">项目号</th>
                 <td style="width:25%">{{ itemId }}</td>
                 <th style="width:25%">项目名称</th>
@@ -14,7 +14,7 @@
                 <th>测试类型</th>
                 <td>{{ itemInfo.testType }}</td>
             </tr>
-            <tr class="pure-table-odd">
+            <tr>
                 <th>申请日期</th>
                 <td>{{ itemInfo.applicateDate }}</td>
                 <th>申请人</th>
@@ -26,7 +26,7 @@
                 <th>联系电话</th>
                 <td>{{ itemInfo.telephone }}</td>
             </tr>
-            <tr class="pure-table-odd">
+            <tr>
                 <th>邮箱</th>
                 <td>{{ itemInfo.email }}</td>
                 <th>联系地址</th>
@@ -38,7 +38,7 @@
                 <th>预计结束日期</th>
                 <td>{{ itemInfo.dueDate }}</td>
             </tr>
-            <tr class="pure-table-odd">
+            <tr>
                 <th>审核人员</th>
                 <td>{{ itemInfo.verifier }}</td>
                 <th>测试人员</th>
@@ -64,7 +64,7 @@
             <el-button type="primary" @click="nextStep">下一步</el-button><!--仅测试用-->
             <el-button type="primary" @click="operateProcess">操作流程</el-button>
         </div>
-        <div style="margin:20px">
+        <div style="margin:20px ; width: 90%;">
             <h2>项目表单</h2>
             <el-table :data="forms" border style="width: 100%">
                 <el-table-column prop="title" label="表名" style="width: 25%">
@@ -368,6 +368,7 @@ export default {
 
 <style scoped>
 .pure-table {
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
@@ -383,8 +384,6 @@ export default {
 
 .pure-table td,
 .pure-table th {
-    border-left: 1px solid #cbcbcb;
-    border-width: 0 0 0 1px;
     font-size: inherit;
     margin: 0;
     overflow: visible;
@@ -402,11 +401,14 @@ export default {
     background-color: transparent;
 }
 
-.pure-table-odd td {
-    background-color: #f2f2f2;
-}
-
-.pure-table-odd th {
-    background-color: #f2f2f2;
+.item {
+    width: 94%;
+    margin-top: 2%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 </style>

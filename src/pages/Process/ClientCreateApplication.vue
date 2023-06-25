@@ -16,14 +16,27 @@
 export default {
     name: 'ClientCreateApplication',
     data() {
-        return {}
+        return {
+            processId: '',
+        }
     },
     mounted() {
+        this.$bus.$on('getId', (processId) => {
+            this.processId = processId
+            this.$router.replace({
+                name: 'applicationForm',
+                query: {
+                    writable: true,
+                    processId: this.processId
+                }
+            })
+        })
         this.$bus.$on('submitApplication', () => {
             this.$router.replace({
                 name: 'functionList',
                 query: {
-                    writable: true
+                    writable: true,
+                    processId: this.processId
                 }
             })
         })
@@ -36,6 +49,7 @@ export default {
     beforeDestroy() {
         this.$bus.$off('submitApplication')
         this.$bus.$off('submitFunctionList')
+        this.$bus.$off('getId')
     },
     computed: {
         active() {
