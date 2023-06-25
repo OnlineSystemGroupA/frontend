@@ -5,7 +5,6 @@
             <el-step title="步骤 1" description="阅读说明"></el-step>
             <el-step title="步骤 2" description="填写申请表格"></el-step>
             <el-step title="步骤 3" description="填写测试功能表"></el-step>
-            <el-step title="步骤 4" description="等待审核通过"></el-step>
         </el-steps>
         <keep-alive>
             <router-view></router-view>
@@ -28,6 +27,15 @@ export default {
                 }
             })
         })
+        this.$bus.$on('submitFunctionList', () => {
+            this.$router.replace({
+                name: 'applicationSuccess',
+            })
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('submitApplication')
+        this.$bus.$off('submitFunctionList')
     },
     computed: {
         active() {
@@ -37,6 +45,8 @@ export default {
                 return 1
             } else if (path.endsWith('functionList')) {
                 return 2
+            } else if (path.endsWith('applicationSuccess')) {
+                return 3
             }
             return 0
         }

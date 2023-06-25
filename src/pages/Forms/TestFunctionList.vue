@@ -184,7 +184,7 @@ export default {
         },
 
         submit() {
-
+            this.doSubmit()
         },
         save() {
 
@@ -194,6 +194,12 @@ export default {
         },
         refute() {
 
+        },
+        doSubmit() {
+            if (this.writable) {
+                console.log(JSON.stringify(this.form))
+                this.$bus.$emit('submitFunctionList')
+            }
         },
     },
     computed: {

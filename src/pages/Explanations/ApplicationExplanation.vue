@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="explanation">
         <h3 style="text-align: center">软件项目委托测试提交材料</h3>
         <h4 style="text-align: left">一、软件项目委托测试需要提交的文档：</h4>
         <ol>
@@ -33,10 +33,16 @@ export default {
     },
     methods:{
         applicationForm() {
-            this.axios.post('/api/workflow/start').then(this.handleResult, this.handleError)
-            
+            //this.axios.post('/api/workflow/start').then(this.handleResult, this.handleError)
+
             //this.$bus.$emit('setWritable',false)
             //console.log('Set writable')
+            this.$router.replace({
+                name: 'applicationForm',
+                query: {
+                    writable: true
+                }
+            })
         },
         handleResult(res) {
             if (res.status === 200) {
@@ -58,6 +64,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.explanation{
+    width: 94%;
+    margin-top: 2%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 5%;
+}
 </style>

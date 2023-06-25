@@ -54,6 +54,7 @@ import QuotationForm from '../pages/Forms/QuotationForm'
 import ContractForm from '../pages/Forms/ContractForm'
 import ClientWriteContract from '../pages/Process/ClientWriteContract'
 import EmployeeWriteContract from '../pages/Process/EmployeeWriteContract'
+import ApplicationSuccess from '../pages/Pages/ApplicationSuccess'
 
 const router = new VueRouter({
     routes: [
@@ -232,6 +233,12 @@ const router = new VueRouter({
                                 return { writable }
                             },
                             meta: { title: '功能表格', logType: 'client' }
+                        },
+                        {
+                            name: 'applicationSuccess',
+                            path: 'applicationSuccess',
+                            component: ApplicationSuccess,
+                            meta: { title: '申请成功', logType: 'client' }
                         }
                     ]
                 },//创建申请             
@@ -559,8 +566,8 @@ const router = new VueRouter({
                             name: 'workArrangeTable',
                             path: 'workArrangeTable',
                             component: WorkArrangeTable,
-                            props({ query: { work, page } }) {
-                                return { work, page }
+                            props({ query: { itemId, work, page } }) {
+                                return { itemId, work, page }
                             },
                             meta: { title: '工作安排', logType: 'employee' }
                         }
