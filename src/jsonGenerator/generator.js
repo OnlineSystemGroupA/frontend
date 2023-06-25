@@ -13,11 +13,11 @@ var generateApplication = function () {
         "testStandards<@{1,10}>": ["<@string{4,20}>"],
         "testAspects<@{1,10}>": ["<@string{4,20}>"],
         "softwareScales": [
-            {"scaleDescription": "<@string{4,20}>", "scale": "<@[1-20000]>"},
+            { "scaleDescription": "<@string{4,20}>", "scale": "<@[1-20000]>" },
         ],
         "softwareType": ["<@string{4,20}>", "<@string{4,20}>"],
         "clientSystems<@{1,3}>": [
-            {"system": "<@string{4,20}>", "version": "<@string{4,20}>", "vforKey": "<@string{4,20}>"},
+            { "system": "<@string{4,20}>", "version": "<@string{4,20}>", "vforKey": "<@string{4,20}>" },
         ],
         "clientMemory": "<@[1-20000]>",
         "clientOtherRequirement": "<@string{4,120}>",
@@ -330,8 +330,8 @@ var generateTestReport = function () {
             }
         },
         "networkEnvironment": '<@string{4,20}>',
-        "testStandardList<@{2,7}>": [{"standard": '<@string{4,20}>'},],
-        "referenceList<@{2,7}>": [{"reference": '<@string{4,20}>'},],
+        "testStandardList<@{2,7}>": [{ "standard": '<@string{4,20}>' },],
+        "referenceList<@{2,7}>": [{ "reference": '<@string{4,20}>' },],
         "functionTest<@{2,7}>": [{
             "functionModule": '<@string{4,20}>',
             "functionRequirement": '<@string{4,20}>',
@@ -677,6 +677,52 @@ var generateProblemForm = function () {
     })
 }
 
+var generateContractForm = function () {
+    var contractModelJson = {
+        item: '<@string{4,20}>',
+        client: '<@string{4,20}>',
+        trustee: '<@string{4,20}>',
+        signPlace: '<@string{4,20}>',
+        signDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        validDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        software: '<@string{4,20}>',
+        qualityCharacteristic: '<@string{4,20}>',
+        testFee: '<@[1-20000]>',
+        testTime: '<@[1-20000]>',
+        rectificationFrequency: '<@[1-20000]>',
+        rectificationTime: '<@[1-20000]>',
+        clientInfo: {
+            representive: '<@string{4,20}>',
+            signatureDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+            contact: '<@string{4,20}>',
+            address: '<@string{4,20}>',
+            telephone: '<@string{4,20}>',
+            fax: '<@string{4,20}>',
+            bank: '<@string{4,20}>',
+            account: '<@string{4,20}>',
+            postcode: '<@string{4,20}>',
+        },
+        trusteeInfo: {
+            representive: '<@string{4,20}>',
+            signatureDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+            contact: '<@string{4,20}>',
+            address: '<@string{4,20}>',
+            telephone: '<@string{4,20}>',
+            fax: '<@string{4,20}>',
+            postcode: '<@string{4,20}>',
+        }
+    }
+    var contractForm = randomjson(contractModelJson)
+    console.log(contractForm)
+    var contractFormArray = JSON.stringify(contractForm)
+    const fs = require('fs')
+    const path = require('path')
+    let dir = path.join('../assets/jsons/contractForm.json')//存入路径
+    fs.writeFile(dir, contractFormArray, 'utf8', (err) => {
+        console.log("写入成功");
+    })
+}
+
 generateApplication()
 generateTestReport()
 generateFunctionList()
@@ -685,3 +731,4 @@ generateTestRecords()
 generateTestPlanVerification()
 generateDocumentReviewForm()
 generateProblemForm()
+generateContractForm()

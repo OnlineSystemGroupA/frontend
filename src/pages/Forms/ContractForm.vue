@@ -214,6 +214,7 @@
 </template>
 
 <script>
+import contractForm from '../../assets/jsons/contractForm.json'
 export default {
     name: 'ContractForm',
     props: ['writable', 'formId', 'checking'],
@@ -250,6 +251,7 @@ export default {
                     address: '',
                     telephone: '',
                     fax: '',
+                    postcode: '',
                 }
             }
         }
@@ -297,6 +299,9 @@ export default {
             }
             return false
         }
+    },
+    created() {
+        this.form = contractForm
     }
 }
 </script>
