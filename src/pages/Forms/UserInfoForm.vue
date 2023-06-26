@@ -8,8 +8,8 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">
-                    <el-form-item label="电子邮件" prop="email">
-                        <el-input v-model="userInfo.email" placeholder="请输入电子邮箱" clearable=""></el-input>
+                    <el-form-item label="电子邮箱" prop="e_mail">
+                        <el-input v-model="userInfo.e_mail" placeholder="请输入电子邮箱" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
