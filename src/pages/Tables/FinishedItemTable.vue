@@ -463,11 +463,13 @@ export default {
     },
     methods: {
         checkItemDetail(processId) {
-            /*this.$router.push({
-                name: 'adminItemDetail',
-                query: { itemId: processId }
-            })*/
-            console.log(processId)
+           if (sessionStorage.getItem('logType')) {
+                var path = sessionStorage.getItem('logType') + 'FinishedItemDetail'
+                this.$router.push({
+                    name: path,
+                    query: { itemId: processId }
+                })
+            }
         },
         handleResult(res) {
             if (res.status === 200) {

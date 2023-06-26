@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 90%;" class="employee">
+    <div class="employee">
         <h2>个人信息</h2>
         <table style="width:90%; text-align: center;" class="pure-table" rules = all>
             <tr>

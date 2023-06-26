@@ -56,6 +56,7 @@ import ClientWriteContract from '../pages/Process/ClientWriteContract'
 import EmployeeWriteContract from '../pages/Process/EmployeeWriteContract'
 import ApplicationSuccess from '../pages/Pages/ApplicationSuccess'
 import FinishedItemTable from '../pages/Tables/FinishedItemTable'
+import FinishedItemDetail from '../pages/Details/FinishedItemDetail'
 
 const router = new VueRouter({
     routes: [
@@ -132,6 +133,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '项目详情', logType: 'client' }
                 },//项目详情
+                {
+                    name: 'clientFinishedItemDetail',
+                    path: 'clientFinishedItemDetail',
+                    component: FinishedItemDetail,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '结束项目详情', logType: 'client' }
+                },//结束项目详情
                 {
                     name: 'clientReadApplicationForm',
                     path: 'clientReadApplicationForm',
@@ -455,6 +465,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '项目详情', logType: 'employee' }
                 },//项目详情
+                {
+                    name: 'employeeFinishedItemDetail',
+                    path: 'employeeFinishedItemDetail',
+                    component: FinishedItemDetail,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '结束项目详情', logType: 'employee' }
+                },//结束项目详情
                 {
                     name: 'employeeReadApplicationForm',
                     path: 'employeeReadApplicationForm',
@@ -935,6 +954,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '项目详情', logType: 'admin' }
                 },//项目详情
+                {
+                    name: 'adminFinishedItemDetail',
+                    path: 'adminFinishedItemDetail',
+                    component: FinishedItemDetail,
+                    props({ query: { itemId } }) {
+                        return { itemId }
+                    },
+                    meta: { title: '结束项目详情', logType: 'admin' }
+                },//结束项目详情
                 {
                     name: 'adminReadApplicationForm',
                     path: 'adminReadApplicationForm',
