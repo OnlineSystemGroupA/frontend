@@ -60,7 +60,7 @@
             <el-button type="primary" @click="changePassword" v-if="show">
                 修改密码
             </el-button>
-            <el-button type="primary" @click="editAuthority" v-if="!show">
+            <el-button type="primary" @click="editAuthority" v-if="authorityShow">
                 修改权限
             </el-button>
         </el-row>
@@ -81,6 +81,8 @@ export default {
                 e_mail: 'jielun@qq.com',
                 telephone: '123456789',
                 address: '台北xx街道xx号',
+                date: '2023-06-12',
+                gender: '男',
                 company: {
                     name: '杰威尔公司',
                     telephone: '1000000',
@@ -92,8 +94,6 @@ export default {
                     website: 'www.jieweier.com',
                     address: '台湾省高雄市xx街道xx号',
                 },
-                date: '2023-06-12',
-                gender: '男',
             }
         }
     },
@@ -120,6 +120,12 @@ export default {
     computed: {
         show() {
             if (sessionStorage.getItem('logType') === 'client') {
+                return true
+            }
+            return false
+        },
+        authorityShow() {
+            if (sessionStorage.getItem('logType') === 'admin') {
                 return true
             }
             return false

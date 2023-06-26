@@ -125,6 +125,15 @@ const router = new VueRouter({
                     ]
                 },//个人信息
                 {
+                    name: 'contactEmployee',
+                    path: 'contactEmployee',
+                    component: EmployeeDetail,
+                    props({ query: { employeeId } }) {
+                        return { employeeId }
+                    },
+                    meta: { title: '联系负责人', logType: 'client' },
+                },//联系负责人
+                {
                     name: 'clientItemDetail',
                     path: 'clientItemDetail',
                     component: ItemDetail,
@@ -447,6 +456,15 @@ const router = new VueRouter({
                         }
                     ]
                 },//个人信息
+                {
+                    name: 'contactClient',
+                    path: 'contactClient',
+                    component: ClientDetail,
+                    props({ query: { clientId } }) {
+                        return { clientId }
+                    },
+                    meta: { title: '联系申请人', logType: 'employee' },
+                },//联系申请人
                 {
                     name: 'arrangeItem',
                     path: 'arrangeItem',
