@@ -1,8 +1,8 @@
 <template>
     <div style="width: 90%;" class="employee">
         <h2>个人信息</h2>
-        <table style="width:90%; text-align: center;" class="pure-table">
-            <tr class="pure-table-odd">
+        <table style="width:90%; text-align: center;" class="pure-table" rules = all>
+            <tr>
                 <th>员工号</th>
                 <td>{{ userInfo.employeeId }}</td>
                 <th>真实姓名</th>
@@ -16,7 +16,7 @@
                 <td>{{ userInfo.e_mail }}</td>
             </tr>
 
-            <tr class="pure-table-odd">
+            <tr>
                 <th>部门</th>
                 <td>{{ userInfo.department }}</td>
                 <th>职位</th>
@@ -40,7 +40,7 @@
 <script>
 export default {
     name: 'EmployeeDetail',
-    props:['employeeId'],
+    props: ['employeeId'],
     data() {
         return {
             userInfo: {
@@ -56,19 +56,19 @@ export default {
     methods: {
         changePassword() {
             this.$router.push({
-                name:"employeeChangePassword"
+                name: "employeeChangePassword"
             })
         },
         editInfo() {
             this.$router.push({
                 name: "editEmployeeInfo",
                 query: {
-                    employeeId:this.employeeId
+                    employeeId: this.employeeId
                 }
-            })  
+            })
         }
     },
-    computed:{
+    computed: {
         show() {
             if (sessionStorage.getItem('logType') === 'employee') {
                 return false
@@ -93,6 +93,7 @@ export default {
 
 <style scoped>
 .pure-table {
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
@@ -108,8 +109,6 @@ export default {
 
 .pure-table td,
 .pure-table th {
-    border-left: 1px solid #cbcbcb;
-    border-width: 0 0 0 1px;
     font-size: inherit;
     margin: 0;
     overflow: visible;
@@ -127,15 +126,11 @@ export default {
     background-color: transparent;
 }
 
-.pure-table-odd td {
-    background-color: #f2f2f2;
-}
-
-.pure-table-odd th {
-    background-color: #f2f2f2;
-}
-
 .employee {
+    width: 94%;
+    margin-top: 2%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
