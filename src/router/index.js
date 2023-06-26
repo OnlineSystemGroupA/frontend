@@ -55,6 +55,7 @@ import ContractForm from '../pages/Forms/ContractForm'
 import ClientWriteContract from '../pages/Process/ClientWriteContract'
 import EmployeeWriteContract from '../pages/Process/EmployeeWriteContract'
 import ApplicationSuccess from '../pages/Pages/ApplicationSuccess'
+import FinishedItemTable from '../pages/Tables/FinishedItemTable'
 
 const router = new VueRouter({
     routes: [
@@ -94,6 +95,15 @@ const router = new VueRouter({
                     meta: { title: '项目列表', logType: 'client' }
                 },//项目列表
                 {
+                    name: 'clientFinishedItem',
+                    path: 'clientFinishedItem',
+                    component: FinishedItemTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
+                    meta: { title: '已结束列表', logType: 'client' }
+                },//已结束项目
+                {
                     name: 'clientDetail',
                     path: 'clientDetail',
                     component: ClientDetail,
@@ -126,8 +136,8 @@ const router = new VueRouter({
                     name: 'clientReadApplicationForm',
                     path: 'clientReadApplicationForm',
                     component: ApplicationForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取申请表', logType: 'client' }
                 },//读取申请表
@@ -135,8 +145,8 @@ const router = new VueRouter({
                     name: 'clientReadTestFunctionList',
                     path: 'clientReadTestFunctionList',
                     component: TestFunctionList,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试功能表', logType: 'client' }
                 },//读取测试功能表
@@ -144,8 +154,8 @@ const router = new VueRouter({
                     name: 'clientReadQuotationForm',
                     path: 'clientReadQuotationForm',
                     component: QuotationForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取报价表', logType: 'client' }
                 },//读取报价
@@ -153,8 +163,8 @@ const router = new VueRouter({
                     name: 'clientReadContractForm',
                     path: 'clientReadContractForm',
                     component: ContractForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取合同', logType: 'client' }
                 },//读取合同
@@ -162,8 +172,8 @@ const router = new VueRouter({
                     name: 'clientReadApplicationVerifyForm',
                     path: 'clientReadApplicationVerifyForm',
                     component: ApplicationVerifyForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取申请审核表', logType: 'client' }
                 },//读取审核申请
@@ -171,8 +181,8 @@ const router = new VueRouter({
                     name: 'clientReadTestRecordsForm',
                     path: 'clientReadTestRecordsForm',
                     component: TestRecordsForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试记录表', logType: 'client' }
                 },//读取测试记录表
@@ -180,8 +190,8 @@ const router = new VueRouter({
                     name: 'clientReadTestProblemForm',
                     path: 'clientReadTestProblemForm',
                     component: TestProblemForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试问题表', logType: 'client' }
                 },//读取测试问题表
@@ -189,8 +199,8 @@ const router = new VueRouter({
                     name: 'clientReadTestReportForm',
                     path: 'clientReadTestReportForm',
                     component: TestReportForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试报告', logType: 'client' }
                 },//读取测试报告
@@ -198,8 +208,8 @@ const router = new VueRouter({
                     name: 'clientReadDocumentReviewForm',
                     path: 'clientReadDocumentReviewForm',
                     component: DocumentReviewForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取文档检查表', logType: 'client' }
                 },//读取文档检查表
@@ -220,8 +230,8 @@ const router = new VueRouter({
                             name: 'applicationForm',
                             path: 'applicationForm',
                             component: ApplicationForm,
-                            props({ query: { writable } }) {
-                                return { writable }
+                            props({ query: { writable, processId } }) {
+                                return { writable, processId }
                             },
                             meta: { title: '申请表格', logType: 'client' }
                         },
@@ -229,8 +239,8 @@ const router = new VueRouter({
                             name: 'functionList',
                             path: 'functionList',
                             component: TestFunctionList,
-                            props({ query: { writable } }) {
-                                return { writable }
+                            props({ query: { writable, processId } }) {
+                                return { writable, processId }
                             },
                             meta: { title: '功能表格', logType: 'client' }
                         },
@@ -255,8 +265,8 @@ const router = new VueRouter({
                             name: 'editSavedApplicationForm',
                             path: 'editSavedApplicationForm',
                             component: ApplicationForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '编辑申请表格', logType: 'client' }
                         },
@@ -264,8 +274,8 @@ const router = new VueRouter({
                             name: 'editSavedFunctionList',
                             path: 'editSavedFunctionList',
                             component: TestFunctionList,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '编辑功能表格', logType: 'client' }
                         },
@@ -284,8 +294,8 @@ const router = new VueRouter({
                             name: 'editApplicationForm',
                             path: 'editApplicationForm',
                             component: ApplicationForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '编辑申请表格', logType: 'client' }
                         },
@@ -293,8 +303,8 @@ const router = new VueRouter({
                             name: 'editFunctionList',
                             path: 'editFunctionList',
                             component: TestFunctionList,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '编辑功能表格', logType: 'client' }
                         },
@@ -302,8 +312,8 @@ const router = new VueRouter({
                             name: 'readVerification',
                             path: 'readVerification',
                             component: ApplicationVerifyForm,
-                            props({ query: { writable, formId } }) {
-                                return { writable, formId }
+                            props({ query: { writable, processId } }) {
+                                return { writable, processId }
                             },
                             meta: { title: '申请审核表格', logType: 'client' }
                         },
@@ -331,8 +341,8 @@ const router = new VueRouter({
                             name: 'clientWriteContract',
                             path: 'clientWriteContract',
                             component: ContractForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '填写合同', logType: 'client' }
                         },
@@ -360,8 +370,8 @@ const router = new VueRouter({
                             name: 'readTestReportForm',
                             path: 'readTestReportForm',
                             component: TestReportForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '查看测试报告', logType: 'client' }
                         },
@@ -380,8 +390,8 @@ const router = new VueRouter({
                             name: 'clientCheckTestReportForm',
                             path: 'clientCheckTestReportForm',
                             component: TestReportForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '查看测试报告', logType: 'client' }
                         }
@@ -404,6 +414,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '查看项目', logType: 'employee' }
                 },//查看项目
+                {
+                    name: 'employeeFinishedItem',
+                    path: 'employeeFinishedItem',
+                    component: FinishedItemTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
+                    meta: { title: '已结束列表', logType: 'employee' }
+                },//已结束项目
                 {
                     name: 'employeeDetail',
                     path: 'employeeDetail',
@@ -440,8 +459,8 @@ const router = new VueRouter({
                     name: 'employeeReadApplicationForm',
                     path: 'employeeReadApplicationForm',
                     component: ApplicationForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取申请表', logType: 'employee' }
                 },//读取申请表
@@ -449,8 +468,8 @@ const router = new VueRouter({
                     name: 'employeeReadTestFunctionList',
                     path: 'employeeReadTestFunctionList',
                     component: TestFunctionList,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试功能表', logType: 'employee' }
                 },//读取测试功能表
@@ -458,8 +477,8 @@ const router = new VueRouter({
                     name: 'employeeReadApplicationVerifyForm',
                     path: 'employeeReadApplicationVerifyForm',
                     component: ApplicationVerifyForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取申请审核表', logType: 'employee' }
                 },//读取审核申请
@@ -467,8 +486,8 @@ const router = new VueRouter({
                     name: 'employeeReadQuotationForm',
                     path: 'employeeReadQuotationForm',
                     component: QuotationForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取报价表', logType: 'employee' }
                 },//读取报价
@@ -476,8 +495,8 @@ const router = new VueRouter({
                     name: 'employeeReadContractForm',
                     path: 'employeeReadContractForm',
                     component: ContractForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取合同', logType: 'employee' }
                 },//读取合同
@@ -485,8 +504,8 @@ const router = new VueRouter({
                     name: 'employeeReadTestPlanForm',
                     path: 'employeeReadTestPlanForm',
                     component: TestPlanForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试计划', logType: 'employee' }
                 },//读取测试计划表
@@ -494,8 +513,8 @@ const router = new VueRouter({
                     name: 'employeeReadTestPlanVerifyForm',
                     path: 'employeeReadTestPlanVerifyForm',
                     component: TestPlanVerifyForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试计划审核表', logType: 'employee' }
                 },//读取测试计划审核表
@@ -503,8 +522,8 @@ const router = new VueRouter({
                     name: 'employeeReadTestRecordsForm',
                     path: 'employeeReadTestRecordsForm',
                     component: TestRecordsForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试记录表', logType: 'employee' }
                 },//读取测试记录表
@@ -512,8 +531,8 @@ const router = new VueRouter({
                     name: 'employeeReadTestProblemForm',
                     path: 'employeeReadTestProblemForm',
                     component: TestProblemForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试问题表', logType: 'employee' }
                 },//读取测试问题表
@@ -521,8 +540,8 @@ const router = new VueRouter({
                     name: 'employeeReadTestReportForm',
                     path: 'employeeReadTestReportForm',
                     component: TestReportForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试报告', logType: 'employee' }
                 },//读取测试报告
@@ -530,8 +549,8 @@ const router = new VueRouter({
                     name: 'employeeReadReportVerifyForm',
                     path: 'employeeReadReportVerifyForm',
                     component: ReportVerifyForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取报告审核', logType: 'employee' }
                 },//读取报告审核
@@ -539,8 +558,8 @@ const router = new VueRouter({
                     name: 'employeeReadDocumentReviewForm',
                     path: 'employeeReadDocumentReviewForm',
                     component: DocumentReviewForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取文档检查表', logType: 'employee' }
                 },//读取文档检查表
@@ -548,8 +567,8 @@ const router = new VueRouter({
                     name: 'employeeReadTestWorkCheck',
                     path: 'employeeReadTestWorkCheck',
                     component: TestWorkCheck,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试工作检查表', logType: 'employee' }
                 },//读取测试工作检查表
@@ -586,8 +605,8 @@ const router = new VueRouter({
                             name: 'checkApplicationForm',
                             path: 'checkApplicationForm',
                             component: ApplicationForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '查看申请表格', logType: 'employee' }
                         },
@@ -595,8 +614,8 @@ const router = new VueRouter({
                             name: 'checkFunctionList',
                             path: 'checkFunctionList',
                             component: TestFunctionList,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '查看测试功能', logType: 'employee' }
                         },
@@ -604,8 +623,8 @@ const router = new VueRouter({
                             name: 'applicationVerifyForm',
                             path: 'applicationVerifyForm',
                             component: ApplicationVerifyForm,
-                            props({ query: { writable, formId } }) {
-                                return { writable, formId }
+                            props({ query: { writable, processId } }) {
+                                return { writable, processId }
                             },
                             meta: { title: '申请审核表格', logType: 'employee' }
                         },
@@ -633,8 +652,8 @@ const router = new VueRouter({
                             name: 'employeeWriteContract',
                             path: 'employeeWriteContract',
                             component: ContractForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '填写合同', logType: 'employee' }
                         },
@@ -653,8 +672,8 @@ const router = new VueRouter({
                             name: 'documentReviewForm',
                             path: 'documentReviewForm',
                             component: DocumentReviewForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '软件文档评审表', logType: 'employee' }
                         },
@@ -673,8 +692,8 @@ const router = new VueRouter({
                             name: 'testPlanForm',
                             path: 'testPlanForm',
                             component: TestPlanForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '测试计划', logType: 'employee' }
                         },
@@ -693,8 +712,8 @@ const router = new VueRouter({
                             name: 'checkTestPlanForm',
                             path: 'checkTestPlanForm',
                             component: TestPlanForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '查看测试计划', logType: 'employee' }
                         },
@@ -702,8 +721,8 @@ const router = new VueRouter({
                             name: 'testPlanVerifyForm',
                             path: 'testPlanVerifyForm',
                             component: TestPlanVerifyForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '测试方案审核', logType: 'employee' }
                         },
@@ -722,8 +741,8 @@ const router = new VueRouter({
                             name: 'testRecordsForm',
                             path: 'testRecordsForm',
                             component: TestRecordsForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '软件测试记录', logType: 'employee' }
                         },
@@ -731,8 +750,8 @@ const router = new VueRouter({
                             name: 'testReportForm',
                             path: 'testReportForm',
                             component: TestReportForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '测试报告填写', logType: 'employee' }
                         },
@@ -740,8 +759,8 @@ const router = new VueRouter({
                             name: 'testProblemForm',
                             path: 'testProblemForm',
                             component: TestProblemForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '测试问题列表', logType: 'employee' }
                         }
@@ -760,8 +779,8 @@ const router = new VueRouter({
                             name: 'checkTestReportForm',
                             path: 'checkTestReportForm',
                             component: TestReportForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '查看测试报告', logType: 'employee' }
                         },
@@ -769,8 +788,8 @@ const router = new VueRouter({
                             name: 'reportVerifyForm',
                             path: 'reportVerifyForm',
                             component: ReportVerifyForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '测试报告审核表格', logType: 'employee' }
                         }
@@ -789,8 +808,8 @@ const router = new VueRouter({
                             name: 'editTestReportForm',
                             path: 'editTestReportForm',
                             component: TestReportForm,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '编辑测试报告', logType: 'employee' }
                         }
@@ -809,8 +828,8 @@ const router = new VueRouter({
                             name: 'workCheckForm',
                             path: 'workCheckForm',
                             component: TestWorkCheck,
-                            props({ query: { writable, checking, formId } }) {
-                                return { writable, checking, formId }
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
                             },
                             meta: { title: '测试工作检查表', logType: 'employee' }
 
@@ -899,6 +918,15 @@ const router = new VueRouter({
                     meta: { title: '项目列表', logType: 'admin' }
                 },//项目列表
                 {
+                    name: 'adminFinishedItem',
+                    path: 'adminFinishedItem',
+                    component: FinishedItemTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
+                    meta: { title: '已结束列表', logType: 'admin' }
+                },//已结束项目
+                {
                     name: 'adminItemDetail',
                     path: 'adminItemDetail',
                     component: ItemDetail,
@@ -911,8 +939,8 @@ const router = new VueRouter({
                     name: 'adminReadApplicationForm',
                     path: 'adminReadApplicationForm',
                     component: ApplicationForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取申请表', logType: 'admin' }
                 },//读取申请表
@@ -920,8 +948,8 @@ const router = new VueRouter({
                     name: 'adminReadTestFunctionList',
                     path: 'adminReadTestFunctionList',
                     component: TestFunctionList,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试功能表', logType: 'admin' }
                 },//读取测试功能表
@@ -929,8 +957,8 @@ const router = new VueRouter({
                     name: 'adminReadApplicationVerifyForm',
                     path: 'adminReadApplicationVerifyForm',
                     component: ApplicationVerifyForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取申请审核表', logType: 'admin' }
                 },//读取审核申请
@@ -938,8 +966,8 @@ const router = new VueRouter({
                     name: 'adminReadQuotationForm',
                     path: 'adminReadQuotationForm',
                     component: QuotationForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取报价表', logType: 'admin' }
                 },//读取报价
@@ -947,8 +975,8 @@ const router = new VueRouter({
                     name: 'adminReadContractForm',
                     path: 'adminReadContractForm',
                     component: ContractForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取合同', logType: 'admin' }
                 },//读取合同
@@ -956,8 +984,8 @@ const router = new VueRouter({
                     name: 'adminReadTestPlanForm',
                     path: 'adminReadTestPlanForm',
                     component: TestPlanForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试计划', logType: 'admin' }
                 },//读取测试计划表
@@ -965,8 +993,8 @@ const router = new VueRouter({
                     name: 'adminReadTestPlanVerifyForm',
                     path: 'adminReadTestPlanVerifyForm',
                     component: TestPlanVerifyForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试计划审核表', logType: 'admin' }
                 },//读取测试计划审核表
@@ -974,8 +1002,8 @@ const router = new VueRouter({
                     name: 'adminReadTestRecordsForm',
                     path: 'adminReadTestRecordsForm',
                     component: TestRecordsForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试记录表', logType: 'admin' }
                 },//读取测试记录表
@@ -983,8 +1011,8 @@ const router = new VueRouter({
                     name: 'adminReadTestProblemForm',
                     path: 'adminReadTestProblemForm',
                     component: TestProblemForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试问题表', logType: 'admin' }
                 },//读取测试问题表
@@ -992,8 +1020,8 @@ const router = new VueRouter({
                     name: 'adminReadTestReportForm',
                     path: 'adminReadTestReportForm',
                     component: TestReportForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试报告', logType: 'admin' }
                 },//读取测试报告
@@ -1001,8 +1029,8 @@ const router = new VueRouter({
                     name: 'adminReadReportVerifyForm',
                     path: 'adminReadReportVerifyForm',
                     component: ReportVerifyForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取报告审核', logType: 'admin' }
                 },//读取报告审核
@@ -1010,8 +1038,8 @@ const router = new VueRouter({
                     name: 'adminReadDocumentReviewForm',
                     path: 'adminReadDocumentReviewForm',
                     component: DocumentReviewForm,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取文档检查表', logType: 'admin' }
                 },//读取文档检查表
@@ -1019,8 +1047,8 @@ const router = new VueRouter({
                     name: 'adminReadTestWorkCheck',
                     path: 'adminReadTestWorkCheck',
                     component: TestWorkCheck,
-                    props({ query: { writable, checking, formId } }) {
-                        return { writable, checking, formId }
+                    props({ query: { writable, checking, processId } }) {
+                        return { writable, checking, processId }
                     },
                     meta: { title: '读取测试工作检查表', logType: 'admin' }
                 },//读取测试工作检查表

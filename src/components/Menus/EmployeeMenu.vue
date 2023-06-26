@@ -2,10 +2,11 @@
     <div style="height: 100%;">
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
             :collapse="isCollapse" background-color="var(--theme-color)" text-color="#FFFFFF" active-text-color="#FFCC00">
-            <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-s-order"></i>分配任务</el-menu-item>
-            <el-menu-item index="2" @click="checkItem"><i class="el-icon-search"></i>查看项目</el-menu-item>
-            <el-menu-item index="3" @click="employeeDetail"><i class="el-icon-user"></i>个人信息</el-menu-item>
-            <el-menu-item index="4" @click="logOut"><i class="el-icon-back"></i>登出</el-menu-item>
+            <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-s-order" style="color:gold"></i>分配任务</el-menu-item>
+            <el-menu-item index="2" @click="checkItem"><i class="el-icon-search" style="color:gold"></i>查看项目</el-menu-item>
+            <el-menu-item index="3" @click="checkFinishedItem"><i class="el-icon-document" style="color:gold"></i>结束项目</el-menu-item>
+            <el-menu-item index="4" @click="employeeDetail"><i class="el-icon-user" style="color:gold"></i>个人信息</el-menu-item>
+            <el-menu-item index="5" @click="logOut"><i class="el-icon-back" style="color:gold"></i>登出</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -34,6 +35,12 @@ export default {
         checkItem() {
             this.$router.push({
                 name: 'employeeItem',
+                query: { page: 1 }
+            })
+        },
+        checkFinishedItem() {
+            this.$router.push({
+                name: 'employeeFinishedItem',
                 query: { page: 1 }
             })
         },

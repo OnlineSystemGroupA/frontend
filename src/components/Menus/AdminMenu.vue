@@ -16,7 +16,7 @@
                  active-text-color="#FFCC00">
             <el-submenu index="1">
                 <template slot="title">
-                    <i class="el-icon-document"></i>
+                    <i class="el-icon-user" style="color:gold"></i>
                     <span slot="title">查看用户</span>
                 </template>
                 <el-menu-item-group>
@@ -27,14 +27,15 @@
             </el-submenu>
             <el-submenu index="2">
                 <template slot="title">
-                    <i class="el-icon-document"></i>
+                    <i class="el-icon-document" style="color:gold"></i>
                     <span slot="title">查看项目</span>
                 </template>
                 <el-menu-item-group>
                     <el-menu-item index="2-1" @click="checkItem">查看项目表格</el-menu-item>
+                    <el-menu-item index="2-2" @click="checkFinishedItem">查看已完成项目</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
-            <el-menu-item index="4" @click="logOut"><i class="el-icon-back"></i>登出</el-menu-item>
+            <el-menu-item index="3" @click="logOut"><i class="el-icon-back" style="color:gold"></i>登出</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -75,6 +76,12 @@ export default {
             this.$router.push({
                 name: 'adminItemTable',
                 query:{ page : 1 }
+            })
+        },
+        checkFinishedItem() {
+            this.$router.push({
+                name: 'adminFinishedItem',
+                query: { page: 1 }
             })
         },
         logOut() {

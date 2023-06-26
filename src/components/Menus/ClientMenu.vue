@@ -8,10 +8,11 @@
         -->
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
             :collapse="isCollapse" background-color="var(--theme-color)" text-color="#FFFFFF" active-text-color="#FFCC00">
-            <el-menu-item index="1" @click="createApplication"><i class="el-icon-upload2"></i>测试申请</el-menu-item>
-            <el-menu-item index="2" @click="checkItem"><i class="el-icon-search"></i>查看项目</el-menu-item>
-            <el-menu-item index="3" @click="clientDetail"><i class="el-icon-user"></i>个人信息</el-menu-item>
-            <el-menu-item index="4" @click="logOut"><i class="el-icon-back"></i>登出</el-menu-item>
+            <el-menu-item index="1" @click="createApplication"><i class="el-icon-upload2" style="color:gold"></i>测试申请</el-menu-item>
+            <el-menu-item index="2" @click="checkItem"><i class="el-icon-search" style="color:gold"></i>查看项目</el-menu-item>
+            <el-menu-item index="3" @click="checkFinishedItem"><i class="el-icon-document" style="color:gold"></i>结束项目</el-menu-item>
+            <el-menu-item index="4" @click="clientDetail"><i class="el-icon-user" style="color:gold"></i>个人信息</el-menu-item>
+            <el-menu-item index="5" @click="logOut"><i class="el-icon-back" style="color:gold"></i>登出</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -44,6 +45,12 @@ export default {
         clientDetail() {
             this.$router.push({
                 name: 'clientDetail'
+            })
+        },
+        checkFinishedItem() {
+            this.$router.push({
+                name: 'clientFinishedItem',
+                query: { page: 1 }
             })
         },
         logOut() {

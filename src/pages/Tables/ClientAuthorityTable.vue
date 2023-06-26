@@ -49,7 +49,7 @@ export default {
 
 <style>
 .clientAuthority {
-    width: 90%;
+    width: 94%;
     align-items: center;
     border-radius: 30px;
     margin: 30px;
