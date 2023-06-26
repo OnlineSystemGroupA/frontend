@@ -66,8 +66,17 @@ export default {
 }
 
 .sub-menu-group {
+    background-color: #28679d;
     padding-bottom: 10px;
     box-shadow: inset 0 10px 5px -10px #000000, inset 0 -10px 5px -10px #000000;
+
+    /deep/ .el-menu-item:hover {
+        background-color: #cccccc !important;
+    }
+
+    /deep/ .el-menu-item {
+        background-color: #28679d !important;
+    }
 }
 
 .el-submenu {
