@@ -6,14 +6,8 @@
                 <el-radio-button :label="true">收起</el-radio-button>
             </el-radio-group>
         -->
-        <el-menu default-active="1-4-1"
-                 class="el-menu-vertical-demo"
-                 @open="handleOpen"
-                 @close="handleClose"
-                 :collapse="isCollapse"
-                 background-color="var(--theme-color)"
-                 text-color="#FFFFFF"
-                 active-text-color="#FFCC00">
+        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+            :collapse="isCollapse" background-color="var(--theme-color)" text-color="#FFFFFF" active-text-color="#FFCC00">
             <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-user" style="color:gold"></i>
@@ -75,7 +69,7 @@ export default {
         checkItem() {
             this.$router.push({
                 name: 'adminItemTable',
-                query:{ page : 1 }
+                query: { page: 1 }
             })
         },
         checkFinishedItem() {
@@ -112,9 +106,8 @@ export default {
     box-shadow: inset 0 10px 5px -10px #000000, inset 0 -10px 5px -10px #000000;
 }
 
-.el-submenu {
-/deep/ .el-submenu__icon-arrow {
+.el-submenu  .el-submenu__icon-arrow {
     color: gold;
 }
-}
+
 </style>

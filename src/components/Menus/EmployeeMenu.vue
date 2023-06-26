@@ -2,7 +2,8 @@
     <div style="height: 100%;">
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
             :collapse="isCollapse" background-color="var(--theme-color)" text-color="#FFFFFF" active-text-color="#FFCC00">
-            <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-s-order" style="color:gold"></i>分配任务</el-menu-item>
+            <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-s-order"
+                    style="color:gold"></i>分配任务</el-menu-item>
             <el-submenu index="2">
                 <template slot="title">
                     <i class="el-icon-document" style="color:gold"></i>
@@ -13,7 +14,8 @@
                     <el-menu-item index="2-2" @click="checkFinishedItem">查看已完成项目</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
-            <el-menu-item index="3" @click="employeeDetail"><i class="el-icon-user" style="color:gold"></i>个人信息</el-menu-item>
+            <el-menu-item index="3" @click="employeeDetail"><i class="el-icon-user"
+                    style="color:gold"></i>个人信息</el-menu-item>
             <el-menu-item index="4" @click="logOut"><i class="el-icon-back" style="color:gold"></i>登出</el-menu-item>
         </el-menu>
     </div>
@@ -85,9 +87,7 @@ export default {
     box-shadow: inset 0 10px 5px -10px #000000, inset 0 -10px 5px -10px #000000;
 }
 
-.el-submenu {
-/deep/ .el-submenu__icon-arrow {
+.el-submenu .el-submenu__icon-arrow {
     color: gold;
-}
 }
 </style>
