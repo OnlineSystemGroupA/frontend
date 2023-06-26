@@ -1,5 +1,6 @@
 <template>
     <div class="header">
+        <img src="../../assets/img/title.png" class="img-title">
         <el-breadcrumb class="breadcrumb" separator-class="el-icon-arrow-right" style="width: 50%">
             <el-breadcrumb-item
                 v-for="bread in breads"
@@ -83,5 +84,10 @@ export default {
     /deep/ .el-breadcrumb__inner:hover {
         color: gold !important;
     }
+}
+
+.img-title{
+    height: 50px;
+    margin-right: 10px;
 }
 </style>

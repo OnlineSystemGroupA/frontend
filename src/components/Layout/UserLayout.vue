@@ -44,6 +44,7 @@ export default {
 }
 
 .user-header {
+    padding-left: 5px;
     display: flex;
     justify-content: center;
     flex-direction: column;
