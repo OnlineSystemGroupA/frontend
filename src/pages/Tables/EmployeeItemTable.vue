@@ -30,8 +30,15 @@
             <el-table-column prop="taskName" label="项目状态" style="width: 16%"> </el-table-column>
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
-                    <el-button @click="checkItemDetail(scope.row.processId)" icon="el-icon-search" size="small"
-                        type="primary">查看项目</el-button>
+                    <el-tooltip class="item" effect="light" content="查看项目详情" placement="bottom">
+                        <el-button @click="checkItemDetail(scope.row.processId)" icon="el-icon-search" size="small"
+                            type="primary" circle></el-button>
+                    </el-tooltip>
+
+                    <el-tooltip class="item" effect="light" content="联系申请人" placement="bottom">
+                        <el-button @click="contactApplicant(scope.row.startUser)" icon="el-icon-user" size="small"
+                            type="primary" circle></el-button>
+                    </el-tooltip>
                 </template>
             </el-table-column>
         </el-table>
@@ -397,6 +404,14 @@ export default {
             this.$router.push({
                 name: 'employeeItem',
                 query: { page: curpage }
+            })
+        },
+        contactApplicant(startUser){
+            this.$router.push({
+                name: 'contactClient',
+                query: {
+                    clientId:startUser
+                }
             })
         }
     },

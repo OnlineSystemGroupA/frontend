@@ -25,10 +25,10 @@
         </table>
         <br>
         <el-row>
-            <el-button type="primary" @click="editInfo" v-if="show">
+            <el-button type="primary" @click="editInfo" v-if="editShow">
                 修改信息
             </el-button>
-            <el-button type="primary" @click="changePassword" v-if="!show">
+            <el-button type="primary" @click="changePassword" v-if="show">
                 修改密码
             </el-button>
         </el-row>
@@ -71,9 +71,15 @@ export default {
     computed: {
         show() {
             if (sessionStorage.getItem('logType') === 'employee') {
-                return false
+                return true
             }
-            return true
+            return false
+        },
+        editShow() {
+            if (sessionStorage.getItem('logType') === 'admin') {
+                return true
+            }
+            return false
         }
     },
     mounted() {
