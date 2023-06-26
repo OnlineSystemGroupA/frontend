@@ -8,6 +8,7 @@
                 class="breadcrumb">
                 {{ bread.title }}
             </el-breadcrumb-item>
+
         </el-breadcrumb>
     </div>
 </template>
