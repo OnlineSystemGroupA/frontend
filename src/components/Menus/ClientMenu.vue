@@ -92,9 +92,8 @@ export default {
     box-shadow: inset 0 10px 5px -10px #000000, inset 0 -10px 5px -10px #000000;
 }
 
-.el-submenu {
-    /deep/ .el-submenu__icon-arrow {
+.el-submenu .el-submenu__icon-arrow {
         color: gold;
-    }
 }
+
 </style>
