@@ -3,6 +3,10 @@
         <template #menu>
             <EmployeeMenu></EmployeeMenu>
         </template>
+        <template #detail-button>
+            <el-button @click="employeeDetail" circle size="medium" class="header-button" type="text"
+                       icon="el-icon-user"></el-button>
+        </template>
     </UserLayout>
 </template>
 
@@ -15,6 +19,14 @@ export default {
     components: {
         UserLayout,
         EmployeeMenu
+    },
+
+    methods: {
+        employeeDetail() {
+            this.$router.push({
+                name: 'employeeDetail'
+            })
+        }
     }
 }
 </script>
