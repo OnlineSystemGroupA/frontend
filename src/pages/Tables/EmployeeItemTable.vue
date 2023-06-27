@@ -36,7 +36,7 @@
                     </el-tooltip>
 
                     <el-tooltip class="item" effect="light" content="联系申请人" placement="bottom">
-                        <el-button @click="contactApplicant(scope.row.startUser)" icon="el-icon-user" size="small"
+                        <el-button @click="contactClient(scope.row.startUser)" icon="el-icon-user" size="small"
                             type="primary" circle></el-button>
                     </el-tooltip>
                 </template>
@@ -112,7 +112,7 @@ export default {
     methods: {
         checkItemDetail(processId) {
             this.$router.push({
-                name: 'clientItemDetail',
+                name: 'employeeItemDetail',
                 query: { itemId: processId }
             })
         },
@@ -134,16 +134,16 @@ export default {
             this.axios.get('/api/workflow/processes/count').then(this.handleCount, this.handleError)
             this.axios.get('/api/workflow/processes?pageIndex=' + curpage + '&numPerPage=10&' + 'orderBy=' + this.sortKey).then(this.handleResult, this.handleError)
             this.$router.push({
-                name: 'clientItem',
+                name: 'employeeItemTable',
                 query: { page: curpage }
 
             })
         },
-        contractEmployee(assignee) {
+        contractClient(client) {
             this.$router.push({
-                name: 'contactEmployee',
+                name: 'contactClient',
                 query: {
-                    employeeId: assignee
+                    clientId: client 
                 }
             })
         }

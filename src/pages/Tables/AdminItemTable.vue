@@ -110,7 +110,7 @@ export default {
     methods: {
         checkItemDetail(processId) {
             this.$router.push({
-                name: 'clientItemDetail',
+                name: 'adminItemDetail',
                 query: { itemId: processId }
             })
         },
@@ -132,9 +132,8 @@ export default {
             this.axios.get('/api/workflow/processes/count').then(this.handleCount, this.handleError)
             this.axios.get('/api/workflow/processes?pageIndex=' + curpage + '&numPerPage=10&' + 'orderBy=' + this.sortKey).then(this.handleResult, this.handleError)
             this.$router.push({
-                name: 'clientItem',
+                name: 'adminItemTable',
                 query: { page: curpage }
-
             })
         },
         contractEmployee(assignee) {

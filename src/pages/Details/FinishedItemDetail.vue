@@ -1,5 +1,6 @@
 <template>
     <div class="item">
+        <el-button circle icon="el-icon-back" @click="goBack" class="return-button"></el-button>
         <h2>已结束项目</h2>
         <table border style="width:90%; text-align: center;" class="pure-table" rules=all>
             <tr>
@@ -57,7 +58,8 @@
                 <el-table-column label="操作" style="width: 25%">
                     <template slot-scope="scope">
                         <el-button @click="readForm(scope.row)" icon="el-icon-search" size="small"
-                            type="primary">查看</el-button>
+                                   type="primary">查看
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -86,7 +88,7 @@ export default {
                 verifier: '赵六',
                 tester: '刘七',
             },
-             forms: [
+            forms: [
                 {
                     title: '测试申请表',
                     date: '2023-5-11',
@@ -169,6 +171,13 @@ export default {
         }
     },
     methods: {
+        goBack() {
+            let logType = sessionStorage.getItem('logType')
+            this.$router.push({
+                name: logType + "FinishedItemTable",
+                query: {page: 1}
+            })
+        },
         readForm(row) {
             //console.log(row.title)
             if (!sessionStorage.getItem('logType')) {
@@ -179,50 +188,38 @@ export default {
             let routeName = ''
             if (row.title === '测试申请表') {
                 routeName = logType + 'ReadApplicationForm'
-            }
-            else if (row.title === '测试功能表') {
+            } else if (row.title === '测试功能表') {
                 routeName = logType + 'ReadTestFunctionList'
-            }
-            else if (row.title === '申请审核表') {
+            } else if (row.title === '申请审核表') {
                 routeName = logType + 'ReadApplicationVerifyForm'
-            }
-            else if (row.title === '测试报价表') {
+            } else if (row.title === '测试报价表') {
                 routeName = logType + 'ReadQuotationForm'
-            }
-            else if (row.title === '测试合同表') {
+            } else if (row.title === '测试合同表') {
                 routeName = logType + 'ReadContractForm'
-            }
-            else if (row.title === '测试计划表') {
+            } else if (row.title === '测试计划表') {
                 routeName = logType + 'ReadTestPlanForm'
                 if (logType === 'client') {
                     return
                 }
-            }
-            else if (row.title === '测试计划审核表') {
+            } else if (row.title === '测试计划审核表') {
                 routeName = logType + 'ReadTestPlanVerifyForm'
                 if (logType === 'client') {
                     return
                 }
-            }
-            else if (row.title === '测试记录表') {
+            } else if (row.title === '测试记录表') {
                 routeName = logType + 'ReadTestRecordsForm'
-            }
-            else if (row.title === '测试问题表') {
+            } else if (row.title === '测试问题表') {
                 routeName = logType + 'ReadTestProblemForm'
-            }
-            else if (row.title === '测试报告表') {
+            } else if (row.title === '测试报告表') {
                 routeName = logType + 'ReadTestReportForm'
-            }
-            else if (row.title === '报告审核表') {
+            } else if (row.title === '报告审核表') {
                 routeName = logType + 'ReadReportVerifyForm'
                 if (logType === 'client') {
                     return
                 }
-            }
-            else if (row.title === '文档审核表') {
+            } else if (row.title === '文档审核表') {
                 routeName = logType + 'ReadDocumentReviewForm'
-            }
-            else if (row.title === '测试检查表') {
+            } else if (row.title === '测试检查表') {
                 routeName = logType + 'ReadTestWorkCheck'
                 if (logType === 'client') {
                     return
@@ -246,6 +243,10 @@ export default {
 </script>
 
 <style scoped>
+.return-button {
+    margin-right: auto;
+}
+
 .pure-table {
     width: 100%;
     border-collapse: collapse;
@@ -279,6 +280,7 @@ export default {
 .pure-table td {
     background-color: transparent;
 }
+
 .item {
     width: 94%;
     margin-top: 2%;
