@@ -42,13 +42,13 @@ export default {
         },
         checkItem() {
             this.$router.push({
-                name: 'employeeItem',
+                name: 'employeeItemTable',
                 query: {page: 1}
             })
         },
         checkFinishedItem() {
             this.$router.push({
-                name: 'employeeFinishedItem',
+                name: 'employeeFinishedItemTable',
                 query: {page: 1}
             })
         }

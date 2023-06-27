@@ -87,7 +87,8 @@ export default {
 }
 
 .img-title{
-    height: 50px;
+    width: 200px;
+    object-fit: contain;
     margin-right: 10px;
 }
 </style>
