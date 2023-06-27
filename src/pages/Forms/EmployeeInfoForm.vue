@@ -1,7 +1,8 @@
 <template>
     <div class="employee">
+        <h2>新员工信息</h2>
         <el-form label-position="left" label-width="80px">
-            <table border style="width:90%; text-align: center;">
+            <table class="pure-table" rules = all>
                 <tr>
                     <th style="width:25%">姓名</th>
                     <td style="width:25%"><el-input placeholder="姓名" v-model="form.name"></el-input> </td>
@@ -83,7 +84,7 @@ export default {
 
 <style scoped>
 .employee {
-    width: 800px;
+    width: 80%;
     align-items: center;
     border-radius: 30px;
     margin: 30px;
@@ -94,5 +95,39 @@ export default {
 .col {
     width: 50%;
     padding: 10px;
+}
+
+.pure-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #cbcbcb;
+}
+
+.pure-table caption {
+    color: #000;
+    font: italic 85%/1 arial, sans-serif;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.pure-table td,
+.pure-table th {
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: .5em 1em;
+}
+
+.pure-table thead {
+    background-color: #e0e0e0;
+    color: #000;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.pure-table td {
+    background-color: transparent;
 }
 </style>

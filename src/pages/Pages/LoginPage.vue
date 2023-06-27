@@ -44,7 +44,7 @@ export default {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	background-image: url(../../assets/img/background.jpg);
+	background-image: url(~@/assets/img/background.jpg);
 	background-size:100% 100%;
 }
 

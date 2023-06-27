@@ -1,7 +1,7 @@
 <template>
     <div class="item">
         <h2>项目详情</h2>
-        <table border style="width:90%; text-align: center;" class="pure-table" rules=all>
+        <table  class="pure-table" rules=all>
             <tr>
                 <th style="width:25%">项目号</th>
                 <td style="width:25%">{{ itemId }}</td>
@@ -46,9 +46,9 @@
             </tr>
         </table>
         <br>
-        <div style="margin:20px">
+        <div style="margin:10px; width: 100%;">
             <h2>测试流程</h2>
-            <el-steps :active="active" finish-status="success">
+            <el-steps :active="active" finish-status="success" align-center>
                 <el-step title="申请创建中"></el-step>
                 <el-step title="申请审核中"></el-step>
                 <el-step title="报价生成中"></el-step>
