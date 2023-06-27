@@ -2,7 +2,11 @@
     <div class="layout">
         <el-container>
             <el-header class="user-header">
-                <UserHeader></UserHeader>
+                <UserHeader>
+                    <template #detail-button>
+                        <slot name="detail-button"></slot>
+                    </template>
+                </UserHeader>
             </el-header>
             <el-container>
                 <el-aside width="13%" class="aside">
@@ -40,6 +44,7 @@ export default {
 }
 
 .user-header {
+    padding-left: 5px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -68,7 +73,7 @@ export default {
     z-index: 5;
     box-shadow: 0 0 5px 0 #000000;
 
-    /deep/ .el-menu{
+    /deep/ .el-menu {
         border-right: 0;
     }
 }
