@@ -72,7 +72,7 @@ import { nanoid } from "nanoid"
 import testProblemForm from '../../assets/jsons/testProblemForm.json'
 export default {
     name: 'TestProblemForm',
-    props: ['writable', 'formId', 'checking'],
+    props: ['writable', 'processId', 'checking'],
     data() {
         return {
             form: {

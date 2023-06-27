@@ -85,7 +85,7 @@
 <script>
 export default {
     name: 'ApplicationVerifyForm',
-    props: ['writable', 'formId'],
+    props: ['writable', 'processId'],
     data() {
         return {
             form: {

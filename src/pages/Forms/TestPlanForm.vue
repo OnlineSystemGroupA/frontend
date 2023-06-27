@@ -105,7 +105,7 @@
 import testPlanForm from '../../assets/jsons/testPlanForm.json'
 export default {
     name: 'TestPlanForm',
-    props: ['writable', 'checking', 'formId'],
+    props: ['writable', 'checking', 'processId'],
     data() {
         return {
             form: {

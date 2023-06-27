@@ -116,7 +116,7 @@ import {nanoid} from "nanoid";
 
 export default {
     name: 'TestFunctionList',
-    props: ['writable', 'checking', 'formId'],
+    props: ['writable', 'checking', 'processId'],
     data() {
         return {
             form: {

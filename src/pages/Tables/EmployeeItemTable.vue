@@ -36,7 +36,7 @@
                     </el-tooltip>
 
                     <el-tooltip class="item" effect="light" content="联系申请人" placement="bottom">
-                        <el-button @click="contactApplicant(scope.row.startUser)" icon="el-icon-user" size="small"
+                        <el-button @click="contactClient(scope.row.startUser)" icon="el-icon-user" size="small"
                             type="primary" circle></el-button>
                     </el-tooltip>
                 </template>
@@ -406,11 +406,11 @@ export default {
                 query: { page: curpage }
             })
         },
-        contactApplicant(startUser){
+        contractClient(client) {
             this.$router.push({
                 name: 'contactClient',
                 query: {
-                    clientId:startUser
+                    clientId: client 
                 }
             })
         }

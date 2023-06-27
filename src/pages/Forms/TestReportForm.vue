@@ -415,7 +415,7 @@ import testReportForm from '../../assets/jsons/testReportForm.json'
 
 export default {
     name: 'TestReportForm',
-    props: ['writable', 'formId', 'checking'],
+    props: ['writable', 'processId', 'checking'],
     data() {
         return {
             form: {

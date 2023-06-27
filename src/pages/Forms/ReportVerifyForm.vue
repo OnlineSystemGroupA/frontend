@@ -108,7 +108,7 @@
 <script>
 export default {
     name: "ReportVerifyForm",
-    props: ['writable', 'checking', 'formId'],
+    props: ['writable', 'checking', 'processId'],
     data() {
         return {
             form: {

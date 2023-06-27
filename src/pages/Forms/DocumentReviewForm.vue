@@ -81,7 +81,7 @@
 import documentReviewForm from '../../assets/jsons/documentReviewForm.json'
 export default {
 	name: 'DocumentReviewForm',
-	props: ['writable', 'formId', 'checking'],
+	props: ['writable', 'processId', 'checking'],
 	data() {
 		return {
 			form: {

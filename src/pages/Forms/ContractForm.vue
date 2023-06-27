@@ -217,7 +217,7 @@
 import contractForm from '../../assets/jsons/contractForm.json'
 export default {
     name: 'ContractForm',
-    props: ['writable', 'formId', 'checking'],
+    props: ['writable', 'processId', 'checking'],
     data() {
         return {
             form: {

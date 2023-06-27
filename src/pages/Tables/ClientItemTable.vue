@@ -402,8 +402,9 @@ export default {
         },
         handlePageChange(curpage) {
             this.$router.push({
-                name: 'clientItemTable',
+                name: 'clientItem',
                 query: { page: curpage }
+
             })
         },
         contractEmployee(assignee) {

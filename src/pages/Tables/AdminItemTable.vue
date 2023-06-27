@@ -698,6 +698,7 @@ export default {
             this.$router.push({
                 name: 'adminItemTable',
                 query: { page: curpage }
+
             })
         }
     },

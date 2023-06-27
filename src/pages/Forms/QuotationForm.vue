@@ -69,7 +69,7 @@
 <script>
 export default {
     name: 'QuotationForm',
-    props: ['writable', 'checking', 'formId'],
+    props: ['writable', 'checking', 'processId'],
     data() {
         return {
             labelPosition: 'left',

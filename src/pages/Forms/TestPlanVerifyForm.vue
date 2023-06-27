@@ -46,7 +46,7 @@ import testPlanVerification from '../../assets/jsons/testPlanVerificationForm.js
 
 export default {
     name: 'TestPlanVerifyForm',
-    props: ['writable', 'formId'],
+    props: ['writable', 'processId'],
     data() {
         return {
             form: {

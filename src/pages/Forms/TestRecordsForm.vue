@@ -77,7 +77,7 @@
 import testRecords from '../../assets/jsons/testRecordsForm.json'
 export default {
     name: 'TestRecordForm',
-    props: ['writable', 'formId', 'checking'],
+    props: ['writable', 'processId', 'checking'],
     data() {
         return {
             form: {

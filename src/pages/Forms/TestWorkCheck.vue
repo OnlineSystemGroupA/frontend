@@ -103,7 +103,7 @@
 <script>
 export default {
     name: 'TestWorkCheck',
-    props: ['writable', 'formId', 'checking'],
+    props: ['writable', 'processId', 'checking'],
     data() {
         return {
             form: {
