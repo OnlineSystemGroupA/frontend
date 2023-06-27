@@ -402,7 +402,7 @@ export default {
         },
         handlePageChange(curpage) {
             this.$router.push({
-                name: 'employeeItem',
+                name: 'employeeItemTable',
                 query: { page: curpage }
             })
         },
