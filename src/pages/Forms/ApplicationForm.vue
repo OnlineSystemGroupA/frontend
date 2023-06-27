@@ -278,7 +278,7 @@
 </template>
 
 <script>
-import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue"; 申请
+import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue"; 
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
 import applicationForm from "../../assets/jsons/applicationForm"
 import { nanoid } from "nanoid";
