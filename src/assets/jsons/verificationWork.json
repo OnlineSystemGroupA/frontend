@@ -1,0 +1,12 @@
+{
+    "operation":[
+        {
+            "key":"writeTestPlan",
+            "value":"verifyTestPlan"
+        },
+        {
+            "key": "editTestReport",
+            "value": "verifyTestReport"
+        }
+    ]
+}

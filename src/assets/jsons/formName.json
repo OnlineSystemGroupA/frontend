@@ -1,0 +1,56 @@
+{
+    "transformation":[
+        {
+            "key": "测试申请表",
+            "value": "ApplicationForm"
+        },
+        {
+            "key": "测试功能表",
+            "value": "TestFunctionList"
+        },       
+        {
+            "key": "申请审核表",
+            "value": "ApplicationVerifyForm"
+        },
+        {
+            "key": "测试报价表",
+            "value": "QuotationForm"
+        },
+        {
+            "key": "测试合同表",
+            "value": "ContractForm"
+        },
+        {
+            "key": "测试计划表",
+            "value": "TestPlanForm"
+        },
+        {
+            "key": "测试计划审核表",
+            "value": "TestPlanVerifyForm"
+        },
+        {
+            "key": "测试记录表",
+            "value": "TestRecordsForm"
+        },
+        {
+            "key": "测试问题表",
+            "value": "TestProblemForm"
+        },
+        {
+            "key": "测试报告表",
+            "value": "TestReportForm"
+        },
+        {
+            "key": "报告审核表",
+            "value": "ReportVerifyForm"
+        },
+        {
+            "key": "文档审核表",
+            "value": "DocumentReviewForm"
+        },
+        {
+            "key": "测试检查表",
+            "value": "TestWorkCheck"
+        }
+    ]
+}

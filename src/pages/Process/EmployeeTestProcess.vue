@@ -34,7 +34,7 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    formId: this.itemId,
+                    processId: this.itemId,
                     itemId: this.itemId
                 }
             })
@@ -45,7 +45,7 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    formId: this.itemId,
+                    processId: this.itemId,
                     itemId: this.itemId
                 }
             })
@@ -56,7 +56,7 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    formId: this.itemId,
+                    processId: this.itemId,
                     itemId: this.itemId
                 }
             })

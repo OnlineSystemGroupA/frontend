@@ -1,0 +1,36 @@
+{
+    "operation": [
+        {
+            "key":"1",
+            "value":"checkApplication"
+        },
+        {
+            "key": "2",
+            "value": "offerQuotation"
+        },
+        {
+            "key": "3",
+            "value": "employeeContract"
+        },
+        {
+            "key": "4",
+            "value": "reviewSample"
+        },
+        {
+            "key": "5",
+            "value": "writeTestPlan"
+        },
+        {
+            "key": "6",
+            "value": "testProcess"
+        },
+        {
+            "key": "7",
+            "value": "editTestReport"
+        },
+        {
+            "key": "8",
+            "value": "checkTestWork"
+        }
+    ]
+}

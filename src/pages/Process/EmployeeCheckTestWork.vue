@@ -3,7 +3,7 @@
         <h2>测试工作检查</h2>
         <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
-        <el-button type="primary" @click="documentReview">软件文档检查表</el-button>
+        <el-button type="primary" @click="checkTestWork()">测试工作检查表</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -33,7 +33,7 @@ export default {
                     query: {
                         writable: true,
                         checking: false,
-                        formId: this.itemId,
+                        processId: this.itemId,
                         itemId: this.itemId
                     }
                 }
