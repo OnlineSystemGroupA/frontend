@@ -73,7 +73,7 @@ export default {
     }
 }
 
-.el-submenu .el-submenu__icon-arrow {
+.el-submenu /deep/ .el-submenu__icon-arrow {
         color: gold;
 }
 
