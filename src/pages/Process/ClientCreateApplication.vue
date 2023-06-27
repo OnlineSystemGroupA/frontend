@@ -1,7 +1,7 @@
 <template>
     <div style="width: 100%">
         <h2>创建新项目</h2>
-        <el-steps :active="active" finish-status="success">
+        <el-steps :active="active" finish-status="success" align-center style="width: 100%;">
             <el-step title="步骤 1" description="阅读说明"></el-step>
             <el-step title="步骤 2" description="填写申请表格"></el-step>
             <el-step title="步骤 3" description="填写测试功能表"></el-step>

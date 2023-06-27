@@ -10,10 +10,10 @@
             <el-form-item label="确认密码" prop="CurrentPassword">
                 <el-input v-model="certainPassword" placeholder="请输入确认密码" show-password></el-input>
             </el-form-item>
-            <el-form-item>
+            <el-row class="button_row">
                 <el-button type="primary" @click="submit">修改</el-button>
                 <el-button type="primary" @click="cancel">取消</el-button>
-            </el-form-item>
+            </el-row>
         </el-form>
     </div>
 </template>
@@ -49,5 +49,11 @@ export default {
     margin: 30px;
     padding: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.button_row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

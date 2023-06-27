@@ -82,10 +82,10 @@
                 </el-col>
             </el-row>
 
-            <el-form-item>
+            <el-row class="button_row">
                 <el-button type="primary" @click="submit">修改</el-button>
                 <el-button type="primary" @click="cancel">取消</el-button>
-            </el-form-item>
+            </el-row>
         </el-form>
     </div>
 </template>
@@ -137,11 +137,17 @@ export default {
 
 <style scoped>
 .userInfo {
-    width: 90%;
     align-items: center;
+    width: 90%;
     border-radius: 30px;
     margin: 30px;
     padding: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.button_row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
