@@ -40,13 +40,13 @@ export default {
         },
         checkItem() {
             this.$router.push({
-                name: 'clientItem',
+                name: 'clientItemTable',
                 query: {page: 1}
             })
         },
         checkFinishedItem() {
             this.$router.push({
-                name: 'clientFinishedItem',
+                name: 'clientFinishedItemTable',
                 query: {page: 1}
             })
         }

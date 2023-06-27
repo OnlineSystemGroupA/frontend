@@ -87,8 +87,8 @@ const router = new VueRouter({
             meta: { title: '客户界面', logType: 'client' },
             children: [
                 {
-                    name: 'clientItem',
-                    path: 'clientItem',
+                    name: 'clientItemTable',
+                    path: 'clientItemTable',
                     component: ClientItemTable,
                     props({ query: { page } }) {
                         return { page }
@@ -96,8 +96,8 @@ const router = new VueRouter({
                     meta: { title: '项目列表', logType: 'client' }
                 },//项目列表
                 {
-                    name: 'clientFinishedItem',
-                    path: 'clientFinishedItem',
+                    name: 'clientFinishedItemTable',
+                    path: 'clientFinishedItemTable',
                     component: FinishedItemTable,
                     props({ query: { page } }) {
                         return { page }
@@ -416,8 +416,8 @@ const router = new VueRouter({
             meta: { title: '员工界面', logType: 'employee' },
             children: [
                 {
-                    name: 'employeeItem',
-                    path: 'employeeItem',
+                    name: 'employeeItemTable',
+                    path: 'employeeItemTable',
                     component: EmployeeItemTable,
                     props({ query: { page } }) {
                         return { page }
@@ -425,8 +425,8 @@ const router = new VueRouter({
                     meta: { title: '查看项目', logType: 'employee' }
                 },//查看项目
                 {
-                    name: 'employeeFinishedItem',
-                    path: 'employeeFinishedItem',
+                    name: 'employeeFinishedItemTable',
+                    path: 'employeeFinishedItemTable',
                     component: FinishedItemTable,
                     props({ query: { page } }) {
                         return { page }
