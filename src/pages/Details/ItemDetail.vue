@@ -1,7 +1,8 @@
 <template>
     <div class="item">
+        <el-button circle icon="el-icon-back" @click="goBack" class="return-button"></el-button>
         <h2>项目详情</h2>
-        <table border style="width:90%; text-align: center;" class="pure-table" rules=all>
+        <table class="pure-table" rules=all>
             <tr>
                 <th style="width:25%">项目号</th>
                 <td style="width:25%">{{ itemId }}</td>
@@ -76,7 +77,8 @@
                 <el-table-column label="操作" style="width: 25%">
                     <template slot-scope="scope">
                         <el-button @click="readForm(scope.row)" icon="el-icon-search" size="small"
-                            type="primary">查看</el-button>
+                                   type="primary">查看
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -206,50 +208,38 @@ export default {
             let routeName = ''
             if (row.title === '测试申请表') {
                 routeName = logType + 'ReadApplicationForm'
-            }
-            else if (row.title === '测试功能表') {
+            } else if (row.title === '测试功能表') {
                 routeName = logType + 'ReadTestFunctionList'
-            }
-            else if (row.title === '申请审核表') {
+            } else if (row.title === '申请审核表') {
                 routeName = logType + 'ReadApplicationVerifyForm'
-            }
-            else if (row.title === '测试报价表') {
+            } else if (row.title === '测试报价表') {
                 routeName = logType + 'ReadQuotationForm'
-            }
-            else if (row.title === '测试合同表') {
+            } else if (row.title === '测试合同表') {
                 routeName = logType + 'ReadContractForm'
-            }
-            else if (row.title === '测试计划表') {
+            } else if (row.title === '测试计划表') {
                 routeName = logType + 'ReadTestPlanForm'
                 if (logType === 'client') {
                     return
                 }
-            }
-            else if (row.title === '测试计划审核表') {
+            } else if (row.title === '测试计划审核表') {
                 routeName = logType + 'ReadTestPlanVerifyForm'
                 if (logType === 'client') {
                     return
                 }
-            }
-            else if (row.title === '测试记录表') {
+            } else if (row.title === '测试记录表') {
                 routeName = logType + 'ReadTestRecordsForm'
-            }
-             else if (row.title === '测试问题表') {
+            } else if (row.title === '测试问题表') {
                 routeName = logType + 'ReadTestProblemForm'
-            }
-            else if (row.title === '测试报告表') {
+            } else if (row.title === '测试报告表') {
                 routeName = logType + 'ReadTestReportForm'
-            }
-            else if (row.title === '报告审核表') {
+            } else if (row.title === '报告审核表') {
                 routeName = logType + 'ReadReportVerifyForm'
                 if (logType === 'client') {
                     return
                 }
-            }
-            else if (row.title === '文档审核表') {
+            } else if (row.title === '文档审核表') {
                 routeName = logType + 'ReadDocumentReviewForm'
-            }
-            else if (row.title === '测试检查表') {
+            } else if (row.title === '测试检查表') {
                 routeName = logType + 'ReadTestWorkCheck'
                 if (logType === 'client') {
                     return
@@ -268,6 +258,13 @@ export default {
                 )
             }
         },
+        goBack() {
+            let logType = sessionStorage.getItem('logType')
+            this.$router.push({
+                name: logType + "ItemTable",
+                query: {page: 1}
+            })
+        },
         operateProcess() {
             if (!sessionStorage.getItem('logType')) {
                 alert('请登录！')
@@ -279,78 +276,62 @@ export default {
                 if (logType === 'client') {
                     routeName = 'savedApplication'
                 }
-            }
-            else if (this.active === 1) {
+            } else if (this.active === 1) {
                 if (logType === 'client') {
                     routeName = 'submittedApplication'
-                }
-                else if (logType === 'employee') {
+                } else if (logType === 'employee') {
                     routeName = 'checkApplication'
                 }
-            }
-            else if (this.active === 2) {
+            } else if (this.active === 2) {
                 if (logType === 'client') {
                     routeName = 'clientAcceptQuotation'
-                }
-                else if (logType === 'employee') {
+                } else if (logType === 'employee') {
                     routeName = 'offerQuotation'
                 }
-            }
-            else if (this.active === 3) {
+            } else if (this.active === 3) {
                 if (logType === 'client') {
                     routeName = 'clientContract'
-                }
-                else if (logType === 'employee') {
+                } else if (logType === 'employee') {
                     routeName = 'employeeContract'
                 }
-            }
-            else if (this.active === 4) {
+            } else if (this.active === 4) {
                 if (logType === 'client') {
                     routeName = 'clientUploadSamples'
-                }
-                else if (logType === 'employee') {
+                } else if (logType === 'employee') {
                     routeName = 'reviewSample'
                 }
-            }
-            else if (this.active === 5) {
+            } else if (this.active === 5) {
                 if (logType === 'employee') {
                     routeName = 'writeTestPlan'
                     if (sessionStorage.getItem('work') === 'verification') {
                         routeName = 'verifyTestPlan'
                     }
                 }
-            }
-            else if (this.active === 6) {
+            } else if (this.active === 6) {
                 if (logType === 'employee') {
                     routeName = 'testProcess'
                 }
-            }
-            else if (this.active === 7) {
+            } else if (this.active === 7) {
                 if (logType === 'client') {
                     routeName = 'clientVerifyTestReport'
-                }
-                else if (logType === 'employee') {
+                } else if (logType === 'employee') {
                     routeName = 'editTestReport'
                     if (sessionStorage.getItem('work') === 'verification') {
                         routeName = 'verifyTestReport'
                     }
                 }
-            }
-            else if (this.active === 8) {
+            } else if (this.active === 8) {
                 if (logType === 'employee') {
                     routeName = 'checkTestWork'
                 }
-            }
-            else if (this.active === 9) {
+            } else if (this.active === 9) {
                 if (logType === 'client') {
-                    routeName =  'confirmTestReport'
+                    routeName = 'confirmTestReport'
                 }
-            }
-            else if (this.active === 10) {
+            } else if (this.active === 10) {
                 console.log('10')
                 this.active = 11
-            }
-            else if (this.active === 11) {
+            } else if (this.active === 11) {
                 console.log('11')
             }
             if (routeName) {
@@ -367,6 +348,10 @@ export default {
 </script>
 
 <style scoped>
+.return-button {
+    margin-right: auto;
+}
+
 .pure-table {
     width: 100%;
     border-collapse: collapse;
