@@ -1,0 +1,57 @@
+{
+    "authority":
+    [
+        {
+            "key":"ApplicationForm",
+            "value":"true"
+        },
+        {
+            "key": "TestFunctionList",
+            "value": "true"
+        },
+        {
+            "key": "ApplicationVerifyForm",
+            "value": "true"
+        },
+        {
+            "key": "QuotationForm",
+            "value": "true"
+        },
+        {
+            "key": "ContractForm",
+            "value": "true"
+        },
+        {
+            "key": "TestPlanForm",
+            "value": "false"
+        },
+        {
+            "key": "TestPlanVerifyForm",
+            "value": "false"
+        },
+        {
+            "key": "TestRecordsForm",
+            "value": "true"
+        },
+        {
+            "key": "TestProblemForm",
+            "value": "true"
+        },
+        {
+            "key": "TestReportForm",
+            "value": "true"
+        },
+        {
+            "key": "ReportVerifyForm",
+            "value": "false"
+        },
+        {
+            "key": "DocumentReviewForm",
+            "value": "true"
+        },
+        {
+            "key": "TestWorkCheck",
+            "value": "false"
+        }
+    ]
+}

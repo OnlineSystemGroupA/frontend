@@ -2,7 +2,7 @@
     <div style="width:90%;">
         <h2>项目报价</h2>
         <h3>项目号:{{ itemId }}</h3>
-        <QuotationForm :writable="false" :form-id="itemId" :checking="false"></QuotationForm>
+        <QuotationForm :writable="false" :process-id="itemId" :checking="false"></QuotationForm>
         <br>
         <el-button type="primary">报价</el-button>
     </div>

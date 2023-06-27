@@ -57,8 +57,7 @@
                 </el-table-column>
                 <el-table-column label="操作" style="width: 25%">
                     <template slot-scope="scope">
-                        <el-button @click="readForm(scope.row)" icon="el-icon-search" size="small"
-                                   type="primary">查看
+                        <el-button @click="readForm(scope.row)" icon="el-icon-search" size="small" type="primary">查看
                         </el-button>
                     </template>
                 </el-table-column>
@@ -68,6 +67,8 @@
 </template>
 
 <script>
+import formAuthority from '../../assets/jsons/formAuthority.json'
+import formName from '../../assets/jsons/formName.json'
 export default {
     name: 'FinishedItemDetail',
     props: ['itemId'],
@@ -167,7 +168,9 @@ export default {
                     state: '已通过',
                     available: true,
                 },
-            ]
+            ],
+            formMap: new Map(),
+            authorityMap: new Map(),
         }
     },
     methods: {
@@ -175,57 +178,23 @@ export default {
             let logType = sessionStorage.getItem('logType')
             this.$router.push({
                 name: logType + "FinishedItemTable",
-                query: {page: 1}
+                query: { page: 1 }
             })
         },
-        readForm(row) {
+       readForm(row) {
             //console.log(row.title)
             if (!sessionStorage.getItem('logType')) {
                 alert('请登录！')
                 return
             }
             let logType = sessionStorage.getItem('logType')
-            let routeName = ''
-            if (row.title === '测试申请表') {
-                routeName = logType + 'ReadApplicationForm'
-            } else if (row.title === '测试功能表') {
-                routeName = logType + 'ReadTestFunctionList'
-            } else if (row.title === '申请审核表') {
-                routeName = logType + 'ReadApplicationVerifyForm'
-            } else if (row.title === '测试报价表') {
-                routeName = logType + 'ReadQuotationForm'
-            } else if (row.title === '测试合同表') {
-                routeName = logType + 'ReadContractForm'
-            } else if (row.title === '测试计划表') {
-                routeName = logType + 'ReadTestPlanForm'
-                if (logType === 'client') {
-                    return
-                }
-            } else if (row.title === '测试计划审核表') {
-                routeName = logType + 'ReadTestPlanVerifyForm'
-                if (logType === 'client') {
-                    return
-                }
-            } else if (row.title === '测试记录表') {
-                routeName = logType + 'ReadTestRecordsForm'
-            } else if (row.title === '测试问题表') {
-                routeName = logType + 'ReadTestProblemForm'
-            } else if (row.title === '测试报告表') {
-                routeName = logType + 'ReadTestReportForm'
-            } else if (row.title === '报告审核表') {
-                routeName = logType + 'ReadReportVerifyForm'
-                if (logType === 'client') {
-                    return
-                }
-            } else if (row.title === '文档审核表') {
-                routeName = logType + 'ReadDocumentReviewForm'
-            } else if (row.title === '测试检查表') {
-                routeName = logType + 'ReadTestWorkCheck'
-                if (logType === 'client') {
-                    return
-                }
-            }
+            let routeName = this.formMap.get(row.title)
+            console.log(routeName)
             if (routeName) {
+                if (this.authorityMap.get(routeName) !== 'true') {
+                    return
+                }
+                routeName = logType + 'Read' + routeName
                 this.$router.push(
                     {
                         name: routeName,
@@ -238,6 +207,16 @@ export default {
                 )
             }
         },
+        
+    },
+    created() {
+        formName.transformation.forEach(element => {
+            this.formMap.set(element.key, element.value)
+        })
+        //console.log(this.formMap)
+        formAuthority.authority.forEach(element => {
+            this.authorityMap.set(element.key, element.value)
+        })
     }
 }
 </script>

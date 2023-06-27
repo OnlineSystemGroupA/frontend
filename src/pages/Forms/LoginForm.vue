@@ -15,7 +15,7 @@
             <el-form-item>
                 <el-radio-group v-model="logType" @change="onChangeLoginTye">
                     <el-radio label="client">客户</el-radio>
-                    <el-radio label="employee">员工</el-radio>
+                    <el-radio label="operator">员工</el-radio>
                     <el-radio label="admin">管理员</el-radio>
                 </el-radio-group>
             </el-form-item>
@@ -87,6 +87,9 @@ export default {
             if (res.status === 200) {
                 sessionStorage.setItem('tokenHead', res.data.tokenHead)
                 sessionStorage.setItem('tokenStr', res.data.tokenStr)
+                if (this.logType === "operator") {
+                    this.logType = 'employee'
+                }
                 sessionStorage.setItem('logType', this.logType)
                 this.$router.replace({
                     name: this.logType

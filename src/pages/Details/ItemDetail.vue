@@ -87,6 +87,12 @@
 </template>
 
 <script>
+import formAuthority from '../../assets/jsons/formAuthority.json'
+import formName from '../../assets/jsons/formName.json'
+import clientOperation from '../../assets/jsons/clientOperation.json'
+import employeeOperation from '../../assets/jsons/employeeOperation.json'
+import verificationWork from '../../assets/jsons/verificationWork.json'
+
 export default {
     name: 'ItemDetail',
     props: ['itemId'],
@@ -187,7 +193,12 @@ export default {
                     state: '已通过',
                     available: true,
                 },
-            ]
+            ],
+            formMap: new Map(),
+            authorityMap: new Map(),
+            clientOperationMap: new Map(),
+            employeeOperationMap: new Map(),
+            verificationMap: new Map()
         }
     },
     methods: {
@@ -205,47 +216,13 @@ export default {
                 return
             }
             let logType = sessionStorage.getItem('logType')
-            let routeName = ''
-            if (row.title === '测试申请表') {
-                routeName = logType + 'ReadApplicationForm'
-            } else if (row.title === '测试功能表') {
-                routeName = logType + 'ReadTestFunctionList'
-            } else if (row.title === '申请审核表') {
-                routeName = logType + 'ReadApplicationVerifyForm'
-            } else if (row.title === '测试报价表') {
-                routeName = logType + 'ReadQuotationForm'
-            } else if (row.title === '测试合同表') {
-                routeName = logType + 'ReadContractForm'
-            } else if (row.title === '测试计划表') {
-                routeName = logType + 'ReadTestPlanForm'
-                if (logType === 'client') {
-                    return
-                }
-            } else if (row.title === '测试计划审核表') {
-                routeName = logType + 'ReadTestPlanVerifyForm'
-                if (logType === 'client') {
-                    return
-                }
-            } else if (row.title === '测试记录表') {
-                routeName = logType + 'ReadTestRecordsForm'
-            } else if (row.title === '测试问题表') {
-                routeName = logType + 'ReadTestProblemForm'
-            } else if (row.title === '测试报告表') {
-                routeName = logType + 'ReadTestReportForm'
-            } else if (row.title === '报告审核表') {
-                routeName = logType + 'ReadReportVerifyForm'
-                if (logType === 'client') {
-                    return
-                }
-            } else if (row.title === '文档审核表') {
-                routeName = logType + 'ReadDocumentReviewForm'
-            } else if (row.title === '测试检查表') {
-                routeName = logType + 'ReadTestWorkCheck'
-                if (logType === 'client') {
-                    return
-                }
-            }
+            let routeName = this.formMap.get(row.title)
+            console.log(routeName)
             if (routeName) {
+                if (this.authorityMap.get(routeName) !== 'true') {
+                    return
+                }
+                routeName = logType + 'Read' + routeName
                 this.$router.push(
                     {
                         name: routeName,
@@ -272,68 +249,19 @@ export default {
             }
             let logType = sessionStorage.getItem('logType')
             let routeName = ''
-            if (this.active === 0) {
-                if (logType === 'client') {
-                    routeName = 'savedApplication'
-                }
-            } else if (this.active === 1) {
-                if (logType === 'client') {
-                    routeName = 'submittedApplication'
-                } else if (logType === 'employee') {
-                    routeName = 'checkApplication'
-                }
-            } else if (this.active === 2) {
-                if (logType === 'client') {
-                    routeName = 'clientAcceptQuotation'
-                } else if (logType === 'employee') {
-                    routeName = 'offerQuotation'
-                }
-            } else if (this.active === 3) {
-                if (logType === 'client') {
-                    routeName = 'clientContract'
-                } else if (logType === 'employee') {
-                    routeName = 'employeeContract'
-                }
-            } else if (this.active === 4) {
-                if (logType === 'client') {
-                    routeName = 'clientUploadSamples'
-                } else if (logType === 'employee') {
-                    routeName = 'reviewSample'
-                }
-            } else if (this.active === 5) {
-                if (logType === 'employee') {
-                    routeName = 'writeTestPlan'
-                    if (sessionStorage.getItem('work') === 'verification') {
-                        routeName = 'verifyTestPlan'
-                    }
-                }
-            } else if (this.active === 6) {
-                if (logType === 'employee') {
-                    routeName = 'testProcess'
-                }
-            } else if (this.active === 7) {
-                if (logType === 'client') {
-                    routeName = 'clientVerifyTestReport'
-                } else if (logType === 'employee') {
-                    routeName = 'editTestReport'
-                    if (sessionStorage.getItem('work') === 'verification') {
-                        routeName = 'verifyTestReport'
-                    }
-                }
-            } else if (this.active === 8) {
-                if (logType === 'employee') {
-                    routeName = 'checkTestWork'
-                }
-            } else if (this.active === 9) {
-                if (logType === 'client') {
-                    routeName = 'confirmTestReport'
-                }
-            } else if (this.active === 10) {
-                console.log('10')
-                this.active = 11
-            } else if (this.active === 11) {
-                console.log('11')
+            if (logType === 'client') {
+                console.log(this.active)
+                routeName = this.clientOperationMap.get(this.active)
             }
+            else {
+                routeName = this.employeeOperationMap.get(this.active)
+                if (sessionStorage.getItem('work') === 'verification') {
+                    if (this.employeeOperationMap.get(routeName)) {
+                        routeName = this.employeeOperationMap.get(routeName)
+                    } 
+                }
+            }
+            console.log(routeName)
             if (routeName) {
                 this.$router.push({
                     name: routeName,
@@ -343,6 +271,27 @@ export default {
                 })
             }
         }
+    },
+    created() {
+        formName.transformation.forEach(element => {
+            this.formMap.set(element.key,element.value)
+        })
+        //console.log(this.formMap)
+        formAuthority.authority.forEach(element => {
+            this.authorityMap.set(element.key, element.value)
+        })
+        //console.log(this.authorityMap)
+        clientOperation.operation.forEach(element => {
+            this.clientOperationMap.set(parseInt(element.key), element.value)
+        })
+        console.log(this.clientOperationMap)
+        employeeOperation.operation.forEach(element => {
+            this.employeeOperationMap.set(parseInt(element.key), element.value)
+        })
+        verificationWork.operation.forEach(element => {
+            this.verificationMap.set(element.key, element.value)
+        })
+
     }
 }
 </script>
