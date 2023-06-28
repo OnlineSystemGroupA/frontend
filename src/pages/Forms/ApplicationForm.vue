@@ -659,7 +659,6 @@ export default {
                         'Content-Type': 'text/plain'
                     }
                 }).then(this.handleResult, this.handleError)
-                //this.$bus.$emit('submitApplication')
             }
         },
         save() {
@@ -677,11 +676,10 @@ export default {
             console.log(res)
             if (res.status === 200) {
                 alert('上传成功')
+                this.$bus.$emit('submitApplication')
             }
         },
         handleError(err) {
-            //console.log(err)
-            //console.log(err.response.status)
             if (err.response.status === 401) {
                 alert('账号或者密码错误')
             } else if (err.response.status === 403) {
@@ -689,7 +687,6 @@ export default {
             } else if (err.response.status === 404) {
                 alert('不存在该用户')
             }
-            //alert(err.response.data)
         },
     },
     mounted() {
@@ -697,6 +694,7 @@ export default {
     },
     created() {
         this.form = applicationForm;
+        this.chosenData.companyType = '企业类型'
     },
     computed: {
         disabled() {
