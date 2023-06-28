@@ -134,10 +134,6 @@
             <el-form-item label="架构:" prop="serverNames" ref="serverNames">
                 <br>
                 <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions"
-                                     option-description="添加一种架构"
-                                     @change="emitChangeEvent('serverNames', form.serverNames)"
-                                     @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
-                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions"
                                      :disabled="disabled"
                                      option-description="添加一种架构"
                                      @change="emitChangeEvent('serverNames', form.serverNames)"
