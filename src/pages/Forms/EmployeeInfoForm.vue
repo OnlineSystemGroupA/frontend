@@ -2,10 +2,12 @@
     <div class="employee">
         <h2>新员工信息</h2>
         <el-form label-position="left" label-width="80px">
-            <table class="pure-table" rules = all>
+            <table class="pure-table" rules=all>
                 <tr>
                     <th style="width:25%">姓名</th>
-                    <td style="width:25%"><el-input placeholder="姓名" v-model="form.name"></el-input> </td>
+                    <td style="width:25%">
+                        <el-input placeholder="姓名" v-model="form.name"></el-input>
+                    </td>
                     <th style="width:25%">职员号</th>
                     <td style="width:25%">
                         <el-input placeholder="职员号" v-model="form.id"></el-input>
@@ -16,15 +18,16 @@
                     <th style="width:25%">部门</th>
                     <td style="width:25%">
                         <el-select placeholder="部门" v-model="form.department">
-                            <el-option v-for="department in departments" :key="department.value" :label="department.label"
-                                :value="department.value"></el-option>
+                            <el-option v-for="department in departments" :key="department.value"
+                                       :label="department.label"
+                                       :value="department.value"></el-option>
                         </el-select>
                     </td>
                     <th style="width:25%">职能</th>
                     <td style="width:25%">
                         <el-select placeholder="职能" v-model="form.position">
                             <el-option v-for="position in positions" :key="position.value" :label="position.label"
-                                :value="position.value"></el-option>
+                                       :value="position.value"></el-option>
                         </el-select>
                     </td>
                 </tr>
@@ -76,7 +79,7 @@ export default {
     },
     methods: {
         submit() {
-            
+
         }
     }
 }

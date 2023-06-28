@@ -10,6 +10,7 @@
 
 <script>
 import QuotationForm from '../Forms/QuotationForm.vue';
+
 export default {
     name: 'EmployeeQuotation',
     props: ['itemId'],

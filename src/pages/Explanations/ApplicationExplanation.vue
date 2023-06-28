@@ -6,7 +6,9 @@
             <li>《软件项目委托测试申请表》：①书面一份加盖公章；②电子文档。</li>
             <li>《委托测试软件功能列表》: ①书面一份加盖公章；②电子文档</li>
             <li>《软件项目委托测试保密协议》、《软件项目委托测试合同》：格式按照合同及协议规范签订。①书面各两分；②电子文档</li>
-            <li>软件资料: 包括《用户手册》、《安装手册》、《操作手册》、《维护手册》。(手册要有详细的目录索引、页码标识、文档版本号、技术支持联系方法、公司名称、地址等) ①电子文档。</li>
+            <li>软件资料: 包括《用户手册》、《安装手册》、《操作手册》、《维护手册》。(手册要有详细的目录索引、页码标识、文档版本号、技术支持联系方法、公司名称、地址等)
+                ①电子文档。
+            </li>
             <li>《无法检测功能的声明》①书面一份加盖公章；②电子文档。</li>
         </ol>
         <h4 style="text-align: left">二、提交软件样品</h4>
@@ -25,19 +27,17 @@
 
 <script>
 export default {
-    name:'ApplicationExplanation',
-    data(){
-        return{
-
-        }
+    name: 'ApplicationExplanation',
+    data() {
+        return {}
     },
-    methods:{
+    methods: {
         applicationForm() {
             this.axios.post('/api/workflow/start').then(this.handleResult, this.handleError)
 
             //this.$bus.$emit('setWritable',false)
             //console.log('Set writable')
-            
+
         },
         handleResult(res) {
             if (res.status === 200) {
@@ -55,7 +55,7 @@ export default {
 </script>
 
 <style scoped>
-.explanation{
+.explanation {
     width: 94%;
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);

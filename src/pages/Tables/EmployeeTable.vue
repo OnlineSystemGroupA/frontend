@@ -35,14 +35,15 @@
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
                     <el-button @click="pickEmployee(scope.row.id)" icon="el-icon-search" size="small"
-                        type="primary">查看员工</el-button>
+                               type="primary">查看员工
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
         <div class="block">
             <br>
             <el-pagination layout="prev, pager, next" background :current-page="page" :page-count="pageCount"
-                v-on:current-change="(curpage) => { handlePageChange(curpage) }">
+                           v-on:current-change="(curpage) => { handlePageChange(curpage) }">
             </el-pagination>
         </div>
     </div>
@@ -529,8 +530,7 @@ export default {
                         employeeId: id
                     }
                 })
-            }
-            else {
+            } else {
                 this.$router.push({
                     name: 'itemOfEmployee',
                     query: {
@@ -546,8 +546,7 @@ export default {
                     name: 'employeeTable',
                     query: { page: curpage }
                 })
-            }
-            else {
+            } else {
                 this.$router.push({
                     name: 'employeeTableForManager',
                     query: { page: curpage }

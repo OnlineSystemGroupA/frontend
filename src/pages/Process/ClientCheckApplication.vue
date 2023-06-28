@@ -17,9 +17,7 @@ export default {
     name: 'ClientCheckApplication',
     props: ['itemId'],
     data() {
-        return {
-            
-        }
+        return {}
     },
     methods: {
         editApplicationForm() {
@@ -44,7 +42,7 @@ export default {
                 }
             })
         },
-       checkItemDetail(id) {
+        checkItemDetail(id) {
             this.$router.push({
                 name: 'clientItemDetail',
                 query: { itemId: id }

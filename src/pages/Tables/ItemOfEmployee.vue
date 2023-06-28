@@ -38,7 +38,10 @@
                 <span>排序</span>
                 <br>
                 <el-radio-group v-model="sortKey">
-                    <el-radio v-for="(sort, index) in sortKeys" :key="index" :label="sort.value">{{ sort.label }}</el-radio>
+                    <el-radio v-for="(sort, index) in sortKeys" :key="index" :label="sort.value">{{
+                            sort.label
+                        }}
+                    </el-radio>
                 </el-radio-group>
             </div>
         </div>
@@ -50,19 +53,20 @@
                     <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.processId }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="title" label="项目名称" style="width: 16%"> </el-table-column>
-            <el-table-column prop="startDate" label="创建时间" style="width: 16%"> </el-table-column>
-            <el-table-column prop="startUser" label="申请人" style="width: 16%"> </el-table-column>
-            <el-table-column prop="taskName" label="项目状态" style="width: 16%"> </el-table-column>
+            <el-table-column prop="title" label="项目名称" style="width: 16%"></el-table-column>
+            <el-table-column prop="startDate" label="创建时间" style="width: 16%"></el-table-column>
+            <el-table-column prop="startUser" label="申请人" style="width: 16%"></el-table-column>
+            <el-table-column prop="taskName" label="项目状态" style="width: 16%"></el-table-column>
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
                     <el-tooltip class="item" effect="light" content="查看项目详情" placement="bottom">
                         <el-button @click="checkItemDetail(scope.row.processId)" icon="el-icon-search" size="small"
-                            type="primary" circle></el-button>
+                                   type="primary" circle></el-button>
                     </el-tooltip>
                     <el-tooltip class="item" effect="light" content="删除员工任务" placement="bottom">
-                        <el-button @click="deleteItem(scope.row.processId)" icon="el-icon-delete" size="small" type="danger"
-                            circle></el-button>
+                        <el-button @click="deleteItem(scope.row.processId)" icon="el-icon-delete" size="small"
+                                   type="danger"
+                                   circle></el-button>
                     </el-tooltip>
                 </template>
             </el-table-column>
@@ -71,7 +75,7 @@
         <div class="block">
             <br>
             <el-pagination layout="prev, pager, next" background :current-page="currentPage" :page-count="pageCount"
-                v-on:current-change="(curpage) => { handlePageChange(curpage) }">
+                           v-on:current-change="(curpage) => { handlePageChange(curpage) }">
             </el-pagination>
         </div>
     </div>
@@ -123,14 +127,14 @@ export default {
                 assignee: '张三',
                 endDate: '2022-12-04',
             },
-            {
-                processId: '002',
-                title: '网页游戏测试',
-                startDate: '2022-11-05',
-                startUser: '亚瑟',
-                assignee: '梅林',
-                endDate: '2022-12-04',
-            },],
+                {
+                    processId: '002',
+                    title: '网页游戏测试',
+                    startDate: '2022-11-05',
+                    startUser: '亚瑟',
+                    assignee: '梅林',
+                    endDate: '2022-12-04',
+                },],
             itemCount: 0,
         }
     },
@@ -190,7 +194,7 @@ export default {
         },
         deleteItem(id) {
             console.log(id)
-            this.$confirm('确认是否删除员工此任务'+id +'?', '提示', {
+            this.$confirm('确认是否删除员工此任务' + id + '?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'

@@ -5,7 +5,7 @@
         </template>
         <template #detail-button>
             <el-button @click="clientDetail" circle size="medium" class="header-button" type="text"
-                icon="el-icon-user"></el-button>
+                       icon="el-icon-user"></el-button>
         </template>
     </UserLayout>
 </template>

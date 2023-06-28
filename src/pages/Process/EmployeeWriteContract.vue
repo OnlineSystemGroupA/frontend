@@ -5,7 +5,7 @@
         <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
         <el-button type="primary" @click="writeContract">填写合同</el-button>
         <router-view></router-view>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -13,9 +13,7 @@ export default {
     name: 'EmployeeWriteContent',
     props: ['itemId'],
     data() {
-        return {
-            
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {

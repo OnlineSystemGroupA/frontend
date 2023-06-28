@@ -68,7 +68,8 @@
             <hr>
             <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
                 <br>
-                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects" :default-options="testAspectsOptions"
+                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects"
+                                         :default-options="testAspectsOptions"
                                          option-description="选择测试指标" create-description="其他指标"
                                          @change="emitChangeEvent('testAspects', form.testAspects)"
                                          @blur="emitBlurEvent('testAspects', form.testAspects)"></MultipleCreateAndSelect>
@@ -119,17 +120,17 @@
                                  v-model.number="form.clientMemory" style="margin-top:5px"></el-input-number>
             </el-form-item>
             <el-form-item label="其他要求:" label-width="20%">
-                <el-input placeholder="其他要求" v-model="form.clientOtherRequirement" style="margin-top:5px"></el-input>
+                <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
+                          style="margin-top:5px"></el-input>
             </el-form-item>
             <h3>服务器端</h3>
             <h4>硬件</h4>
             <el-form-item label="架构:" prop="serverNames" ref="serverNames">
                 <br>
                 <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions"
-                                     option-description="添加一种架构" @change="emitChangeEvent('serverNames', form.serverNames)"
-                                     @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
-                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions" :disabled="disabled"
-                                     option-description="添加一种架构" @change="emitChangeEvent('serverNames', form.serverNames)"
+                                     :disabled="disabled"
+                                     option-description="添加一种架构"
+                                     @change="emitChangeEvent('serverNames', form.serverNames)"
                                      @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
             </el-form-item>
             <el-row>
@@ -147,7 +148,8 @@
                 </el-col>
             </el-row>
             <el-form-item label="其他要求:" label-width="20%">
-                <el-input placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
+                <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
+                          style="margin-top:5px"></el-input>
             </el-form-item>
             <h4>软件</h4>
             <el-row :gutter="20">
@@ -647,7 +649,6 @@ export default {
                         'Content-Type': 'text/plain'
                     }
                 }).then(this.handleResult, this.handleError)
-                //this.$bus.$emit('submitApplication')
             }
         },
         save() {
@@ -665,17 +666,17 @@ export default {
             console.log(res)
             if (res.status === 200) {
                 alert('上传成功')
+                this.$bus.$emit('submitApplication')
             }
         },
         handleError(err) {
-            //console.log(err)
-            //console.log(err.response.status)
-            if (err.response.status === 403) {
-                alert('	该流程实例对当前用户不可见或当前用户无修改权限')
+            if (err.response.status === 401) {
+                alert('账号或者密码错误')
+            } else if (err.response.status === 403) {
+                alert('账号封禁中')
             } else if (err.response.status === 404) {
                 alert('指定流程实例不存在')
             }
-            //alert(err.response.data)
         },
     },
     mounted() {

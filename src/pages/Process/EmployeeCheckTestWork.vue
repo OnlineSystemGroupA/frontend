@@ -1,5 +1,5 @@
 <template>
-    <div style="width:90%;"> 
+    <div style="width:90%;">
         <h2>测试工作检查</h2>
         <h3>项目号:{{ itemId }}</h3>
         <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
@@ -15,9 +15,7 @@ export default {
     name: 'EmployeeCheckTestWork',
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {

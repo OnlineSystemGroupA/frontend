@@ -1,6 +1,6 @@
 <template>
     <div class="contract">
-        <el-form :disabled = "disable">
+        <el-form :disabled="disable">
             <div style="text-align: center;">
                 <h2 style="font-size: 56px;">南京大学测试中心合同</h2>
             </div>
@@ -11,40 +11,51 @@
                         <th style="width:40%">
                             <h3>项目名称：</h3>
                         </th>
-                        <td style="width:40%"><el-input placeholder="项目名称" v-model="form.item"
-                                style="width:100%"></el-input>
+                        <td style="width:40%">
+                            <el-input placeholder="项目名称" v-model="form.item"
+                                      style="width:100%"></el-input>
                         </td>
                     </tr>
                     <tr>
                         <th>
                             <h3>委托方（甲方）：</h3>
                         </th>
-                        <td><el-input placeholder="委托方（甲方）" v-model="form.client" style="width:100%"></el-input></td>
+                        <td>
+                            <el-input placeholder="委托方（甲方）" v-model="form.client" style="width:100%"></el-input>
+                        </td>
                     </tr>
                     <tr>
                         <th>
                             <h3>受托方（乙方）：</h3>
                         </th>
-                        <td><el-input placeholder="受托方（乙方）" v-model="form.trustee" style="width:100%"></el-input></td>
+                        <td>
+                            <el-input placeholder="受托方（乙方）" v-model="form.trustee" style="width:100%"></el-input>
+                        </td>
                     </tr>
                     <tr>
                         <th>
                             <h3>签订地点：</h3>
                         </th>
-                        <td><el-input placeholder="签订地点" v-model="form.signPlace" style="width:100%"></el-input></td>
+                        <td>
+                            <el-input placeholder="签订地点" v-model="form.signPlace" style="width:100%"></el-input>
+                        </td>
                     </tr>
                     <tr>
                         <th>
                             <h3>签订日期：</h3>
                         </th>
-                        <td><el-date-picker placeholder="签订日期" v-model="form.signDate" style="width:100%"></el-date-picker>
+                        <td>
+                            <el-date-picker placeholder="签订日期" v-model="form.signDate"
+                                            style="width:100%"></el-date-picker>
                         </td>
                     </tr>
                     <tr>
                         <th>
                             <h3>有效期至：</h3>
                         </th>
-                        <td><el-date-picker placeholder="有效期至" v-model="form.validDate" style="width:100%"></el-date-picker>
+                        <td>
+                            <el-date-picker placeholder="有效期至" v-model="form.validDate"
+                                            style="width:100%"></el-date-picker>
                         </td>
                     </tr>
                 </table>
@@ -52,15 +63,21 @@
             <br>
             <div>
                 <p>
-                    本合同由作为委托方的<el-input placeholder="委托方（甲方）" v-model="form.client"
-                        style="width:20%"></el-input>（以下简称“甲方”）与作为受托方的 南京大学
+                    本合同由作为委托方的
+                    <el-input placeholder="委托方（甲方）" v-model="form.client"
+                              style="width:20%"></el-input>
+                    （以下简称“甲方”）与作为受托方的 南京大学
                     （以下简称“乙方”）在平等自愿的基础上，依据《中华人民共和国合同法》有关规定就项目的执行，经友好协商后订立。
                 </p>
                 <h4>一、 任务表述</h4>
                 <p>
-                    乙方按照国家软件质量测试标准和测试规范，完成甲方委托的软件<el-input placeholder="受测软件" v-model="form.software"
-                        style="width:20%"></el-input>(下称受测软件)的质量特性<el-input placeholder="质量特性"
-                        v-model="form.qualityCharacteristic" style="width:20%"></el-input>，进行测试，并出具相应的测试报告。
+                    乙方按照国家软件质量测试标准和测试规范，完成甲方委托的软件
+                    <el-input placeholder="受测软件" v-model="form.software"
+                              style="width:20%"></el-input>
+                    (下称受测软件)的质量特性
+                    <el-input placeholder="质量特性"
+                              v-model="form.qualityCharacteristic" style="width:20%"></el-input>
+                    ，进行测试，并出具相应的测试报告。
                 </p>
                 <h4>二、双方的主要义务 </h4>
                 <p>
@@ -85,7 +102,9 @@
                 </p>
                 <h4>四、合同价款</h4>
                 <p>
-                    本合同软件测试费用为人民币<el-input-number placeholder="测试费用" v-model="form.testFee"></el-input-number>（¥元）。
+                    本合同软件测试费用为人民币
+                    <el-input-number placeholder="测试费用" v-model="form.testFee"></el-input-number>
+                    （¥元）。
                 </p>
                 <h4>五、测试费用支付方式</h4>
                 <p>
@@ -94,27 +113,38 @@
                 <h4>六、履行的期限</h4>
                 <p>
                 <ol>
-                    <li>本次测试的履行期限为合同生效之日起<el-input-number placeholder="自然日"
-                            v-model="form.testTime"></el-input-number>个自然日内完成。
+                    <li>本次测试的履行期限为合同生效之日起
+                        <el-input-number placeholder="自然日"
+                                         v-model="form.testTime"></el-input-number>
+                        个自然日内完成。
                     </li>
                     <li>经甲乙双方同意，可对测试进度作适当修改，并以修改后的测试进度作为本合同执行的期限。</li>
-                    <li>如受测软件在测试过程中出现的问题，导致继续进行测试会影响整体测试进度，则乙方暂停测试并以书面形式通知甲方进行整改。在整个测试过程中，整改次数限于<el-input-number
+                    <li>如受测软件在测试过程中出现的问题，导致继续进行测试会影响整体测试进度，则乙方暂停测试并以书面形式通知甲方进行整改。在整个测试过程中，整改次数限于
+                        <el-input-number
                             placeholder="整改次数"
-                            v-model="form.rectificationFrequency"></el-input-number>次，每次不超过<el-input-number
-                            placeholder="整改天数" v-model="form.rectificationTime"></el-input-number>天。
+                            v-model="form.rectificationFrequency"></el-input-number>
+                        次，每次不超过
+                        <el-input-number
+                            placeholder="整改天数" v-model="form.rectificationTime"></el-input-number>
+                        天。
                     </li>
                     <li>如因甲方原因，导致测试进度延迟、应由甲方负责,乙方不承担责任。</li>
-                    <li>如因乙方原因，导致测试进度延迟，则甲方可酌情提出赔偿要求，赔偿金额不超过甲方已付金额的50%。双方经协商一致后另行签订书面协议，作为本合同的补充。</li>
+                    <li>
+                        如因乙方原因，导致测试进度延迟，则甲方可酌情提出赔偿要求，赔偿金额不超过甲方已付金额的50%。双方经协商一致后另行签订书面协议，作为本合同的补充。
+                    </li>
                 </ol>
                 </p>
                 <h4>七、资料的保密</h4>
-                <p>对于一方向另一方提供使用的秘密信息，另一方负有保密的责任，不得向任何第三方透露。为明确双方的保密义务，双方应签署《软件项目委托测试保密协议》，并保证切实遵守其中条款。</p>
+                <p>
+                    对于一方向另一方提供使用的秘密信息，另一方负有保密的责任，不得向任何第三方透露。为明确双方的保密义务，双方应签署《软件项目委托测试保密协议》，并保证切实遵守其中条款。</p>
                 <h4>八、 风险责任的承担</h4>
-                <p>乙方人员在本协议有效期间（包括可能的到甲方出差）发生人身意外或罹患疾病时由乙方负责处理。甲方人员在本协议有效期间（包括可能的到乙方出差）发生人身意外或罹患疾病时由甲方负责处理。</p>
+                <p>
+                    乙方人员在本协议有效期间（包括可能的到甲方出差）发生人身意外或罹患疾病时由乙方负责处理。甲方人员在本协议有效期间（包括可能的到乙方出差）发生人身意外或罹患疾病时由甲方负责处理。</p>
                 <h4>九、验收方法</h4>
                 <p>由乙方向甲方提交软件产品鉴定测试报告正本一份，甲方签收鉴定测试报告后，完成验收。</p>
                 <h4>十、 争议解决</h4>
-                <p>双方因履行本合同所发生的一切争议，应通过友好协商解决；如协商解决不成，就提交市级仲裁委员会进行仲裁。裁决对双方当事人具有同等约束力。</p>
+                <p>
+                    双方因履行本合同所发生的一切争议，应通过友好协商解决；如协商解决不成，就提交市级仲裁委员会进行仲裁。裁决对双方当事人具有同等约束力。</p>
                 <h4>十一、 其他</h4>
                 <p>本合同自双方授权代表签字盖章之日起生效，自受托方的主要义务履行完毕之日起终止。</p>
                 <p>本合同未尽事宜由双方协商解决。</p>
@@ -125,38 +155,60 @@
                 <tr>
                     <th rowspan="7" style="text-align:center; font-size: 24px;">委<br>托<br>方</th>
                     <th>单位全称</th>
-                    <td colspan="3"><el-input placeholder="委托方（甲方）" v-model="form.client" style="width:100%"></el-input>
+                    <td colspan="3">
+                        <el-input placeholder="委托方（甲方）" v-model="form.client" style="width:100%"></el-input>
                     </td>
                 </tr>
                 <tr>
                     <th>授权代表</th>
-                    <td><el-input placeholder="授权代表" v-model = "form.clientInfo.representive" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="授权代表" v-model="form.clientInfo.representive"
+                                  style="width:100%"></el-input>
+                    </td>
                     <th>签章日期</th>
-                    <td><el-date-picker placeholder="签章日期" v-model = "form.clientInfo.signatureDate" style="width:100%"></el-date-picker></td>
+                    <td>
+                        <el-date-picker placeholder="签章日期" v-model="form.clientInfo.signatureDate"
+                                        style="width:100%"></el-date-picker>
+                    </td>
                 </tr>
                 <tr>
                     <th>联系人</th>
-                    <td colspan="3"><el-input placeholder="联系人" v-model = "form.clientInfo.contact" style="width:100%"></el-input></td>
+                    <td colspan="3">
+                        <el-input placeholder="联系人" v-model="form.clientInfo.contact" style="width:100%"></el-input>
+                    </td>
                 </tr>
                 <tr>
                     <th>通讯地址</th>
-                    <td colspan="3"><el-input placeholder="通讯地址" v-model = "form.clientInfo.address" style="width:100%"></el-input></td>
+                    <td colspan="3">
+                        <el-input placeholder="通讯地址" v-model="form.clientInfo.address"
+                                  style="width:100%"></el-input>
+                    </td>
                 </tr>
                 <tr>
                     <th>电话</th>
-                    <td><el-input placeholder="电话" v-model = "form.clientInfo.telephone" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="电话" v-model="form.clientInfo.telephone" style="width:100%"></el-input>
+                    </td>
                     <th>传真</th>
-                    <td><el-input placeholder="传真" v-model = "form.clientInfo.fax" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="传真" v-model="form.clientInfo.fax" style="width:100%"></el-input>
+                    </td>
                 </tr>
                 <tr>
                     <th>开户银行</th>
-                    <td colspan="3"><el-input placeholder="开户银行" v-model = "form.clientInfo.bank" style="width:100%"></el-input></td>
+                    <td colspan="3">
+                        <el-input placeholder="开户银行" v-model="form.clientInfo.bank" style="width:100%"></el-input>
+                    </td>
                 </tr>
                 <tr>
                     <th>账号</th>
-                    <td><el-input placeholder="账号" v-model = "form.clientInfo.account" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="账号" v-model="form.clientInfo.account" style="width:100%"></el-input>
+                    </td>
                     <th>邮编</th>
-                    <td><el-input placeholder="邮编" v-model = "form.clientInfo.postcode" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="邮编" v-model="form.clientInfo.postcode" style="width:100%"></el-input>
+                    </td>
                 </tr>
                 <tr>
                     <th rowspan="8" style="text-align:center; font-size: 24px;">受<br>托<br>方</th>
@@ -166,25 +218,42 @@
                 </tr>
                 <tr>
                     <th>授权代表</th>
-                    <td><el-input placeholder="授权代表" v-model = "form.trusteeInfo.representive" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="授权代表" v-model="form.trusteeInfo.representive"
+                                  style="width:100%"></el-input>
+                    </td>
                     <th>签章日期</th>
-                    <td><el-date-picker placeholder="签章日期" v-model = "form.trusteeInfo.signatureDate" style="width:100%"></el-date-picker></td>
+                    <td>
+                        <el-date-picker placeholder="签章日期" v-model="form.trusteeInfo.signatureDate"
+                                        style="width:100%"></el-date-picker>
+                    </td>
                 </tr>
                 <tr>
                     <th>联系人</th>
-                    <td colspan="3"><el-input placeholder="联系人" v-model = "form.trusteeInfo.contact" style="width:100%"></el-input></td>
+                    <td colspan="3">
+                        <el-input placeholder="联系人" v-model="form.trusteeInfo.contact" style="width:100%"></el-input>
+                    </td>
                 </tr>
                 <tr>
                     <th>通讯地址</th>
-                    <td><el-input placeholder="通讯地址" v-model = "form.trusteeInfo.address" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="通讯地址" v-model="form.trusteeInfo.address"
+                                  style="width:100%"></el-input>
+                    </td>
                     <th>邮编</th>
-                    <td><el-input placeholder="邮编" v-model = "form.trusteeInfo.postcode" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="邮编" v-model="form.trusteeInfo.postcode" style="width:100%"></el-input>
+                    </td>
                 </tr>
                 <tr>
                     <th>电话</th>
-                    <td><el-input placeholder="电话" v-model = "form.trusteeInfo.telephone" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="电话" v-model="form.trusteeInfo.telephone" style="width:100%"></el-input>
+                    </td>
                     <th>传真</th>
-                    <td><el-input placeholder="传真" v-model = "form.trusteeInfo.fax" style="width:100%"></el-input></td>
+                    <td>
+                        <el-input placeholder="传真" v-model="form.trusteeInfo.fax" style="width:100%"></el-input>
+                    </td>
                 </tr>
                 <tr>
                     <th>开户银行</th>
@@ -215,6 +284,7 @@
 
 <script>
 import contractForm from '../../assets/jsons/contractForm.json'
+
 export default {
     name: 'ContractForm',
     props: ['writable', 'processId', 'checking'],

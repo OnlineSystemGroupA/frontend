@@ -25,7 +25,7 @@
                         <el-col class="col">
                             <el-form-item label="发现时间">
                                 <el-date-picker style="width: 100%;" v-model="item.discoveredTime"
-                                    placeholder="发现时间"></el-date-picker>
+                                                placeholder="发现时间"></el-date-picker>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -43,13 +43,15 @@
                 </el-form-item>
 
                 <el-form-item label="发现缺陷的初始条件">
-                    <el-input v-model="item.initialCondition" placeholder="发现缺陷的初始条件" type="textarea"></el-input>
+                    <el-input v-model="item.initialCondition" placeholder="发现缺陷的初始条件"
+                              type="textarea"></el-input>
                 </el-form-item>
 
                 <el-form-item label="发现缺陷用例及具体操作路径（要具体）">
-                    <el-input v-model="item.operationRoute" placeholder="发现缺陷用例及具体操作路径（要具体）" type="textarea"></el-input>
+                    <el-input v-model="item.operationRoute" placeholder="发现缺陷用例及具体操作路径（要具体）"
+                              type="textarea"></el-input>
                 </el-form-item>
-                
+
                 <el-form-item label="修改意见">
                     <el-input v-model="item.editSuggestion" type="textarea" placeholder="修改意见"></el-input>
                 </el-form-item>
@@ -68,8 +70,9 @@
 </template>
 
 <script>
-import { nanoid } from "nanoid"
+import {nanoid} from "nanoid"
 import testProblemForm from '../../assets/jsons/testProblemForm.json'
+
 export default {
     name: 'TestProblemForm',
     props: ['writable', 'processId', 'checking'],
@@ -134,11 +137,9 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -146,11 +147,9 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            }
-            else if (this.checking === 'false') {
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if (this.checking) {
+            } else if (this.checking) {
                 return true
             }
             return false

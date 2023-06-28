@@ -20,7 +20,7 @@ import PageFooter from "@/components/Footers/PageFooter.vue";
 
 export default {
     name: 'LoginPage',
-    components: {PageFooter},
+    components: { PageFooter },
     //components: { LoginHeader },
     methods: {
         register() {

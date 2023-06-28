@@ -8,30 +8,46 @@
                 <table>
                     <tr>
                         <th>测试类型</th>
-                        <td><el-input v-model="record.type"></el-input></td>
+                        <td>
+                            <el-input v-model="record.type"></el-input>
+                        </td>
                         <th>设计说明</th>
-                        <td><el-input v-model="record.description"></el-input></td>
+                        <td>
+                            <el-input v-model="record.description"></el-input>
+                        </td>
                     </tr>
 
                     <tr>
                         <th>规约说明</th>
-                        <td> <el-input v-model="record.contract"></el-input></td>
+                        <td>
+                            <el-input v-model="record.contract"></el-input>
+                        </td>
                         <th>前提条件</th>
-                        <td><el-input v-model="record.premise"></el-input></td>
+                        <td>
+                            <el-input v-model="record.premise"></el-input>
+                        </td>
                     </tr>
 
                     <tr>
                         <th>执行过程</th>
-                        <td><el-input v-model="record.process"></el-input></td>
+                        <td>
+                            <el-input v-model="record.process"></el-input>
+                        </td>
                         <th>预期结果</th>
-                        <td><el-input v-model="record.prediction"></el-input></td>
+                        <td>
+                            <el-input v-model="record.prediction"></el-input>
+                        </td>
                     </tr>
 
                     <tr>
                         <th>设计者</th>
-                        <td><el-input v-model="record.designer"></el-input></td>
+                        <td>
+                            <el-input v-model="record.designer"></el-input>
+                        </td>
                         <th>实际结果</th>
-                        <td><el-input v-model="record.result"></el-input></td>
+                        <td>
+                            <el-input v-model="record.result"></el-input>
+                        </td>
                     </tr>
 
                     <tr>
@@ -43,18 +59,26 @@
                             </el-radio-group>
                         </td>
                         <th>相关 bug 编号</th>
-                        <td><el-input v-model="record.bugIndex"></el-input></td>
+                        <td>
+                            <el-input v-model="record.bugIndex"></el-input>
+                        </td>
                     </tr>
 
                     <tr>
                         <th>执行者</th>
-                        <td><el-input v-model="record.executor"></el-input></td>
+                        <td>
+                            <el-input v-model="record.executor"></el-input>
+                        </td>
                         <th>执行测试时间</th>
-                        <td><el-input v-model="record.date"></el-input></td>
+                        <td>
+                            <el-input v-model="record.date"></el-input>
+                        </td>
                     </tr>
 
                     <th>确认人</th>
-                    <td><el-input v-model="record.confirmer"></el-input></td>
+                    <td>
+                        <el-input v-model="record.confirmer"></el-input>
+                    </td>
                 </table>
 
                 <br>
@@ -75,6 +99,7 @@
 
 <script>
 import testRecords from '../../assets/jsons/testRecordsForm.json'
+
 export default {
     name: 'TestRecordForm',
     props: ['writable', 'processId', 'checking'],
@@ -143,11 +168,9 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -155,11 +178,9 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            }
-            else if (this.checking === 'false') {
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if (this.checking) {
+            } else if (this.checking) {
                 return true
             }
             return false

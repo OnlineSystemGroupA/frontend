@@ -17,9 +17,7 @@ export default {
     name: "EmployeeTestProcess",
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {

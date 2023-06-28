@@ -15,9 +15,7 @@ export default {
     name: 'EmployeeWriteTestPlan',
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {

@@ -19,8 +19,7 @@
 export default {
     name: 'EmployeeCheckApplication',
     data() {
-        return {
-        }
+        return {}
     },
     props: ['itemId'],
     methods: {
@@ -41,11 +40,9 @@ export default {
             let path = this.$route.path
             if (path.endsWith('checkApplicationForm')) {
                 return 0
-            }
-            else if (path.endsWith('checkFunctionList')) {
+            } else if (path.endsWith('checkFunctionList')) {
                 return 1
-            }
-            else if (path.endsWith('applicationVerifyForm')) {
+            } else if (path.endsWith('applicationVerifyForm')) {
                 return 2
             }
             return -1

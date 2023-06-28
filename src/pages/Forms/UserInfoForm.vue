@@ -38,7 +38,8 @@
                 </el-col>
                 <el-col style="width:50%">
                     <el-form-item label="公司电话" prop="company.telephone">
-                        <el-input v-model="userInfo.company.telephone" placeholder="请输入公司电话" clearable=""></el-input>
+                        <el-input v-model="userInfo.company.telephone" placeholder="请输入公司电话"
+                                  clearable=""></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -51,7 +52,8 @@
                 </el-col>
                 <el-col style="width:50%">
                     <el-form-item label="公司地址" prop="company.address">
-                        <el-input v-model="userInfo.company.address" placeholder="请输入公司地址" clearable=""></el-input>
+                        <el-input v-model="userInfo.company.address" placeholder="请输入公司地址"
+                                  clearable=""></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -59,12 +61,14 @@
             <el-row>
                 <el-col style="width:50%">
                     <el-form-item label="公司邮编" prop="company.postcode">
-                        <el-input v-model="userInfo.company.postcode" placeholder="请输入公司邮编" clearable=""></el-input>
+                        <el-input v-model="userInfo.company.postcode" placeholder="请输入公司邮编"
+                                  clearable=""></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">
                     <el-form-item label="公司网址" prop="company.website">
-                        <el-input v-model="userInfo.company.website" placeholder="请输入公司网址" clearable=""></el-input>
+                        <el-input v-model="userInfo.company.website" placeholder="请输入公司网址"
+                                  clearable=""></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -72,7 +76,8 @@
             <el-row>
                 <el-col style="width:50%">
                     <el-form-item label="公司邮箱" prop="company.e_mail">
-                        <el-input v-model="userInfo.company.e_mail" placeholder="请输入公司邮箱" clearable=""></el-input>
+                        <el-input v-model="userInfo.company.e_mail" placeholder="请输入公司邮箱"
+                                  clearable=""></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">

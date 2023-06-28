@@ -17,29 +17,30 @@
                 <el-radio v-for="(sort, index) in sortKeys" :key="index" :label="sort.value">{{ sort.label }}</el-radio>
             </el-radio-group>
         </div>
-        <br />
+        <br/>
         <el-table :data="currentItemList" border style="width: 100%; height: auto;">
             <el-table-column prop="processId" label="项目号" style="width: 14%">
                 <template slot-scope="scope">
                     <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.processId }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="title" label="项目名称" style="width: 14%"> </el-table-column>
-            <el-table-column prop="startDate" label="创建时间" style="width: 14%"> </el-table-column>
-            <el-table-column prop="endDate" label="结束时间" style="width: 14%"> </el-table-column>
-            <el-table-column prop="assignee" label="负责人" style="width: 14%"> </el-table-column>
-            <el-table-column prop="startUser" label="申请人" style="width: 14%"> </el-table-column>
+            <el-table-column prop="title" label="项目名称" style="width: 14%"></el-table-column>
+            <el-table-column prop="startDate" label="创建时间" style="width: 14%"></el-table-column>
+            <el-table-column prop="endDate" label="结束时间" style="width: 14%"></el-table-column>
+            <el-table-column prop="assignee" label="负责人" style="width: 14%"></el-table-column>
+            <el-table-column prop="startUser" label="申请人" style="width: 14%"></el-table-column>
             <el-table-column label="操作" style="width:16%">
                 <template slot-scope="scope">
                     <el-button @click="checkItemDetail(scope.row.processId)" icon="el-icon-search" size="small"
-                        type="primary">查看项目</el-button>
+                               type="primary">查看项目
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
         <div class="block">
             <br>
             <el-pagination layout="prev, pager, next" background :current-page="page" :page-count="pageCount"
-                v-on:current-change="(curpage) => { handlePageChange(curpage) }">
+                           v-on:current-change="(curpage) => { handlePageChange(curpage) }">
             </el-pagination>
         </div>
     </div>
@@ -47,7 +48,7 @@
 
 <script>
 export default {
-    name:'FinishedItemTable',
+    name: 'FinishedItemTable',
     props: ['page'],
     data() {
         return {
@@ -463,7 +464,7 @@ export default {
     },
     methods: {
         checkItemDetail(processId) {
-           if (sessionStorage.getItem('logType')) {
+            if (sessionStorage.getItem('logType')) {
                 var path = sessionStorage.getItem('logType') + 'FinishedItemDetail'
                 this.$router.push({
                     name: path,

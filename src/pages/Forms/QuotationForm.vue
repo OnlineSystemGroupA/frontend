@@ -45,22 +45,34 @@
             </tr>
             <tr>
                 <td>测试费（软件确认测试）</td>
-                <td>完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本</td>
-                <td><el-input-number v-model="form.quotation" :disabled="disable"></el-input-number></td>
+                <td>
+                    完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本
+                </td>
+                <td>
+                    <el-input-number v-model="form.quotation" :disabled="disable"></el-input-number>
+                </td>
                 <td>含1份测试报告 （需增加报告，每份另收 1000元）</td>
-                <td><el-input-number v-model="form.rowTotal" :disabled="disable"></el-input-number></td>
+                <td>
+                    <el-input-number v-model="form.rowTotal" :disabled="disable"></el-input-number>
+                </td>
             </tr>
             <tr>
                 <th colspan="4">小计</th>
-                <td><el-input-number v-model="form.subTotal" :disabled="disable"></el-input-number></td>
+                <td>
+                    <el-input-number v-model="form.subTotal" :disabled="disable"></el-input-number>
+                </td>
             </tr>
             <tr>
                 <th colspan="4">税率（8%）</th>
-                <td><el-input-number v-model="form.taxRate" :disabled="disable"></el-input-number></td>
+                <td>
+                    <el-input-number v-model="form.taxRate" :disabled="disable"></el-input-number>
+                </td>
             </tr>
             <tr>
                 <th colspan="4">总计</th>
-                <td><el-input-number v-model="form.total" :disabled="disable"></el-input-number></td>
+                <td>
+                    <el-input-number v-model="form.total" :disabled="disable"></el-input-number>
+                </td>
             </tr>
         </table>
     </div>
@@ -85,15 +97,13 @@ export default {
             }
         }
     },
-     computed: {
+    computed: {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -101,11 +111,9 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            }
-            else if (this.checking === 'false') {
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if (this.checking) {
+            } else if (this.checking) {
                 return true
             }
             return false
@@ -115,12 +123,13 @@ export default {
 </script>
 
 <style scoped>
-.quotation{
+.quotation {
     width: 94%;
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;
 }
+
 .pure-table {
     border-collapse: collapse;
     border-spacing: 0;

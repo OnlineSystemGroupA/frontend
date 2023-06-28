@@ -14,9 +14,7 @@ export default {
     name: 'EmployeeArrangeMission',
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {

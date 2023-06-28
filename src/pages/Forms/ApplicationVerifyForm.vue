@@ -48,12 +48,15 @@
                     <el-checkbox label="支持手册"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
-            <el-form-item label="其他"><el-input placeholder="其他材料检查" v-model="form.otherDocument"></el-input></el-form-item>
+            <el-form-item label="其他">
+                <el-input placeholder="其他材料检查" v-model="form.otherDocument"></el-input>
+            </el-form-item>
             <h2>确认意见</h2>
             <el-form-item>
                 <el-radio-group v-model="form.confirmation">
                     <el-radio label="测试所需材料不全，未达到受理条件。"></el-radio>
-                    <el-radio label="属依据国家标准或自编非标规范进行的常规检测，有资质、能力和资源满足委托方要求。"></el-radio>
+                    <el-radio
+                        label="属依据国家标准或自编非标规范进行的常规检测，有资质、能力和资源满足委托方要求。"></el-radio>
                     <el-radio label="无国家标准和规范依据，或中心缺乏检测设备和工具，无法完成检测。"></el-radio>
                     <el-radio label="超出中心能力和资质范围，无法完成检测。"></el-radio>
                 </el-radio-group>
@@ -117,8 +120,7 @@ export default {
             //console.log(this.writable)
             if (this.writable === 'false') {
                 return true
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false

@@ -67,22 +67,23 @@
             </p>
             <p>下表大致估计了本次测试各个阶段所需工作量及起止时间。</p>
             <el-table :data="form.timeTable" height="auto" border style="width: 100%">
-                <el-table-column prop="task" label="里程碑任务" style="width: 25%"> </el-table-column>
+                <el-table-column prop="task" label="里程碑任务" style="width: 25%"></el-table-column>
                 <el-table-column prop="lastTime" label="工作量" style="width: 25%">
                     <template slot-scope="scope">
                         <el-input-number v-model="scope.row.lastTime" placeholder="工作量"
-                            style="width: 100%"></el-input-number>
+                                         style="width: 100%"></el-input-number>
                     </template>
                 </el-table-column>
                 <el-table-column prop="startTime" label="开始时间" style="width: 25%">
                     <template slot-scope="scope">
                         <el-date-picker v-model="scope.row.startTime" placeholder="开始时间"
-                            style="width: 100%"></el-date-picker>
+                                        style="width: 100%"></el-date-picker>
                     </template>
                 </el-table-column>
                 <el-table-column prop="endTime" label="结束时间" style="width: 25%">
                     <template slot-scope="scope">
-                        <el-date-picker v-model="scope.row.endTime" placeholder="结束时间" style="width: 100%"></el-date-picker>
+                        <el-date-picker v-model="scope.row.endTime" placeholder="结束时间"
+                                        style="width: 100%"></el-date-picker>
                     </template>
                 </el-table-column>
             </el-table>
@@ -103,6 +104,7 @@
 
 <script>
 import testPlanForm from '../../assets/jsons/testPlanForm.json'
+
 export default {
     name: 'TestPlanForm',
     props: ['writable', 'checking', 'processId'],
@@ -198,11 +200,9 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -210,11 +210,9 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            }
-            else if (this.checking === 'false') {
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if (this.checking) {
+            } else if (this.checking) {
                 return true
             }
             return false

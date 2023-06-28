@@ -54,10 +54,10 @@ export default {
             },
             rules: {
                 username: [
-                    {validator: valiUsername, trigger: "blur"}
+                    { validator: valiUsername, trigger: "blur" }
                 ],
                 password: [
-                    {validator: valiPassword, trigger: "blur"}
+                    { validator: valiPassword, trigger: "blur" }
                 ],
             }
         };
@@ -115,14 +115,14 @@ export default {
 </script>
 
 <style scoped>
-.login{
+.login {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: center;
 }
 
-.login h4{
+.login h4 {
     color: #3086d0;
     font-size: 2rem;
     margin-top: 1rem;
