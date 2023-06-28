@@ -7,7 +7,7 @@
                 <td style="width: 20%;">{{ userInfo.username }}</td>
                 <th style="width: 20%;">真实姓名</th>
                 <td style="width: 20%;">{{ userInfo.realName }}</td>
-                <td rowspan=4> <img style = "width:100%;height: 100%;" src="../../assets/img/avater.webp"></td>
+                <td rowspan=4> <img style = "width:100%;height: 100%;" src="../../assets/img/avater.png"></td>
             </tr>
 
             <tr>
