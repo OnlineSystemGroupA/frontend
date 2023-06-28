@@ -1,15 +1,15 @@
 <template>
     <div class="func-list">
         <h1>功能表格</h1>
-        <el-form :model="form" ref="form" :disabled="disable">
+        <el-form :model="form" ref="form" :rules="mainRules" :disabled="disable">
             <el-row :gutter="20">
                 <el-col :span="11">
-                    <el-form-item label="软件名称" label-width="25%">
+                    <el-form-item label="软件名称" label-width="25%" prop="softwareName">
                         <el-input v-model="form.softwareName" style="width: 75%"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="11">
-                    <el-form-item label="版本号" label-width="25%">
+                    <el-form-item label="版本号" label-width="25%" prop="softwareVersion">
                         <el-input v-model="form.softwareVersion" style="width: 75%"></el-input>
                     </el-form-item>
                 </el-col>
@@ -23,55 +23,62 @@
                 <el-table-column type="expand">
                     <template slot-scope="func">
                         <div class="table-dropdown">
-                            <el-form-item>
-                                <el-form-item label="功能名称">
-                                    <el-input v-model="func.row.title" placeholder="功能名称"
-                                              style="width: 60%"></el-input>
-                                </el-form-item>
-                                <el-table :data="func.row.items" @row-click="row=>onItemRowClick(func.row.index, row)"
-                                          style="width: 80%" :ref="'itemTable' + func.row.index">
-                                    <el-table-column type="expand">
-                                        <template slot-scope="item">
-                                            <div class="table-dropdown">
-                                                <el-form-item label="详细功能名称">
-                                                    <el-input v-model="item.row.name" placeholder="详细功能名称"
-                                                              style="width: 60%"></el-input>
-                                                </el-form-item>
-                                                <el-form-item v-model="item.row.name" label="详细功能描述"
-                                                              style="margin-top: 10px">
-                                                    <el-input v-model="item.row.description"
-                                                              type="textarea"
-                                                              :autosize="{minRows: 4, maxRows: 8}"
-                                                              resize='none'
-                                                              placeholder="详细功能描述"
-                                                              style="width: 60%"></el-input>
-                                                </el-form-item>
-                                            </div>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column label="详细功能名称" prop="name"></el-table-column>
-                                    <el-table-column align="right">
-                                        <template slot="header">
-                                            <el-button
-                                                size="mini"
-                                                type="primary"
-                                                plain
-                                                circle
-                                                icon="el-icon-plus"
-                                                @click.native.stop="addItem(func.row.index)"></el-button>
-                                        </template>
-                                        <template slot-scope="item">
-                                            <el-button
-                                                size="mini"
-                                                type="danger"
-                                                plain
-                                                circle
-                                                icon="el-icon-delete"
-                                                @click.native.stop="removeItem(func.row.title, item.row.name)"></el-button>
-                                        </template>
-                                    </el-table-column>
-                                </el-table>
+                            <el-form-item label="功能名称" label-width="10%"
+                                          :rules="funcRules.title"
+                                          :prop="'functions.' + func.row.index + '.title'">
+                                <el-input v-model="func.row.title" placeholder="功能名称"
+                                          style="width: 60%"></el-input>
                             </el-form-item>
+                            <el-table :data="func.row.items"
+                                      @row-click="row=>onItemRowClick(func.row.index, row)"
+                                      :row-class-name="funcRowClassName"
+                                      style="width: 80%"
+                                      :ref="'itemTable' + func.row.index">
+                                <el-table-column type="expand">
+                                    <template slot-scope="item">
+                                        <div class="table-dropdown">
+                                            <el-form-item label="详细功能名称" label-width="25%"
+                                                          :rules="detailedFunctionRules.name"
+                                                          :prop="'functions.' + func.row.index + '.items.' + item.row.index + '.name'">
+                                                <el-input v-model="item.row.name" placeholder="详细功能名称"
+                                                          style="width: 60%"></el-input>
+                                            </el-form-item>
+                                            <el-form-item label="详细功能描述" label-width="25%"
+                                                          :rules="detailedFunctionRules.description"
+                                                          :prop="'functions.' + func.row.index + '.items.' + item.row.index + '.description'"
+                                                          style="margin-top: 10px">
+                                                <el-input v-model="item.row.description"
+                                                          type="textarea"
+                                                          :autosize="{minRows: 4, maxRows: 8}"
+                                                          resize='none'
+                                                          placeholder="详细功能描述"
+                                                          style="width: 60%"></el-input>
+                                            </el-form-item>
+                                        </div>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="详细功能名称" prop="name"></el-table-column>
+                                <el-table-column align="right">
+                                    <template slot="header">
+                                        <el-button
+                                            size="mini"
+                                            type="primary"
+                                            plain
+                                            circle
+                                            icon="el-icon-plus"
+                                            @click.native.stop="addItem(func.row.index)"></el-button>
+                                    </template>
+                                    <template slot-scope="item">
+                                        <el-button
+                                            size="mini"
+                                            type="danger"
+                                            plain
+                                            circle
+                                            icon="el-icon-delete"
+                                            @click.native.stop="removeItem(func.row.title, item.row.name)"></el-button>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
                         </div>
                     </template>
                 </el-table-column>
@@ -126,14 +133,30 @@ export default {
                     {
                         title: '',
                         items: [
-                            {name: '', description: ''}
+                            { name: '', description: '' }
                         ]
                     }
                 ],
                 key: nanoid(6)
             },
             expands: [],
-            newFuncTitle: ''
+            newFuncTitle: '',
+            mainRules: {
+                softwareName: [
+                    { required: true, message: '请填写软件名称', trigger: 'blur' }
+                ],
+                softwareVersion: [
+                    { required: true, message: '请填写软件版本', trigger: 'blur' }
+                ],
+            },
+            funcRules: {
+                title: { required: true, message: '请填写功能名称', trigger: 'blur' }
+            },
+            detailedFunctionRules: {
+                // name: { validator: temp, trigger: 'blur' },
+                name: { required: true, message: '请填写详细功能名称', trigger: 'blur' },
+                description: { required: true, message: '请填写详细功能描述', trigger: 'blur' }
+            },
         }
     },
     methods: {
@@ -176,15 +199,23 @@ export default {
         },
 
         onItemRowClick(index, row) {
+            console.log('functions.' + index + '.title')
             this.$refs['itemTable' + index].toggleRowExpansion(row);
         },
 
-        funcRowClassName({row, rowIndex}) {
+        funcRowClassName({ row, rowIndex }) {
             row.index = rowIndex;
         },
 
         submit() {
-            this.doSubmit()
+            this.$refs.form.validate((valid) => {
+                if (valid) {
+                    this.doSubmit();
+                } else {
+                    console.log(this.form)
+                    alert("测试功能表不符合要求，请修改测试功能表！");
+                }
+            })
         },
         save() {
 
@@ -200,7 +231,7 @@ export default {
                 console.log(JSON.stringify(this.form))
                 this.$bus.$emit('submitFunctionList')
             }
-        },
+        }
     },
     computed: {
         disable() {
@@ -235,7 +266,7 @@ export default {
 
 <style lang="less">
 .func-list {
-   width: 94%;
+    width: 94%;
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;

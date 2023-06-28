@@ -19,7 +19,7 @@ export default {
         clientItemTable() {
             this.$router.push(
                 {
-                    name: 'clientItem',
+                    name: 'clientItemTable',
                     query: {
                         page: 1
                     }
