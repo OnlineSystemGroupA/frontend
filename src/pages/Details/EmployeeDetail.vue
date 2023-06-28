@@ -1,7 +1,7 @@
 <template>
     <div class="employee">
         <h2>个人信息</h2>
-        <table style="width:90%; text-align: center;" class="pure-table" rules = all>
+        <table style="width:90%; text-align: center;" class="pure-table" rules=all>
             <tr>
                 <th>员工号</th>
                 <td>{{ userInfo.employeeId }}</td>
@@ -27,6 +27,9 @@
         <el-row>
             <el-button type="primary" @click="editInfo" v-if="editShow">
                 修改信息
+            </el-button>
+            <el-button type="danger" @click="deleteEmployee" v-if="editShow">
+                删除员工
             </el-button>
             <el-button type="primary" @click="changePassword" v-if="show">
                 修改密码
@@ -66,6 +69,23 @@ export default {
                     employeeId: this.employeeId
                 }
             })
+        },
+        deleteEmployee() {
+            this.$confirm('确认是否删除员工' + this.userInfo.employeeId + '?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });
+            });
         }
     },
     computed: {
