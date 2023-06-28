@@ -11,6 +11,7 @@
         <el-select
             class="select-option"
             v-model="newTag"
+            v-if="!disabled"
             ref="tagSelect"
             filterable
             allow-create

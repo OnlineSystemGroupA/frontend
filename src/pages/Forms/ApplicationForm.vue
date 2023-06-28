@@ -1,10 +1,10 @@
 <template>
     <div class="application">
-        <el-form label-position="left" size="small" :model="form" ref="form" :disabled="disable" :rules="rules">
+        <el-form label-position="left" size="small" :model="form" ref="form" :disabled="disabled" :rules="rules">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
                 <br>
-                <SelectAndCreateTags v-model="form.testTypes" :default-options="testTypeOptions" :disabled="disable"
+                <SelectAndCreateTags v-model="form.testTypes" :default-options="testTypeOptions" :disabled="disabled"
                                      option-description="新增一个测试类型"
                                      @change="emitChangeEvent('testTypes', form.testTypes)"
                                      @blur="emitBlurEvent('testTypes', form.testTypes)"></SelectAndCreateTags>
@@ -63,7 +63,7 @@
             <el-form-item label="测试依据" ref="testStandards" prop="testStandards">
                 <br>
                 <SelectAndCreateTags v-model="form.testStandards" :default-options="testStandardOptions"
-                                     :disabled="disable"
+                                     :disabled="disabled"
                                      option-description="新增一个测试依据"
                                      @change="emitChangeEvent('testStandards', form.testStandards)"
                                      @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
@@ -71,10 +71,17 @@
             <hr>
             <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
                 <br>
-                <MultipleCreateAndSelect v-model="form.testAspects" :default-options="testAspectsOptions"
+                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects" :default-options="testAspectsOptions"
                                          option-description="选择测试指标" create-description="其他指标"
                                          @change="emitChangeEvent('testAspects', form.testAspects)"
                                          @blur="emitBlurEvent('testAspects', form.testAspects)"></MultipleCreateAndSelect>
+                <div v-if="disabled">
+                    <el-tag
+                        :key="tag"
+                        v-for="tag in form.testAspects">
+                        {{ tag.length > 50 ? tag.substring(0, 49) + '...' : tag }}
+                    </el-tag>
+                </div>
             </el-form-item>
             <hr>
             <el-form-item label="软件规模（至少一种）" ref="softwareScales" prop="softwareScales">
@@ -125,7 +132,7 @@
             <h4>硬件</h4>
             <el-form-item label="架构:" prop="serverNames" ref="serverNames">
                 <br>
-                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions" :disabled="disable"
+                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions" :disabled="disabled"
                                      option-description="添加一种架构"
                                      @change="emitChangeEvent('serverNames', form.serverNames)"
                                      @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
@@ -187,7 +194,7 @@
             </el-row>
             <el-form-item label="构架:" prop="serverFrames" ref="serverFrames">
                 <br>
-                <SelectAndCreateTags v-model="form.serverFrames" :default-options="frameOptions" :disabled="disable"
+                <SelectAndCreateTags v-model="form.serverFrames" :default-options="frameOptions" :disabled="disabled"
                                      option-description="添加一种构架"
                                      @change="emitChangeEvent('serverFrames', form.serverFrames)"
                                      @blur="emitBlurEvent('serverFrames', form.serverFrames)"></SelectAndCreateTags>
@@ -276,13 +283,13 @@
                 </div>
             </div>
         </el-form>
-        <el-row v-show="!disable">
-            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
-            <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
+        <el-row v-show="!disabled">
+            <el-button type="primary" @click="submit" :disabled="disabled">提交</el-button>
+            <el-button type="primary" @click="save" :disabled="disabled">保存</el-button>
         </el-row>
         <el-row v-show="check">
-            <el-button type="primary" @click="pass" :disabled="!disable">通过</el-button>
-            <el-button type="primary" @click="refute" :disabled="!disable">驳回</el-button>
+            <el-button type="primary" @click="pass" :disabled="!disabled">通过</el-button>
+            <el-button type="primary" @click="refute" :disabled="!disabled">驳回</el-button>
         </el-row>
     </div>
 </template>
@@ -662,7 +669,7 @@ export default {
         this.form = applicationForm;
     },
     computed: {
-        disable() {
+        disabled() {
             if (this.writable === 'false') {
                 return true
             } else if (this.writable === 'true') {
@@ -687,6 +694,12 @@ export default {
 </script>
 
 <style scoped>
+.el-tag {
+    height: 32px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
 .other-input {
     width: 30%;
     margin-left: 10px;
