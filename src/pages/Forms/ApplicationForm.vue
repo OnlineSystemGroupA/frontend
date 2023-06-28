@@ -5,7 +5,8 @@
             <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
                 <br>
                 <SelectAndCreateTags v-model="form.testTypes" :default-options="testTypeOptions" :disabled="disabled"
-                                     option-description="新增一个测试类型" @change="emitChangeEvent('testTypes', form.testTypes)"
+                                     option-description="新增一个测试类型"
+                                     @change="emitChangeEvent('testTypes', form.testTypes)"
                                      @blur="emitBlurEvent('testTypes', form.testTypes)"></SelectAndCreateTags>
             </el-form-item>
             <hr>
@@ -54,7 +55,8 @@
                 </el-col>
             </el-row>
             <el-form-item label="主要功能及用途简介（限200字）" prop="description">
-                <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" resize='none' v-model="form.description"
+                <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" resize='none'
+                          v-model="form.description"
                           maxlength="200" placeholder="主要功能及用途"></el-input>
             </el-form-item>
             <hr>
@@ -107,7 +109,8 @@
                 <el-form-item v-for="(clientSystem) in form.clientSystems" :key="clientSystem.vforKey"
                               :label="clientSystem.system" label-width="15%" style="margin-top:5px">
                     <el-input v-model="clientSystem.version" placeholder="系统版本" style="width:30%"></el-input>
-                    <el-button type="danger" @click="deleteClientSystem(clientSystem)" icon="el-icon-delete" circle plain
+                    <el-button type="danger" @click="deleteClientSystem(clientSystem)" icon="el-icon-delete" circle
+                               plain
                                size=mini style="margin-left:5%"></el-button>
                 </el-form-item>
                 <el-input v-model="newClientSystem" placeholder="其他操作系统"
@@ -294,7 +297,7 @@
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
 //import applicationForm from "../../assets/jsons/applicationForm"
-import { nanoid } from "nanoid";
+import {nanoid} from "nanoid";
 
 export default {
     name: "ApplicationForm",
@@ -687,10 +690,11 @@ export default {
         this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm').then(
             (res) => {
                 console.log(res.data)
-                this.form = res.data
-                //this.form = JSON.parse(res.data)
+                if (res.data) {
+                    this.form = res.data
+                }
             },
-            (err)=>{
+            (err) => {
                 if (err.response.status === 403) {
                     alert('指定流程或表单对该用户不可见')
                 } else if (err.response.status === 404) {
