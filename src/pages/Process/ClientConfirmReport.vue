@@ -26,7 +26,7 @@ export default {
                 query: {
                     writable: false,
                     checking: false,
-                    formId: this.itemId,
+                    processId: this.itemId,
                     itemId: this.itemId
                 }
             })
