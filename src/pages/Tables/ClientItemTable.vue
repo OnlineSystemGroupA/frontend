@@ -134,7 +134,7 @@ export default {
             this.axios.get('/api/workflow/processes/count').then(this.handleCount, this.handleError)
             this.axios.get('/api/workflow/processes?pageIndex=' + curpage + '&numPerPage=10&' + 'orderBy=' + this.sortKey).then(this.handleResult, this.handleError)
             this.$router.push({
-                name: 'clientItem',
+                name: 'clientItemTable',
                 query: { page: curpage }
 
             })
