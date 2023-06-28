@@ -13,9 +13,7 @@ export default {
     name: 'ClientVerifyTestReport',
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {
@@ -27,8 +25,8 @@ export default {
         checkTestReport() {
             this.$router.push(
                 {
-                    name:'clientCheckTestReportForm',
-                    query:{
+                    name: 'clientCheckTestReportForm',
+                    query: {
                         writable: false,
                         checking: true,
                         processId: this.itemId,

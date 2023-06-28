@@ -239,7 +239,7 @@ export default {
             let logType = sessionStorage.getItem('logType')
             this.$router.push({
                 name: logType + "ItemTable",
-                query: {page: 1}
+                query: { page: 1 }
             })
         },
         operateProcess() {
@@ -252,13 +252,12 @@ export default {
             if (logType === 'client') {
                 console.log(this.active)
                 routeName = this.clientOperationMap.get(this.active)
-            }
-            else {
+            } else {
                 routeName = this.employeeOperationMap.get(this.active)
                 if (sessionStorage.getItem('work') === 'verification') {
                     if (this.employeeOperationMap.get(routeName)) {
                         routeName = this.employeeOperationMap.get(routeName)
-                    } 
+                    }
                 }
             }
             console.log(routeName)
@@ -274,7 +273,7 @@ export default {
     },
     created() {
         formName.transformation.forEach(element => {
-            this.formMap.set(element.key,element.value)
+            this.formMap.set(element.key, element.value)
         })
         //console.log(this.formMap)
         formAuthority.authority.forEach(element => {

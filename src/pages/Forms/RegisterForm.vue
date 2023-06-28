@@ -14,16 +14,16 @@
             <el-form-item label="密码" prop="password">
                 <el-input v-model="userInfo.password" placeholder="请输入密码" show-password></el-input>
             </el-form-item>
-  
+
             <el-form-item label="确认密码" prop="checkPassword">
                 <el-input v-model="userInfo.checkPassword" placeholder="请再次输入密码" show-password></el-input>
             </el-form-item>
         </el-form>
-      
+
         <el-row>
             <el-button type="primary" @click="onSubmit">注册</el-button>
         </el-row>
-        
+
     </div>
 </template>
 

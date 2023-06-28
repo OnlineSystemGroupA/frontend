@@ -16,9 +16,7 @@ export default {
     name: 'EmployeeVerifyTestReport',
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {

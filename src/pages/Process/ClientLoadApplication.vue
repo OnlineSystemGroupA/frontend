@@ -16,9 +16,7 @@ export default {
     name: 'ClientLoadApplication',
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         editApplicationForm() {

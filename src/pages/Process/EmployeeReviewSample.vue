@@ -16,9 +16,7 @@ export default {
     name: 'EmployeeReviewSample',
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {

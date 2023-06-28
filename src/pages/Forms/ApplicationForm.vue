@@ -71,7 +71,8 @@
             <hr>
             <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
                 <br>
-                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects" :default-options="testAspectsOptions"
+                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects"
+                                         :default-options="testAspectsOptions"
                                          option-description="选择测试指标" create-description="其他指标"
                                          @change="emitChangeEvent('testAspects', form.testAspects)"
                                          @blur="emitBlurEvent('testAspects', form.testAspects)"></MultipleCreateAndSelect>
@@ -87,7 +88,7 @@
             <el-form-item label="软件规模（至少一种）" ref="softwareScales" prop="softwareScales">
                 <br>
                 <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
-                    @change="handleScaleChange(scale, $event)"></el-checkbox>
+                             @change="handleScaleChange(scale, $event)"></el-checkbox>
                 <br>
                 <el-form-item v-for="scale in form.softwareScales" :key="scale.scaleDescription"
                               :label="scale.scaleDescription" label-width="30%" style="margin-top:5px">
@@ -116,7 +117,7 @@
                                size=mini style="margin-left:5%"></el-button>
                 </el-form-item>
                 <el-input v-model="newClientSystem" placeholder="其他操作系统"
-                    style="width:20%;margin-top:10px;margin-right:5px"></el-input>
+                          style="width:20%;margin-top:10px;margin-right:5px"></el-input>
                 <el-button @click="addClientSystem" type="primary">添加</el-button>
             </el-form-item>
             <br>
@@ -125,16 +126,19 @@
                                  v-model.number="form.clientMemory" style="margin-top:5px"></el-input-number>
             </el-form-item>
             <el-form-item label="其他要求:" label-width="20%">
-                <el-input placeholder="其他要求" v-model="form.clientOtherRequirement" style="margin-top:5px"></el-input>
+                <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
+                          style="margin-top:5px"></el-input>
             </el-form-item>
             <h3>服务器端</h3>
             <h4>硬件</h4>
             <el-form-item label="架构:" prop="serverNames" ref="serverNames">
                 <br>
                 <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions"
-                    option-description="添加一种架构" @change="emitChangeEvent('serverNames', form.serverNames)"
-                    @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
-                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions" :disabled="disabled"
+                                     option-description="添加一种架构"
+                                     @change="emitChangeEvent('serverNames', form.serverNames)"
+                                     @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
+                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions"
+                                     :disabled="disabled"
                                      option-description="添加一种架构"
                                      @change="emitChangeEvent('serverNames', form.serverNames)"
                                      @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
@@ -154,7 +158,8 @@
                 </el-col>
             </el-row>
             <el-form-item label="其他要求:" label-width="20%">
-                <el-input placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
+                <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
+                          style="margin-top:5px"></el-input>
             </el-form-item>
             <h4>软件</h4>
             <el-row :gutter="20">
@@ -216,7 +221,7 @@
                                style="margin-left:5%"></el-button>
                 </el-form-item>
                 <el-input v-model="newMedium" placeholder="其他介质"
-                    style="width:20%;margin-top:10px;margin-right:5px"></el-input>
+                          style="width:20%;margin-top:10px;margin-right:5px"></el-input>
                 <el-button @click="addMedium" type="primary">添加</el-button>
             </el-form-item>
             <h3>文档资料</h3>
@@ -242,7 +247,7 @@
             <br>
             <el-form-item label="希望完成测试时间：" prop="expectedDate">
                 <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
-                    v-model="form.expectedDate"></el-date-picker>
+                                v-model="form.expectedDate"></el-date-picker>
             </el-form-item>
             <hr>
             <div class="InfoCom">
@@ -299,7 +304,7 @@
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
 import applicationForm from "../../assets/jsons/applicationForm"
-import { nanoid } from "nanoid";
+import {nanoid} from "nanoid";
 
 export default {
     name: "ApplicationForm",
@@ -649,11 +654,11 @@ export default {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 console.log(this.processId)
-                this.axios.put('/api/workflow/processes/'+ this.processId + '/forms/' + 'ApplicationForm', JSON.stringify(this.form), {
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'
                     }
-                }).then(this.handleResult,this.handleError)
+                }).then(this.handleResult, this.handleError)
                 //this.$bus.$emit('submitApplication')
             }
         },
@@ -671,7 +676,7 @@ export default {
         handleResult(res) {
             console.log(res)
             if (res.status === 200) {
-                 alert('上传成功')
+                alert('上传成功')
             }
         },
         handleError(err) {

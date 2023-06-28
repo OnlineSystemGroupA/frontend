@@ -6,18 +6,16 @@
         <el-button type="primary" @click="writeContract">填写合同</el-button>
         <el-button type="primary">下载pdf</el-button>
         <el-button type="primary">上传扫描件</el-button>
-        <router-view></router-view>        
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
 export default {
     name: 'ClientWriteContent',
-    props:['itemId'],
+    props: ['itemId'],
     data() {
-        return {
-            
-        }
+        return {}
     },
     methods: {
         checkItemDetail(id) {

@@ -69,6 +69,7 @@
 <script>
 import formAuthority from '../../assets/jsons/formAuthority.json'
 import formName from '../../assets/jsons/formName.json'
+
 export default {
     name: 'FinishedItemDetail',
     props: ['itemId'],
@@ -181,7 +182,7 @@ export default {
                 query: { page: 1 }
             })
         },
-       readForm(row) {
+        readForm(row) {
             //console.log(row.title)
             if (!sessionStorage.getItem('logType')) {
                 alert('请登录！')
@@ -207,7 +208,7 @@ export default {
                 )
             }
         },
-        
+
     },
     created() {
         formName.transformation.forEach(element => {

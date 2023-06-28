@@ -10,8 +10,9 @@
                     <el-radio :label="false">不接受</el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="不接受理由" >
-                <el-input type="textarea" placeholder="不接受理由" v-model="reasonForRefution" :disabled="acceptOrNot"></el-input>
+            <el-form-item label="不接受理由">
+                <el-input type="textarea" placeholder="不接受理由" v-model="reasonForRefution"
+                          :disabled="acceptOrNot"></el-input>
             </el-form-item>
         </el-form>
         <el-button>提交</el-button>
@@ -20,6 +21,7 @@
 
 <script>
 import QuotationForm from '../Forms/QuotationForm.vue';
+
 export default {
     name: 'ClientAcceptQuotation',
     props: ['itemId'],
@@ -30,7 +32,7 @@ export default {
         return {
             quotation: '114514',
             reason: '市场行情如此',
-            acceptOrNot:true,
+            acceptOrNot: true,
             reasonForRefution: '',
         }
     }

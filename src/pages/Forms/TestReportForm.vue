@@ -479,14 +479,14 @@ export default {
                     }
                 },
                 networkEnvironment: '',
-                testStandardList: [{standard: ''},],
-                referenceList: [{reference: ''},],
-                functionTest: [{functionModule: '', functionRequirement: '', testResult: ''}],
-                efficiencyTest: [{property: '', testExplanation: '', testResult: ''}],
-                portabilityTest: [{property: '', testExplanation: '', testResult: ''}],
-                usabilityTest: [{property: '', testExplanation: '', testResult: ''}],
-                reliabilityTest: [{property: '', testExplanation: '', testResult: ''}],
-                maintainabilityTest: [{property: '', testExplanation: '', testResult: ''}]
+                testStandardList: [{ standard: '' },],
+                referenceList: [{ reference: '' },],
+                functionTest: [{ functionModule: '', functionRequirement: '', testResult: '' }],
+                efficiencyTest: [{ property: '', testExplanation: '', testResult: '' }],
+                portabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
+                usabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
+                reliabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
+                maintainabilityTest: [{ property: '', testExplanation: '', testResult: '' }]
             }
         }
     },

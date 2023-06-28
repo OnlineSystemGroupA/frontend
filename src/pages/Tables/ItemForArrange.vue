@@ -24,21 +24,22 @@
                     <p @click="itemArrange(scope.row.processId)">{{ scope.row.processId }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="title" label="项目名称" style="width: 16%"> </el-table-column>
-            <el-table-column prop="startDate" label="创建时间" style="width: 16%"> </el-table-column>
-            <el-table-column prop="startUser" label="申请人" style="width: 16%"> </el-table-column>
-            <el-table-column prop="taskName" label="项目状态" style="width: 16%"> </el-table-column>
+            <el-table-column prop="title" label="项目名称" style="width: 16%"></el-table-column>
+            <el-table-column prop="startDate" label="创建时间" style="width: 16%"></el-table-column>
+            <el-table-column prop="startUser" label="申请人" style="width: 16%"></el-table-column>
+            <el-table-column prop="taskName" label="项目状态" style="width: 16%"></el-table-column>
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
                     <el-button @click="itemArrange(scope.row.processId)" icon="el-icon-search" size="small"
-                        type="primary">分配任务</el-button>
+                               type="primary">分配任务
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
         <div class="block">
             <br>
             <el-pagination layout="prev, pager, next" background :current-page="page" :page-count="pageCount"
-                v-on:current-change="(curpage) => { handlePageChange(curpage) }">
+                           v-on:current-change="(curpage) => { handlePageChange(curpage) }">
             </el-pagination>
         </div>
     </div>
@@ -350,7 +351,7 @@ export default {
                 {
                     value: 'taskName',
                     label: '项目状态',
-                },      
+                },
                 {
                     value: 'startUser',
                     label: '申请人',

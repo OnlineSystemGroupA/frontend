@@ -5,7 +5,7 @@
         <i class="el-icon-circle-check" style="font-size: 90px; color: #5eb234;"></i>
         <h2 style="font-size: 50px;">成功提交申请</h2>
         <br/>
-        <el-button type = "primary" @click="clientItemTable">查看项目列表</el-button>
+        <el-button type="primary" @click="clientItemTable">查看项目列表</el-button>
     </div>
 </template>
 
@@ -31,10 +31,10 @@ export default {
 </script>
 
 <style scoped>
-.success{
+.success {
     display: flex;
-	justify-content: center;
-	align-items: center;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     width: 94%;
     margin-top: 2%;

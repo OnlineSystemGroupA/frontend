@@ -15,9 +15,7 @@ export default {
     name: 'ClientConfirmReport',
     props: ['itemId'],
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         readTestReport() {

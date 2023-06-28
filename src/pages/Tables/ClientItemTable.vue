@@ -24,20 +24,20 @@
                     <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.projectId }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="title" label="项目名称" style="width: 16%"> </el-table-column>
-            <el-table-column prop="startDate" label="创建时间" style="width: 16%"> </el-table-column>
-            <el-table-column prop="assignee" label="负责人" style="width: 16%"> </el-table-column>
-            <el-table-column prop="taskName" label="项目状态" style="width: 16%"> </el-table-column>
+            <el-table-column prop="title" label="项目名称" style="width: 16%"></el-table-column>
+            <el-table-column prop="startDate" label="创建时间" style="width: 16%"></el-table-column>
+            <el-table-column prop="assignee" label="负责人" style="width: 16%"></el-table-column>
+            <el-table-column prop="taskName" label="项目状态" style="width: 16%"></el-table-column>
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
                     <el-tooltip class="item" effect="light" content="查看项目详情" placement="bottom">
                         <el-button @click="checkItemDetail(scope.row.processId)" icon="el-icon-search" size="small"
-                            type="primary" circle></el-button>
+                                   type="primary" circle></el-button>
                     </el-tooltip>
 
                     <el-tooltip class="item" effect="light" content="联系负责人" placement="bottom">
                         <el-button @click="contractEmployee(scope.row.assignee)" icon="el-icon-user" size="small"
-                            type="primary" circle></el-button>
+                                   type="primary" circle></el-button>
                     </el-tooltip>
 
                 </template>
@@ -46,7 +46,7 @@
         <div class="block">
             <br>
             <el-pagination layout="prev, pager, next" background :current-page="currentPage" :page-count="pageCount"
-                v-on:current-change="(curpage) => { handlePageChange(curpage) }">
+                           v-on:current-change="(curpage) => { handlePageChange(curpage) }">
             </el-pagination>
         </div>
     </div>

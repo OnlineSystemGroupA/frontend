@@ -10,7 +10,7 @@
                     <el-form-item label="任务类型">
                         <el-select placeholder="工作" v-model="workInfo.work">
                             <el-option v-for="work in works" :key="work.value" :label="work.label"
-                                :value="work.value"></el-option>
+                                       :value="work.value"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-form>
@@ -45,7 +45,7 @@
         <div class="block">
             <br>
             <el-pagination layout="prev, pager, next" background :current-page="page" :page-count="pageCount"
-                v-on:current-change="(curpage) => { handlePageChange(curpage) }">
+                           v-on:current-change="(curpage) => { handlePageChange(curpage) }">
             </el-pagination>
         </div>
     </div>
@@ -56,7 +56,7 @@
 export default {
     name: 'WorkArrangeTable',
     //components: {EmployeeTable},
-    props: ['itemId','work','page'],
+    props: ['itemId', 'work', 'page'],
     data() {
         return {
             keyword: '',
@@ -497,8 +497,7 @@ export default {
         workType() {
             if (this.work === 'verification') {
                 return '审核工作'
-            }
-            else {
+            } else {
                 return '测试工作'
             }
         },
@@ -522,8 +521,7 @@ export default {
                         value: '测试工作检查',
                     },
                 ]
-            }
-            else {
+            } else {
                 return [
                     {
                         label: '制定测试报告',
