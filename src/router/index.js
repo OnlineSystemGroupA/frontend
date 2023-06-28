@@ -57,6 +57,7 @@ import EmployeeWriteContract from '../pages/Process/EmployeeWriteContract'
 import ApplicationSuccess from '../pages/Pages/ApplicationSuccess'
 import FinishedItemTable from '../pages/Tables/FinishedItemTable'
 import FinishedItemDetail from '../pages/Details/FinishedItemDetail'
+import ItemOfEmployee from '../pages/Tables/ItemOfEmployee'
 
 const router = new VueRouter({
     routes: [
@@ -474,6 +475,24 @@ const router = new VueRouter({
                     },
                     meta: { title: '项目分配情况', logType: 'employee' }
                 },//项目分配情况
+                {
+                    name: 'employeeTableForManager',
+                    path: 'employeeTableForManager',
+                    component: EmployeeTable,
+                    props({ query: { page } }) {
+                        return { page }
+                    },
+                    meta: { title: '员工列表', logType: 'employee' }
+                },//员工列表
+                {
+                    name: 'itemOfEmployee',
+                    path: 'itemOfEmployee',
+                    component: ItemOfEmployee,
+                    props({ query: { employeeId, page } }) {
+                        return { employeeId, page }
+                    },
+                    meta: { title: '员工负责项目', logType: 'employee' }
+                },//员工负责项目
                 {
                     name: 'employeeItemDetail',
                     path: 'employeeItemDetail',
