@@ -18,7 +18,7 @@
             </el-radio-group>
         </div>
         <br>
-        <el-table :data="currentItemList" border style="width: 100%; height: auto;">
+        <el-table :data="itemList" border style="width: 100%; height: auto;">
             <el-table-column prop="processId" label="项目号" style="width: 16%">
                 <template slot-scope="scope">
                     <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.processId }}</p>
@@ -45,7 +45,7 @@
 
         <div class="block">
             <br>
-            <el-pagination layout="prev, pager, next" background :current-page="page" :page-count="pageCount"
+            <el-pagination layout="prev, pager, next" background :current-page="currentPage" :page-count="pageCount"
                 v-on:current-change="(curpage) => { handlePageChange(curpage) }">
             </el-pagination>
         </div>

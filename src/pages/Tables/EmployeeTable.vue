@@ -522,18 +522,37 @@ export default {
     },
     methods: {
         pickEmployee(id) {
-            this.$router.push({
-                name: 'employeeDetailForAdmin',
-                query: {
-                    employeeId: id
-                }
-            })
+            if (sessionStorage.getItem('logType') === 'admin') {
+                this.$router.push({
+                    name: 'employeeDetailForAdmin',
+                    query: {
+                        employeeId: id
+                    }
+                })
+            }
+            else {
+                this.$router.push({
+                    name: 'itemOfEmployee',
+                    query: {
+                        employeeId: id,
+                        page: 1
+                    }
+                })
+            }
         },
         handlePageChange(curpage) {
-            this.$router.push({
-                name: 'employeeTable',
-                query: { page: curpage }
-            })
+            if (sessionStorage.getItem('logType') === 'admin') {
+                this.$router.push({
+                    name: 'employeeTable',
+                    query: { page: curpage }
+                })
+            }
+            else {
+                this.$router.push({
+                    name: 'employeeTableForManager',
+                    query: { page: curpage }
+                })
+            }
         }
     }
 }

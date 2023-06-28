@@ -93,6 +93,9 @@ export default {
     },
     beforeDestroy() {
         this.$bus.$off('changePassword')
+    },
+    created() {
+        this.userInfo.employeeId = this.employeeId
     }
 }
 </script>

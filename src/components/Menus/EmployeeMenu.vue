@@ -1,8 +1,7 @@
 <template>
     <div style="height: 100%;">
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-                 :collapse="isCollapse" background-color="var(--theme-color)" text-color="#FFFFFF"
-                 active-text-color="#FFCC00">
+            :collapse="isCollapse" background-color="var(--theme-color)" text-color="#FFFFFF" active-text-color="#FFCC00">
             <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-s-order" style="color:gold"></i>分配任务
             </el-menu-item>
             <el-submenu index="2">
@@ -15,6 +14,8 @@
                     <el-menu-item index="2-2" @click="checkFinishedItem">已完成项目</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
+            <el-menu-item index="3" @click="manageEmployee"><i class="el-icon-s-management" style="color:gold"></i>管理员工
+            </el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -37,19 +38,25 @@ export default {
         arrangeMission() {
             this.$router.push({
                 name: 'arrangeItem',
-                query: {page: 1}
+                query: { page: 1 }
             })
         },
         checkItem() {
             this.$router.push({
                 name: 'employeeItemTable',
-                query: {page: 1}
+                query: { page: 1 }
             })
         },
         checkFinishedItem() {
             this.$router.push({
                 name: 'employeeFinishedItemTable',
-                query: {page: 1}
+                query: { page: 1 }
+            })
+        },
+        manageEmployee() {
+            this.$router.push({
+                name: 'employeeTableForManager',
+                query: { page: 1 }
             })
         }
     }

@@ -38,7 +38,7 @@
         </el-table>
         <div class="block">
             <br>
-            <el-pagination layout="prev, pager, next" background :current-page="page" :page-count="pageCount"
+            <el-pagination layout="prev, pager, next" background :current-page="currentPage" :page-count="pageCount"
                 v-on:current-change="(curpage) => { handlePageChange(curpage) }">
             </el-pagination>
         </div>
@@ -84,7 +84,7 @@ export default {
             itemCount: 0,
         }
     },
-     computed: {
+    computed: {
         pageCount() {
             var count = Math.floor(this.itemCount / 10)
             if (this.itemCount % 10 !== 0) {
