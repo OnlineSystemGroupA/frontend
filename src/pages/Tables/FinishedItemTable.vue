@@ -488,7 +488,7 @@ export default {
             })*/
 
             if (sessionStorage.getItem('logType')) {
-                var path = sessionStorage.getItem('logType') + 'FinishedItem'
+                var path = sessionStorage.getItem('logType') + 'FinishedItemTable'
                 this.$router.push({
                     name: path,
                     query: { page: curpage }
