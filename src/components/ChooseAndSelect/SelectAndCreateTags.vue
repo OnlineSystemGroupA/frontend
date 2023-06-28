@@ -3,7 +3,7 @@
         <el-tag
             :key="tag"
             v-for="tag in dynamicTags"
-            closable
+            :closable="!disabled"
             :disable-transitions="false"
             @close="handleClose(tag)">
             {{ tag.length > 50 ? tag.substring(0, 49) + '...' : tag }}
@@ -45,7 +45,7 @@ export default {
         prop: 'options',
         event: 'change'
     },
-    props: ["options", "defaultOptions", "optionDescription"],
+    props: ["options", "defaultOptions", "optionDescription", "disabled"],
 
     data() {
         return {
