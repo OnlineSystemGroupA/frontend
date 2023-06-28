@@ -293,7 +293,7 @@
 <script>
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
-//import applicationForm from "../../assets/jsons/applicationForm"
+import applicationForm from "../../assets/jsons/applicationForm"
 import { nanoid } from "nanoid";
 
 export default {
@@ -670,12 +670,10 @@ export default {
             }
         },
         handleError(err) {
-            if (err.response.status === 401) {
-                alert('账号或者密码错误')
-            } else if (err.response.status === 403) {
-                alert('账号封禁中')
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
             } else if (err.response.status === 404) {
-                alert('指定流程实例不存在')
+                alert('指定流程或表单不存在')
             }
         },
     },
@@ -683,7 +681,7 @@ export default {
         //console.log(applicationForm)
     },
     created() {
-        //this.form = applicationForm;
+        
         this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm').then(
             (res) => {
                 console.log(res.data)
@@ -696,6 +694,7 @@ export default {
                 } else if (err.response.status === 404) {
                     alert('指定流程或表单不存在')
                 }
+                this.form = applicationForm;
             }
         )
     },
