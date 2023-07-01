@@ -8,7 +8,7 @@ var generateApplication = function () {
         "companyChineseName": "<@chinese{4,10}>",
         "companyEnglishName": "<@string{6,20}>",
         "developmentDepartment": "<@chinese{4,10}>",
-        "companyType": "<@chinese{4,10}>",
+        "companyType": "内资企业",
         "description": "<@chinese{0,310}>",
         "testStandards<@{1,10}>": ["<@string{4,20}>"],
         "testAspects<@{1,10}>": ["<@string{4,20}>"],

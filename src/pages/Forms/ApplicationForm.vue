@@ -1,6 +1,7 @@
 <template>
     <div class="application">
-        <el-form label-position="left" size="small" :model="form" ref="form" :disabled="disabled" :rules="rules">
+        <el-form label-position="left" size="small" :model="form" ref="form" :disabled="disabled" :rules="rules"
+                 v-if="dataReady">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
                 <br>
@@ -42,14 +43,19 @@
                 <el-col :span="12">
                     <el-form-item label="单位性质" ref="companyType" prop="companyType" class="is-required">
                         <br>
-                        <el-select v-model="chosenData.companyType" placeholder="单位性质"
-                                   @blur="emitBlurEvent('companyType', chosenData.companyType, true)"
-                                   @change="form.companyType = (chosenData.companyType !== '其他' ? chosenData.companyType : '')">
-                            <el-option v-for="item in orgTypeOptions" :key="item.value" :label="item.label"
-                                       :value="item.value"></el-option>
-                        </el-select>
-                        <el-input v-model="form.companyType" placeholder="其他单位性质" class="other-input"
-                                  v-if="chosenData.companyType === '其他'"></el-input>
+                        <div v-if="!disabled">
+                            <el-select v-model="chosenData.companyType" placeholder="单位性质"
+                                       @blur="emitBlurEvent('companyType', chosenData.companyType, true)"
+                                       @change="form.companyType = (chosenData.companyType !== '其他' ? chosenData.companyType : '')">
+                                <el-option v-for="item in orgTypeOptions" :key="item.value" :label="item.label"
+                                           :value="item.value"></el-option>
+                            </el-select>
+                            <el-input v-model="form.companyType" placeholder="其他单位性质" class="other-input"
+                                      v-if="chosenData.companyType === '其他'"></el-input>
+                        </div>
+                        <div v-if="disabled">
+                            <el-input v-model="form.companyType"></el-input>
+                        </div>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -68,8 +74,7 @@
             <hr>
             <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
                 <br>
-                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects"
-                                         :default-options="testAspectsOptions"
+                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects" :default-options="testAspectsOptions"
                                          option-description="选择测试指标" create-description="其他指标"
                                          @change="emitChangeEvent('testAspects', form.testAspects)"
                                          @blur="emitBlurEvent('testAspects', form.testAspects)"></MultipleCreateAndSelect>
@@ -120,17 +125,14 @@
                                  v-model.number="form.clientMemory" style="margin-top:5px"></el-input-number>
             </el-form-item>
             <el-form-item label="其他要求:" label-width="20%">
-                <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
-                          style="margin-top:5px"></el-input>
+                <el-input placeholder="其他要求" v-model="form.clientOtherRequirement" style="margin-top:5px"></el-input>
             </el-form-item>
             <h3>服务器端</h3>
             <h4>硬件</h4>
             <el-form-item label="架构:" prop="serverNames" ref="serverNames">
                 <br>
-                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions"
-                                     :disabled="disabled"
-                                     option-description="添加一种架构"
-                                     @change="emitChangeEvent('serverNames', form.serverNames)"
+                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions" :disabled="disabled"
+                                     option-description="添加一种架构" @change="emitChangeEvent('serverNames', form.serverNames)"
                                      @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
             </el-form-item>
             <el-row>
@@ -148,8 +150,7 @@
                 </el-col>
             </el-row>
             <el-form-item label="其他要求:" label-width="20%">
-                <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
-                          style="margin-top:5px"></el-input>
+                <el-input placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
             </el-form-item>
             <h4>软件</h4>
             <el-row :gutter="20">
@@ -569,7 +570,8 @@ export default {
             serverNameOptions: [
                 { value: 'PC服务器', label: 'PC服务器' },
                 { value: 'UNIX／Linux服务器', label: 'UNIX／Linux服务器' }
-            ]
+            ],
+            dataReady: false,
         };
     }
     ,
@@ -654,6 +656,12 @@ export default {
         save() {
             if (this.writable) {
                 sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                 console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
             }
         },
         pass() {
@@ -667,6 +675,12 @@ export default {
             if (res.status === 200) {
                 alert('上传成功')
                 this.$bus.$emit('submitApplication')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
             }
         },
         handleError(err) {
@@ -685,10 +699,15 @@ export default {
         this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm').then(
             (res) => {
                 console.log(res.data)
-                this.form = res.data
-                //this.form = JSON.parse(res.data)
+                if (res.data) {
+                    this.form = res.data
+                }
+                else {
+                    this.form = applicationForm
+                }
+                this.dataReady = true
             },
-            (err)=>{
+            (err) => {
                 if (err.response.status === 403) {
                     alert('指定流程或表单对该用户不可见')
                 } else if (err.response.status === 404) {
