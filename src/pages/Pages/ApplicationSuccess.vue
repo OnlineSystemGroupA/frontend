@@ -13,7 +13,9 @@
 export default {
     name: 'ApplicationSuccess',
     data() {
-
+        return {
+            
+        }
     },
     methods: {
         clientItemTable() {
