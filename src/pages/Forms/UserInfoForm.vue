@@ -1,6 +1,6 @@
 <template>
     <div class="userInfo">
-        <el-form :label-position="labelPosition" ref="loginForm" label-width="80px" :model="userInfo" :rules="rules">
+        <el-form :label-position="labelPosition" ref="loginForm" label-width="80px" :model="userInfo">
             <el-row>
                 <el-col style="width:50%">
                     <el-form-item label="真实姓名" prop="realName">
@@ -8,16 +8,16 @@
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">
-                    <el-form-item label="电子邮箱" prop="e_mail">
-                        <el-input v-model="userInfo.e_mail" placeholder="请输入电子邮箱" clearable=""></el-input>
+                    <el-form-item label="电子邮箱" prop="email">
+                        <el-input v-model="userInfo.email" placeholder="请输入电子邮箱" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
 
             <el-row>
                 <el-col style="width:50%">
-                    <el-form-item label="联系电话" prop="telephone">
-                        <el-input v-model="userInfo.telephone" placeholder="请输入联系电话" clearable=""></el-input>
+                    <el-form-item label="联系电话" prop="phone">
+                        <el-input v-model="userInfo.phone" placeholder="请输入联系电话" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">
@@ -32,13 +32,13 @@
 
             <el-row>
                 <el-col style="width:50%">
-                    <el-form-item label="公司" prop="company.name">
-                        <el-input v-model="userInfo.company.name" placeholder="请输入公司" clearable=""></el-input>
+                    <el-form-item label="公司" prop="company">
+                        <el-input v-model="userInfo.company" placeholder="请输入公司" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">
-                    <el-form-item label="公司电话" prop="company.telephone">
-                        <el-input v-model="userInfo.company.telephone" placeholder="请输入公司电话"
+                    <el-form-item label="公司电话" prop="companyTelephone">
+                        <el-input v-model="userInfo.companyTelephone" placeholder="请输入公司电话"
                                   clearable=""></el-input>
                     </el-form-item>
                 </el-col>
@@ -46,13 +46,13 @@
 
             <el-row>
                 <el-col style="width:50%">
-                    <el-form-item label="公司传真" prop="company.fax">
-                        <el-input v-model="userInfo.company.fax" placeholder="请输入公司传真" clearable=""></el-input>
+                    <el-form-item label="公司传真" prop="companyFax">
+                        <el-input v-model="userInfo.companyFax" placeholder="请输入公司传真" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">
-                    <el-form-item label="公司地址" prop="company.address">
-                        <el-input v-model="userInfo.company.address" placeholder="请输入公司地址"
+                    <el-form-item label="公司地址" prop="companyAddress">
+                        <el-input v-model="userInfo.companyAddress" placeholder="请输入公司地址"
                                   clearable=""></el-input>
                     </el-form-item>
                 </el-col>
@@ -60,14 +60,14 @@
 
             <el-row>
                 <el-col style="width:50%">
-                    <el-form-item label="公司邮编" prop="company.postcode">
-                        <el-input v-model="userInfo.company.postcode" placeholder="请输入公司邮编"
+                    <el-form-item label="公司邮编" prop="companyPostcode">
+                        <el-input v-model="userInfo.companyPostcode" placeholder="请输入公司邮编"
                                   clearable=""></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">
-                    <el-form-item label="公司网址" prop="company.website">
-                        <el-input v-model="userInfo.company.website" placeholder="请输入公司网址"
+                    <el-form-item label="公司网址" prop="companyWebsite">
+                        <el-input v-model="userInfo.companyWebsite" placeholder="请输入公司网址"
                                   clearable=""></el-input>
                     </el-form-item>
                 </el-col>
@@ -75,14 +75,14 @@
 
             <el-row>
                 <el-col style="width:50%">
-                    <el-form-item label="公司邮箱" prop="company.e_mail">
-                        <el-input v-model="userInfo.company.e_mail" placeholder="请输入公司邮箱"
+                    <el-form-item label="公司邮箱" prop="companyEmail">
+                        <el-input v-model="userInfo.companyEmail" placeholder="请输入公司邮箱"
                                   clearable=""></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col style="width:50%">
-                    <el-form-item label="公司手机" prop="company.phone">
-                        <el-input v-model="userInfo.company.phone" placeholder="请输入公司手机" clearable=""></el-input>
+                    <el-form-item label="公司手机" prop="companyPhone">
+                        <el-input v-model="userInfo.companyPhone" placeholder="请输入公司手机" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -100,35 +100,51 @@ export default {
     name: 'UserInfoForm',
     data() {
         return {
+            labelPosition:'left',
             userInfo: {
-                username: '杰伦',
-                realName: '周杰伦',
-                e_mail: 'jielun@qq.com',
-                telephone: '123456789',
-                address: '台北xx街道xx号',
-                date: '2023-06-12',
-                gender: '男',
-                company: {
-                    name: '杰威尔公司',
-                    telephone: '1000000',
-                    fax: '1000000',
-                    contact: '方文山',
-                    postcode: '324330',
-                    phone: '100002',
-                    e_mail: '103948932@11.com',
-                    website: 'www.jieweier.com',
-                    address: '台湾省高雄市xx街道xx号',
-                },
+                username: '',
+                realName: '',
+                email: '',
+                phone: '',
+                createdDate: '',
+                gender: '',
+                company: '',
+                companyAddress: '',
+                companyEmail: '',
+                companyFax: '',
+                companyPhone: '',
+                companyWebsite: '',
             }
         }
     },
     methods: {
 
         submit() {
-            alert('修改成功')
-            this.$router.replace({
-                name: 'clientDetail'
-            })
+            this.axios.post('/api/account/client_details',this.userInfo).then(this.handleResponse,this,this.handleError)
+        },
+        handleResponse(res) {
+            if (res.status === 200) {
+                if (res.data === 'email') {
+                    alert('邮箱与他人重复')
+                }
+                else if (res.data === 'phone') {
+                    alert('电话与他人重复')
+                }
+                else {
+                    console.log(res.data)
+                    alert('修改成功')
+                    this.$bus.$emit('editInfo')
+                }
+            }
+        },
+
+        handleError(err) {
+            if (err.status === 409) {
+                alert('登录类型错误')
+            }
+            else if (err.status === 404) {
+                alert('404 Not found!')
+            }
         },
         cancel() {
             alert('取消修改')
@@ -136,6 +152,23 @@ export default {
                 name: 'clientDetail'
             })
         }
+    },
+    created() {
+        this.axios.get('/api/account/client_details').then(
+            (res) => {
+                if (res.status === 200) {
+                    console.log(res.data)
+                    this.userInfo = res.data
+                    var date = this.userInfo.createdDate.split('T')
+                    this.userInfo.createdDate = date[0]
+                }
+            },
+            (err) => {
+                if (err.status === 409) {
+                    alert('登录类型错误')
+                }
+            }
+        )
     }
 }
 </script>

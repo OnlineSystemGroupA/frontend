@@ -12,44 +12,44 @@
 
             <tr>
                 <th>创建时间</th>
-                <td>{{ userInfo.date }}</td>
+                <td>{{ userInfo.createdDate }}</td>
                 <th>性别</th>
                 <td>{{ userInfo.gender }}</td>
             </tr>
 
             <tr>
                 <th>联系电话</th>
-                <td>{{ userInfo.telephone }}</td>
+                <td>{{ userInfo.phone }}</td>
                 <th>电子邮箱</th>
-                <td>{{ userInfo.e_mail }}</td>
+                <td>{{ userInfo.email }}</td>
             </tr>
 
             <tr>
                 <th>公司</th>
-                <td>{{ userInfo.company.name }}</td>
+                <td>{{ userInfo.company }}</td>
                 <th>公司电话</th>
-                <td>{{ userInfo.company.telephone }}</td>
+                <td>{{ userInfo.companyTelephone }}</td>
             </tr>
 
             <tr>
                 <th>公司传真</th>
-                <td>{{ userInfo.company.fax }}</td>
+                <td>{{ userInfo.companyFax }}</td>
                 <th>公司地址</th>
-                <td colspan=2>{{ userInfo.company.address }}</td>
+                <td colspan=2>{{ userInfo.companyAddress }}</td>
             </tr>
 
             <tr>
                 <th>公司邮编</th>
-                <td>{{ userInfo.company.postcode }}</td>
+                <td>{{ userInfo.companyPostcode }}</td>
                 <th>公司网址</th>
-                <td colspan=2>{{ userInfo.company.website }}</td>
+                <td colspan=2>{{ userInfo.companyWebsite }}</td>
             </tr>
 
             <tr>
                 <th>公司邮箱</th>
-                <td>{{ userInfo.company.e_mail }}</td>
+                <td>{{ userInfo.companyEmail }}</td>
                 <th>公司手机</th>
-                <td colspan=2>{{ userInfo.company.phone }}</td>
+                <td colspan=2>{{ userInfo.companyPhone }}</td>
             </tr>
         </table>
         <br>
@@ -76,24 +76,18 @@ export default {
     data() {
         return {
             userInfo: {
-                username: '杰伦',
-                realName: '周杰伦',
-                e_mail: 'jielun@qq.com',
-                telephone: '123456789',
-                address: '台北xx街道xx号',
-                date: '2023-06-12',
-                gender: '男',
-                company: {
-                    name: '杰威尔公司',
-                    telephone: '1000000',
-                    fax: '1000000',
-                    contact: '方文山',
-                    postcode: '324330',
-                    phone: '100002',
-                    e_mail: '103948932@11.com',
-                    website: 'www.jieweier.com',
-                    address: '台湾省高雄市xx街道xx号',
-                },
+                username: '',
+                realName: '',
+                email: '',
+                phone: '',
+                createdDate: '',
+                gender: '',
+                company: '',
+                companyAddress: '',
+                companyEmail: '',
+                companyFax: '',
+                companyPhone: '',
+                companyWebsite:'',
             }
         }
     },
@@ -115,6 +109,25 @@ export default {
                     clientId: this.clientId,
                 }
             })
+        },
+        update() {
+            if (sessionStorage.getItem('logType') === 'client') {
+                this.axios.get('/api/account/client_details').then(
+                    (res) => {
+                        if (res.status === 200) {
+                            console.log(res.data)
+                            this.userInfo = res.data
+                            var date = this.userInfo.createdDate.split('T')
+                            this.userInfo.createdDate = date[0]
+                        }
+                    },
+                    (err) => {
+                        if (err.status === 409) {
+                            alert('登录类型错误')
+                        }
+                    }
+                )
+            }
         }
     },
     computed: {
@@ -139,9 +152,20 @@ export default {
                 )
             }
         })
+        this.$bus.$on('editInfo', () => {
+            console.log('更新信息')
+            this.update()
+            this.$router.push({
+                name: 'clientDetail'
+            })
+        })
+    },
+    created() {
+        this.update()
     },
     beforeDestroy() {
         this.$bus.$off('changePassword')
+        this.$bus.$off('editInfo')
     }
 }
 </script>

@@ -15,20 +15,16 @@
                 </el-col>
             </el-row>
             <hr>
-            <el-table :data="form.functions"
-                      ref="functionTable"
-                      @row-click="onFuncRowClick"
-                      :row-class-name="funcRowClassName"
-                      style="width: 100%">
+            <el-table :data="form.functions" ref="functionTable" @row-click="onFuncRowClick"
+                      :row-class-name="funcRowClassName" style="width: 100%">
                 <el-table-column type="expand">
                     <template slot-scope="func">
                         <div class="table-dropdown">
                             <el-form-item>
                                 <el-form-item label="功能名称">
-                                    <el-input v-model="func.row.title" placeholder="功能名称"
-                                              style="width: 60%"></el-input>
+                                    <el-input v-model="func.row.title" placeholder="功能名称" style="width: 60%"></el-input>
                                 </el-form-item>
-                                <el-table :data="func.row.items" @row-click="row=>onItemRowClick(func.row.index, row)"
+                                <el-table :data="func.row.items" @row-click="row => onItemRowClick(func.row.index, row)"
                                           style="width: 80%" :ref="'itemTable' + func.row.index">
                                     <el-table-column type="expand">
                                         <template slot-scope="item">
@@ -39,12 +35,9 @@
                                                 </el-form-item>
                                                 <el-form-item v-model="item.row.name" label="详细功能描述"
                                                               style="margin-top: 10px">
-                                                    <el-input v-model="item.row.description"
-                                                              type="textarea"
-                                                              :autosize="{minRows: 4, maxRows: 8}"
-                                                              resize='none'
-                                                              placeholder="详细功能描述"
-                                                              style="width: 60%"></el-input>
+                                                    <el-input v-model="item.row.description" type="textarea"
+                                                              :autosize="{ minRows: 4, maxRows: 8 }" resize='none'
+                                                              placeholder="详细功能描述" style="width: 60%"></el-input>
                                                 </el-form-item>
                                             </div>
                                         </template>
@@ -52,22 +45,12 @@
                                     <el-table-column label="详细功能名称" prop="name"></el-table-column>
                                     <el-table-column align="right">
                                         <template slot="header">
-                                            <el-button
-                                                size="mini"
-                                                type="primary"
-                                                plain
-                                                circle
-                                                icon="el-icon-plus"
-                                                @click.native.stop="addItem(func.row.index)"></el-button>
+                                            <el-button size="mini" type="primary" plain circle icon="el-icon-plus"
+                                                       @click.native.stop="addItem(func.row.index)"></el-button>
                                         </template>
                                         <template slot-scope="item">
-                                            <el-button
-                                                size="mini"
-                                                type="danger"
-                                                plain
-                                                circle
-                                                icon="el-icon-delete"
-                                                @click.native.stop="removeItem(func.row.title, item.row.name)"></el-button>
+                                            <el-button size="mini" type="danger" plain circle icon="el-icon-delete"
+                                                       @click.native.stop="removeItem(func.row.title, item.row.name)"></el-button>
                                         </template>
                                     </el-table-column>
                                 </el-table>
@@ -78,22 +61,12 @@
                 <el-table-column label="功能名称" prop="title"></el-table-column>
                 <el-table-column align="right">
                     <template slot="header">
-                        <el-button
-                            size="mini"
-                            type="primary"
-                            plain
-                            circle
-                            icon="el-icon-plus"
-                            @click.native.stop="addFunc"></el-button>
+                        <el-button size="mini" type="primary" plain circle icon="el-icon-plus"
+                                   @click.native.stop="addFunc"></el-button>
                     </template>
                     <template slot-scope="func">
-                        <el-button
-                            size="mini"
-                            type="danger"
-                            plain
-                            circle
-                            icon="el-icon-delete"
-                            @click.native.stop="removeFunc(func.row)"></el-button>
+                        <el-button size="mini" type="danger" plain circle icon="el-icon-delete"
+                                   @click.native.stop="removeFunc(func.row)"></el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -112,7 +85,7 @@
 
 <script>
 import functionList from '../../assets/jsons/functionList.json'
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 
 export default {
     name: 'TestFunctionList',
@@ -126,7 +99,7 @@ export default {
                     {
                         title: '',
                         items: [
-                            {name: '', description: ''}
+                            { name: '', description: '' }
                         ]
                     }
                 ],
@@ -179,7 +152,7 @@ export default {
             this.$refs['itemTable' + index].toggleRowExpansion(row);
         },
 
-        funcRowClassName({row, rowIndex}) {
+        funcRowClassName({ row, rowIndex }) {
             row.index = rowIndex;
         },
 
@@ -256,14 +229,37 @@ export default {
         console.log(functionList)
     },
     created() {
-        this.form = functionList
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestFunctionForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    }
+                    else {
+                        this.form = functionList
+                    }
+                }
+
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = functionList
+
+            }
+        )
     }
 }
 </script>
 
 <style lang="less">
 .func-list {
-   width: 94%;
+    width: 94%;
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;
@@ -277,5 +273,4 @@ export default {
 .add-func {
     margin-bottom: 30px;
 }
-
 </style>
