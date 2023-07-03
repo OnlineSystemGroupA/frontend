@@ -184,7 +184,7 @@ export default {
             console.log(res)
             if (res.status === 200) {
                 alert('上传成功')
-                this.$bus.$emit('submitFunctionList')
+                this.$bus.$emit('submitFunctionList',this.processId)
             }
         },
         handleSaveResult(res) {

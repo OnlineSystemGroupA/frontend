@@ -40,10 +40,10 @@ export default {
                 }
             })
         })
-        this.$bus.$on('submitFunctionList', () => {
-            this.$router.replace({
-                name: 'applicationSuccess',
-            })
+        this.$bus.$on('submitFunctionList', (processId) => {
+            this.processId = processId
+            console.log(this.processId)
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task' ).then(this.handleRes,this.handleErr)
         })
     },
     beforeDestroy() {
@@ -63,6 +63,26 @@ export default {
                 return 3
             }
             return 0
+        }
+    },
+    methods:{
+        handleRes(res){
+            if (res.status === 200) {
+                this.$router.replace({
+                    name: 'applicationSuccess',
+                })
+            }
+        },
+        handleErr(err) {
+            if (err.status === 403) {
+                alert('指定流程对该用户不可见或当前用户无完成任务权限')
+            }
+            else if (err.status === 404) {
+                alert('指定流程不存在')
+            }
+            else if (err.status === 460) {
+                alert('未满足完成条件')
+            }
         }
     }
 }
