@@ -12,7 +12,7 @@
                             <h3>项目名称：</h3>
                         </th>
                         <td style="width:40%">
-                            <el-input placeholder="项目名称" v-model="form.item"
+                            <el-input placeholder="项目名称" v-model="form.projectName"
                                       style="width:100%"></el-input>
                         </td>
                     </tr>
@@ -291,7 +291,7 @@ export default {
     data() {
         return {
             form: {
-                item: '',
+                projectName: '',
                 client: '',
                 trustee: '',
                 signPlace: '',

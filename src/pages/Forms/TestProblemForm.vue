@@ -24,7 +24,7 @@
                         </el-col>
                         <el-col class="col">
                             <el-form-item label="发现时间">
-                                <el-date-picker style="width: 100%;" v-model="item.discoveredTime"
+                                <el-date-picker style="width: 100%;" v-model="item.discoveredDate"
                                                 placeholder="发现时间"></el-date-picker>
                             </el-form-item>
                         </el-col>
@@ -87,7 +87,7 @@ export default {
                         initialCondition: '',
                         operationRoute: '',
                         relatedCase: '',
-                        discoveredTime: '',
+                        discoveredDate: '',
                         personInCharge: '',
                         editSuggestion: '',
                         vforKey: nanoid(6)
