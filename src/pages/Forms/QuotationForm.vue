@@ -2,17 +2,16 @@
     <div class="quotation">
         <h2>报价单</h2>
         <el-form :label-position="labelPosition" label-width="100px" :disabled="disable">
-            <el-row>
-                <el-col style="width:50%">
+            <el-row :gutter="20">
+                <el-col :span="14">
                     <el-form-item label="报价日期">
                         <el-date-picker v-model="form.quotationDate"></el-date-picker>
                     </el-form-item>
-                    至
-                    <el-form-item label="报价有效期">
+                    <el-form-item label="报价有效期至">
                         <el-date-picker v-model="form.validDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
-                <el-col style="width:50%">
+                <el-col :span="10">
                     <table class="pure-table" rules=all>
                         <tr>
                             <th>户名</th>
@@ -37,10 +36,10 @@
         <br>
         <table class="pure-table" rules=all>
             <tr>
-                <th>项目</th>
+                <th style="min-width: 75px">项目</th>
                 <th>说明</th>
                 <th>单价</th>
-                <th>备注</th>
+                <th>数量</th>
                 <th>行合计</th>
             </tr>
             <tr>
@@ -49,29 +48,54 @@
                     完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本
                 </td>
                 <td>
-                    <el-input-number v-model="form.quotation" :disabled="disable"></el-input-number>
+                    <el-input-number :precision="2"
+                                     :controls="false"
+                                     v-model="form.testFee"
+                                     :disabled="disable"></el-input-number>
                 </td>
-                <td>含1份测试报告 （需增加报告，每份另收 1000元）</td>
+                <td style="text-align:center">
+                    1
+                </td>
+                <td style="text-align:center">
+                    {{ testTotal.toFixed(2) }}
+                </td>
+            </tr>
+            <tr>
+                <td>测试报告费</td>
                 <td>
-                    <el-input-number v-model="form.rowTotal" :disabled="disable"></el-input-number>
+                    首份测试报告免费
+                </td>
+                <td>
+                    <el-input-number :precision="2"
+                                     :controls="false"
+                                     v-model="form.reportFee"
+                                     :disabled="disable"></el-input-number>
+                </td>
+                <td>
+                    <el-input-number v-model="form.reportNum"
+                                     :min="1"
+                                     :disabled="disable"></el-input-number>
+                </td>
+                <td style="text-align:center">
+                    {{ reportTotal.toFixed(2) }}
                 </td>
             </tr>
             <tr>
                 <th colspan="4">小计</th>
-                <td>
-                    <el-input-number v-model="form.subTotal" :disabled="disable"></el-input-number>
+                <td style="text-align:center">
+                    {{ totalBeforeTax.toFixed(2) }}
                 </td>
             </tr>
             <tr>
-                <th colspan="4">税率（8%）</th>
-                <td>
-                    <el-input-number v-model="form.taxRate" :disabled="disable"></el-input-number>
+                <th colspan="4">税（8%）</th>
+                <td style="text-align:center">
+                    {{ tax.toFixed(2) }}
                 </td>
             </tr>
             <tr>
                 <th colspan="4">总计</th>
-                <td>
-                    <el-input-number v-model="form.total" :disabled="disable"></el-input-number>
+                <td style="text-align: center; min-width: 100px">
+                    {{ totalAfterTax.toFixed(2) }}
                 </td>
             </tr>
         </table>
@@ -89,11 +113,9 @@ export default {
                 quotationDate: '',
                 validDate: '',
                 software: '',
-                quotation: '',
-                rowTotal: '',
-                subTotal: '',
-                taxRate: '',
-                total: '',
+                testFee: 0,
+                reportFee: 0,
+                reportNum: 1,
             }
         }
     },
@@ -117,7 +139,22 @@ export default {
                 return true
             }
             return false
-        }
+        },
+        testTotal() {
+            return this.form.testFee
+        },
+        reportTotal() {
+            return (this.form.reportNum - 1) * this.form.reportFee
+        },
+        totalBeforeTax() {
+            return this.testTotal + this.reportTotal
+        },
+        tax() {
+            return this.totalBeforeTax * 0.08;
+        },
+        totalAfterTax() {
+            return this.totalBeforeTax + this.tax
+        },
     }
 }
 </script>
