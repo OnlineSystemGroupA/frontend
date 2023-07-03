@@ -6,7 +6,8 @@
             <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
                 <br>
                 <SelectAndCreateTags v-model="form.testTypes" :default-options="testTypeOptions" :disabled="disabled"
-                                     option-description="新增一个测试类型" @change="emitChangeEvent('testTypes', form.testTypes)"
+                                     option-description="新增一个测试类型"
+                                     @change="emitChangeEvent('testTypes', form.testTypes)"
                                      @blur="emitBlurEvent('testTypes', form.testTypes)"></SelectAndCreateTags>
             </el-form-item>
             <hr>
@@ -47,7 +48,7 @@
                             <el-select v-model="chosenData.companyType" placeholder="单位性质"
                                        @blur="emitBlurEvent('companyType', chosenData.companyType, true)"
                                        @change="form.companyType = (chosenData.companyType !== '其他' ? chosenData.companyType : '')">
-                                <el-option v-for="item in orgTypeOptions" :key="item.value" :label="item.label"
+                                <el-option v-for="item in companyTypeOptions" :key="item.value" :label="item.label"
                                            :value="item.value"></el-option>
                             </el-select>
                             <el-input v-model="form.companyType" placeholder="其他单位性质" class="other-input"
@@ -60,7 +61,8 @@
                 </el-col>
             </el-row>
             <el-form-item label="主要功能及用途简介（限200字）" prop="description">
-                <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" resize='none' v-model="form.description"
+                <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" resize='none'
+                          v-model="form.description"
                           maxlength="200" placeholder="主要功能及用途"></el-input>
             </el-form-item>
             <hr>
@@ -74,7 +76,8 @@
             <hr>
             <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
                 <br>
-                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects" :default-options="testAspectsOptions"
+                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects"
+                                         :default-options="testAspectsOptions"
                                          option-description="选择测试指标" create-description="其他指标"
                                          @change="emitChangeEvent('testAspects', form.testAspects)"
                                          @blur="emitBlurEvent('testAspects', form.testAspects)"></MultipleCreateAndSelect>
@@ -112,7 +115,8 @@
                 <el-form-item v-for="(clientSystem) in form.clientSystems" :key="clientSystem.vforKey"
                               :label="clientSystem.system" label-width="15%" style="margin-top:5px">
                     <el-input v-model="clientSystem.version" placeholder="系统版本" style="width:30%"></el-input>
-                    <el-button type="danger" @click="deleteClientSystem(clientSystem)" icon="el-icon-delete" circle plain
+                    <el-button type="danger" @click="deleteClientSystem(clientSystem)" icon="el-icon-delete" circle
+                               plain
                                size=mini style="margin-left:5%"></el-button>
                 </el-form-item>
                 <el-input v-model="newClientSystem" placeholder="其他操作系统"
@@ -125,14 +129,17 @@
                                  v-model.number="form.clientMemory" style="margin-top:5px"></el-input-number>
             </el-form-item>
             <el-form-item label="其他要求:" label-width="20%">
-                <el-input placeholder="其他要求" v-model="form.clientOtherRequirement" style="margin-top:5px"></el-input>
+                <el-input placeholder="其他要求" v-model="form.clientOtherRequirement"
+                          style="margin-top:5px"></el-input>
             </el-form-item>
             <h3>服务器端</h3>
             <h4>硬件</h4>
             <el-form-item label="架构:" prop="serverNames" ref="serverNames">
                 <br>
-                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions" :disabled="disabled"
-                                     option-description="添加一种架构" @change="emitChangeEvent('serverNames', form.serverNames)"
+                <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions"
+                                     :disabled="disabled"
+                                     option-description="添加一种架构"
+                                     @change="emitChangeEvent('serverNames', form.serverNames)"
                                      @blur="emitBlurEvent('serverNames', form.serverNames)"></SelectAndCreateTags>
             </el-form-item>
             <el-row>
@@ -150,7 +157,8 @@
                 </el-col>
             </el-row>
             <el-form-item label="其他要求:" label-width="20%">
-                <el-input placeholder="其他要求" v-model="form.serverOtherRequirement" style="margin-top:5px"></el-input>
+                <el-input placeholder="其他要求" v-model="form.serverOtherRequirement"
+                          style="margin-top:5px"></el-input>
             </el-form-item>
             <h4>软件</h4>
             <el-row :gutter="20">
@@ -295,7 +303,7 @@
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
 import applicationForm from "../../assets/jsons/applicationForm"
-import { nanoid } from "nanoid";
+import {nanoid} from "nanoid";
 
 export default {
     name: "ApplicationForm",
@@ -306,13 +314,13 @@ export default {
     props: ['writable', 'processId', 'checking'],
     data() {
         const valiChosenCompanyType = (rule, value, callback) => {
-            if (this.chosenData.companyType === "") {
+            if (this.form.companyType === "" && this.chosenData.companyType !== "其他") {
                 callback(new Error("请选择单位性质"));
             }
             callback();
         };
         const valiCompanyType = (rule, value, callback) => {
-            if (this.chosenData.companyType === "其他" && this.form.companyType === "") {
+            if (this.form.companyType === "" && this.chosenData.companyType === "其他") {
                 callback(new Error("请填写其他单位性质"));
             }
             callback();
@@ -507,13 +515,13 @@ export default {
                 { value: "产品说明要求", label: "产品说明要求" },
                 { value: "用户文档集要求", label: "用户文档集要求" },
             ],
-            orgTypeOptions: [
+            companyTypeOptions: [
                 { value: "内资企业", label: "内资企业" },
                 { value: "外（合）资企业", label: "外（合）资企业" },
                 { value: "港澳台（合）资本企业", label: "港澳台（合）资本企业" },
                 { value: "科研院校", label: "科研院校" },
                 { value: "政府事业团体", label: "政府事业团体" },
-                { label: "其他", value: "其他" }
+                { value: "其他", label: "其他" }
             ],
             scaleOptions: ['功能数（到最后一级菜单）', '功能点数', '代码行数（不包括注释行、空行）'],
             softwareTypeOptions: [
@@ -656,7 +664,7 @@ export default {
         save() {
             if (this.writable) {
                 sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
-                 console.log(this.processId)
+                console.log(this.processId)
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'
@@ -690,22 +698,36 @@ export default {
                 alert('指定流程或表单不存在')
             }
         },
+        initializeDOM() {
+            // 设置单位性质DOM的绑定值，需要检查”企业类型“是否选择了“其他”
+            if (this.form.companyType !== "") {
+                console.log(this.companyTypeOptions.indexOf(this.form.companyType))
+                console.log(this.companyTypeOptions)
+                if (this.companyTypeOptions.findIndex(
+                    (option) => option.value === this.form.companyType
+                ) !== -1) {
+                    this.chosenData.companyType = this.form.companyType
+                } else {
+                    this.chosenData.companyType = '其他'
+                }
+            }
+        }
     },
     mounted() {
-        //console.log(applicationForm)
+        // console.log(this.form.companyType)
+        // console.log(this.chosenData.companyType)
     },
     created() {
-        
         this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm').then(
             (res) => {
                 console.log(res.data)
                 if (res.data) {
                     this.form = res.data
-                }
-                else {
+                } else {
                     this.form = applicationForm
                 }
                 this.dataReady = true
+                this.initializeDOM()
             },
             (err) => {
                 if (err.response.status === 403) {
@@ -714,6 +736,7 @@ export default {
                     alert('指定流程或表单不存在')
                 }
                 this.form = applicationForm;
+                this.initializeDOM()
             }
         )
     },
