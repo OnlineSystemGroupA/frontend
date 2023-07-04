@@ -19,9 +19,9 @@
         </div>
         <br>
         <el-table :data="itemList" border style="width: 100%; height: auto;">
-            <el-table-column prop="recordId" label="项目号" style="width: 16%">
+            <el-table-column prop="projectId" label="项目号" style="width: 16%">
                 <template slot-scope="scope">
-                    <p @click="itemArrange(scope.row.processId)">{{ scope.row.recordId }}</p>
+                    <p @click="itemArrange(scope.row.processId)">{{ scope.row.projectId }}</p>
                 </template>
             </el-table-column>
             <el-table-column prop="title" label="项目名称" style="width: 16%"></el-table-column>
@@ -54,10 +54,10 @@ export default {
         return {
             keyword: "",
             itemList: [],
-            sortKey: 'recordId',
+            sortKey: 'projectId',
             sortKeys: [
                 {
-                    value: 'recordId',
+                    value: 'projectId',
                     label: '项目号',
                 },
                 {

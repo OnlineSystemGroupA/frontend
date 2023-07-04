@@ -4,16 +4,16 @@
         <table style="width:90%; text-align: center;" class="pure-table" rules=all>
             <tr>
                 <th>员工号</th>
-                <td>{{ userInfo.employeeId }}</td>
+                <td>{{ userInfo.jobNumber }}</td>
                 <th>真实姓名</th>
                 <td>{{ userInfo.realName }}</td>
             </tr>
 
             <tr>
                 <th>联系电话</th>
-                <td>{{ userInfo.telephone }}</td>
+                <td>{{ userInfo.phone }}</td>
                 <th>电子邮箱</th>
-                <td>{{ userInfo.e_mail }}</td>
+                <td>{{ userInfo.email }}</td>
             </tr>
 
             <tr>
@@ -46,14 +46,7 @@ export default {
     props: ['employeeId'],
     data() {
         return {
-            userInfo: {
-                employeeId: 'e001',
-                realName: '绫波丽',
-                e_mail: 'eva@163.com',
-                telephone: '123456789',
-                department: '测试部',
-                position: '测试员',
-            }
+            userInfo:'' ,
         }
     },
     methods: {
@@ -115,7 +108,16 @@ export default {
         this.$bus.$off('changePassword')
     },
     created() {
-        this.userInfo.employeeId = this.employeeId
+        this.axios.get('/api/account/operator_details').then(
+            (res) => {
+                if (res.status === 200) {
+                    this.userInfo = res.data
+                }
+            },
+            (err)=>{
+                alert(err.data)
+            }
+        )
     }
 }
 </script>

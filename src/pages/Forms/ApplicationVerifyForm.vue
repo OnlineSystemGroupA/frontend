@@ -22,26 +22,26 @@
             </div>
             <h2>材料检查</h2>
             <el-form-item label="测试样品">
-                <el-checkbox-group v-model="form.softwareSample">
+                <el-checkbox-group v-model="form.softwareSamples">
                     <el-checkbox label="源代码"></el-checkbox>
                     <el-checkbox label="可执行文件"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
             <el-form-item label="需求文档">
-                <el-checkbox-group v-model="form.requirementDocument">
+                <el-checkbox-group v-model="form.requirementDocuments">
                     <el-checkbox label="项目计划任务书"></el-checkbox>
                     <el-checkbox label="需求分析报告"></el-checkbox>
                     <el-checkbox label="合同"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
             <el-form-item label="用户文档">
-                <el-checkbox-group v-model="form.userDocument">
+                <el-checkbox-group v-model="form.userDocuments">
                     <el-checkbox label="用户手册"></el-checkbox>
                     <el-checkbox label="用户指南"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
             <el-form-item label="操作文件">
-                <el-checkbox-group v-model="form.operatingDocument">
+                <el-checkbox-group v-model="form.operatingDocuments">
                     <el-checkbox label="操作员手册"></el-checkbox>
                     <el-checkbox label="安装手册"></el-checkbox>
                     <el-checkbox label="诊断手册"></el-checkbox>
@@ -71,7 +71,7 @@
             </el-form-item>
             <h2>测试项目编号</h2>
             <el-form-item>
-                <el-input placeholder="测试项目编号" v-model="form.projectNumber"></el-input>
+                <el-input placeholder="测试项目编号" v-model="form.projectId"></el-input>
             </el-form-item>
             <h2>备注</h2>
             <el-form-item>
@@ -95,14 +95,14 @@ export default {
                 confidentialLevel: '',
                 virusCheck: '',
                 virusScanner: '',
-                softwareSample: [],
-                requirementDocument: [],
-                userDocument: [],
-                operatingDocument: [],
+                softwareSamples: [],
+                requirementDocuments: [],
+                userDocuments: [],
+                operatingDocuments: [],
                 otherDocument: '',
                 confirmation: '',
                 acceptance: '',
-                projectNumber: '',
+                projectId: '',
                 notes: ''
             }
         }
@@ -113,7 +113,32 @@ export default {
         },
         submit() {
             console.log(JSON.stringify(this.form))
-        }
+            console.log(this.processId)
+            this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationVerifyForm', JSON.stringify(this.form), {
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            }).then(this.handleResult, this.handleError)
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
     },
     computed: {
         disable() {
@@ -125,7 +150,25 @@ export default {
             }
             return false
         }
-    }
+    },
+    created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationVerifyForm').then(
+            (res) => {
+                console.log(res.data)
+                if (res.data) {
+                    this.form = res.data
+                } 
+                this.dataReady = true
+            },
+            (err) => {
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+            }
+        )
+    },
 }
 </script>
 

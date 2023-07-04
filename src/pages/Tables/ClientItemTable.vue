@@ -59,10 +59,10 @@ export default {
     data() {
         return {
             keyword: '',
-            sortKey: 'recordId',
+            sortKey: 'projectId',
             sortKeys: [
                 {
-                    value: 'recordId',
+                    value: 'projectId',
                     label: '项目号',
                 },
                 {
