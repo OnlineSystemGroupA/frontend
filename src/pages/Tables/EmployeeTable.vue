@@ -19,12 +19,12 @@
         </div>
         <br>
         <el-table :data="currentItemList" border style="width: 100%; height: auto;">
-            <el-table-column prop="id" label="id" style="width: 16%; height: auto;">
+            <el-table-column prop="jobNumber" label="员工号" style="width: 16%; height: auto;">
                 <template slot-scope="scope">
-                    <p @click="pickEmployee(scope.row.id)">{{ scope.row.id }}</p>
+                    <p @click="pickEmployee(scope.row.jobNumber)">{{ scope.row.jobNumber }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="employeeName" label="姓名" style="width: 16%; height: auto;">
+            <el-table-column prop="realName" label="姓名" style="width: 16%; height: auto;">
             </el-table-column>
             <el-table-column prop="department" label="部门" style="width: 16%; height: auto;">
             </el-table-column>
@@ -34,7 +34,7 @@
             </el-table-column>
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
-                    <el-button @click="pickEmployee(scope.row.id)" icon="el-icon-search" size="small"
+                    <el-button @click="pickEmployee(scope.row.jobNumber)" icon="el-icon-search" size="small"
                                type="primary">查看员工
                     </el-button>
                 </template>
@@ -56,14 +56,14 @@ export default {
     data() {
         return {
             keyword: '',
-            sortKey: 'id',
+            sortKey: 'jobNumber',
             sortKeys: [
                 {
-                    value: 'id',
-                    label: '员工id',
+                    value: 'jobNumber',
+                    label: '员工号',
                 },
                 {
-                    value: 'employeeName',
+                    value: 'realName',
                     label: '用户名',
                 },
                 {
@@ -79,428 +79,7 @@ export default {
                     label: '邮箱',
                 },
             ],
-            employeeData: [
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-                {
-                    id: 'e001',
-                    employeeName: '李四',
-                    department: '市场部',
-                    position: '调查员',
-                    email: '123@132.com'
-                },
-                {
-                    id: 'e002',
-                    employeeName: '王五',
-                    department: '测试部',
-                    position: '测试员',
-                    email: 'wangwu@163.com'
-                },
-                {
-                    id: 'e003',
-                    employeeName: '赵六',
-                    department: '审核部',
-                    position: '部长',
-                    email: 'leo@163.com'
-                },
-                {
-                    id: 'e004',
-                    employeeName: '何七',
-                    department: '测试部',
-                    position: '部长',
-                    email: 'seven@163.com'
-                },
-                {
-                    id: 'e005',
-                    employeeName: '钱八',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'money@163.com'
-                },
-                {
-                    id: 'e006',
-                    employeeName: '程九',
-                    department: '测试部',
-                    position: '记录员',
-                    email: 'nine@163.com'
-                },
-            ]
+            employeeData: []
         }
     },
     computed: {
@@ -522,19 +101,19 @@ export default {
         }
     },
     methods: {
-        pickEmployee(id) {
+        pickEmployee(jobNumber) {
             if (sessionStorage.getItem('logType') === 'admin') {
                 this.$router.push({
                     name: 'employeeDetailForAdmin',
                     query: {
-                        employeeId: id
+                        employeeId: jobNumber
                     }
                 })
             } else {
                 this.$router.push({
                     name: 'itemOfEmployee',
                     query: {
-                        employeeId: id,
+                        employeeId: jobNumber,
                         page: 1
                     }
                 })
@@ -552,6 +131,22 @@ export default {
                     query: { page: curpage }
                 })
             }
+        }
+    },
+    created() {
+        if (sessionStorage.getItem('logType') === 'admin') {
+            console.log('admin')
+        }
+        else {
+            this.axios.get('/api/account/operators').then(
+                (res) => {
+                    console.log(res)
+                    this.employeeData = res.data
+                },
+                (err) => {
+                    console.log(err)
+                }
+            )
         }
     }
 }
