@@ -265,7 +265,7 @@ export default {
                 this.$router.push({
                     name: routeName,
                     query: {
-                        itemId: this.itemId
+                        processId: this.itemId
                     }
                 })
             }

@@ -673,10 +673,10 @@ export default {
             }
         },
         pass() {
-            this.$bus.$emit('passApplication')
+            this.$bus.$emit('passApplication', true)
         },
         refute() {
-
+            this.$bus.$emit('passApplication', false)
         },
         handleResult(res) {
             console.log(res)

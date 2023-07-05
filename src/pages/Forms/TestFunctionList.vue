@@ -160,13 +160,22 @@ export default {
             this.doSubmit()
         },
         save() {
-
+            if (this.writable) {
+                console.log(JSON.stringify(this.form))
+                console.log(JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestFunctionForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
+            }
         },
         pass() {
-            this.$bus.$emit('passFunction')
+            this.$bus.$emit('passFunction', true)
         },
         refute() {
-
+            this.$bus.$emit('passFunction', false)
         },
         doSubmit() {
             if (this.writable) {

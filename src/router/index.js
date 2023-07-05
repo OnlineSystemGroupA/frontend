@@ -652,8 +652,8 @@ const router = new VueRouter({
                     name: 'checkApplication',
                     path: 'checkApplication',
                     component: EmployeeCheckApplication,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '申请详情', logType: 'employee' },
                     children: [

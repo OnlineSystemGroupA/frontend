@@ -124,6 +124,7 @@ export default {
             console.log(res)
             if (res.status === 200) {
                 alert('上传成功')
+                this.$bus.$emit('submitApplicationVerifyForm')
             }
         },
         handleSaveResult(res) {
