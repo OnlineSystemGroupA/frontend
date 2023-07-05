@@ -2,16 +2,17 @@
     <div class="quotation">
         <h2>报价单</h2>
         <el-form :label-position="labelPosition" label-width="100px" :disabled="disable">
-            <el-row :gutter="20">
-                <el-col :span="14">
+            <el-row>
+                <el-col style="width:50%">
                     <el-form-item label="报价日期">
                         <el-date-picker v-model="form.quotationDate"></el-date-picker>
                     </el-form-item>
-                    <el-form-item label="报价有效期至">
+                    至
+                    <el-form-item label="报价有效期">
                         <el-date-picker v-model="form.validDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
-                <el-col :span="10">
+                <el-col style="width:50%">
                     <table class="pure-table" rules=all>
                         <tr>
                             <th>户名</th>
@@ -36,67 +37,30 @@
         <br>
         <table class="pure-table" rules=all>
             <tr>
-                <th style="min-width: 75px">项目</th>
+                <th>项目</th>
                 <th>说明</th>
                 <th>单价</th>
-                <th>数量</th>
+                <th>备注</th>
                 <th>行合计</th>
             </tr>
             <tr>
                 <td>测试费（软件确认测试）</td>
-                <td>
-                    完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本
-                </td>
-                <td>
-                    <el-input-number :precision="2"
-                                     :controls="false"
-                                     v-model="form.testFee"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td style="text-align:center">
-                    1
-                </td>
-                <td style="text-align:center">
-                    {{ testTotal.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <td>测试报告费</td>
-                <td>
-                    首份测试报告免费
-                </td>
-                <td>
-                    <el-input-number :precision="2"
-                                     :controls="false"
-                                     v-model="form.reportFee"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td>
-                    <el-input-number v-model="form.reportNum"
-                                     :min="1"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td style="text-align:center">
-                    {{ reportTotal.toFixed(2) }}
-                </td>
+                <td>完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本</td>
+                <td><el-input-number v-model="form.quotation" :disabled="disable"></el-input-number></td>
+                <td>含1份测试报告 （需增加报告，每份另收 1000元）</td>
+                <td><el-input-number v-model="form.rowTotal" :disabled="disable"></el-input-number></td>
             </tr>
             <tr>
                 <th colspan="4">小计</th>
-                <td style="text-align:center">
-                    {{ totalBeforeTax.toFixed(2) }}
-                </td>
+                <td><el-input-number v-model="form.subTotal" :disabled="disable"></el-input-number></td>
             </tr>
             <tr>
-                <th colspan="4">税（8%）</th>
-                <td style="text-align:center">
-                    {{ tax.toFixed(2) }}
-                </td>
+                <th colspan="4">税率（8%）</th>
+                <td><el-input-number v-model="form.taxRate" :disabled="disable"></el-input-number></td>
             </tr>
             <tr>
                 <th colspan="4">总计</th>
-                <td style="text-align: center; min-width: 100px">
-                    {{ totalAfterTax.toFixed(2) }}
-                </td>
+                <td><el-input-number v-model="form.total" :disabled="disable"></el-input-number></td>
             </tr>
         </table>
     </div>
@@ -113,19 +77,23 @@ export default {
                 quotationDate: '',
                 validDate: '',
                 software: '',
-                testFee: 0,
-                reportFee: 0,
-                reportNum: 1,
+                quotation: '',
+                rowTotal: '',
+                subTotal: '',
+                taxRate: '',
+                total: '',
             }
         }
     },
-    computed: {
+     computed: {
         disable() {
             if (this.writable === 'false') {
                 return true
-            } else if (this.writable === 'true') {
+            }
+            else if (this.writable === 'true') {
                 return false
-            } else if (!this.writable) {
+            }
+            else if (!this.writable) {
                 return true
             }
             return false
@@ -133,40 +101,81 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            } else if (this.checking === 'false') {
+            }
+            else if (this.checking === 'false') {
                 return false
-            } else if (this.checking) {
+            }
+            else if (this.checking) {
                 return true
             }
             return false
+        }
+    },
+    methods: {
+        submit() {
+            if (this.writable) {
+                this.doSubmit()
+            }
         },
-        testTotal() {
-            return this.form.testFee
+        doSubmit() {
+             console.log(JSON.stringify(this.form))
+            console.log(this.processId)
+            this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'QuotationForm', JSON.stringify(this.form), {
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            }).then(this.handleResult, this.handleError)
         },
-        reportTotal() {
-            return (this.form.reportNum - 1) * this.form.reportFee
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
         },
-        totalBeforeTax() {
-            return this.testTotal + this.reportTotal
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
         },
-        tax() {
-            return this.totalBeforeTax * 0.08;
-        },
-        totalAfterTax() {
-            return this.totalBeforeTax + this.tax
-        },
+    },
+    mounted() {
+        this.$bus.$on('submitQuotation', () => {
+            this.submit()
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('submitQuotation')
+    },
+    created() {
+         this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'QuotationForm').then(
+            (res) => {
+                console.log(res.data)
+                if (res.data) {
+                    this.form = res.data
+                }
+                this.dataReady = true
+            },
+            (err) => {
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+            }
+        )
     }
 }
 </script>
 
 <style scoped>
-.quotation {
+.quotation{
     width: 94%;
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;
 }
-
 .pure-table {
     border-collapse: collapse;
     border-spacing: 0;

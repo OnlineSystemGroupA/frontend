@@ -2,9 +2,9 @@
     <div style="width:90%;">
         <h2>项目报价</h2>
         <h3>项目号:{{ processId }}</h3>
-        <QuotationForm :writable="false" :process-id="processId" :checking="false"></QuotationForm>
+        <QuotationForm :writable="true" :process-id="processId" :checking="true"></QuotationForm>
         <br>
-        <el-button type="primary">报价</el-button>
+        <el-button type="primary" @click="submit">报价</el-button>
     </div>
 </template>
 
@@ -30,7 +30,10 @@ export default {
                 query: { processId: id }
             })
         },
-    }
+        submit() {
+            this.$bus.$emit('submitQuotation')
+        }
+    },
 }
 </script>
 
