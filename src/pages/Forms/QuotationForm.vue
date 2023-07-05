@@ -48,7 +48,7 @@
                         完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本
                     </td>
                     <td>
-                        <el-form-item label-width="0" class="form-item-table">
+                        <el-form-item label-width="0" prop="testFee" :show-message="false" class="form-item-table">
                             <el-input-number :precision="2"
                                              :min="0"
                                              :controls="false"
@@ -68,7 +68,7 @@
                         首份测试报告免费
                     </td>
                     <td>
-                        <el-form-item label-width="0" class="form-item-table">
+                        <el-form-item label-width="0" prop="reportFee" :show-message="false" class="form-item-table">
                             <el-input-number :precision="2"
                                              :min="0"
                                              :controls="false"
@@ -76,7 +76,7 @@
                         </el-form-item>
                     </td>
                     <td>
-                        <el-form-item label-width="0" class="form-item-table">
+                        <el-form-item label-width="0" prop="reportNum" :show-message="false" class="form-item-table">
                             <el-input-number v-model="form.reportNum"
                                              :min="1"
                                              :precision="0"></el-input-number>
@@ -138,9 +138,9 @@ export default {
                 quotationDate: '',
                 validDate: '',
                 software: '',
-                testFee: 0,
-                reportFee: 0,
-                reportNum: 1,
+                testFee: undefined,
+                reportFee: undefined,
+                reportNum: undefined,
             },
 
             rules: {
@@ -149,7 +149,10 @@ export default {
                     { required: true, message: '请填写有效期截止日期', trigger: ['blur', 'change'] },
                     { validator: valiValidDate, trigger: 'change' },
                 ],
-                software: { required: true, message: '请填写软件名称', trigger: 'blur' }
+                software: { required: true, message: '请填写软件名称', trigger: 'blur' },
+                testFee: { required: true, type: 'number', message: '请填写测试费', trigger: 'blur' },
+                reportFee: { required: true, type: 'number', message: '请填写报告单价', trigger: 'blur' },
+                reportNum: { required: true, type: 'number', message: '请填写报告数量', trigger: ['blur', 'change'] }
             }
         }
     },
@@ -182,19 +185,24 @@ export default {
             return false
         },
         testTotal() {
-            return this.form.testFee
+            let res = this.form.testFee
+            return res ? res : NaN
         },
         reportTotal() {
-            return (this.form.reportNum - 1) * this.form.reportFee
+            let res = (this.form.reportNum - 1) * this.form.reportFee
+            return res ? res : NaN
         },
         totalBeforeTax() {
-            return this.testTotal + this.reportTotal
+            let res = this.testTotal + this.reportTotal
+            return res ? res : NaN
         },
         tax() {
-            return this.totalBeforeTax * 0.08;
+            let res = this.totalBeforeTax * 0.08;
+            return res ? res : NaN
         },
         totalAfterTax() {
-            return this.totalBeforeTax + this.tax
+            let res = this.totalBeforeTax + this.tax
+            return res ? res : NaN
         },
     }
 }
