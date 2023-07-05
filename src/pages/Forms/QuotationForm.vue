@@ -1,13 +1,14 @@
 <template>
     <div class="quotation">
         <h2>报价单</h2>
-        <el-form :label-position="labelPosition" label-width="100px" :disabled="disable">
+        <el-form :label-position="labelPosition" label-width="110px" ref="form" :model="form" :rules="rules"
+                 :disabled="disable">
             <el-row :gutter="20">
                 <el-col :span="14">
-                    <el-form-item label="报价日期">
-                        <el-date-picker v-model="form.quotationDate"></el-date-picker>
+                    <el-form-item label="报价日期" prop="quotationDate">
+                        <el-date-picker v-model="form.quotationDate" @change="onQuotationDateChange"></el-date-picker>
                     </el-form-item>
-                    <el-form-item label="报价有效期至">
+                    <el-form-item label="报价有效期至" prop="validDate">
                         <el-date-picker v-model="form.validDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
@@ -28,77 +29,85 @@
                     </table>
                 </el-col>
             </el-row>
-            <el-form-item label="软件名称" style="width:50%">
+            <el-form-item label="软件名称" prop="software" style="width:50%">
                 <el-input v-model="form.software" placeholder="软件名称"></el-input>
             </el-form-item>
-        </el-form>
 
-        <br>
-        <table class="pure-table" rules=all>
-            <tr>
-                <th style="min-width: 75px">项目</th>
-                <th>说明</th>
-                <th>单价</th>
-                <th>数量</th>
-                <th>行合计</th>
-            </tr>
-            <tr>
-                <td>测试费（软件确认测试）</td>
-                <td>
-                    完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本
-                </td>
-                <td>
-                    <el-input-number :precision="2"
-                                     :controls="false"
-                                     v-model="form.testFee"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td style="text-align:center">
-                    1
-                </td>
-                <td style="text-align:center">
-                    {{ testTotal.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <td>测试报告费</td>
-                <td>
-                    首份测试报告免费
-                </td>
-                <td>
-                    <el-input-number :precision="2"
-                                     :controls="false"
-                                     v-model="form.reportFee"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td>
-                    <el-input-number v-model="form.reportNum"
-                                     :min="1"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td style="text-align:center">
-                    {{ reportTotal.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <th colspan="4">小计</th>
-                <td style="text-align:center">
-                    {{ totalBeforeTax.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <th colspan="4">税（8%）</th>
-                <td style="text-align:center">
-                    {{ tax.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <th colspan="4">总计</th>
-                <td style="text-align: center; min-width: 100px">
-                    {{ totalAfterTax.toFixed(2) }}
-                </td>
-            </tr>
-        </table>
+            <br>
+            <table class="pure-table" rules=all>
+                <tr>
+                    <th style="min-width: 75px">项目</th>
+                    <th>说明</th>
+                    <th>单价/元</th>
+                    <th>数量</th>
+                    <th>行合计/元</th>
+                </tr>
+                <tr>
+                    <td>测试费（软件确认测试）</td>
+                    <td>
+                        完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本
+                    </td>
+                    <td>
+                        <el-form-item label-width="0" class="form-item-table">
+                            <el-input-number :precision="2"
+                                             :min="0"
+                                             :controls="false"
+                                             v-model="form.testFee"></el-input-number>
+                        </el-form-item>
+                    </td>
+                    <td style="text-align:center">
+                        1
+                    </td>
+                    <td style="text-align:center">
+                        {{ testTotal.toFixed(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>测试报告费</td>
+                    <td>
+                        首份测试报告免费
+                    </td>
+                    <td>
+                        <el-form-item label-width="0" class="form-item-table">
+                        <el-input-number :precision="2"
+                                         :min="0"
+                                         :controls="false"
+                                         v-model="form.reportFee"
+                                         :disabled="disable"></el-input-number>
+                        </el-form-item>
+                    </td>
+                    <td>
+                        <el-form-item label-width="0" class="form-item-table">
+                        <el-input-number v-model="form.reportNum"
+                                         :min="1"
+                                         :precision="0"
+                                         :disabled="disable"></el-input-number>
+                        </el-form-item>
+                    </td>
+                    <td style="text-align:center">
+                        {{ reportTotal.toFixed(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">小计</th>
+                    <td style="text-align:center">
+                        {{ totalBeforeTax.toFixed(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">税（8%）</th>
+                    <td style="text-align:center">
+                        {{ tax.toFixed(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">总计</th>
+                    <td style="text-align: center; min-width: 100px">
+                        {{ totalAfterTax.toFixed(2) }}
+                    </td>
+                </tr>
+            </table>
+        </el-form>
     </div>
 </template>
 
@@ -107,6 +116,24 @@ export default {
     name: 'QuotationForm',
     props: ['writable', 'checking', 'processId'],
     data() {
+        const valiValidDate = (rule, value, callback) => {
+            if (value === '') {
+                callback()
+            }
+            if (!this.form.quotationDate || this.form.quotationDate === '') {
+                callback(new Error('有效期截止日期不能早于报价日期'))
+            }
+
+            const startTime = new Date(this.form.quotationDate).getTime()
+            const endTime = new Date(value).getTime()
+            console.log(this.form.quotationDate)
+            console.log(startTime)
+            if (startTime > endTime) {
+                callback(new Error('有效期截止日期不能早于报价日期'))
+            }
+
+            callback()
+        };
         return {
             labelPosition: 'left',
             form: {
@@ -116,6 +143,26 @@ export default {
                 testFee: 0,
                 reportFee: 0,
                 reportNum: 1,
+            },
+
+            rules: {
+                quotationDate: [
+                    { required: true, message: '请填写报价日期', trigger: ['blur', 'change'] }
+                ],
+                validDate: [
+                    { required: true, message: '请填写有效期截止日期', trigger: ['blur', 'change'] },
+                    { validator: valiValidDate, trigger: 'change' },
+                ],
+                software: [
+                    { required: true, message: '请填写软件名称', trigger: 'blur' }
+                ],
+            }
+        }
+    },
+    methods: {
+        onQuotationDateChange() {
+            if (this.form.validDate && this.form.validDate !== '') {
+                this.$refs.form.validateField('validDate')
             }
         }
     },
@@ -198,5 +245,9 @@ export default {
 
 .pure-table td {
     background-color: transparent;
+}
+
+.form-item-table {
+    margin-bottom: 0;
 }
 </style>
