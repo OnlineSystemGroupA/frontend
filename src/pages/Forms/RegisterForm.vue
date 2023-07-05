@@ -69,18 +69,10 @@ export default {
             },
 
             rules: {
-                username: [
-                    { validator: valiUsername, trigger: "blur" }
-                ],
-                email: [
-                    { validator: valiEmail, trigger: "blur" }
-                ],
-                password: [
-                    { validator: valiPassword, trigger: "blur" }
-                ],
-                checkPassword: [
-                    { validator: valiCheckPassword, trigger: "blur" }
-                ]
+                username: { validator: valiUsername, trigger: "blur" },
+                email: { validator: valiEmail, trigger: "blur" },
+                password: { validator: valiPassword, trigger: "blur" },
+                checkPassword: { validator: valiCheckPassword, trigger: "blur" }
             }
         }
     },

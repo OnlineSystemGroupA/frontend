@@ -31,11 +31,11 @@ export default {
     methods: {
         submit() {
             alert('修改成功')
-            this.$bus.$emit('changePassword')
+            this.$emit('done')
         },
         cancel() {
             alert('取消修改')
-            this.$bus.$emit('changePassword')
+            this.$emit('done')
         }
     }
 }
@@ -43,7 +43,6 @@ export default {
 
 <style scoped>
 .password {
-    width: 400px;
     align-items: center;
     border-radius: 30px;
     margin: 30px;
