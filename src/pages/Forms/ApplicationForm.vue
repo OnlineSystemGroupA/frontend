@@ -377,107 +377,43 @@ export default {
                 }
             },
             rules: {
-                testTypes: [
-                    { type: 'array', required: true, message: '请添加至少一个测试类型', trigger: 'change' }
-                ],
-                softwareName: [
-                    { required: true, message: '请填写软件名称', trigger: 'blur' }
-                ],
-                softwareVersion: [
-                    { required: true, message: '请填写软件版本', trigger: 'blur' }
-                ],
-                companyChineseName: [
-                    { required: true, message: '请填写委托单位（中文）', trigger: 'blur' }
-                ],
-                companyEnglishName: [
-                    { required: true, message: '请填写委托单位（英文）', trigger: 'blur' }
-                ],
-                developmentDepartment: [
-                    { required: true, message: '请填写开发单位', trigger: 'blur' }
-                ],
+                testTypes: { type: 'array', required: true, message: '请添加至少一个测试类型', trigger: 'change' },
+                softwareName: { required: true, message: '请填写软件名称', trigger: 'blur' },
+                softwareVersion: { required: true, message: '请填写软件版本', trigger: 'blur' },
+                companyChineseName: { required: true, message: '请填写委托单位（中文）', trigger: 'blur' },
+                companyEnglishName: { required: true, message: '请填写委托单位（英文）', trigger: 'blur' },
+                developmentDepartment: { required: true, message: '请填写开发单位', trigger: 'blur' },
                 companyType: [
                     { validator: valiChosenCompanyType, trigger: 'change' },
                     { validator: valiCompanyType, trigger: 'blur' }
                 ],
-                description: [
-                    { required: true, message: '请填写主要功能及用途简介', trigger: 'blur' }
-                ],
-                testStandards: [
-                    { type: 'array', required: true, message: '请添加至少一个测试依据', trigger: 'change' }
-                ],
-                testAspects: [
-                    { type: 'array', required: true, message: '请添加至少一个测试指标', trigger: 'change' }
-                ],
-                softwareScales: [
-                    { type: 'array', required: true, message: '请填写至少一个软件规模', trigger: 'change' }
-                ],
-                softwareType: [
-                    { type: 'array', required: true, message: '请选择软件类型', trigger: 'change' }
-                ],
-                clientSystems: [
-                    { type: 'array', required: true, message: '请添加至少一个客户端系统', trigger: 'blur' }
-                ],
-                serverNames: [
-                    { type: 'array', required: true, message: '请添加至少一个服务器架构', trigger: 'change' }
-                ],
-                serverSystem: [
-                    { required: true, message: '请填写使用的操作系统', trigger: 'blur' }
-                ],
-                serverSystemVersion: [
-                    { required: true, message: '请填写使用的操作系统版本', trigger: 'blur' }
-                ],
-                serverLanguage: [
-                    { required: true, message: '请填写软件编程语言', trigger: 'blur' }
-                ],
-                serverFrames: [
-                    { type: 'array', required: true, message: '请添加至少一个软件构架', trigger: 'change' }
-                ],
-                serverDatabase: [
-                    { required: true, message: '请填写使用的数据库', trigger: 'blur' }
-                ],
-                serverMiddleware: [
-                    { required: true, message: '请填写使用的中间件', trigger: 'blur' }
-                ],
-                networkEnvironment: [
-                    { required: true, message: '请填写运行网络环境', trigger: 'blur' }
-                ],
-                media: [
-                    { type: 'array', required: true, message: '请添加至少一个软件介质', trigger: 'blur' }
-                ],
-                documents: [
-                    { required: true, message: '请填写文档资料清单', trigger: 'blur' }
-                ],
-                expireHandle: [
-                    { required: true, message: '请选择期满样品处理方式' }
-                ],
-                expectedDate: [
-                    { required: true, message: '请选择期望完成日期', trigger: 'blur' }
-                ],
+                description: { required: true, message: '请填写主要功能及用途简介', trigger: 'blur' },
+                testStandards: { type: 'array', required: true, message: '请添加至少一个测试依据', trigger: 'change' },
+                testAspects: { type: 'array', required: true, message: '请添加至少一个测试指标', trigger: 'change' },
+                softwareScales: { type: 'array', required: true, message: '请填写至少一个软件规模', trigger: 'change' },
+                softwareType: { type: 'array', required: true, message: '请选择软件类型', trigger: 'change' },
+                clientSystems: { type: 'array', required: true, message: '请添加至少一个客户端系统', trigger: 'blur' },
+                serverNames: { type: 'array', required: true, message: '请添加至少一个服务器架构', trigger: 'change' },
+                serverSystem: { required: true, message: '请填写使用的操作系统', trigger: 'blur' },
+                serverSystemVersion: { required: true, message: '请填写使用的操作系统版本', trigger: 'blur' },
+                serverLanguage: { required: true, message: '请填写软件编程语言', trigger: 'blur' },
+                serverFrames: { type: 'array', required: true, message: '请添加至少一个软件构架', trigger: 'change' },
+                serverDatabase: { required: true, message: '请填写使用的数据库', trigger: 'blur' },
+                serverMiddleware: { required: true, message: '请填写使用的中间件', trigger: 'blur' },
+                networkEnvironment: { required: true, message: '请填写运行网络环境', trigger: 'blur' },
+                media: { type: 'array', required: true, message: '请添加至少一个软件介质', trigger: 'blur' },
+                documents: { required: true, message: '请填写文档资料清单', trigger: 'blur' },
+                expireHandle: { required: true, message: '请选择期满样品处理方式' },
+                expectedDate: { required: true, message: '请选择期望完成日期', trigger: 'blur' },
                 companyInfo: {
-                    telephone: [
-                        { required: true, message: '请填写电话号码', trigger: 'blur' }
-                    ],
-                    fax: [
-                        { required: true, message: '请填写传真', trigger: 'blur' }
-                    ],
-                    address: [
-                        { required: true, message: '请填写地址', trigger: 'blur' }
-                    ],
-                    postcode: [
-                        { required: true, message: '请填写邮编', trigger: 'blur' }
-                    ],
-                    contractPerson: [
-                        { required: true, message: '请填写联系人', trigger: 'blur' }
-                    ],
-                    mobile: [
-                        { required: true, message: '请填写手机号码', trigger: 'blur' }
-                    ],
-                    email: [
-                        { required: true, message: '请填写电子邮箱', trigger: 'blur' }
-                    ],
-                    website: [
-                        { required: true, message: '请填写单位网址', trigger: 'blur' }
-                    ],
+                    telephone: { required: true, message: '请填写电话号码', trigger: 'blur' },
+                    fax: { required: true, message: '请填写传真', trigger: 'blur' },
+                    address: { required: true, message: '请填写地址', trigger: 'blur' },
+                    postcode: { required: true, message: '请填写邮编', trigger: 'blur' },
+                    contractPerson: { required: true, message: '请填写联系人', trigger: 'blur' },
+                    mobile: { required: true, message: '请填写手机号码', trigger: 'blur' },
+                    email: { required: true, message: '请填写电子邮箱', trigger: 'blur' },
+                    website: { required: true, message: '请填写单位网址', trigger: 'blur' },
                 }
             },
 
