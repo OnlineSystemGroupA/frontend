@@ -69,17 +69,17 @@
                     </td>
                     <td>
                         <el-form-item label-width="0" class="form-item-table">
-                        <el-input-number :precision="2"
-                                         :min="0"
-                                         :controls="false"
-                                         v-model="form.reportFee"></el-input-number>
+                            <el-input-number :precision="2"
+                                             :min="0"
+                                             :controls="false"
+                                             v-model="form.reportFee"></el-input-number>
                         </el-form-item>
                     </td>
                     <td>
                         <el-form-item label-width="0" class="form-item-table">
-                        <el-input-number v-model="form.reportNum"
-                                         :min="1"
-                                         :precision="0"></el-input-number>
+                            <el-input-number v-model="form.reportNum"
+                                             :min="1"
+                                             :precision="0"></el-input-number>
                         </el-form-item>
                     </td>
                     <td style="text-align:center">
@@ -144,16 +144,12 @@ export default {
             },
 
             rules: {
-                quotationDate: [
-                    { required: true, message: '请填写报价日期', trigger: ['blur', 'change'] }
-                ],
+                quotationDate: { required: true, message: '请填写报价日期', trigger: ['blur', 'change'] },
                 validDate: [
                     { required: true, message: '请填写有效期截止日期', trigger: ['blur', 'change'] },
                     { validator: valiValidDate, trigger: 'change' },
                 ],
-                software: [
-                    { required: true, message: '请填写软件名称', trigger: 'blur' }
-                ],
+                software: { required: true, message: '请填写软件名称', trigger: 'blur' }
             }
         }
     },
