@@ -65,7 +65,9 @@ export default {
                 this.$router.push(
                     {
                         name: 'employeeItemDetail',
-                        processId: this.processId
+                        query: {
+                            processId: this.processId
+                        }
                     }
                 )
             }
