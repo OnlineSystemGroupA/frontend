@@ -72,16 +72,14 @@
                         <el-input-number :precision="2"
                                          :min="0"
                                          :controls="false"
-                                         v-model="form.reportFee"
-                                         :disabled="disable"></el-input-number>
+                                         v-model="form.reportFee"></el-input-number>
                         </el-form-item>
                     </td>
                     <td>
                         <el-form-item label-width="0" class="form-item-table">
                         <el-input-number v-model="form.reportNum"
                                          :min="1"
-                                         :precision="0"
-                                         :disabled="disable"></el-input-number>
+                                         :precision="0"></el-input-number>
                         </el-form-item>
                     </td>
                     <td style="text-align:center">
