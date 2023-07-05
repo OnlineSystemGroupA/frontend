@@ -77,6 +77,7 @@
                 <td>
                     <el-input-number v-model="form.reportNum"
                                      :min="1"
+                                     :precision="0"
                                      :disabled="disable"></el-input-number>
                 </td>
                 <td style="text-align:center">
