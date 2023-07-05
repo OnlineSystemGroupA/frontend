@@ -1,26 +1,26 @@
 <template>
     <div class="userInfo">
-        <el-form :label-position="labelPosition" ref="loginForm" label-width="80px" :model="userInfo">
-            <el-row>
-                <el-col style="width:50%">
+        <el-form label-position="left" ref="loginForm" label-width="80px" :model="userInfo">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="真实姓名" prop="realName">
                         <el-input v-model="userInfo.realName" placeholder="请输入真实姓名" clearable></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col style="width:50%">
+                <el-col :span="12">
                     <el-form-item label="电子邮箱" prop="email">
                         <el-input v-model="userInfo.email" placeholder="请输入电子邮箱" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
 
-            <el-row>
-                <el-col style="width:50%">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="联系电话" prop="phone">
                         <el-input v-model="userInfo.phone" placeholder="请输入联系电话" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col style="width:50%">
+                <el-col :span="12">
                     <el-form-item label="性别">
                         <el-radio-group v-model="userInfo.gender">
                             <el-radio label="男"></el-radio>
@@ -30,13 +30,13 @@
                 </el-col>
             </el-row>
 
-            <el-row>
-                <el-col style="width:50%">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="公司" prop="company">
                         <el-input v-model="userInfo.company" placeholder="请输入公司" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col style="width:50%">
+                <el-col :span="12">
                     <el-form-item label="公司电话" prop="companyTelephone">
                         <el-input v-model="userInfo.companyTelephone" placeholder="请输入公司电话"
                                   clearable=""></el-input>
@@ -44,13 +44,13 @@
                 </el-col>
             </el-row>
 
-            <el-row>
-                <el-col style="width:50%">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="公司传真" prop="companyFax">
                         <el-input v-model="userInfo.companyFax" placeholder="请输入公司传真" clearable=""></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col style="width:50%">
+                <el-col :span="12">
                     <el-form-item label="公司地址" prop="companyAddress">
                         <el-input v-model="userInfo.companyAddress" placeholder="请输入公司地址"
                                   clearable=""></el-input>
@@ -58,14 +58,14 @@
                 </el-col>
             </el-row>
 
-            <el-row>
-                <el-col style="width:50%">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="公司邮编" prop="companyPostcode">
                         <el-input v-model="userInfo.companyPostcode" placeholder="请输入公司邮编"
                                   clearable=""></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col style="width:50%">
+                <el-col :span="12">
                     <el-form-item label="公司网址" prop="companyWebsite">
                         <el-input v-model="userInfo.companyWebsite" placeholder="请输入公司网址"
                                   clearable=""></el-input>
@@ -73,14 +73,14 @@
                 </el-col>
             </el-row>
 
-            <el-row>
-                <el-col style="width:50%">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="公司邮箱" prop="companyEmail">
                         <el-input v-model="userInfo.companyEmail" placeholder="请输入公司邮箱"
                                   clearable=""></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col style="width:50%">
+                <el-col :span="12">
                     <el-form-item label="公司手机" prop="companyPhone">
                         <el-input v-model="userInfo.companyPhone" placeholder="请输入公司手机" clearable=""></el-input>
                     </el-form-item>
@@ -100,7 +100,6 @@ export default {
     name: 'UserInfoForm',
     data() {
         return {
-            labelPosition:'left',
             userInfo: {
                 username: '',
                 realName: '',
@@ -118,22 +117,26 @@ export default {
         }
     },
     methods: {
+        onEditDone() {
+            this.$router.replace(
+                { name: 'clientDetail' }
+            )
+        },
 
         submit() {
-            this.axios.post('/api/account/client_details',this.userInfo).then(this.handleResponse,this,this.handleError)
+            this.axios.post('/api/account/client_details', this.userInfo).then(this.handleResponse, this, this.handleError)
         },
         handleResponse(res) {
             if (res.status === 200) {
                 if (res.data === 'email') {
                     alert('邮箱与他人重复')
-                }
-                else if (res.data === 'phone') {
+                } else if (res.data === 'phone') {
                     alert('电话与他人重复')
-                }
-                else {
+                } else {
                     console.log(res.data)
                     alert('修改成功')
-                    this.$bus.$emit('editInfo')
+                    this.$emit('done')
+                    this.$emit('change')
                 }
             }
         },
@@ -141,16 +144,13 @@ export default {
         handleError(err) {
             if (err.status === 409) {
                 alert('登录类型错误')
-            }
-            else if (err.status === 404) {
+            } else if (err.status === 404) {
                 alert('404 Not found!')
             }
         },
         cancel() {
             alert('取消修改')
-            this.$router.replace({
-                name: 'clientDetail'
-            })
+            this.$emit('done')
         }
     },
     created() {
@@ -176,7 +176,6 @@ export default {
 <style scoped>
 .userInfo {
     align-items: center;
-    width: 90%;
     border-radius: 30px;
     margin: 30px;
     padding: 50px;

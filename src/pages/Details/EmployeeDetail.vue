@@ -36,7 +36,9 @@
             </el-button>
         </el-row>
 
-        <router-view></router-view>
+        <el-dialog :visible.sync="editDialogVisible" center @closed="onEditDone" class="edit-dialog">
+            <router-view @done="editDialogVisible=false" @change="update"></router-view>
+        </el-dialog>
     </div>
 </template>
 
@@ -53,16 +55,33 @@ export default {
                 telephone: '123456789',
                 department: '测试部',
                 position: '测试员',
-            }
+            },
+            editDialogVisible: false
         }
     },
     methods: {
+        onEditDone() {
+            if (sessionStorage.getItem('logType') === 'employee') {
+                this.$router.push(
+                    { name: 'employeeDetail' }
+                )
+            } else if (sessionStorage.getItem('logType') === 'admin') {
+                this.$router.push({
+                    name: 'employeeDetailForAdmin',
+                    query: {
+                        employeeId: this.employeeId
+                    }
+                })
+            }
+        },
         changePassword() {
+            this.editDialogVisible = true
             this.$router.push({
                 name: "employeeChangePassword"
             })
         },
         editInfo() {
+            this.editDialogVisible = true
             this.$router.push({
                 name: "editEmployeeInfo",
                 query: {
@@ -103,13 +122,13 @@ export default {
         }
     },
     mounted() {
-        this.$bus.$on('changePassword', () => {
-            if (sessionStorage.getItem('logType') === 'employee') {
-                this.$router.push(
-                    { name: 'employeeDetail' }
-                )
-            }
-        })
+        // this.$bus.$on('changePassword', () => {
+        //     if (sessionStorage.getItem('logType') === 'employee') {
+        //         this.$router.push(
+        //             { name: 'employeeDetail' }
+        //         )
+        //     }
+        // })
     },
     beforeDestroy() {
         this.$bus.$off('changePassword')
