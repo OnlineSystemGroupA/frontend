@@ -13,8 +13,7 @@
                         </th>
                         <td style="width:40%">
                             <el-form-item prop="projectName">
-                                <el-input placeholder="项目名称" v-model="form.projectName"
-                                ></el-input>
+                                <el-input placeholder="项目名称" v-model="form.projectName"></el-input>
                             </el-form-item>
                         </td>
                     </tr>
@@ -24,8 +23,7 @@
                         </th>
                         <td>
                             <el-form-item prop="client">
-                                <el-input placeholder="委托方（甲方）" v-model="form.client"
-                                ></el-input>
+                                <el-input placeholder="委托方（甲方）" v-model="form.client"></el-input>
                             </el-form-item>
                         </td>
                     </tr>
@@ -35,8 +33,7 @@
                         </th>
                         <td>
                             <el-form-item prop="trustee">
-                                <el-input placeholder="受托方（乙方）" v-model="form.trustee"
-                                ></el-input>
+                                <el-input placeholder="受托方（乙方）" v-model="form.trustee"></el-input>
                             </el-form-item>
                         </td>
                     </tr>
