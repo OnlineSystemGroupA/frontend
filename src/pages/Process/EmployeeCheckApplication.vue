@@ -37,7 +37,6 @@ export default {
         },
         handleRes(res) {
             if (res.status === 200) {
-                
                 if (this.passable) {
                     this.$alert('申请审核通过', '审核流程', {
                         confirmButtonText: '确定',
@@ -48,9 +47,7 @@ export default {
                             });
                         }
                     });
-                    
-                }
-                else {
+                } else {
                     this.$alert('申请已驳回', '审核流程', {
                         confirmButtonText: '确定',
                         callback: () => {
@@ -75,11 +72,9 @@ export default {
         handleErr(err) {
             if (err.status === 403) {
                 alert('指定流程对该用户不可见或当前用户无完成任务权限')
-            }
-            else if (err.status === 404) {
+            } else if (err.status === 404) {
                 alert('指定流程不存在')
-            }
-            else if (err.status === 460) {
+            } else if (err.status === 460) {
                 alert('未满足完成条件')
             }
         }

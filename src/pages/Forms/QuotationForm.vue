@@ -200,7 +200,6 @@ export default {
             }
         },
         submit() {
-
             this.$refs.form.validate((valid) => {
                 if (valid) {
                     this.doSubmit();
@@ -208,7 +207,6 @@ export default {
                     alert("报价不符合要求，请修改报价！");
                 }
             })
-
         },
         doSubmit() {
             if (this.writable) {
