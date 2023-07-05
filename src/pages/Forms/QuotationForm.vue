@@ -32,77 +32,82 @@
             <el-form-item label="软件名称" prop="software" style="width:50%">
                 <el-input v-model="form.software" placeholder="软件名称"></el-input>
             </el-form-item>
-        </el-form>
 
-        <br>
-        <table class="pure-table" rules=all>
-            <tr>
-                <th style="min-width: 75px">项目</th>
-                <th>说明</th>
-                <th>单价/元</th>
-                <th>数量</th>
-                <th>行合计/元</th>
-            </tr>
-            <tr>
-                <td>测试费（软件确认测试）</td>
-                <td>
-                    完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本
-                </td>
-                <td>
-                    <el-input-number :precision="2"
-                                     :min="0"
-                                     :controls="false"
-                                     v-model="form.testFee"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td style="text-align:center">
-                    1
-                </td>
-                <td style="text-align:center">
-                    {{ testTotal.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <td>测试报告费</td>
-                <td>
-                    首份测试报告免费
-                </td>
-                <td>
-                    <el-input-number :precision="2"
-                                     :min="0"
-                                     :controls="false"
-                                     v-model="form.reportFee"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td>
-                    <el-input-number v-model="form.reportNum"
-                                     :min="1"
-                                     :precision="0"
-                                     :disabled="disable"></el-input-number>
-                </td>
-                <td style="text-align:center">
-                    {{ reportTotal.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <th colspan="4">小计</th>
-                <td style="text-align:center">
-                    {{ totalBeforeTax.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <th colspan="4">税（8%）</th>
-                <td style="text-align:center">
-                    {{ tax.toFixed(2) }}
-                </td>
-            </tr>
-            <tr>
-                <th colspan="4">总计</th>
-                <td style="text-align: center; min-width: 100px">
-                    {{ totalAfterTax.toFixed(2) }}
-                </td>
-            </tr>
-        </table>
+            <br>
+            <table class="pure-table" rules=all>
+                <tr>
+                    <th style="min-width: 75px">项目</th>
+                    <th>说明</th>
+                    <th>单价/元</th>
+                    <th>数量</th>
+                    <th>行合计/元</th>
+                </tr>
+                <tr>
+                    <td>测试费（软件确认测试）</td>
+                    <td>
+                        完成委托项目测试进行的测试需求分析、测试设计、测试执行、测试评估、出具第三方测试报告等工作量成本和测试资源使用成本
+                    </td>
+                    <td>
+                        <el-form-item label-width="0" class="form-item-table">
+                            <el-input-number :precision="2"
+                                             :min="0"
+                                             :controls="false"
+                                             v-model="form.testFee"></el-input-number>
+                        </el-form-item>
+                    </td>
+                    <td style="text-align:center">
+                        1
+                    </td>
+                    <td style="text-align:center">
+                        {{ testTotal.toFixed(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>测试报告费</td>
+                    <td>
+                        首份测试报告免费
+                    </td>
+                    <td>
+                        <el-form-item label-width="0" class="form-item-table">
+                        <el-input-number :precision="2"
+                                         :min="0"
+                                         :controls="false"
+                                         v-model="form.reportFee"
+                                         :disabled="disable"></el-input-number>
+                        </el-form-item>
+                    </td>
+                    <td>
+                        <el-form-item label-width="0" class="form-item-table">
+                        <el-input-number v-model="form.reportNum"
+                                         :min="1"
+                                         :precision="0"
+                                         :disabled="disable"></el-input-number>
+                        </el-form-item>
+                    </td>
+                    <td style="text-align:center">
+                        {{ reportTotal.toFixed(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">小计</th>
+                    <td style="text-align:center">
+                        {{ totalBeforeTax.toFixed(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">税（8%）</th>
+                    <td style="text-align:center">
+                        {{ tax.toFixed(2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">总计</th>
+                    <td style="text-align: center; min-width: 100px">
+                        {{ totalAfterTax.toFixed(2) }}
+                    </td>
+                </tr>
+            </table>
+        </el-form>
     </div>
 </template>
 
@@ -240,5 +245,9 @@ export default {
 
 .pure-table td {
     background-color: transparent;
+}
+
+.form-item-table {
+    margin-bottom: 0;
 }
 </style>
