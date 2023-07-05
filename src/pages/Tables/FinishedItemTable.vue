@@ -468,7 +468,7 @@ export default {
                 var path = sessionStorage.getItem('logType') + 'FinishedItemDetail'
                 this.$router.push({
                     name: path,
-                    query: { itemId: processId }
+                    query: { processId: processId }
                 })
             }
         },

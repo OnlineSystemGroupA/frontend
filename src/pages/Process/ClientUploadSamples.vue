@@ -1,6 +1,6 @@
 <template>
     <div style="width:90%;">
-        <h2>项目号:{{ itemId }}</h2>
+        <h2>项目号:{{ processId }}</h2>
         <h2>上传文件</h2>
         <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/"
                    :on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList" :auto-upload="false">
@@ -16,7 +16,7 @@
 <script>
 export default {
     name: 'ClientUploadSamples',
-    props: ['itemId'],
+    props: ['processId'],
     data() {
         return {
             fileList: [],

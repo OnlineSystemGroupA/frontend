@@ -31,7 +31,6 @@ export default {
                     writable: true,
                     checking: false,
                     processId: this.itemId,
-                    itemId: this.itemId
                 }
             })
         }

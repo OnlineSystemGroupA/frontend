@@ -1,8 +1,8 @@
 <template>
     <div style="width:90%;">
         <h2>员工填写合同</h2>
-        <h3>项目号:{{ itemId }}</h3>
-        <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
+        <h3>项目号:{{ processId }}</h3>
+        <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="writeContract">填写合同</el-button>
         <router-view></router-view>
     </div>
@@ -11,7 +11,7 @@
 <script>
 export default {
     name: 'EmployeeWriteContent',
-    props: ['itemId'],
+    props: ['processId'],
     data() {
         return {}
     },
@@ -19,7 +19,7 @@ export default {
         checkItemDetail(id) {
             this.$router.push({
                 name: 'employeeItemDetail',
-                query: { itemId: id }
+                query: { processId: id }
             })
         },
         writeContract() {
@@ -28,8 +28,7 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    processId: this.itemId,
-                    itemId: this.itemId
+                    processId: this.processId,
                 }
             })
         }

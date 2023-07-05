@@ -109,7 +109,7 @@ export default {
                 {
                     name: 'arrangeMission',
                     query: {
-                        itemId: id
+                        processId: id
                     }
                 }
             )

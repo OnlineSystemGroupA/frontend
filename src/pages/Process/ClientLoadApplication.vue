@@ -1,7 +1,7 @@
 <template>
     <div style="width:90%;">
         <h2>查看已保存申请</h2>
-        <h3>项目号:{{ itemId }}</h3>
+        <h3>项目号:{{ processId }}</h3>
         <el-button type="primary" @click="editApplicationForm">修改测试申请表</el-button>
         <el-button type="primary" @click="editFunctionList">修改测试功能表</el-button>
         <el-button type="primary" @click="submit">提交申请</el-button>
@@ -14,7 +14,7 @@
 <script>
 export default {
     name: 'ClientLoadApplication',
-    props: ['itemId'],
+    props: ['processId'],
     data() {
         return {}
     },
@@ -25,8 +25,7 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    processId: this.itemId,
-                    itemId: this.itemId
+                    processId: this.processId,
                 }
             })
         },
@@ -36,8 +35,7 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    processId: this.itemId,
-                    itemId: this.itemId
+                    processId: this.processId,
                 }
             })
         },

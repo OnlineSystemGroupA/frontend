@@ -1,8 +1,8 @@
 <template>
     <div style="width:90%;">
         <h2>测试计划审核</h2>
-        <h3>项目号:{{ itemId }}</h3>
-        <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
+        <h3>项目号:{{ processId }}</h3>
+        <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="priamry" @click="checkTestPlan">查看测试计划</el-button>
         <el-button type="priamry" @click="verfiyTestPlan">填写审核表格</el-button>
         <keep-alive>
@@ -17,12 +17,12 @@ export default {
     data() {
         return {}
     },
-    props: ['itemId'],
+    props: ['processId'],
     methods: {
         checkItemDetail(id) {
             this.$router.push({
                 name: 'employeeItemDetail',
-                query: { itemId: id }
+                query: { processId: id }
             })
         },
         checkTestPlan() {
@@ -31,8 +31,7 @@ export default {
                 query: {
                     writable: false,
                     checking: true,
-                    processId: this.itemId,
-                    itemId: this.itemId
+                    processId: this.processId,
                 }
             })
         },
@@ -42,8 +41,7 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    processId: this.itemId,
-                    itemId: this.itemId
+                    processId: this.processId,
                 }
             })
         }

@@ -1,8 +1,8 @@
 <template>
     <div style="width:90%;">
         <h2>项目报价</h2>
-        <h3>项目号:{{ itemId }}</h3>
-        <QuotationForm :writable="false" :process-id="itemId" :checking="false"></QuotationForm>
+        <h3>项目号:{{ processId }}</h3>
+        <QuotationForm :writable="false" :process-id="processId" :checking="false"></QuotationForm>
         <br>
         <el-button type="primary">报价</el-button>
     </div>
@@ -13,7 +13,7 @@ import QuotationForm from '../Forms/QuotationForm.vue';
 
 export default {
     name: 'EmployeeQuotation',
-    props: ['itemId'],
+    props: ['processId'],
     components: {
         QuotationForm
     },
@@ -27,7 +27,7 @@ export default {
         checkItemDetail(id) {
             this.$router.push({
                 name: 'employeeItemDetail',
-                query: { itemId: id }
+                query: { processId: id }
             })
         },
     }

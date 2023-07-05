@@ -138,8 +138,8 @@ const router = new VueRouter({
                     name: 'clientItemDetail',
                     path: 'clientItemDetail',
                     component: ItemDetail,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '项目详情', logType: 'client' }
                 },//项目详情
@@ -147,8 +147,8 @@ const router = new VueRouter({
                     name: 'clientFinishedItemDetail',
                     path: 'clientFinishedItemDetail',
                     component: FinishedItemDetail,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '结束项目详情', logType: 'client' }
                 },//结束项目详情
@@ -276,8 +276,8 @@ const router = new VueRouter({
                     name: 'savedApplication',
                     path: 'savedApplication',
                     component: ClientLoadApplication,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '查看未提交申请', logType: 'client' },
                     children: [
@@ -305,8 +305,8 @@ const router = new VueRouter({
                     name: 'submittedApplication',
                     path: 'submittedApplication',
                     component: ClientCheckApplication,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '已提交的测试报告', logType: 'client' },
                     children: [
@@ -343,8 +343,8 @@ const router = new VueRouter({
                     name: 'clientAcceptQuotation',
                     path: 'clientAcceptQuotation',
                     component: ClientAcceptQuotation,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '查看报价', logType: 'client' }
                 },//查看报价
@@ -352,8 +352,8 @@ const router = new VueRouter({
                     name: 'clientContract',
                     path: 'clientContract',
                     component: ClientWriteContract,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '填写合同', logType: 'client' },
                     children: [
@@ -372,8 +372,8 @@ const router = new VueRouter({
                     name: 'clientUploadSamples',
                     path: 'clientUploadSammples',
                     component: ClientUploadSamples,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '上传样品', logType: 'client' },
                 },//上传样品
@@ -381,8 +381,8 @@ const router = new VueRouter({
                     name: 'confirmTestReport',
                     path: 'confirmTestReport',
                     component: ClientConfirmReport,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '确认测试报告', logType: 'client' },
                     children: [
@@ -401,8 +401,8 @@ const router = new VueRouter({
                     name: 'clientVerifyTestReport',
                     path: 'clientVerifyTestReport',
                     component: ClientVerifyTestReport,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '审核测试报告', logType: 'client' },
                     children: [
@@ -497,8 +497,8 @@ const router = new VueRouter({
                     name: 'employeeItemDetail',
                     path: 'employeeItemDetail',
                     component: ItemDetail,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '项目详情', logType: 'employee' }
                 },//项目详情
@@ -506,8 +506,8 @@ const router = new VueRouter({
                     name: 'employeeFinishedItemDetail',
                     path: 'employeeFinishedItemDetail',
                     component: FinishedItemDetail,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '结束项目详情', logType: 'employee' }
                 },//结束项目详情
@@ -632,8 +632,8 @@ const router = new VueRouter({
                     name: 'arrangeMission',
                     path: 'arrangeMission',
                     component: EmployeeArrangeMission,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '分配任务', logType: 'employee' },
                     children: [
@@ -641,8 +641,8 @@ const router = new VueRouter({
                             name: 'workArrangeTable',
                             path: 'workArrangeTable',
                             component: WorkArrangeTable,
-                            props({ query: { itemId, work, page } }) {
-                                return { itemId, work, page }
+                            props({ query: { processId, work, page } }) {
+                                return { processId, work, page }
                             },
                             meta: { title: '工作安排', logType: 'employee' }
                         }
@@ -690,8 +690,8 @@ const router = new VueRouter({
                     name: 'offerQuotation',
                     path: 'offerQuotation',
                     component: EmployeeQuotation,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '提出报价', logType: 'employee' }
                 },//提出报价
@@ -699,8 +699,8 @@ const router = new VueRouter({
                     name: 'employeeContract',
                     path: 'employeeContract',
                     component: EmployeeWriteContract,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '填写合同', logType: 'employee' },
                     children: [
@@ -719,8 +719,8 @@ const router = new VueRouter({
                     path: 'reviewSample',
                     name: 'reviewSample',
                     component: EmployeeReviewSample,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '检查样品', logType: 'employee' },
                     children: [
@@ -739,8 +739,8 @@ const router = new VueRouter({
                     name: 'writeTestPlan',
                     path: 'writeTestPlan',
                     component: EmployeeWriteTestPlan,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '创建测试计划', logType: 'employee' },
                     children: [
@@ -759,8 +759,8 @@ const router = new VueRouter({
                     name: 'verifyTestPlan',
                     path: 'verifyTestPlan',
                     component: EmployeeVerifyTestPlan,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '审核测试计划', logType: 'employee' },
                     children: [
@@ -788,8 +788,8 @@ const router = new VueRouter({
                     name: 'testProcess',
                     path: 'testProcess',
                     component: EmployeeTestProcess,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '测试过程', logType: 'employee' },
                     children: [
@@ -826,8 +826,8 @@ const router = new VueRouter({
                     name: 'verifyTestReport',
                     path: 'verifyTestReport',
                     component: EmployeeVerifyTestReport,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '审核测试报告', logType: 'employee' },
                     children: [
@@ -855,8 +855,8 @@ const router = new VueRouter({
                     name: 'editTestReport',
                     path: 'editTestReport',
                     component: EmployeeEditTestReport,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '编辑测试报告', logType: 'employee' },
                     children: [
@@ -875,8 +875,8 @@ const router = new VueRouter({
                     name: 'checkTestWork',
                     path: 'checkTestWork',
                     component: EmployeeCheckTestWork,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '检查测试工作', logType: 'employee' },
                     children: [
@@ -986,8 +986,8 @@ const router = new VueRouter({
                     name: 'adminItemDetail',
                     path: 'adminItemDetail',
                     component: ItemDetail,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '项目详情', logType: 'admin' }
                 },//项目详情
@@ -995,8 +995,8 @@ const router = new VueRouter({
                     name: 'adminFinishedItemDetail',
                     path: 'adminFinishedItemDetail',
                     component: FinishedItemDetail,
-                    props({ query: { itemId } }) {
-                        return { itemId }
+                    props({ query: { processId } }) {
+                        return { processId }
                     },
                     meta: { title: '结束项目详情', logType: 'admin' }
                 },//结束项目详情

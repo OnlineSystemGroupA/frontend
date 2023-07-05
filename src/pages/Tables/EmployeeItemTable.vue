@@ -113,7 +113,7 @@ export default {
         checkItemDetail(processId) {
             this.$router.push({
                 name: 'employeeItemDetail',
-                query: { itemId: processId }
+                query: { processId: processId }
             })
         },
         handleResult(res) {

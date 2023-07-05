@@ -1,10 +1,10 @@
 <template>
     <div style="width:90%;">
         <h2>查看已提交申请</h2>
-        <h3>项目号:{{ itemId }}</h3>
+        <h3>项目号:{{ processId }}</h3>
         <el-button type="primary" @click="editApplicationForm">修改测试申请表</el-button>
         <el-button type="primary" @click="editFunctionList">修改测试功能表</el-button>
-        <el-button type="primary" @click="checkItemDetail(itemId)">查看项目详情</el-button>
+        <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="resubmit">重新提交</el-button>
         <keep-alive>
             <router-view></router-view>
@@ -15,7 +15,7 @@
 <script>
 export default {
     name: 'ClientCheckApplication',
-    props: ['itemId'],
+    props: ['processId'],
     data() {
         return {}
     },
@@ -26,8 +26,7 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    processId: this.itemId,
-                    itemId: this.itemId
+                    processId: this.processId,
                 }
             })
         },
@@ -37,15 +36,14 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
-                    processId: this.itemId,
-                    itemId: this.itemId
+                    processId: this.processId,
                 }
             })
         },
         checkItemDetail(id) {
             this.$router.push({
                 name: 'clientItemDetail',
-                query: { itemId: id }
+                query: { processId: id }
             })
         },
         resubmit() {

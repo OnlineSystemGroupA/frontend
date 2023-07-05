@@ -50,7 +50,7 @@
 export default {
     name: 'WorkArrangeTable',
     //components: {EmployeeTable},
-    props: ['itemId', 'page'],
+    props: ['processId', 'page'],
     data() {
         return {
             keyword: '',
@@ -105,7 +105,7 @@ export default {
                 query: {
                     work: this.work,
                     page: curpage,
-                    itemId: this.itemId
+                    processId: this.processId
                 }
             })
         },
@@ -116,11 +116,11 @@ export default {
                 }
             });
             console.log(this.workInfo.uid)
-            this.axios.post('/api/workflow/processes/' + this.itemId + '/participants', { "userId": this.workInfo.uid }).then(
+            this.axios.post('/api/workflow/processes/' + this.processId + '/participants', { "userId": this.workInfo.uid }).then(
                 (res) => {
                     if (res.status === 200) {
 
-                        this.axios.post('/api/workflow/processes/' + this.itemId + '/complete_task').then(this.handleRes, this.handleErr)
+                        this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task').then(this.handleRes, this.handleErr)
                     }
                 },
                 (err) => {

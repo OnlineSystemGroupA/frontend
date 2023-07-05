@@ -1,8 +1,8 @@
 <template>
     <div style="width:90%;">
         <h2>查看报价</h2>
-        <h3>项目号:{{ itemId }}</h3>
-        <QuotationForm :writable="false" :form-id="itemId" :checking="false"></QuotationForm>
+        <h3>项目号:{{ processId }}</h3>
+        <QuotationForm :writable="false" :process-id="processId" :checking="false"></QuotationForm>
         <el-form>
             <el-form-item label="接受意见">
                 <el-radio-group v-model="acceptOrNot">
@@ -24,7 +24,7 @@ import QuotationForm from '../Forms/QuotationForm.vue';
 
 export default {
     name: 'ClientAcceptQuotation',
-    props: ['itemId'],
+    props: ['processId'],
     components: {
         QuotationForm
     },

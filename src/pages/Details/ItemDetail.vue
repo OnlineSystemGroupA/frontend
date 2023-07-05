@@ -5,7 +5,7 @@
         <table class="pure-table" rules=all>
             <tr>
                 <th style="width:25%">项目号</th>
-                <td style="width:25%">{{ itemId }}</td>
+                <td style="width:25%">{{ processId }}</td>
                 <th style="width:25%">项目名称</th>
                 <td style="width:25%">{{ itemInfo.title }}</td>
             </tr>
@@ -95,7 +95,7 @@ import verificationWork from '../../assets/jsons/verificationWork.json'
 
 export default {
     name: 'ItemDetail',
-    props: ['itemId'],
+    props: ['processId'],
     data() {
         return {
             itemInfo: {
@@ -229,7 +229,7 @@ export default {
                         query: {
                             writable: false,
                             checking: false,
-                            processId: this.itemId,
+                            processId: this.processId,
                         }
                     }
                 )
@@ -265,7 +265,7 @@ export default {
                 this.$router.push({
                     name: routeName,
                     query: {
-                        processId: this.itemId
+                        processId: this.processId
                     }
                 })
             }
