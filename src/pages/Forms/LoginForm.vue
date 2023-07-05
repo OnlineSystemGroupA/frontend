@@ -53,12 +53,8 @@ export default {
                 password: "",
             },
             rules: {
-                username: [
-                    { validator: valiUsername, trigger: "blur" }
-                ],
-                password: [
-                    { validator: valiPassword, trigger: "blur" }
-                ],
+                username: { validator: valiUsername, trigger: "blur" },
+                password: { validator: valiPassword, trigger: "blur" },
             }
         };
     },

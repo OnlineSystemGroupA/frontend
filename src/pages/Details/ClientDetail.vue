@@ -65,11 +65,14 @@
             </el-button>
         </el-row>
 
-        <router-view></router-view>
+        <el-dialog :visible.sync="editDialogVisible" center @closed="onEditDone" class="edit-dialog">
+            <router-view @done="editDialogVisible=false" @change="update"></router-view>
+        </el-dialog>
     </div>
 </template>
 
 <script>
+
 export default {
     name: 'ClientDetail',
     props: ['clientId'],
@@ -87,17 +90,26 @@ export default {
                 companyEmail: '',
                 companyFax: '',
                 companyPhone: '',
-                companyWebsite:'',
-            }
+                companyWebsite: '',
+            },
+            editDialogVisible: false
         }
     },
     methods: {
+        onEditDone() {
+            // dialog 关闭动画后回调
+            this.$router.replace(
+                { name: 'clientDetail' }
+            )
+        },
         editInfo() {
+            this.editDialogVisible = true
             this.$router.push({
                 name: 'userInfoForm'
             })
         },
         changePassword() {
+            this.editDialogVisible = true;
             this.$router.push({
                 name: 'clientChangePassword'
             })
@@ -144,22 +156,6 @@ export default {
             return false
         }
     },
-    mounted() {
-        this.$bus.$on('changePassword', () => {
-            if (sessionStorage.getItem('logType') === 'client') {
-                this.$router.push(
-                    { name: 'clientDetail' }
-                )
-            }
-        })
-        this.$bus.$on('editInfo', () => {
-            console.log('更新信息')
-            this.update()
-            this.$router.push({
-                name: 'clientDetail'
-            })
-        })
-    },
     created() {
         this.update()
     },
@@ -170,9 +166,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .client {
-    width: 94%;
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;

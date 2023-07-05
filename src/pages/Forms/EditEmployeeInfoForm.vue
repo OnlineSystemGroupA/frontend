@@ -1,6 +1,6 @@
 <template>
     <div class="userInfo">
-        <el-form :label-position="labelPosition" ref="loginForm" label-width="80px" :model="employeeInfo"
+        <el-form label-position="left" ref="loginForm" label-width="80px" :model="employeeInfo"
                  :rules="rules">
             <el-form-item label="真实姓名" prop="realName">
                 <el-input v-model="employeeInfo.realName" placeholder="请输入真实姓名" clearable></el-input>
@@ -25,10 +25,10 @@
                 </el-select>
             </el-form-item>
 
-            <el-form-item>
+            <el-row class="button_row">
                 <el-button type="primary" @click="submit">修改</el-button>
                 <el-button type="primary" @click="cancel">取消</el-button>
-            </el-form-item>
+            </el-row>
         </el-form>
     </div>
 </template>
@@ -62,35 +62,29 @@ export default {
     methods: {
         submit() {
             alert('修改成功')
-            this.$router.push({
-                name: 'employeeDetailForAdmin',
-                query: {
-                    employeeId: this.employeeId
-                }
-            })
-
+            this.$emit('done')
+            this.$emit('change')
         },
         cancel() {
             alert('取消操作')
-            this.$router.push({
-                name: 'employeeDetailForAdmin',
-                query: {
-                    employeeId: this.employeeId
-                }
-            })
+            this.$emit('done')
         }
     }
 }
 </script>
 
 <style scoped>
-
 .userInfo {
-    width: 40%;
     align-items: center;
     border-radius: 30px;
     margin: 30px;
     padding: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.button_row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
