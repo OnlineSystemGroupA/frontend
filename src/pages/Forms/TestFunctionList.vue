@@ -18,6 +18,7 @@
             <el-table :data="form.functions"
                       ref="functionTable"
                       @row-click="onFuncRowClick"
+                      :row-class-name="funcRowClassName"
                       style="width: 100%">
                 <el-table-column type="expand">
                     <template slot-scope="func">
@@ -30,6 +31,7 @@
                             </el-form-item>
                             <el-table :data="func.row.items"
                                       @row-click="row=>onItemRowClick(func.row.index, row)"
+                                      :row-class-name="funcRowClassName"
                                       style="width: 80%"
                                       :ref="'itemTable' + func.row.index">
                                 <el-table-column type="expand">
@@ -184,24 +186,15 @@ export default {
         onFuncRowClick(row) {
             this.$refs.functionTable.toggleRowExpansion(row);
         },
+
         onItemRowClick(index, row) {
             this.$refs['itemTable' + index].toggleRowExpansion(row);
         },
 
-        makeIndex() {
-            this.form.functions.forEach(
-                (func, funcIndex) => {
-                    func.index = funcIndex
-                    func.items.forEach(
-                        (item, itemIndex) => {
-                            item.index = itemIndex;
-                        }
-                    )
-                }
-            )
-            console.log(this.form)
+        funcRowClassName({ row, rowIndex }) {
+            row.index = rowIndex;
         },
-        
+
         submit() {
             this.$refs.form.validate((valid) => {
                 if (valid) {
@@ -301,16 +294,17 @@ export default {
                         this.form = functionList
                     }
                 }
-                this.makeIndex()
+
             },
             (err) => {
+
                 if (err.response.status === 403) {
                     alert('指定流程或表单对该用户不可见')
                 } else if (err.response.status === 404) {
                     alert('指定流程或表单不存在')
                 }
                 this.form = functionList
-                this.makeIndex()
+
             }
         )
     }
