@@ -47,7 +47,7 @@ export default {
                 }
             })
         },
-        handleRes(res) {
+        handleCheckRes(res) {
             if (res.status === 200) {
                 if (this.pass) {
                     this.$alert('合同审核通过', '审核流程', {
@@ -81,6 +81,16 @@ export default {
                 )
             }
         },
+        handleRes(res) {
+            if (res.status === 200) {
+                this.$router.push({
+                    name: 'clientItemDetail',
+                    query: {
+                        processId: this.processId
+                    },
+                })
+            }
+        },
         handleErr(err) {
             if (err.status === 403) {
                 alert('指定流程对该用户不可见或当前用户无完成任务权限')
@@ -92,12 +102,17 @@ export default {
         }
     },
     mounted() {
+        this.$bus.$on('submitContract', () => {
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=true')
+                .then(this.handleRes, this.handleErr)
+        })
         this.$bus.$on('checkContract', (pass) => {
             this.pass = pass
-            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + pass).then(this.handleRes, this.handleErr)
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + pass).then(this.handleCheckRes, this.handleErr)
         })
     },
     beforeDestroy() {
+        this.$bus.$off('submitContract')
         this.$bus.$off('checkContract')
     }
 }

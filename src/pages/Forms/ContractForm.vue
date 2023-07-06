@@ -126,10 +126,7 @@
                     本合同软件测试费用为人民币
                     <div style="display: inline-block">
                         <el-form-item prop="testFee" :show-message="false">
-                            <el-input-number :precision="2"
-                                             :min="0"
-                                             :controls="false"
-                                             v-model="form.testFee"
+                            <el-input-number :precision="2" :min="0" :controls="false" v-model="form.testFee"
                                              :disabled="disable"></el-input-number>
                         </el-form-item>
                     </div>
@@ -145,9 +142,7 @@
                         <li>本次测试的履行期限为合同生效之日起
                             <div style="display: inline-block">
                                 <el-form-item prop="testTime" :show-message="false">
-                                    <el-input-number :min="0"
-                                                     :precision="0"
-                                                     placeholder="自然日"
+                                    <el-input-number :min="0" :precision="0" placeholder="自然日"
                                                      v-model="form.testTime"></el-input-number>
                                 </el-form-item>
                             </div>
@@ -157,18 +152,14 @@
                         <li>如受测软件在测试过程中出现的问题，导致继续进行测试会影响整体测试进度，则乙方暂停测试并以书面形式通知甲方进行整改。在整个测试过程中，整改次数限于
                             <div style="display: inline-block">
                                 <el-form-item prop="rectificationFrequency" :show-message="false">
-                                    <el-input-number :min="0"
-                                                     :precision="0"
-                                                     placeholder="整改次数"
+                                    <el-input-number :min="0" :precision="0" placeholder="整改次数"
                                                      v-model="form.rectificationFrequency"></el-input-number>
                                 </el-form-item>
                             </div>
                             次，每次不超过
                             <div style="display: inline-block">
                                 <el-form-item prop="rectificationTime" :show-message="false">
-                                    <el-input-number :min="0"
-                                                     :precision="0"
-                                                     placeholder="整改天数"
+                                    <el-input-number :min="0" :precision="0" placeholder="整改天数"
                                                      v-model="form.rectificationTime"></el-input-number>
                                 </el-form-item>
                             </div>
@@ -218,8 +209,7 @@
                     <th>签章日期</th>
                     <td>
                         <el-form-item prop="clientInfo.signatureDate" :show-message="false">
-                            <el-date-picker placeholder="签章日期"
-                                            v-model="form.clientInfo.signatureDate"></el-date-picker>
+                            <el-date-picker placeholder="签章日期" v-model="form.clientInfo.signatureDate"></el-date-picker>
                         </el-form-item>
                     </td>
                 </tr>
@@ -291,8 +281,7 @@
                     <th>签章日期</th>
                     <td>
                         <el-form-item prop="trusteeInfo.signatureDate" :show-message="false">
-                            <el-date-picker placeholder="签章日期"
-                                            v-model="form.trusteeInfo.signatureDate"></el-date-picker>
+                            <el-date-picker placeholder="签章日期" v-model="form.trusteeInfo.signatureDate"></el-date-picker>
                         </el-form-item>
                     </td>
                 </tr>
@@ -544,7 +533,7 @@ export default {
         }
     },
     created() {
-        this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ContractForm').then(
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ContractForm').then(
             (res) => {
                 if (res.status === 200) {
                     if (res.data) {
@@ -554,7 +543,7 @@ export default {
                         this.form = contractForm
                     }
                 }
-                
+
             },
             (err) => {
                 if (err.response.status === 403) {
@@ -562,7 +551,7 @@ export default {
                 } else if (err.response.status === 404) {
                     alert('指定流程或表单不存在')
                 }
-                 this.form = contractForm
+                this.form = contractForm
             }
         )
     }

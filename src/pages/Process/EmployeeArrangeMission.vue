@@ -3,8 +3,7 @@
         <h2>任务分配</h2>
         <h3>项目号:{{ processId }}</h3>
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
-        <el-button type="primary" @click="arrangeWork('verification')">分配审核任务</el-button>
-        <el-button type="primary" @click="arrangeWork('testment')">分配测试任务</el-button>
+        <el-button type="primary" @click="arrangeWork()">分配工作人员</el-button>
         <router-view></router-view>
     </div>
 </template>
@@ -23,11 +22,10 @@ export default {
                 query: { processId: id }
             })
         },
-        arrangeWork(work) {
+        arrangeWork() {
             this.$router.push({
                 name: 'workArrangeTable',
                 query: {
-                    work: work,
                     page: 1,
                     processId:this.processId
                 }

@@ -67,13 +67,13 @@ export default {
         })
     },*/
     computed: {
-        workType() {
+        /*workType() {
             if (this.work === 'verification') {
                 return '审核工作'
             } else {
                 return '测试工作'
             }
-        },
+        },*/
         pageCount() {
             var count = Math.floor(this.employeeData.length / 10)
             if (this.employeeData.length % 10 !== 0) {

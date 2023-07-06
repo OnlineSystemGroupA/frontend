@@ -39,12 +39,14 @@
                 <th>预计结束日期</th>
                 <td>{{ itemInfo.dueDate }}</td>
             </tr>
+            <!--
             <tr>
                 <th>审核人员</th>
                 <td>{{ itemInfo.verifier }}</td>
                 <th>测试人员</th>
                 <td>{{ itemInfo.tester }}</td>
             </tr>
+            -->
         </table>
         <br>
         <div style="margin:10px; width: 100%;">
