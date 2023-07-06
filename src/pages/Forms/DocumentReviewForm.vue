@@ -1,71 +1,91 @@
 <template>
     <div class="document">
-        <el-form label-width="100px" label-position="left" :disabled='disable'>
-            <el-form-item label="软件名称">
-                <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
-            </el-form-item>
-            <el-form-item label="版本号">
-                <el-input placeholder="版本号" v-model="form.softwareVersion"></el-input>
-            </el-form-item>
-            <el-form-item label="委托单位">
-                <el-input placeholder="委托单位" v-model="form.clientCompany"></el-input>
-            </el-form-item>
-            <el-form-item label="高校评审组">
-                <el-input placeholder="高校审评组" v-model="form.reviewGroup"></el-input>
-            </el-form-item>
-            <el-form-item label="审评人">
-                <el-input placeholder="审评人" v-model="form.reviewer"></el-input>
-            </el-form-item>
-            <el-form-item label="审评完成日期">
-                <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
-                                v-model="form.finishDate"></el-date-picker>
-            </el-form-item>
-            <el-form label-width="100px" label-position="left" :disabled='disable'>
-                <h2>一.软件说明部分审评</h2>
-                <el-form-item v-for="(review, index) in form.reviewsOnExplanation" :key="index">
-                    <h3>{{ index + 1 }}-{{ review.title }}</h3>
-                    <el-form-item v-for="(item, item_index) in review.items" :key="item_index">
-                        <li>{{ item.content }}</li>
-                        <el-row>
-                            <el-col class="col">
-                                <el-form-item label="评审结果">
-                                    <el-input v-model="item.result" placeholder="评审结果"></el-input>
-                                </el-form-item>
-                            </el-col>
-                            <el-col class="col">
-                                <el-form-item label="评审结果说明">
-                                    <el-input type="textarea" v-model="item.explanation"
-                                              placeholder="评审结果说明"></el-input>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
+        <el-form label-width="120px" label-position="left" :disabled='disable' ref="form" :model="form"
+                 :rules="mainRules">
+            <el-row gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="软件名称" prop="softwareName">
+                        <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
                     </el-form-item>
-                </el-form-item>
-            </el-form>
-            <el-form label-width="100px" label-position="left" :disabled='disable'>
-                <h2>二.软件文档集审评</h2>
-                <el-form-item v-for="(review, index) in form.reviewsOnDocuments" :key="index">
-                    <h3>{{ index + 1 }}-{{ review.title }}</h3>
-                    <el-form-item v-for="(item, item_index) in review.items" :key="item_index">
-                        <li>{{ item.content }}</li>
-                        <el-row>
-                            <el-col class="col">
-                                <el-form-item label="评审结果">
-                                    <el-input v-model="item.result" placeholder="评审结果"></el-input>
-                                </el-form-item>
-                            </el-col>
-                            <el-col class="col">
-                                <el-form-item label="评审结果说明">
-                                    <el-input type="textarea" v-model="item.explanation"
-                                              placeholder="评审结果说明"></el-input>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="版本号" prop="softwareVersion">
+                        <el-input placeholder="版本号" v-model="form.softwareVersion"></el-input>
                     </el-form-item>
-                </el-form-item>
-            </el-form>
-            <el-form-item label="检查人">
-                <el-input placeholder="检查人" v-model="checker"></el-input>
+                </el-col>
+            </el-row>
+            <el-row gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="委托单位" prop="clientCompany">
+                        <el-input placeholder="委托单位" v-model="form.clientCompany"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="高校评审组" prop="reviewGroup">
+                        <el-input placeholder="高校审评组" v-model="form.reviewGroup"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="审评人" prop="reviewer">
+                        <el-input placeholder="审评人" v-model="form.reviewer"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="审评完成日期" prop="finishDate">
+                        <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"
+                                        v-model="form.finishDate"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+
+            <h2>一.软件说明部分审评</h2>
+            <div v-for="(review, reviewIndex) in form.reviewsOnExplanation" :key="review.title" style="padding: 0 40px">
+                <h3>{{ reviewIndex + 1 }}-{{ review.title }}</h3>
+                <div v-for="(item, itemIndex) in review.items" :key="item.content" style="padding: 0 40px">
+                    <li>{{ item.content }}</li>
+                    <el-row>
+                        <el-col class="col">
+                            <el-form-item label="评审结果" :rules="itemRules.result"
+                                          :prop="'reviewsOnExplanation.'+reviewIndex+'.items.'+itemIndex+'.result'">
+                                <el-input v-model="item.result" placeholder="评审结果"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col class="col">
+                            <el-form-item label="评审结果说明" :rules="itemRules.explanation"
+                                          :prop="'reviewsOnExplanation.'+reviewIndex+'.items.'+itemIndex+'.explanation'">
+                                <el-input type="textarea" v-model="item.explanation"
+                                          placeholder="评审结果说明"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </div>
+            </div>
+            <h2>二.软件文档集审评</h2>
+            <div v-for="(review, reviewIndex) in form.reviewsOnDocuments" :key="review.title" style="padding: 0 40px">
+                <h3>{{ reviewIndex + 1 }}-{{ review.title }}</h3>
+                <div v-for="(item, itemIndex) in review.items" :key="item.content" style="padding: 0 40px">
+                    <li>{{ item.content }}</li>
+                    <el-row>
+                        <el-col class="col">
+                            <el-form-item label="评审结果" :rules="itemRules.result"
+                                          :prop="'reviewsOnDocuments.'+reviewIndex+'.items.'+itemIndex+'.result'">
+                                <el-input v-model="item.result" placeholder="评审结果"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col class="col">
+                            <el-form-item label="评审结果说明" :rules="itemRules.explanation"
+                                          :prop="'reviewsOnDocuments.'+reviewIndex+'.items.'+itemIndex+'.explanation'">
+                                <el-input type="textarea" v-model="item.explanation"
+                                          placeholder="评审结果说明"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </div>
+            </div>
+            <el-form-item label="检查人" prop="checker" style="width: 50%">
+                <el-input placeholder="检查人" v-model="form.checker"></el-input>
             </el-form-item>
         </el-form>
         <el-row v-show="!disable">
@@ -349,6 +369,19 @@ export default {
                     }
                 ],
                 checker: ''
+            },
+            mainRules: {
+                softwareName: { required: true, message: "请填写软件名称", trigger: 'blur' },
+                softwareVersion: { required: true, message: "请填写版本号", trigger: 'blur' },
+                clientCompany: { required: true, message: "请填写委托单位", trigger: 'blur' },
+                reviewGroup: { required: true, message: "请填写高校评审组", trigger: 'blur' },
+                reviewer: { required: true, message: "请填写审评人", trigger: 'blur' },
+                finishDate: { required: true, message: "请填写审评完成日期", trigger: ['blur', 'change'] },
+                checker: { required: true, message: "请填写检查人", trigger: 'blur' }
+            },
+            itemRules: {
+                result: { required: true, message: "请填写评审结果", trigger: 'blur' },
+                explanation: { required: true, message: "请填写评审结果说明", trigger: 'blur' }
             }
         }
     },
