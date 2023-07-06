@@ -60,7 +60,7 @@ export default {
 .box {
     display: flex;
     overflow: hidden;
-    width: 60%;
+    width: 850px;
     height: 100%;
     background-color: rgba(255, 255, 255, 60%);
     border-radius: 1.5rem;
