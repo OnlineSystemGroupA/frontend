@@ -1,7 +1,14 @@
 <template>
     <div class="item">
-        <el-button circle icon="el-icon-back" @click="goBack" class="return-button"></el-button>
-        <h2>项目详情</h2>
+        <el-row style="width: 100%">
+            <el-col :span="4">
+                <el-button @click="goBack" circle icon="el-icon-arrow-left" class="return-button"></el-button>
+            </el-col>
+            <el-col :span="16" class="top-col">
+                <h2>项目详情</h2>
+            </el-col>
+            <el-col :span="4"></el-col>
+        </el-row>
         <table class="pure-table" rules=all>
             <tr>
                 <th style="width:25%">项目号</th>
@@ -296,8 +303,14 @@ export default {
 </script>
 
 <style scoped>
+.top-col {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .return-button {
-    margin-right: auto;
 }
 
 .pure-table {

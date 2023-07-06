@@ -89,7 +89,7 @@
 
             <el-row class="button_row">
                 <el-button type="primary" @click="submit">修改</el-button>
-                <el-button type="primary" @click="cancel">取消</el-button>
+                <el-button @click="cancel">取消</el-button>
             </el-row>
         </el-form>
     </div>

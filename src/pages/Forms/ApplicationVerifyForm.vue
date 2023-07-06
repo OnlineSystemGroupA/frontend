@@ -79,7 +79,7 @@
             </el-form-item>
         </el-form>
         <el-row v-show="!disable">
-            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="success" @click="submit" :disabled="disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
     </div>
@@ -158,7 +158,7 @@ export default {
                 console.log(res.data)
                 if (res.data) {
                     this.form = res.data
-                } 
+                }
                 this.dataReady = true
             },
             (err) => {

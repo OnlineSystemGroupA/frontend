@@ -4,7 +4,7 @@
         <h3>项目号:{{ processId }}</h3>
         <el-button type="primary" @click="editApplicationForm">修改测试申请表</el-button>
         <el-button type="primary" @click="editFunctionList">修改测试功能表</el-button>
-        <el-button type="primary" @click="submit">提交申请</el-button>
+        <el-button type="success" @click="submit">提交申请</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>

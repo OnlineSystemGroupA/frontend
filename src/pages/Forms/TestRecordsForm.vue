@@ -87,12 +87,12 @@
         </el-form>
         <br>
         <el-row v-show="!disable">
-            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="success" @click="submit" :disabled="disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
         <el-row v-show="check">
-            <el-button type="primary" @click="pass" :disabled="!disable">通过</el-button>
-            <el-button type="primary" @click="refute" :disabled="!disable">驳回</el-button>
+            <el-button type="success" @click="pass" :disabled="!disable">通过</el-button>
+            <el-button type="danger" @click="refute" :disabled="!disable">驳回</el-button>
         </el-row>
     </div>
 </template>

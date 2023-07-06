@@ -14,7 +14,7 @@
                 <el-input type="textarea" placeholder="不接受理由" v-model="reasonForRefution"></el-input>
             </el-form-item>
         </el-form>
-        <el-button @click="submit">提交</el-button>
+        <el-button type="primary" @click="submit">提交</el-button>
     </div>
 </template>
 
