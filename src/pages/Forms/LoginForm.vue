@@ -6,23 +6,29 @@
                 <el-input v-model="userInfo.username" placeholder="请输入账号" @keyup.enter.native="onSubmit"
                           clearable class="acc"></el-input>
             </el-form-item>
-            <br>
             <el-form-item label="密码" prop="password">
                 <el-input v-model="userInfo.password" placeholder="请输入密码" @keyup.enter.native="onSubmit"
                           show-password class="acc"></el-input>
             </el-form-item>
-            <br>
-            <el-form-item>
-                <el-radio-group v-model="logType" @change="onChangeLoginTye">
-                    <el-radio label="client">客户</el-radio>
-                    <el-radio label="employee">员工</el-radio>
-                    <el-radio label="admin">管理员</el-radio>
+            <el-form-item label-width="0" style="margin: 0 auto 20px auto">
+                <el-radio-group v-model="logType" @change="onChangeLoginTye" style="width: 100%">
+                    <el-row>
+                        <el-col :span="8">
+                            <el-radio label="client">客户</el-radio>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-radio label="employee">员工</el-radio>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-radio label="admin">管理员</el-radio>
+                        </el-col>
+                    </el-row>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item>
+            <div class="buttons">
                 <el-button type="primary" @click="onSubmit">登录</el-button>
                 <el-button @click="userRegister">注册</el-button>
-            </el-form-item>
+            </div>
         </el-form>
     </div>
 </template>
@@ -122,5 +128,16 @@ export default {
     color: #3086d0;
     font-size: 2rem;
     margin-top: 1rem;
+}
+
+.el-form-item {
+    margin-bottom: 40px;
+}
+
+.buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

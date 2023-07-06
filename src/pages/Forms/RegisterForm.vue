@@ -1,7 +1,14 @@
 <template>
     <div class="login">
-        <div style="width:95%;text-align: left;"><a @click="login"><i class="el-icon-arrow-left"></i>返回</a></div>
-        <div><h4>用户注册</h4></div>
+        <el-row style="width: 100%">
+            <el-col :span="4" class="top-col">
+                <el-button @click="backToLogin" icon="el-icon-arrow-left" type="text" circle class="return-button"></el-button>
+            </el-col>
+            <el-col :span="16" class="top-col">
+                <div><h4>用户注册</h4></div>
+            </el-col>
+            <el-col :span="4"></el-col>
+        </el-row>
         <el-form :label-position="labelPosition" ref="registerForm" label-width="80px" :model="userInfo" :rules="rules">
             <el-form-item label="用户名" prop="username">
                 <el-input v-model="userInfo.username" placeholder="用户名" clearable></el-input>
@@ -107,7 +114,7 @@ export default {
                 }
             })
         },
-        login() {
+        backToLogin() {
             this.$router.push({
                 name: 'login'
             })
@@ -117,6 +124,17 @@ export default {
 </script>
 
 <style scoped>
+.top-col {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.return-button{
+    margin-top: 5px;
+}
+
 .login {
     display: flex;
     width: 100%;
