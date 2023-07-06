@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <h4>登录</h4>
-        <el-form :label-position="labelPosition" ref="loginForm" label-width="80px" :model="userInfo" :rules="rules">
+        <el-form label-position="left" ref="loginForm" label-width="80px" :model="userInfo" :rules="rules">
             <el-form-item label="账号/邮箱" prop="username">
                 <el-input v-model="userInfo.username" placeholder="请输入账号" @keyup.enter.native="onSubmit"
                           clearable class="acc"></el-input>
@@ -52,7 +52,6 @@ export default {
         }
 
         return {
-            labelPosition: "left",
             logType: "client",
             userInfo: {
                 username: "",

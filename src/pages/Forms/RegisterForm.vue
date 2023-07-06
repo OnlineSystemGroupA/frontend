@@ -2,14 +2,14 @@
     <div class="login">
         <el-row style="width: 100%">
             <el-col :span="4" class="top-col">
-                <el-button @click="backToLogin" icon="el-icon-arrow-left" type="text" circle class="return-button"></el-button>
+                <el-button @click="goBack" icon="el-icon-arrow-left" type="text" circle class="return-button"></el-button>
             </el-col>
             <el-col :span="16" class="top-col">
                 <div><h4>用户注册</h4></div>
             </el-col>
             <el-col :span="4"></el-col>
         </el-row>
-        <el-form :label-position="labelPosition" ref="registerForm" label-width="80px" :model="userInfo" :rules="rules">
+        <el-form label-position="left" ref="registerForm" label-width="80px" :model="userInfo" :rules="rules">
             <el-form-item label="用户名" prop="username">
                 <el-input v-model="userInfo.username" placeholder="用户名" clearable></el-input>
             </el-form-item>
@@ -67,7 +67,6 @@ export default {
         }
 
         return {
-            labelPosition: "left",
             userInfo: {
                 email: '',
                 username: '',
@@ -114,7 +113,7 @@ export default {
                 }
             })
         },
-        backToLogin() {
+        goBack() {
             this.$router.push({
                 name: 'login'
             })
