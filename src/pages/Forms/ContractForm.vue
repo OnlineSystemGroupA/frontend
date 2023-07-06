@@ -360,7 +360,7 @@
 </template>
 
 <script>
-// import contractForm from '../../assets/jsons/contractForm.json'
+import contractForm from '../../assets/jsons/contractForm.json'
 
 export default {
     name: 'ContractForm',
@@ -477,13 +477,24 @@ export default {
         },
         doSubmit() {
             if (this.writable) {
-                //console.log(JSON.stringify(this.form))
-                //this.$bus.$emit('submitApplication')
+                console.log(JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ContractForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
             }
         },
         save() {
             if (this.writable) {
-                //sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                sessionStorage.setItem('contractForm', JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ContractForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
             }
         },
         pass() {
@@ -491,7 +502,20 @@ export default {
         },
         refute() {
 
-        }
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+                this.$bus.$emit('submitContract')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
     },
     computed: {
         disable() {
@@ -516,7 +540,7 @@ export default {
         }
     },
     created() {
-        // this.form = contractForm
+        this.form = contractForm
     }
 }
 </script>

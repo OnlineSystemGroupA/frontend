@@ -11,6 +11,9 @@
                     <el-form-item label="报价有效期至" prop="validDate">
                         <el-date-picker v-model="form.validDate"></el-date-picker>
                     </el-form-item>
+                    <el-form-item label="软件名称" prop="software">
+                        <el-input v-model="form.software" placeholder="软件名称"></el-input>
+                    </el-form-item>
                 </el-col>
                 <el-col :span="10">
                     <table class="pure-table" rules=all>
@@ -29,9 +32,7 @@
                     </table>
                 </el-col>
             </el-row>
-            <el-form-item label="软件名称" prop="software" style="width:50%">
-                <el-input v-model="form.software" placeholder="软件名称"></el-input>
-            </el-form-item>
+
 
             <br>
             <table class="pure-table" rules=all>
@@ -49,9 +50,7 @@
                     </td>
                     <td>
                         <el-form-item label-width="0" prop="testFee" :show-message="false" class="form-item-table">
-                            <el-input-number :precision="2"
-                                             :min="0"
-                                             :controls="false"
+                            <el-input-number :precision="2" :min="0" :controls="false"
                                              v-model="form.testFee"></el-input-number>
                         </el-form-item>
                     </td>
@@ -69,17 +68,13 @@
                     </td>
                     <td>
                         <el-form-item label-width="0" prop="reportFee" :show-message="false" class="form-item-table">
-                            <el-input-number :precision="2"
-                                             :min="0"
-                                             :controls="false"
+                            <el-input-number :precision="2" :min="0" :controls="false"
                                              v-model="form.reportFee"></el-input-number>
                         </el-form-item>
                     </td>
                     <td>
                         <el-form-item label-width="0" prop="reportNum" :show-message="false" class="form-item-table">
-                            <el-input-number v-model="form.reportNum"
-                                             :min="1"
-                                             :precision="0"></el-input-number>
+                            <el-input-number v-model="form.reportNum" :min="1" :precision="0"></el-input-number>
                         </el-form-item>
                     </td>
                     <td style="text-align:center">
@@ -156,20 +151,15 @@ export default {
             }
         }
     },
-    methods: {
-        onQuotationDateChange() {
-            if (this.form.validDate && this.form.validDate !== '') {
-                this.$refs.form.validateField('validDate')
-            }
-        }
-    },
     computed: {
         disable() {
             if (this.writable === 'false') {
                 return true
-            } else if (this.writable === 'true') {
+            }
+            else if (this.writable === 'true') {
                 return false
-            } else if (!this.writable) {
+            }
+            else if (!this.writable) {
                 return true
             }
             return false
@@ -177,9 +167,11 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            } else if (this.checking === 'false') {
+            }
+            else if (this.checking === 'false') {
                 return false
-            } else if (this.checking) {
+            }
+            else if (this.checking) {
                 return true
             }
             return false
@@ -189,21 +181,84 @@ export default {
             return res ? res : NaN
         },
         reportTotal() {
-            let res = (this.form.reportNum - 1) * this.form.reportFee
-            return res ? res : NaN
+            return (this.form.reportNum - 1) * this.form.reportFee
         },
         totalBeforeTax() {
-            let res = this.testTotal + this.reportTotal
-            return res ? res : NaN
+            return this.testTotal + this.reportTotal
         },
         tax() {
-            let res = this.totalBeforeTax * 0.08;
-            return res ? res : NaN
+            return this.totalBeforeTax * 0.08;
         },
         totalAfterTax() {
-            let res = this.totalBeforeTax + this.tax
-            return res ? res : NaN
+            return this.totalBeforeTax + this.tax
         },
+    },
+    methods: {
+        onQuotationDateChange() {
+            if (this.form.validDate && this.form.validDate !== '') {
+                this.$refs.form.validateField('validDate')
+            }
+        },
+        submit() {
+            this.$refs.form.validate((valid) => {
+                if (valid) {
+                    this.doSubmit();
+                } else {
+                    alert("报价不符合要求，请修改报价！");
+                }
+            })
+        },
+        doSubmit() {
+            if (this.writable) {
+                console.log(JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'QuotationForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
+            }
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+                this.$bus.$emit('QuotationSuccess')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
+    },
+    mounted() {
+        this.$bus.$on('submitQuotation', () => {
+            this.submit()
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('submitQuotation')
+    },
+    created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'QuotationForm').then(
+            (res) => {
+                console.log(res.data)
+                if (res.data) {
+                    this.form = res.data
+                }
+                this.dataReady = true
+            },
+            (err) => {
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+            }
+        )
     }
 }
 </script>

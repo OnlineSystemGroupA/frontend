@@ -4,6 +4,7 @@
         <h3>项目号:{{ processId }}</h3>
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="writeContract">填写合同</el-button>
+        <el-button type="primary" @click="checkContract">审核合同</el-button>
         <el-button type="primary">下载pdf</el-button>
         <el-button type="primary">上传扫描件</el-button>
         <router-view></router-view>
@@ -30,6 +31,16 @@ export default {
                 query: {
                     writable: true,
                     checking: false,
+                    processId: this.processId,
+                }
+            })
+        },
+        checkContract() {
+            this.$router.push({
+                name: 'clientWriteContract',
+                query: {
+                    writable: false,
+                    checking: true,
                     processId: this.processId,
                 }
             })

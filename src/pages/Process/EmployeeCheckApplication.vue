@@ -37,25 +37,44 @@ export default {
         },
         handleRes(res) {
             if (res.status === 200) {
-                this.$alert('申请审核通过', '审核流程', {
-                    confirmButtonText: '确定',
-                    callback: () => {
-                        this.$message({
-                            type: 'info',
-                            message: "审核确认"
-                        });
+                if (this.passable) {
+                    this.$alert('申请审核通过', '审核流程', {
+                        confirmButtonText: '确定',
+                        callback: () => {
+                            this.$message({
+                                type: 'success',
+                                message: "审核确认"
+                            });
+                        }
+                    });
+                } else {
+                    this.$alert('申请已驳回', '审核流程', {
+                        confirmButtonText: '确定',
+                        callback: () => {
+                            this.$message({
+                                type: 'info',
+                                message: "审核驳回"
+                            });
+                        }
+                    });
+                    this.passable = true
+                }
+                this.$router.push(
+                    {
+                        name: 'employeeItemDetail',
+                        query: {
+                            processId: this.processId
+                        }
                     }
-                });
+                )
             }
         },
         handleErr(err) {
             if (err.status === 403) {
                 alert('指定流程对该用户不可见或当前用户无完成任务权限')
-            }
-            else if (err.status === 404) {
+            } else if (err.status === 404) {
                 alert('指定流程不存在')
-            }
-            else if (err.status === 460) {
+            } else if (err.status === 460) {
                 alert('未满足完成条件')
             }
         }
@@ -74,6 +93,7 @@ export default {
         }
     },
     mounted() {
+        this.passable = true
         this.$bus.$on('passApplication', (pass) => {
             this.passable &= pass
             this.$router.push({
@@ -96,6 +116,7 @@ export default {
             })
         })
         this.$bus.$on('submitApplicationVerifyForm', () => {
+            console.log(this.passable)
             this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + this.passable).then(this.handleRes, this.handleErr)
         })
     },
