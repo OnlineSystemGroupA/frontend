@@ -5,7 +5,7 @@
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="writeContract">填写合同</el-button>
         <el-button type="primary" @click="checkContract">审核合同</el-button>
-        <el-button type="primary">下载pdf</el-button>
+        <el-button type="primary" @click="download">下载pdf</el-button>
         <el-button type="primary">上传扫描件</el-button>
         <router-view></router-view>
     </div>
@@ -16,7 +16,9 @@ export default {
     name: 'ClientWriteContent',
     props: ['processId'],
     data() {
-        return {}
+        return {
+            pass: true,
+        }
     },
     methods: {
         checkItemDetail(id) {
@@ -44,7 +46,106 @@ export default {
                     processId: this.processId,
                 }
             })
+        },
+        handleCheckRes(res) {
+            if (res.status === 200) {
+                if (this.pass) {
+                    this.$alert('合同审核通过', '审核流程', {
+                        confirmButtonText: '确定',
+                        callback: () => {
+                            this.$message({
+                                type: 'success',
+                                message: "合同确认"
+                            });
+                        }
+                    });
+                } else {
+                    this.$alert('合同已驳回', '审核流程', {
+                        confirmButtonText: '确定',
+                        callback: () => {
+                            this.$message({
+                                type: 'info',
+                                message: "合同驳回"
+                            });
+                        }
+                    });
+                    this.passable = true
+                }
+                this.$router.push(
+                    {
+                        name: 'clientItemDetail',
+                        query: {
+                            processId: this.processId
+                        }
+                    }
+                )
+            }
+        },
+        handleRes(res) {
+            if (res.status === 200) {
+                this.$router.push({
+                    name: 'clientItemDetail',
+                    query: {
+                        processId: this.processId
+                    },
+                })
+            }
+        },
+        handleErr(err) {
+            if (err.status === 403) {
+                alert('指定流程对该用户不可见或当前用户无完成任务权限')
+            } else if (err.status === 404) {
+                alert('指定流程不存在')
+            } else if (err.status === 460) {
+                alert('未满足完成条件')
+            }
+        },
+        download() {
+            this.axios.get('/api/workflow/processes/' + this.processId + '/files/forms/ContractForm').then(
+                (res) => {
+                    let downloadElement = document.createElement('a')
+                    let href = res
+                    if (typeof blob == 'string') {
+                        downloadElement.target = '_blank'
+                    } else {
+                        href = window.URL.createObjectURL(res) //创建下载的链接
+                    }
+                    downloadElement.href = href
+                    downloadElement.download =
+                        this.processId +
+                        //下载后文件名
+                        document.body.appendChild(downloadElement)
+                    downloadElement.click() //点击下载
+                    document.body.removeChild(downloadElement) //下载完成移除元素
+                    if (typeof blob != 'string') {
+                        window.URL.revokeObjectURL(href) //释放掉blob对象
+                    }
+                },
+                (err) => {
+                    if (err.status === 403) {
+                        alert('指定流程对该用户不可见或当前用户无完成任务权限')
+                    } else if (err.status === 404) {
+                        alert('指定流程不存在')
+                    } else if (err.status === 460) {
+                        alert('未满足完成条件')
+                    }
+                }
+            )
         }
+    },
+    mounted() {
+        this.$bus.$on('submitContract', () => {
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=true')
+                .then(this.handleRes, this.handleErr)
+        })
+        this.$bus.$on('checkContract', (pass) => {
+            this.pass = pass
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + pass).then(this.handleCheckRes, this.handleErr)
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('submitContract')
+        this.$bus.$off('checkContract')
     }
 }
 </script>

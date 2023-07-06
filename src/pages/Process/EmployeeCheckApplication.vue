@@ -116,7 +116,7 @@ export default {
             })
         })
         this.$bus.$on('submitApplicationVerifyForm', () => {
-            console.log(this.passable)
+            //console.log(this.passable)
             this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + this.passable).then(this.handleRes, this.handleErr)
         })
     },
