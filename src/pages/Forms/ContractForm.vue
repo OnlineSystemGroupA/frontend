@@ -498,10 +498,14 @@ export default {
             }
         },
         pass() {
-
+            if (this.check) {
+                this.$bus.$emit('checkContract', true)
+            }
         },
         refute() {
-
+            if (this.check) {
+                this.$bus.$emit('checkContract', false)
+            }
         },
         handleResult(res) {
             console.log(res)
@@ -540,7 +544,27 @@ export default {
         }
     },
     created() {
-        this.form = contractForm
+        this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ContractForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                    }
+                    else {
+                        this.form = contractForm
+                    }
+                }
+                
+            },
+            (err) => {
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                 this.form = contractForm
+            }
+        )
     }
 }
 </script>
