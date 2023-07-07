@@ -6,7 +6,7 @@
         <el-button type="primary" @click="writeContract">填写合同</el-button>
         <el-button type="primary" @click="checkContract">审核合同</el-button>
         <el-button type="primary" @click="download">下载pdf</el-button>
-        <el-button type="primary">上传扫描件</el-button>
+        <el-button type="primary" @click="upload">上传扫描件</el-button>
         <router-view></router-view>
     </div>
 </template>
@@ -100,26 +100,20 @@ export default {
                 alert('未满足完成条件')
             }
         },
-        download() {
-            this.axios.get('/api/workflow/processes/' + this.processId + '/files/forms/ContractForm').then(
-                (res) => {
-                    let downloadElement = document.createElement('a')
-                    let href = res
-                    if (typeof blob == 'string') {
-                        downloadElement.target = '_blank'
-                    } else {
-                        href = window.URL.createObjectURL(res) //创建下载的链接
-                    }
-                    downloadElement.href = href
-                    downloadElement.download =
-                        this.processId +
-                        //下载后文件名
-                        document.body.appendChild(downloadElement)
-                    downloadElement.click() //点击下载
-                    document.body.removeChild(downloadElement) //下载完成移除元素
-                    if (typeof blob != 'string') {
-                        window.URL.revokeObjectURL(href) //释放掉blob对象
-                    }
+        async download() {
+            await this.axios.get('/api/workflow/processes/' + this.processId + '/files/forms/ContractForm', {
+                responseType: "blob" // 二进制流
+            }).then(
+                (res, type) => {
+                    const blob = new Blob([res.data], { type: type });
+                    const downloadElement = document.createElement("a");
+                    const href = window.URL.createObjectURL(blob);
+                    downloadElement.href = href;
+                    downloadElement.download = decodeURIComponent("合同.pdf");
+                    document.body.appendChild(downloadElement);
+                    downloadElement.click();
+                    document.body.removeChild(downloadElement);
+                    window.URL.revokeObjectURL(href);
                 },
                 (err) => {
                     if (err.status === 403) {
@@ -131,6 +125,14 @@ export default {
                     }
                 }
             )
+        },
+        upload(){
+            this.$router.push({
+                name: 'clientUploadContract',
+                query: {
+                    processId: this.processId
+                },
+            })
         }
     },
     mounted() {
