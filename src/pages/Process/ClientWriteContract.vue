@@ -6,7 +6,7 @@
         <el-button type="primary" @click="writeContract">填写合同</el-button>
         <el-button type="primary" @click="checkContract">审核合同</el-button>
         <el-button type="primary" @click="download">下载pdf</el-button>
-        <el-button type="primary">上传扫描件</el-button>
+        <el-button type="primary" @click="upload">上传扫描件</el-button>
         <router-view></router-view>
     </div>
 </template>
@@ -125,6 +125,14 @@ export default {
                     }
                 }
             )
+        },
+        upload(){
+            this.$router.push({
+                name: 'clientUploadContract',
+                query: {
+                    processId: this.processId
+                },
+            })
         }
     },
     mounted() {
