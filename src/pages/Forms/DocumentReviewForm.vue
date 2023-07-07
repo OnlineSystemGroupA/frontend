@@ -385,6 +385,25 @@ export default {
             }
         }
     },
+    methods: {
+        submit() {
+            this.$refs.form.validate((valid) => {
+                if (valid) {
+                    this.doSubmit();
+                } else {
+                    console.log(this.form)
+                    alert("软件文档评审表不符合要求，请修改软件文档评审表！");
+                }
+            })
+        },
+        doSubmit() {
+        },
+        save() {
+        },
+        pass() {
+        },
+        refute() {}
+    },
     computed: {
         disable() {
             if (this.writable === 'false') {

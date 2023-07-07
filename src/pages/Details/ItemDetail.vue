@@ -12,7 +12,7 @@
         <table class="pure-table" rules=all>
             <tr>
                 <th style="width:25%">项目号</th>
-                <td style="width:25%">{{ processId }}</td>
+                <td style="width:25%">{{ itemInfo.projectId }}</td>
                 <th style="width:25%">项目名称</th>
                 <td style="width:25%">{{ itemInfo.title }}</td>
             </tr>
@@ -24,7 +24,7 @@
             </tr>
             <tr>
                 <th>申请日期</th>
-                <td>{{ itemInfo.applicateDate }}</td>
+                <td>{{ itemInfo.applicationDate }}</td>
                 <th>申请人</th>
                 <td>{{ itemInfo.applicant }}</td>
             </tr>
@@ -46,12 +46,14 @@
                 <th>预计结束日期</th>
                 <td>{{ itemInfo.dueDate }}</td>
             </tr>
+            <!--
             <tr>
                 <th>审核人员</th>
                 <td>{{ itemInfo.verifier }}</td>
                 <th>测试人员</th>
                 <td>{{ itemInfo.tester }}</td>
             </tr>
+            -->
         </table>
         <br>
         <div style="margin:10px; width: 100%;">
@@ -69,7 +71,7 @@
                 <el-step title="用户确认中"></el-step>
                 <el-step title="项目已完成"></el-step>
             </el-steps>
-            <el-button type="primary" @click="nextStep">下一步</el-button><!--仅测试用-->
+            <!--<el-button type="primary" @click="nextStep">下一步</el-button>--><!--仅测试用-->
             <el-button type="primary" @click="operateProcess">操作流程</el-button>
         </div>
         <div style="margin:20px ; width: 90%;">
@@ -108,8 +110,8 @@ export default {
             itemInfo: {
                 title: '专用数据库系统',
                 version: '1.2.4',
-                testType: '专项测试申请',
-                applicateDate: '2023-5-12',
+                testType: '',
+                applicationDate: '2023-5-12',
                 applicant: '张三',
                 company: '沈阳好果汁公司',
                 telephone: '114-514-1919',
@@ -276,6 +278,18 @@ export default {
                     }
                 })
             }
+        },
+        handleResponse(res) {
+            if (res.status === 200) {
+                console.log(res.data)
+                this.itemInfo = res.data
+                this.itemInfo.testType = this.itemInfo.testType.substring(1, this.itemInfo.testType.length - 1)
+                this.itemInfo.applicationDate = this.itemInfo.applicationDate.substring(0, this.itemInfo.applicationDate.indexOf('T'))
+                this.active = this.itemInfo.index
+            }
+        },
+        hanldeError(err) {
+            alert(err.data)
         }
     },
     created() {
@@ -297,6 +311,8 @@ export default {
         verificationWork.operation.forEach(element => {
             this.verificationMap.set(element.key, element.value)
         })
+
+        this.axios.get('/api/workflow/processes/'+this.processId+'/details').then(this.handleResponse,this.hanldeError)
 
     }
 }

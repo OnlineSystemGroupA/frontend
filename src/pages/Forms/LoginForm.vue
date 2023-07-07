@@ -12,7 +12,7 @@
             </el-form-item>
             <el-form-item label-width="0" style="margin: 0 auto 20px auto">
                 <el-radio-group v-model="logType" @change="onChangeLoginTye" style="width: 100%">
-                    <el-row>
+                    <el-row style="padding-left: 30px">
                         <el-col :span="8">
                             <el-radio label="client">客户</el-radio>
                         </el-col>
