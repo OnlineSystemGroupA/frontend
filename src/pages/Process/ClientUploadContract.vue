@@ -4,12 +4,14 @@
             <el-radio label="ContractForm">合同扫描件</el-radio>
             <el-radio label="ConfidentialityForm">保密协议扫描件</el-radio>
         </el-radio-group>
-        <el-upload :action="contractFileURL"
+        <el-upload ref="upload"
+                   :action="contractFileURL"
                    :headers="headers"
                    :on-success="handleSuccess"
+                   :before-upload="handleBeforeSuccess"
                    :on-exceed="handleExceed"
                    drag
-                   :file-list="contractFiles">
+                   :file-list="fileList">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         </el-upload>
@@ -23,18 +25,27 @@ export default {
     data() {
         return {
             formType: 'ContractForm',
-            contractFiles: []
+            fileListMap: {
+                ContractForm: [],
+                ConfidentialityForm: []
+            }
         };
     },
     methods: {
         handleSuccess() {
             this.$message.success("上传成功！")
         },
-        handleExceed(files, fileList) {
-            this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+        handleBeforeSuccess() {
+            this.$refs.upload.$el.querySelectorAll('.el-upload-list')[0].innerHTML = ""
+        },
+        handleExceed() {
+            this.$message.warning('请先删除已上传的文件！')
         },
     },
     computed: {
+        fileList() {
+            return this.fileListMap[this.formType];
+        },
         contractFileURL() {
             return '/api/workflow/processes/' + this.processId + '/files/forms/' + this.formType
         },
