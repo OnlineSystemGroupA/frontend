@@ -322,9 +322,9 @@ var generateTestReport = function () {
             }
         },
         "networkEnvironment": '<@string{4,20}>',
-        "testStandards<@{2,7}>": [{ "standard": '<@string{4,20}>' },],
-        "references<@{2,7}>": [{ "reference": '<@string{4,20}>' },],
-        "functionTest<@{2,7}>": [{
+        "testStandards<@{2,7}>": [ '<@string{4,20}>' ],
+        "references<@{2,7}>": ['<@string{4,20}>' ],
+        "functionTests<@{2,7}>": [{
             "functionModule": '<@string{4,20}>',
             "functionRequirement": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
@@ -365,6 +365,7 @@ var generateTestReport = function () {
         console.log("写入成功");
     })
 }
+
 
 var generateDocumentReviewForm = function () {
     var documentReviewModelJson = {
@@ -645,16 +646,15 @@ var generateProblemForm = function () {
     var testProblemModelJson = {
         "problemList<@{3,6}>": [
             {
-                bugIndex: '<@string{4,20}>',
                 description: '<@string{4,20}>',
                 relatedRequirementItem: '<@string{4,20}>',
                 initialCondition: '<@string{4,20}>',
                 operationRoute: '<@string{4,20}>',
                 relatedCase: '<@string{4,20}>',
-                discoveredTime: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+                discoveredDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
                 personInCharge: '<@string{4,20}>',
                 editSuggestion: '<@string{4,20}>',
-                vforKey: '<@string{4,20}>'
+                //vforKey: '<@string{4,20}>'
             }
         ]
     }
