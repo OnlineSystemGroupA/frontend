@@ -270,6 +270,7 @@ var generateTestPlanVerification = function () {
 
 var generateTestReport = function () {
     var testReportModelJson = {
+<<<<<<< HEAD
         form: {
             softwareName: '<@string{4,20}>',
             softwareVersion: '<@string{4,20}>',
@@ -323,6 +324,41 @@ var generateTestReport = function () {
                     name: '<@string{4,20}>',
                     version: '<@string{4,20}>'
                 }
+=======
+        "softwareName": '<@string{4,20}>',
+        "softwareVersion": '<@string{4,20}>',
+        "clientCompany": '<@string{4,20}>',
+        "testType": '<@string{4,20}>',
+        "reportDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "projectId": '<@string{4,20}>',
+        "sampleDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "startDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "endDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "sampleCondition": '<@string{4,20}>',
+        "testStandard": '<@string{4,20}>',
+        "sampleList": '<@string{4,20}>',
+        "testConclusion": '<@string{4,20}>',
+        "telephone": '<@string{4,20}>',
+        "fax": '<@string{4,20}>',
+        "address": '<@string{4,20}>',
+        "website": '<@string{4,20}>',
+        "contract": '<@string{4,20}>',
+        "email": '<@string{4,20}>',
+        "compiler": '<@string{4,20}>',
+        "compileDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "reviewer": '<@string{4,20}>',
+        "reviewDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "approver": '<@string{4,20}>',
+        "approveDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "hardwareType": '<@string{4,20}>',
+        "hardwareName": '<@string{4,20}>',
+        "hardwareConfiguration": '<@string{4,20}>',
+        "hardwareNum": '<@string{4,20}>',
+        "softwareEnvironment": {
+            "operatingSystem": {
+                "name": '<@string{4,20}>',
+                "version": '<@string{4,20}>',
+>>>>>>> refs/remotes/origin/connect
             },
             networkEnvironment: '<@string{4,20}>',
             'testStandards<@{2, 4}>': ['<@string{4,20}>'],
