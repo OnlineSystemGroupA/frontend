@@ -1,13 +1,12 @@
 <template>
     <div class="client">
         <h2>个人信息</h2>
-        <table style="width:90%; text-align: center;" class="pure-table" rules=all>
+        <table class="pure-table" rules=all>
             <tr>
-                <th style="width: 20%;">用户名</th>
-                <td style="width: 20%;">{{ userInfo.username }}</td>
-                <th style="width: 20%;">真实姓名</th>
-                <td style="width: 20%;">{{ userInfo.realName }}</td>
-                <td rowspan=4><img style="width:100%;height: 100%;" src="../../assets/img/avater.png"></td>
+                <th style="width: 25%;">用户名</th>
+                <td style="width: 25%;">{{ userInfo.username }}</td>
+                <th style="width: 25%;">真实姓名</th>
+                <td style="width: 25%;">{{ userInfo.realName }}</td>
             </tr>
 
             <tr>
@@ -35,21 +34,21 @@
                 <th>公司传真</th>
                 <td>{{ userInfo.companyFax }}</td>
                 <th>公司地址</th>
-                <td colspan=2>{{ userInfo.companyAddress }}</td>
+                <td>{{ userInfo.companyAddress }}</td>
             </tr>
 
             <tr>
                 <th>公司邮编</th>
                 <td>{{ userInfo.companyPostcode }}</td>
                 <th>公司网址</th>
-                <td colspan=2>{{ userInfo.companyWebsite }}</td>
+                <td>{{ userInfo.companyWebsite }}</td>
             </tr>
 
             <tr>
                 <th>公司邮箱</th>
                 <td>{{ userInfo.companyEmail }}</td>
                 <th>公司手机</th>
-                <td colspan=2>{{ userInfo.companyPhone }}</td>
+                <td>{{ userInfo.companyPhone }}</td>
             </tr>
         </table>
         <br>
@@ -87,6 +86,8 @@ export default {
                 gender: '',
                 company: '',
                 companyAddress: '',
+                companyTelephone: '',
+                companyPostcode: '',
                 companyEmail: '',
                 companyFax: '',
                 companyPhone: '',
@@ -168,6 +169,7 @@ export default {
 
 <style scoped lang="less">
 .client {
+    width: 94%;
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;
@@ -179,6 +181,7 @@ export default {
 
 .pure-table {
     width: 100%;
+    text-align: center;
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;

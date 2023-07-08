@@ -18,34 +18,32 @@
             <el-table :data="form.functions"
                       ref="functionTable"
                       @row-click="onFuncRowClick"
-                      :row-class-name="funcRowClassName"
                       style="width: 100%">
                 <el-table-column type="expand">
                     <template slot-scope="func">
                         <div class="table-dropdown">
                             <el-form-item label="功能名称" label-width="10%"
                                           :rules="funcRules.title"
-                                          :prop="'functions.' + func.row.index + '.title'">
+                                          :prop="'functions.' + func.$index + '.title'">
                                 <el-input v-model="func.row.title" placeholder="功能名称"
                                           style="width: 60%"></el-input>
                             </el-form-item>
                             <el-table :data="func.row.items"
-                                      @row-click="row=>onItemRowClick(func.row.index, row)"
-                                      :row-class-name="funcRowClassName"
+                                      @row-click="row=>onItemRowClick(func.$index, row)"
                                       style="width: 80%"
-                                      :ref="'itemTable' + func.row.index">
+                                      :ref="'itemTable' + func.$index">
                                 <el-table-column type="expand">
                                     <template slot-scope="item">
                                         <div class="table-dropdown">
                                             <el-form-item label="详细功能名称" label-width="25%"
                                                           :rules="detailedFunctionRules.name"
-                                                          :prop="'functions.' + func.row.index + '.items.' + item.row.index + '.name'">
+                                                          :prop="'functions.' + func.$index + '.items.' + item.$index + '.name'">
                                                 <el-input v-model="item.row.name" placeholder="详细功能名称"
                                                           style="width: 60%"></el-input>
                                             </el-form-item>
                                             <el-form-item label="详细功能描述" label-width="25%"
                                                           :rules="detailedFunctionRules.description"
-                                                          :prop="'functions.' + func.row.index + '.items.' + item.row.index + '.description'"
+                                                          :prop="'functions.' + func.$index + '.items.' + item.$index + '.description'"
                                                           style="margin-top: 10px">
                                                 <el-input v-model="item.row.description"
                                                           type="textarea"
@@ -66,7 +64,7 @@
                                             plain
                                             circle
                                             icon="el-icon-plus"
-                                            @click.native.stop="addItem(func.row.index)"></el-button>
+                                            @click.native.stop="addItem(func.$index)"></el-button>
                                     </template>
                                     <template slot-scope="item">
                                         <el-button
@@ -191,10 +189,6 @@ export default {
             this.$refs['itemTable' + index].toggleRowExpansion(row);
         },
 
-        funcRowClassName({ row, rowIndex }) {
-            row.index = rowIndex;
-        },
-
         submit() {
             this.$refs.form.validate((valid) => {
                 if (valid) {
@@ -311,7 +305,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 .func-list {
     width: 94%;
     margin-top: 2%;

@@ -54,11 +54,14 @@
             <h2>确认意见</h2>
             <el-form-item>
                 <el-radio-group v-model="form.confirmation">
-                    <el-radio label="测试所需材料不全，未达到受理条件。"></el-radio>
-                    <el-radio
+                    <el-radio style="margin-bottom: 10px"
                         label="属依据国家标准或自编非标规范进行的常规检测，有资质、能力和资源满足委托方要求。"></el-radio>
-                    <el-radio label="无国家标准和规范依据，或中心缺乏检测设备和工具，无法完成检测。"></el-radio>
-                    <el-radio label="超出中心能力和资质范围，无法完成检测。"></el-radio>
+                    <br>
+                    <el-radio style="margin-bottom: 10px" label="测试所需材料不全，未达到受理条件。"></el-radio>
+                    <br>
+                    <el-radio style="margin-bottom: 10px" label="无国家标准和规范依据，或中心缺乏检测设备和工具，无法完成检测。"></el-radio>
+                    <br>
+                    <el-radio style="margin-bottom: 10px" label="超出中心能力和资质范围，无法完成检测。"></el-radio>
                 </el-radio-group>
             </el-form-item>
             <h2>受理意见</h2>

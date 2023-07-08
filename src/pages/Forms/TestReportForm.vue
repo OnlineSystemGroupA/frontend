@@ -1,23 +1,40 @@
 <template>
     <div class="report">
         <h1>测 试 报 告</h1>
-        <el-form label-width="100px" label-position="left" :disabled="disable">
-            <el-form-item label="软件名称">
-                <el-input v-model="form.softwareName" placeholder="软件名称"></el-input>
-            </el-form-item>
-            <el-form-item label="版本号">
-                <el-input v-model="form.version" placeholder="版本号"></el-input>
-            </el-form-item>
-            <el-form-item label="委托单位">
-                <el-input v-model="form.clientCompany" placeholder="委托单位"></el-input>
-            </el-form-item>
-            <el-form-item label="测试类型">
-                <el-input v-model="form.testType" placeholder="测试类型"></el-input>
-            </el-form-item>
-            <el-form-item label="报告日期">
-                <el-date-picker type="date" placeholder="报告日期" style="width: 100%;" v-model="form.reportDate">
-                </el-date-picker>
-            </el-form-item>
+        <el-form label-width="100px" label-position="left" :disabled="disabled">
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="软件名称">
+                        <el-input v-model="form.softwareName" placeholder="软件名称"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="版本号">
+                        <el-input v-model="form.version" placeholder="版本号"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="委托单位">
+                        <el-input v-model="form.clientCompany" placeholder="委托单位"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="测试类型">
+                        <el-input v-model="form.testType" placeholder="测试类型"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="报告日期" wi>
+                        <el-date-picker type="date" placeholder="报告日期" style="width: 100%;"
+                                        v-model="form.reportDate">
+                        </el-date-picker>
+                    </el-form-item>
+                </el-col>
+            </el-row>
             <h3>南京大学</h3>
             <h3>软件测试中心</h3>
             <ol>
@@ -39,113 +56,118 @@
                 <li>本报告无本中心章、涂改均无效。</li>
             </ol>
             <h3>测试报告</h3>
-            <el-row>
-                <el-col class="col">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="委托单位">
                         <el-input placeholder="委托单位" v-model="form.clientCompany"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+                <el-col :span="12">
                     <el-form-item label="项目编号">
                         <el-input placeholder="项目编号" v-model="form.itemNum"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col class="col">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="样品名称">
                         <el-input placeholder="样品名称" v-model="form.softwareName"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+                <el-col :span="12">
                     <el-form-item label="版本/型号">
                         <el-input placeholder="版本/型号" v-model="form.version"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col class="col">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="采样日期">
                         <el-date-picker type="date" placeholder="采样日期" style="width: 100%;"
                                         v-model="form.sampleTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+                <el-col :span="12">
                     <el-form-item label="测试类型">
                         <el-input placeholder="测试类型" v-model="form.testType"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-form-item label="测试时间">
-                    <el-date-picker type="date" placeholder="开始日期" style="width: 45%;"
-                                    v-model="form.startTime"></el-date-picker>
-                    ——
-                    <el-date-picker type="date" placeholder="结束日期" style="width: 45%;"
-                                    v-model="form.endTime"></el-date-picker>
-                </el-form-item>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="测试开始时间">
+                        <el-date-picker type="date" placeholder="开始日期" style="width: 100%;"
+                                        v-model="form.startTime"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="测试结束时间">
+                        <el-date-picker type="date" placeholder="结束日期" style="width: 100%;"
+                                        v-model="form.endTime"></el-date-picker>
+                    </el-form-item>
+                </el-col>
             </el-row>
-            <el-row>
+            <el-row :gutter="20">
                 <el-form-item label="样品状态">
                     <el-input placeholder="样品状态" v-model="form.sampleCondition"></el-input>
                 </el-form-item>
             </el-row>
-            <el-row>
+            <el-row :gutter="20">
                 <el-form-item label="测试依据">
                     <el-input type="textarea" placeholder="测试依据" v-model="form.testStandard"></el-input>
                 </el-form-item>
             </el-row>
-            <el-row>
+            <el-row :gutter="20">
                 <el-form-item label="样品清单">
                     <el-input type="textarea" placeholder="样品清单" v-model="form.sampleList"></el-input>
                 </el-form-item>
             </el-row>
-            <el-row>
+            <el-row :gutter="20">
                 <el-form-item label="测试结论">
                     <el-input type="textarea" placeholder="测试结论" v-model="form.testConclusion"></el-input>
                 </el-form-item>
             </el-row>
-            <el-row>
-                <el-col class="col">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="编制人">
                         <el-input placeholder="编制人" v-model="form.compiler"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+                <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                                        v-model="form.complierTime"></el-date-picker>
+                                        v-model="form.compilerTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col class="col">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="审核人">
                         <el-input placeholder="审核人" v-model="form.reviewer"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+                <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
                                         v-model="form.reviewerTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col class="col">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="批准人">
                         <el-input placeholder="批准人" v-model="form.approver"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+                <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
                                         v-model="form.approverTime"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row>
-                <el-col class="col">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <h3>委托单位联系方式</h3>
                     <el-form-item label="电话">
                         <el-input placeholder="电话" v-model="form.telephone"></el-input>
@@ -166,7 +188,7 @@
                         <el-input placeholder="E-mail" v-model="form.email"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+                <el-col :span="12">
                     <h3>测试单位联系方式</h3>
                     <h4>单位地址：南京市栖霞区仙林大道163号</h4>
                     <h4>邮政编码：210046</h4>
@@ -179,92 +201,131 @@
             <h2>一、测试环境（硬件和软件）</h2>
             <div>
                 <h3>硬件环境</h3>
-                <el-form-item label="硬件类型">
-                    <el-input placeholder="硬件类型" v-model="form.hardwareType"></el-input>
-                </el-form-item>
-                <el-form-item label="硬件名称">
-                    <el-input placeholder="硬件名称" v-model="form.hardwareName"></el-input>
-                </el-form-item>
-                <el-form-item label="配置">
-                    <el-input placeholder="配置" v-model="form.hardwareConfiguration"></el-input>
-                </el-form-item>
-                <el-form-item label="数量">
-                    <el-input placeholder="数量" v-model="form.hardwareNum"></el-input>
-                </el-form-item>
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="硬件类型">
+                            <el-input placeholder="硬件类型" v-model="form.hardwareType"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="硬件名称">
+                            <el-input placeholder="硬件名称" v-model="form.hardwareName"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="配置">
+                            <el-input placeholder="配置" v-model="form.hardwareConfiguration"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="数量">
+                            <el-input placeholder="数量" v-model="form.hardwareNum"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
             </div>
             <div>
                 <h3>软件环境</h3>
-                <el-form-item label="操作系统">
-                    <br>
-                    <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称"
-                                  v-model="form.softwareEnvironment.operatingSystem.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="版本">
-                        <el-input placeholder="版本"
-                                  v-model="form.softwareEnvironment.operatingSystem.version"></el-input>
-                    </el-form-item>
-                </el-form-item>
-                <el-form-item label="软件1">
-                    <br>
-                    <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称" v-model="form.softwareEnvironment.softwareOne.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="版本">
-                        <el-input placeholder="版本" v-model="form.softwareEnvironment.softwareOne.version"></el-input>
-                    </el-form-item>
-                </el-form-item>
-                <el-form-item label="软件2">
-                    <br>
-                    <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称" v-model="form.softwareEnvironment.softwareTwo.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="版本">
-                        <el-input placeholder="版本" v-model="form.softwareEnvironment.softwareTwo.version"></el-input>
-                    </el-form-item>
-                </el-form-item>
-                <el-form-item label="软件3">
-                    <br>
-                    <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称"
-                                  v-model="form.softwareEnvironment.softwareThree.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="版本">
-                        <el-input placeholder="版本"
-                                  v-model="form.softwareEnvironment.softwareThree.version"></el-input>
-                    </el-form-item>
-                </el-form-item>
-                <el-form-item label="辅助工具">
-                    <br>
-                    <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称"
-                                  v-model="form.softwareEnvironment.ancillaryTool.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="版本">
-                        <el-input placeholder="版本"
-                                  v-model="form.softwareEnvironment.ancillaryTool.version"></el-input>
-                    </el-form-item>
-                </el-form-item>
-                <el-form-item label="开发工具">
-                    <br>
-                    <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称"
-                                  v-model="form.softwareEnvironment.developmentTool.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="版本">
-                        <el-input placeholder="版本"
-                                  v-model="form.softwareEnvironment.developmentTool.version"></el-input>
-                    </el-form-item>
-                </el-form-item>
-                <el-form-item label="被测试样品">
-                    <br>
-                    <el-form-item label="软件名称">
-                        <el-input placeholder="软件名称" v-model="form.softwareEnvironment.testSample.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="版本">
-                        <el-input placeholder="版本" v-model="form.softwareEnvironment.testSample.version"></el-input>
-                    </el-form-item>
-                </el-form-item>
+                <p>操作系统</p>
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="软件名称">
+                            <el-input placeholder="软件名称"
+                                      v-model="form.softwareEnvironment.operatingSystem.name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="软件版本">
+                            <el-input placeholder="软件版本"
+                                      v-model="form.softwareEnvironment.operatingSystem.version"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <p>辅助工具</p>
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="软件名称">
+                            <el-input placeholder="软件名称"
+                                      v-model="form.softwareEnvironment.ancillaryTool.name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="软件版本">
+                            <el-input placeholder="软件版本"
+                                      v-model="form.softwareEnvironment.ancillaryTool.version"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <p>开发工具</p>
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="软件名称">
+                            <el-input placeholder="软件名称"
+                                      v-model="form.softwareEnvironment.developmentTool.name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="软件版本">
+                            <el-input placeholder="软件版本"
+                                      v-model="form.softwareEnvironment.developmentTool.version"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <p>被测试样品</p>
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <el-form-item label="软件名称">
+                            <el-input placeholder="软件名称"
+                                      v-model="form.softwareEnvironment.testSample.name"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="软件版本">
+                            <el-input placeholder="软件版本"
+                                      v-model="form.softwareEnvironment.testSample.version"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <p>其他软件</p>
+                <el-table :data="form.softwareEnvironment.software" style="width: 100%">
+                    <el-table-column type="index"></el-table-column>
+                    <el-table-column label="软件名称" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.name"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="软件版本" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.version"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" width="100">
+                        <template slot="header">
+                            <el-button
+                                size="mini"
+                                type="primary"
+                                plain
+                                circle
+                                icon="el-icon-plus"
+                                @click="addSoftware"></el-button>
+                        </template>
+                        <template slot-scope="item">
+                            <el-button
+                                size="mini"
+                                type="danger"
+                                plain
+                                circle
+                                icon="el-icon-delete"
+                                @click="deleteSoftware(item.$index)"></el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
             <div>
                 <h3>网络环境</h3>
@@ -273,148 +334,325 @@
             <h2>二、测试依据和参考资料</h2>
             <div>
                 <h3>测试依据</h3>
-                <el-form-item v-for="(item, index) in form.testStandardList" :key="index" :label="'依据' + (index + 1)">
-                    <el-input v-model="item.standard"></el-input>
-                    <el-button @click="deleteStandard(index)">删除</el-button>
+                <el-form-item label-width="0" ref="testStandards" prop="testStandards">
+                    <SelectAndCreateTags v-model="form.testStandardList" :default-options="testStandardOptions"
+                                         :disabled="disabled" option-description="新增一个测试依据"
+                                         @change="emitChangeEvent('testStandards', form.testStandards)"
+                                         @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
                 </el-form-item>
-                <el-button @click="addStandard">
-                    添加表项
-                </el-button>
             </div>
             <div>
                 <h3>参考资料</h3>
-                <el-form-item v-for="(item, index) in form.referenceList" :key="index" :label="'参考' + (index + 1)">
-                    <el-input v-model="item.reference"></el-input>
-                    <el-button @click="deleteReference(index)">删除</el-button>
+                <el-form-item label-width="0" ref="testStandards" prop="testStandards">
+                    <SelectAndCreateTags v-model="form.referenceList" :default-options="[]"
+                                         :disabled="disabled" option-description="新增一个参考资料 "
+                                         @change="emitChangeEvent('testStandards', form.testStandards)"
+                                         @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
                 </el-form-item>
-                <el-button @click="addReference">
-                    添加表项
-                </el-button>
             </div>
             <h2>三、测试内容</h2>
             <div>
                 <h3>功能性测试</h3>
-                <el-form-item v-for="(item, index) in form.functionTest" :key="index" :label="'功能' + (index + 1)">
-                    <br>
-                    <el-form-item label="功能模块">
-                        <el-input placeholder="功能模块" v-model="item.functionModule"></el-input>
-                    </el-form-item>
-                    <el-form-item label="功能要求">
-                        <el-input placeholder="功能要求" v-model="item.functionRequirement"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试结果">
-                        <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                    </el-form-item>
-                    <el-button @click="deleteFunction(index)">删除</el-button>
-                </el-form-item>
-                <el-button @click="addFunction">添加表项</el-button>
+                <el-table :data="form.functionTest" style="width: 100%">
+                    <el-table-column type="index"></el-table-column>
+                    <el-table-column label="功能模块" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.functionModule"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="功能要求" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.functionRequirement"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试结果" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testResult"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" width="100">
+                        <template slot="header">
+                            <el-button
+                                size="mini"
+                                type="primary"
+                                plain
+                                circle
+                                icon="el-icon-plus"
+                                @click="addFunction"></el-button>
+                        </template>
+                        <template slot-scope="item">
+                            <el-button
+                                size="mini"
+                                type="danger"
+                                plain
+                                circle
+                                icon="el-icon-delete"
+                                @click="deleteFunction(item.$index)"></el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
             <div>
                 <h3>效率测试</h3>
-                <el-form-item v-for="(item, index) in form.efficiencyTest" :key="index" :label="'效率' + (index + 1)">
-                    <br>
-                    <el-form-item label="测试特性">
-                        <el-input placeholder="特性测试" v-model="item.property"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试说明">
-                        <el-input placeholder="测试说明" v-model="item.testExplanation"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试结果">
-                        <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                    </el-form-item>
-                    <el-button @click="deleteEfficiency(index)">删除</el-button>
-                </el-form-item>
-                <el-button @click="addEfficiency">添加表项</el-button>
+                <el-table :data="form.efficiencyTest" style="width: 100%">
+                    <el-table-column type="index"></el-table-column>
+                    <el-table-column label="测试特性" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.property"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试说明" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testExplanation"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试结果" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testResult"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" width="100">
+                        <template slot="header">
+                            <el-button
+                                size="mini"
+                                type="primary"
+                                plain
+                                circle
+                                icon="el-icon-plus"
+                                @click="addEfficiency"></el-button>
+                        </template>
+                        <template slot-scope="item">
+                            <el-button
+                                size="mini"
+                                type="danger"
+                                plain
+                                circle
+                                icon="el-icon-delete"
+                                @click="deleteEfficiency(item.$index)"></el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
             <div>
                 <h3>可移植性测试</h3>
-                <el-form-item v-for="(item, index) in form.portabilityTest" :key="index"
-                              :label="'可移植性' + (index + 1)">
-                    <br>
-                    <el-form-item label="测试特性">
-                        <el-input placeholder="特性测试" v-model="item.property"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试说明">
-                        <el-input placeholder="测试说明" v-model="item.testExplanation"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试结果">
-                        <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                    </el-form-item>
-                    <el-button @click="deletePortability(index)">删除</el-button>
-                </el-form-item>
-                <el-button @click="addPortability">添加表项</el-button>
+                <el-table :data="form.portabilityTest" style="width: 100%">
+                    <el-table-column type="index"></el-table-column>
+                    <el-table-column label="测试特性" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.property"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试说明" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testExplanation"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试结果" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testResult"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" width="100">
+                        <template slot="header">
+                            <el-button
+                                size="mini"
+                                type="primary"
+                                plain
+                                circle
+                                icon="el-icon-plus"
+                                @click="addPortability"></el-button>
+                        </template>
+                        <template slot-scope="item">
+                            <el-button
+                                size="mini"
+                                type="danger"
+                                plain
+                                circle
+                                icon="el-icon-delete"
+                                @click="deletePortability(item.$index)"></el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
             <div>
                 <h3>易用性测试</h3>
-                <el-form-item v-for="(item, index) in form.usabilityTest" :key="index" :label="'易用性' + (index + 1)">
-                    <br>
-                    <el-form-item label="测试特性">
-                        <el-input placeholder="特性测试" v-model="item.property"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试说明">
-                        <el-input placeholder="测试说明" v-model="item.testExplanation"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试结果">
-                        <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                    </el-form-item>
-                    <el-button @click="deleteUsability(index)">删除</el-button>
-                </el-form-item>
-                <el-button @click="addUsability">添加表项</el-button>
+                <el-table :data="form.usabilityTest" style="width: 100%">
+                    <el-table-column type="index"></el-table-column>
+                    <el-table-column label="测试特性" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.property"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试说明" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testExplanation"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试结果" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testResult"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" width="100">
+                        <template slot="header">
+                            <el-button
+                                size="mini"
+                                type="primary"
+                                plain
+                                circle
+                                icon="el-icon-plus"
+                                @click="addUsability"></el-button>
+                        </template>
+                        <template slot-scope="item">
+                            <el-button
+                                size="mini"
+                                type="danger"
+                                plain
+                                circle
+                                icon="el-icon-delete"
+                                @click="deleteUsability(item.$index)"></el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
             <div>
                 <h3>可靠性测试</h3>
-                <el-form-item v-for="(item, index) in form.reliabilityTest" :key="index"
-                              :label="'可靠性' + (index + 1)">
-                    <br>
-                    <el-form-item label="测试特性">
-                        <el-input placeholder="特性测试" v-model="item.property"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试说明">
-                        <el-input placeholder="测试说明" v-model="item.testExplanation"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试结果">
-                        <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                    </el-form-item>
-                    <el-button @click="deleteReliability(index)">删除</el-button>
-                </el-form-item>
-                <el-button @click="addReliability">添加表项</el-button>
+                <el-table :data="form.reliabilityTest" style="width: 100%">
+                    <el-table-column type="index"></el-table-column>
+                    <el-table-column label="测试特性" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.property"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试说明" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testExplanation"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试结果" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testResult"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" width="100">
+                        <template slot="header">
+                            <el-button
+                                size="mini"
+                                type="primary"
+                                plain
+                                circle
+                                icon="el-icon-plus"
+                                @click="addReliability"></el-button>
+                        </template>
+                        <template slot-scope="item">
+                            <el-button
+                                size="mini"
+                                type="danger"
+                                plain
+                                circle
+                                icon="el-icon-delete"
+                                @click="deleteReliability(item.$index)"></el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
             <div>
                 <h3>可维护性测试</h3>
-                <el-form-item v-for="(item, index) in form.maintainabilityTest" :key="index"
-                              :label="'可维护性' + (index + 1)">
-                    <br>
-                    <el-form-item label="测试特性">
-                        <el-input placeholder="特性测试" v-model="item.property"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试说明">
-                        <el-input placeholder="测试说明" v-model="item.testExplanation"></el-input>
-                    </el-form-item>
-                    <el-form-item label="测试结果">
-                        <el-input placeholder="测试结果" v-model="item.testResult"></el-input>
-                    </el-form-item>
-                    <el-button @click="deleteMaintainability(index)">删除</el-button>
-                </el-form-item>
-                <el-button @click="addMaintainability">添加表项</el-button>
+                <el-table :data="form.maintainabilityTest" style="width: 100%">
+                    <el-table-column type="index"></el-table-column>
+                    <el-table-column label="测试特性" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.property"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试说明" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testExplanation"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="测试结果" align="center">
+                        <template slot-scope="item">
+                            <el-form-item :show-message="false" label-width="0" class="table-form-item">
+                                <el-input v-model="item.row.testResult"></el-input>
+                            </el-form-item>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" width="100">
+                        <template slot="header">
+                            <el-button
+                                size="mini"
+                                type="primary"
+                                plain
+                                circle
+                                icon="el-icon-plus"
+                                @click="addMaintainability"></el-button>
+                        </template>
+                        <template slot-scope="item">
+                            <el-button
+                                size="mini"
+                                type="danger"
+                                plain
+                                circle
+                                icon="el-icon-delete"
+                                @click="deleteMaintainability(item.$index)"></el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
         </el-form>
         <br>
-        <el-row v-show="!disable">
-            <el-button type="success" @click="submit" :disabled="disable">提交</el-button>
-            <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
+        <el-row v-show="!disabled">
+            <el-button type="success" @click="submit" :disabled="disabled">提交</el-button>
+            <el-button type="primary" @click="save" :disabled="disabled">保存</el-button>
         </el-row>
         <el-row v-show="check">
-            <el-button type="success" @click="pass" :disabled="!disable">通过</el-button>
-            <el-button type="danger" @click="refute" :disabled="!disable">驳回</el-button>
+            <el-button type="success" @click="pass" :disabled="!disabled">通过</el-button>
+            <el-button type="danger" @click="refute" :disabled="!disabled">驳回</el-button>
         </el-row>
     </div>
 </template>
 
 <script>
 import testReportForm from '../../assets/jsons/testReportForm.json'
+import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
 
 export default {
     name: 'TestReportForm',
+    components: { SelectAndCreateTags },
     props: ['writable', 'processId', 'checking'],
     data() {
         return {
@@ -453,18 +691,12 @@ export default {
                         name: '',
                         version: '',
                     },
-                    softwareOne: {
-                        name: '',
-                        version: '',
-                    },
-                    softwareTwo: {
-                        name: '',
-                        version: '',
-                    },
-                    softwareThree: {
-                        name: '',
-                        version: '',
-                    },
+                    software: [
+                        {
+                            name: '',
+                            version: ''
+                        }
+                    ],
                     ancillaryTool: {
                         name: '',
                         version: ''
@@ -487,27 +719,39 @@ export default {
                 usabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
                 reliabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
                 maintainabilityTest: [{ property: '', testExplanation: '', testResult: '' }]
-            }
+            },
+            testStandardOptions: [
+                { value: "GB/T 25000.51-2016", label: "GB/T 25000.51-2016" },
+                { value: "GB/T 25000.10-2016", label: "GB/T 25000.10-2016" },
+                { value: "GB/T 28452-2012", label: "GB/T 28452-2012" },
+                { value: "GB/T 30961-2014", label: "GB/T 30961-2014" },
+                { value: "NST-03-WI12-2011", label: "NST-03-WI12-2011" },
+                { value: "NST-03-WI13-2011", label: "NST-03-WI13-2011" },
+                { value: "NST-03-WI22-2014", label: "NST-03-WI22-2014" },
+            ],
         }
     },
     methods: {
-        addStandard() {
-            const item = {
-                standard: ''
+        emitBlurEvent(ref, value, withDelay = false) {
+            if (withDelay) {
+                setTimeout(() => this.$refs[ref].$emit('el.form.blur', value), 50);
+            } else {
+                this.$refs[ref].$emit('el.form.blur', value);
             }
-            this.form.testStandardList.push(item)
         },
-        deleteStandard(index) {
-            this.form.testStandardList.splice(index, 1)
+        emitChangeEvent(ref, value) {
+            console.log(value);
+            this.$refs[ref].$emit('el.form.change', value);
         },
-        addReference() {
+        addSoftware() {
             const item = {
-                reference: ''
+                name: '',
+                version: ''
             }
-            this.form.referenceList.push(item)
+            this.form.softwareEnvironment.software.push(item)
         },
-        deleteReference(index) {
-            this.form.referenceList.splice(index, 1)
+        deleteSoftware(index) {
+            this.form.softwareEnvironment.software.splice(index, 1)
         },
         addFunction() {
             const item = {
@@ -594,7 +838,7 @@ export default {
         }
     },
     computed: {
-        disable() {
+        disabled() {
             if (this.writable === 'false') {
                 return true
             } else if (this.writable === 'true') {
@@ -625,15 +869,14 @@ export default {
 </script>
 
 <style scoped>
-.col {
-    width: 50%;
-    padding: 10px;
-}
-
 .report {
     width: 94%;
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;
+}
+
+.table-form-item {
+    margin-bottom: 0;
 }
 </style>
