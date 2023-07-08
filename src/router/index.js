@@ -58,6 +58,7 @@ import ApplicationSuccess from '../pages/Pages/ApplicationSuccess'
 import FinishedItemTable from '../pages/Tables/FinishedItemTable'
 import FinishedItemDetail from '../pages/Details/FinishedItemDetail'
 import ItemOfEmployee from '../pages/Tables/ItemOfEmployee'
+import ClientUploadContract from "@/pages/Process/ClientUploadContract.vue";
 
 const router = new VueRouter({
     routes: [
@@ -366,6 +367,15 @@ const router = new VueRouter({
                             },
                             meta: { title: '填写合同', logType: 'client' }
                         },
+                        {
+                            name: 'clientUploadContract',
+                            path: 'clientUploadContract',
+                            component: ClientUploadContract,
+                            props({ query: { writable, checking, processId } }) {
+                                return { writable, checking, processId }
+                            },
+                            meta: { title: '上传合同扫描件', logType: 'client' }
+                        }
                     ]
                 },//填写合同
                 {
