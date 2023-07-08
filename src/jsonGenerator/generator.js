@@ -304,18 +304,10 @@ var generateTestReport = function () {
                 "name": '<@string{4,20}>',
                 "version": '<@string{4,20}>',
             },
-            "softwareOne": {
+            "software": [{
                 "name": '<@string{4,20}>',
                 "version": '<@string{4,20}>',
-            },
-            "softwareTwo": {
-                "name": '<@string{4,20}>',
-                "version": '<@string{4,20}>',
-            },
-            "softwareThree": {
-                "name": '<@string{4,20}>',
-                "version": '<@string{4,20}>',
-            },
+            }],
             "ancillaryTool": {
                 "name": '<@string{4,20}>',
                 "version": '<@string{4,20}>'
