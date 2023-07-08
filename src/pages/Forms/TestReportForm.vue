@@ -64,7 +64,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="项目编号">
-                        <el-input placeholder="项目编号" v-model="form.itemNum"></el-input>
+                        <el-input placeholder="项目编号" v-model="form.projectId"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -84,7 +84,7 @@
                 <el-col :span="12">
                     <el-form-item label="采样日期">
                         <el-date-picker type="date" placeholder="采样日期" style="width: 100%;"
-                                        v-model="form.sampleTime"></el-date-picker>
+                                        v-model="form.sampleDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -97,13 +97,13 @@
                 <el-col :span="12">
                     <el-form-item label="测试开始时间">
                         <el-date-picker type="date" placeholder="开始日期" style="width: 100%;"
-                                        v-model="form.startTime"></el-date-picker>
+                                        v-model="form.startDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="测试结束时间">
                         <el-date-picker type="date" placeholder="结束日期" style="width: 100%;"
-                                        v-model="form.endTime"></el-date-picker>
+                                        v-model="form.endDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -662,10 +662,10 @@ export default {
                 clientCompany: '',
                 testType: '',
                 reportDate: '',
-                itemNum: '',
-                sampleTime: '',
-                startTime: '',
-                endTime: '',
+                projectId: '',
+                sampleDate: '',
+                startDate: '',
+                endDate: '',
                 sampleCondition: '',
                 testStandard: '',
                 sampleList: '',
