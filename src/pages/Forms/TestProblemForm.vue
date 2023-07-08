@@ -4,7 +4,7 @@
         <el-form :disabled="disable">
             <hr>
             <el-table :data="form.problemList"
-                      ref="functionTable"
+                      ref="problemTable"
                       @row-click="onRowClick"
                       style="width: 100%">
                 <el-table-column type="expand">
@@ -68,7 +68,7 @@
                     </template>
                     <template slot-scope="item">
                         <el-button size="mini" type="danger" plain circle icon="el-icon-delete"
-                                   @click.native.stop="deleteProbemItem(item.$index)"></el-button>
+                                   @click.native.stop="deleteProblemItem(item.$index)"></el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -83,7 +83,6 @@
 </template>
 
 <script>
-import {nanoid} from "nanoid"
 import testProblemForm from '../../assets/jsons/testProblemForm.json'
 
 export default {
@@ -94,7 +93,6 @@ export default {
             form: {
                 problemList: [
                     {
-                        index: '',
                         description: '',
                         relatedRequirementItem: '',
                         initialCondition: '',
@@ -111,11 +109,10 @@ export default {
     },
     methods: {
         onRowClick(row) {
-            this.$refs.functionTable.toggleRowExpansion(row);
+            this.$refs.problemTable.toggleRowExpansion(row);
         },
         addProblemItem() {
-            var Item = {
-                index: '',
+            const Item = {
                 description: '',
                 relatedRequirementItem: '',
                 initialCondition: '',
@@ -124,11 +121,10 @@ export default {
                 discoveredDate: '',
                 personInCharge: '',
                 editSuggestion: '',
-                vforKey: nanoid(6)
             }
             this.form.problemList.push(Item)
         },
-        deleteProbemItem(index) {
+        deleteProblemItem(index) {
             this.form.problemList.splice(index, 1)
         },
         submit() {
