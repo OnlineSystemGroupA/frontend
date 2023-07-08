@@ -270,61 +270,6 @@ var generateTestPlanVerification = function () {
 
 var generateTestReport = function () {
     var testReportModelJson = {
-<<<<<<< HEAD
-        form: {
-            softwareName: '<@string{4,20}>',
-            softwareVersion: '<@string{4,20}>',
-            clientCompany: '<@string{4,20}>',
-            testType: '<@string{4,20}>',
-            reportDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-            projectId: '<@string{4,20}>',
-            sampleDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-            startDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-            endDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-            sampleCondition: '<@string{4,20}>',
-            testStandard: '<@string{4,20}>',
-            sampleList: '<@string{4,20}>',
-            testConclusion: '<@string{4,20}>',
-            telephone: '<@string{4,20}>',
-            fax: '<@string{4,20}>',
-            address: '<@string{4,20}>',
-            website: '<@string{4,20}>',
-            contract: '<@string{4,20}>',
-            email: '<@string{4,20}>',
-            compiler: '<@string{4,20}>',
-            compileDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-            reviewer: '<@string{4,20}>',
-            reviewDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-            approver: '<@string{4,20}>',
-            approveDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-            hardwareType: '<@string{4,20}>',
-            hardwareName: '<@string{4,20}>',
-            hardwareConfiguration: '<@string{4,20}>',
-            hardwareNum: '',
-            softwareEnvironment: {
-                operatingSystem: {
-                    name: '<@string{4,20}>',
-                    version: '<@string{4,20}>',
-                },
-                'software<@{2, 4}>': [
-                    {
-                        name: '<@string{4,20}>',
-                        version: '<@string{4,20}>'
-                    }
-                ],
-                ancillaryTool: {
-                    name: '<@string{4,20}>',
-                    version: '<@string{4,20}>'
-                },
-                developmentTool: {
-                    name: '<@string{4,20}>',
-                    version: '<@string{4,20}>'
-                },
-                testSample: {
-                    name: '<@string{4,20}>',
-                    version: '<@string{4,20}>'
-                }
-=======
         "softwareName": '<@string{4,20}>',
         "softwareVersion": '<@string{4,20}>',
         "clientCompany": '<@string{4,20}>',
@@ -358,18 +303,57 @@ var generateTestReport = function () {
             "operatingSystem": {
                 "name": '<@string{4,20}>',
                 "version": '<@string{4,20}>',
->>>>>>> refs/remotes/origin/connect
             },
-            networkEnvironment: '<@string{4,20}>',
-            'testStandards<@{2, 4}>': ['<@string{4,20}>'],
-            references: [],
-            functionTests: [{ functionModule: '', functionRequirement: '', testResult: '' }],
-            efficiencyTests: [{ property: '', testExplanation: '', testResult: '' }],
-            portabilityTests: [{ property: '', testExplanation: '', testResult: '' }],
-            usabilityTests: [{ property: '', testExplanation: '', testResult: '' }],
-            reliabilityTests: [{ property: '', testExplanation: '', testResult: '' }],
-            maintainabilityTests: [{ property: '', testExplanation: '', testResult: '' }]
+            "software": [{
+                "name": '<@string{4,20}>',
+                "version": '<@string{4,20}>',
+            }],
+            "ancillaryTool": {
+                "name": '<@string{4,20}>',
+                "version": '<@string{4,20}>'
+            },
+            "developmentTool": {
+                "name": '<@string{4,20}>',
+                "version": '<@string{4,20}>'
+            },
+            "testSample": {
+                "name": '<@string{4,20}>',
+                "version": '<@string{4,20}>'
+            }
         },
+        "networkEnvironment": '<@string{4,20}>',
+        "testStandardList<@{2,7}>": [{ "standard": '<@string{4,20}>' },],
+        "referenceList<@{2,7}>": [{ "reference": '<@string{4,20}>' },],
+        "functionTest<@{2,7}>": [{
+            "functionModule": '<@string{4,20}>',
+            "functionRequirement": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "efficiencyTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "portabilityTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "usabilityTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "reliabilityTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }],
+        "maintainabilityTest<@{2,7}>": [{
+            "property": '<@string{4,20}>',
+            "testExplanation": '<@string{4,20}>',
+            "testResult": '<@string{4,20}>'
+        }]
     }
     var testReportJson = randomjson(testReportModelJson)
     console.log(testReportJson)
@@ -381,6 +365,7 @@ var generateTestReport = function () {
         console.log("写入成功");
     })
 }
+
 
 var generateDocumentReviewForm = function () {
     var documentReviewModelJson = {
