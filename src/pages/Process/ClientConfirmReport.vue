@@ -35,6 +35,7 @@ export default {
                 type: 'warning',
                 center: true
             }).then(() => {
+                this.complete()
                 this.$message({
                     type: 'success',
                     message: '确认成功!'
@@ -46,6 +47,25 @@ export default {
                 });
             });
 
+        },
+        complete() {
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task')
+                .then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.$message.success("进入下一流程！")
+                            this.$router.push(
+                                {
+                                    name: 'clientItemDetail',
+                                    query: { processId: this.processId }
+                                }
+                            )
+                        }
+                    },
+                    (err) => {
+                        this.$message.warning(err.data)
+                    }
+                )
         }
     }
 

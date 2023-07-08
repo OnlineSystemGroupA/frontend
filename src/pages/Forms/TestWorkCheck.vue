@@ -15,12 +15,11 @@
                 </el-col>
             </el-row>
 
-            <el-col class="column">
+            <el-row class="column">
                 <el-form-item label="委托单位">
                     <el-input placeholder="委托单位" v-model="form.clientCompany"></el-input>
                 </el-form-item>
-            </el-col>
-
+            </el-row>
 
             <el-row>
                 <el-col class="col">
@@ -54,7 +53,7 @@
                 <h3>{{ item.name }}</h3>
                 <el-form-item v-for="(content, index) in item.contents" :key="index">
                     <li>{{ content.content }}</li>
-                    <el-radio-group v-model="content.confirmeded">
+                    <el-radio-group v-model="content.confirmed">
                         <el-radio :label="true">确认</el-radio>
                         <el-radio :label="false">否决</el-radio>
                     </el-radio-group>
@@ -62,8 +61,8 @@
             </el-form-item>
 
             <h2>二、对委托测试软件的可测状态进行评估</h2>
-            <el-form-item v-for="item in form.assessment" :key="item.title">
-                <h3>{{ item.title }}</h3>
+            <el-form-item v-for="item in form.assessment" :key="item.name">
+                <h3>{{ item.name }}</h3>
                 <el-form-item v-for="(content, index) in item.contents" :key="index">
                     <li>{{ content.content }}</li>
                     <el-radio-group v-model="content.confirmed">
@@ -74,8 +73,8 @@
             </el-form-item>
 
             <h2>三、实施测试</h2>
-            <el-form-item v-for="item in form.testment" :key="item.title">
-                <h3>{{ item.title }}</h3>
+            <el-form-item v-for="item in form.testment" :key="item.name">
+                <h3>{{ item.name }}</h3>
                 <el-form-item v-for="(content, index) in item.contents" :key="index">
                     <li>{{ content.content }}</li>
                     <el-radio-group v-model="content.confirmed">
@@ -92,10 +91,6 @@
         <el-row v-show="!disable">
             <el-button type="success" @click="submit" :disabled="disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
-        </el-row>
-        <el-row v-show="check">
-            <el-button type="success" @click="pass" :disabled="!disable">通过</el-button>
-            <el-button type="danger" @click="refute" :disabled="!disable">驳回</el-button>
         </el-row>
     </div>
 </template>
@@ -133,7 +128,7 @@ export default {
                         ]
                     },
                     {
-                        title: '填写《软件项目委托测试申请表》、《委托测试软件功能列表》，按《软件项目委托测试提交材料》提交材料',
+                        name: '填写《软件项目委托测试申请表》、《委托测试软件功能列表》，按《软件项目委托测试提交材料》提交材料',
                         contents: [
                             {
                                 content: '确保委托方应填内容正确、完备；纸质材料已盖公章',
@@ -146,7 +141,7 @@ export default {
                         ]
                     },
                     {
-                        title: '签订《软件项目委托测试合同》、《软件项目委托测试保密协议》',
+                        name: '签订《软件项目委托测试合同》、《软件项目委托测试保密协议》',
                         contents: [
                             {
                                 content: '合同及保密协议内容、数量符合要求',
@@ -162,7 +157,7 @@ export default {
                 ],
                 assessment: [
                     {
-                        title: '对委托测试软件的可测状态进行评估',
+                        name: '对委托测试软件的可测状态进行评估',
                         contents: [
                             {
                                 content: '对委托测试软件的可测状态进行评估',
@@ -173,7 +168,7 @@ export default {
                 ],
                 testment: [
                     {
-                        title: '编制测试方案',
+                        name: '编制测试方案',
                         contents: [
                             {
                                 content: '测试方案必须经中心质量负责人审核，技术负责人批准方能生效。',
@@ -198,7 +193,7 @@ export default {
                         ]
                     },
                     {
-                        title: '搭建测试环境',
+                        name: '搭建测试环境',
                         contents: [
                             {
                                 content: '中心按照委托方提供的委托测试软件运行环境搭建测试环境。',
@@ -207,7 +202,7 @@ export default {
                         ]
                     },
                     {
-                        title: '实施测试',
+                        name: '实施测试',
                         contents: [
                             {
                                 content: '测试过程主要以测试方案为依据，按照用户手册所述的操作方法运行软件，考察软件是否具有用户手册所描述的操作界面，对功能列表的主要功能逐项进行符合性测试并作记录，对未测的次要功能或细节部分，应作出说明。',
@@ -224,7 +219,7 @@ export default {
                         ]
                     },
                     {
-                        title: '编制测试报告',
+                        name: '编制测试报告',
                         contents: [
                             {
                                 content: '根据《软件项目委托测试报告编制作业指导书》和测试结果编制测试报告。',
@@ -245,7 +240,7 @@ export default {
                         ]
                     },
                     {
-                        title: '评测资料归档',
+                        name: '评测资料归档',
                         contents: [
                             {
                                 content: '委托测试的软件产品及测试相关文件、原始记录等能够随时复现测试过程所需的材料，也同测试报告一并交由中心资料室的材料管理员归档，以作为日后对测试结果产生异议时进行复核或仲裁的依据。上述材料由中心保存三年后，中心根据委托申请时要求进行处理。',
@@ -294,22 +289,49 @@ export default {
     },
     methods: {
         submit() {
+            this.doSubmit();
+        },
+        doSubmit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
-                this.$bus.$emit('submitApplication')
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestWorkCheckForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
             }
         },
         save() {
             if (this.writable) {
                 sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestWorkCheckForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
             }
         },
-        pass() {
-            this.$bus.$emit('passApplication')
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
         },
-        refute() {
-
-        }
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
     }
 }
 
