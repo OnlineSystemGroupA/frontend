@@ -1,7 +1,6 @@
 <template>
     <div class="document">
-        <el-form label-width="120px" label-position="left" :disabled='disable' ref="form" :model="form"
-                 :rules="mainRules">
+        <el-form label-width="120px" label-position="left" :disabled='disable' ref="form" :model="form" :rules="mainRules">
             <el-row gutter="20">
                 <el-col :span="12">
                     <el-form-item label="软件名称" prop="softwareName">
@@ -48,15 +47,14 @@
                     <el-row>
                         <el-col class="col">
                             <el-form-item label="评审结果" :rules="itemRules.result"
-                                          :prop="'reviewsOnExplanation.'+reviewIndex+'.items.'+itemIndex+'.result'">
+                                          :prop="'reviewsOnExplanation.' + reviewIndex + '.items.' + itemIndex + '.result'">
                                 <el-input v-model="item.result" placeholder="评审结果"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col class="col">
                             <el-form-item label="评审结果说明" :rules="itemRules.explanation"
-                                          :prop="'reviewsOnExplanation.'+reviewIndex+'.items.'+itemIndex+'.explanation'">
-                                <el-input type="textarea" v-model="item.explanation"
-                                          placeholder="评审结果说明"></el-input>
+                                          :prop="'reviewsOnExplanation.' + reviewIndex + '.items.' + itemIndex + '.explanation'">
+                                <el-input type="textarea" v-model="item.explanation" placeholder="评审结果说明"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -70,15 +68,14 @@
                     <el-row>
                         <el-col class="col">
                             <el-form-item label="评审结果" :rules="itemRules.result"
-                                          :prop="'reviewsOnDocuments.'+reviewIndex+'.items.'+itemIndex+'.result'">
+                                          :prop="'reviewsOnDocuments.' + reviewIndex + '.items.' + itemIndex + '.result'">
                                 <el-input v-model="item.result" placeholder="评审结果"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col class="col">
                             <el-form-item label="评审结果说明" :rules="itemRules.explanation"
-                                          :prop="'reviewsOnDocuments.'+reviewIndex+'.items.'+itemIndex+'.explanation'">
-                                <el-input type="textarea" v-model="item.explanation"
-                                          placeholder="评审结果说明"></el-input>
+                                          :prop="'reviewsOnDocuments.' + reviewIndex + '.items.' + itemIndex + '.explanation'">
+                                <el-input type="textarea" v-model="item.explanation" placeholder="评审结果说明"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -397,12 +394,35 @@ export default {
             })
         },
         doSubmit() {
+            if (this.writable) {
+                console.log(JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'DocumentReviewForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
+            }
         },
         save() {
         },
         pass() {
         },
-        refute() {}
+        refute() { },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+                //this.$bus.$emit('submitContract')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
     },
     computed: {
         disable() {

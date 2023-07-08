@@ -59,6 +59,7 @@ import FinishedItemTable from '../pages/Tables/FinishedItemTable'
 import FinishedItemDetail from '../pages/Details/FinishedItemDetail'
 import ItemOfEmployee from '../pages/Tables/ItemOfEmployee'
 import ClientUploadContract from "@/pages/Process/ClientUploadContract.vue";
+//import ConfidentialityForm from '../pages/Forms/ConfidentialityForm'
 
 const router = new VueRouter({
     routes: [
@@ -984,8 +985,8 @@ const router = new VueRouter({
                     meta: { title: '项目列表', logType: 'admin' }
                 },//项目列表
                 {
-                    name: 'adminFinishedItem',
-                    path: 'adminFinishedItem',
+                    name: 'adminFinishedItemTable',
+                    path: 'adminFinishedItemTable',
                     component: FinishedItemTable,
                     props({ query: { page } }) {
                         return { page }

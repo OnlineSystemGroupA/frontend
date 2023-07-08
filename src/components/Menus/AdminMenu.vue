@@ -67,7 +67,7 @@ export default {
         },
         checkFinishedItem() {
             this.$router.push({
-                name: 'adminFinishedItem',
+                name: 'adminFinishedItemTable',
                 query: {page: 1}
             })
         }

@@ -97,7 +97,7 @@ var generateTestPlan = function () {
             {
                 "version": "<@string{4,20}>",
                 "date": "Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)",
-                "AMD": "<@string{4,20}>",
+                "amd": "<@string{4,20}>",
                 "editor": "<@string{4,20}>",
                 "description": "<@string{4,20}>",
             }
@@ -111,14 +111,14 @@ var generateTestPlan = function () {
         "software": "<@string{4,120}>",
         "other": "<@string{4,120}>",
         "organization": "<@string{4,120}>",
-        "stuff": "<@string{4,120}>",
+        "staff": "<@string{4,120}>",
         "testLevel": "<@string{4,120}>",
         "testType": "<@string{4,120}>",
         "testCondition": "<@string{4,120}>",
         "plannedTest": "<@string{4,120}>",
         "testCases": "<@string{4,120}>",
         "time": "<@string{4,120}>",
-        "timeTable": [
+        "timeTables": [
             {
                 "task": '制定测试计划',
                 "lastTime": '<@[2-10]>',
@@ -168,11 +168,11 @@ var generateTestRecords = function () {
             "prediction": "<@string{4,20}>",
             "designer": "<@string{4,20}>",
             "result": "<@string{4,20}>",
-            "isMatched": "<@boolean>",
+            "matched": "<@boolean>",
             "bugIndex": "<@string{4,20}>",
             "executor": "<@string{4,20}>",
             "date": "<@string{4,20}>",
-            "confirmer": "<@string{4,20}>"
+            "verifier": "<@string{4,20}>"
         }]
     }
     var testRecordJson = randomjson(testRecordModelJson)
@@ -189,52 +189,52 @@ var generateTestRecords = function () {
 var generateTestPlanVerification = function () {
     var testPlanVerificationModelJson = {
         "softwareName": '<@string{4,20}>',
-        "version": '<@string{4,20}>',
-        "itemNum": '<@string{4,20}>',
+        "softwareVersion": '<@string{4,20}>',
+        "projectId": '<@string{4,20}>',
         "testType": '<@string{4,20}>',
         "verifyItems": [
             {
                 "content": '《测试方案》书写规范性',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试环境是否具有典型意义以及是否符合用户要求',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试内容的完整性，是否覆盖了整个系统',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试方法的选取是否合理',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试用例能否覆盖问题',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '输入、输出数据设计合理性',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试时间安排是否合理',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试人力资源安排是否合理',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
         ],
-        "verfiyEmployees": [
+        "verifyEmployees": [
             {
                 "position": '测试工程师',
                 "suggestions": '<@string{4,20}>',
@@ -275,7 +275,7 @@ var generateTestReport = function () {
         "clientCompany": '<@string{4,20}>',
         "testType": '<@string{4,20}>',
         "reportDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-        "itemNum": '<@string{4,20}>',
+        "projectId": '<@string{4,20}>',
         "sampleTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "startTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "endTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
@@ -653,7 +653,7 @@ var generateProblemForm = function () {
     var testProblemModelJson = {
         "problemList<@{3,6}>": [
             {
-                index: '<@string{4,20}>',
+                bugIndex: '<@string{4,20}>',
                 description: '<@string{4,20}>',
                 relatedRequirementItem: '<@string{4,20}>',
                 initialCondition: '<@string{4,20}>',

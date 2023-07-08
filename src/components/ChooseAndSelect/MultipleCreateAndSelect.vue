@@ -8,8 +8,7 @@
             multiple
             collapse-tags
             default-first-option
-            :placeholder="optionDescription"
-        >
+            :placeholder="optionDescription">
             <li>
                 <el-input v-model="newOption" class="el-add-input" :placeholder="createDescription">
                     <template #suffix>

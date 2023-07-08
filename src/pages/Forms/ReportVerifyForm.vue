@@ -99,7 +99,7 @@
             </el-form-item>
         </el-form>
         <el-row v-show="!disable">
-            <el-button type="success" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
     </div>
@@ -143,9 +143,11 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            } else if (this.writable === 'true') {
+            }
+            else if (this.writable === 'true') {
                 return false
-            } else if (!this.writable) {
+            }
+            else if (!this.writable) {
                 return true
             }
             return false
@@ -153,9 +155,11 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            } else if (this.checking === 'false') {
+            }
+            else if (this.checking === 'false') {
                 return false
-            } else if (this.checking) {
+            }
+            else if (this.checking) {
                 return true
             }
             return false
