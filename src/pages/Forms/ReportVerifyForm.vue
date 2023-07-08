@@ -99,8 +99,8 @@
             </el-form-item>
         </el-form>
         <el-row v-show="!disable">
-            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
-            <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
+            <el-button type="success" @click="submit" :disabled="disabled">提交</el-button>
+            <el-button type="primary" @click="save" :disabled="disabled">保存</el-button>
         </el-row>
     </div>
 </template>
@@ -131,12 +131,49 @@ export default {
             }
         }
     },
-    method: {
+    methods: {
         submit() {
-
+            this.doSubmit();
+        },
+        doSubmit() {
+            if (this.writable) {
+                console.log(JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ReportVerifyForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
+            }
         },
         save() {
-
+            if (this.writable) {
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ReportVerifyForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
+            }
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
         },
     },
     computed: {

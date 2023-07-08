@@ -191,7 +191,28 @@ export default {
         console.log(testPlanVerification)
     },
     created() {
-        this.form = testPlanVerification
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    } else {
+                        this.form = testPlanVerification
+                    }
+                }
+
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = testPlanVerification
+            }
+        )
     }
 }
 </script>

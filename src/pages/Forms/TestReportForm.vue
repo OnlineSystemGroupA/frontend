@@ -820,22 +820,57 @@ export default {
             this.form.maintainabilityTests.splice(index, 1)
         },
         submit() {
+            this.doSubmit();
+        },
+        doSubmit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
-                this.$bus.$emit('submitApplication')
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
             }
         },
         save() {
             if (this.writable) {
                 sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
             }
         },
         pass() {
-            this.$bus.$emit('passApplication')
+            //this.$bus.$emit('passApplication', true)
+            console.log('pass')
         },
         refute() {
-
-        }
+            //this.$bus.$emit('passApplication', false)
+            console.log('refute')
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
     },
     computed: {
         disabled() {
@@ -862,8 +897,29 @@ export default {
     mounted() {
         console.log(testReportForm)
     },
-    created() {
-        this.form = testReportForm
+     created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    } else {
+                        this.form = testReportForm
+                    }
+                }
+
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = testReportForm
+            }
+        )
     }
 }
 </script>

@@ -322,9 +322,9 @@ var generateTestReport = function () {
             }
         },
         "networkEnvironment": '<@string{4,20}>',
-        "testStandards<@{2,7}>": [{ "standard": '<@string{4,20}>' },],
-        "references<@{2,7}>": [{ "reference": '<@string{4,20}>' },],
-        "functionTest<@{2,7}>": [{
+        "testStandards<@{2,7}>": [ '<@string{4,20}>' ],
+        "references<@{2,7}>": ['<@string{4,20}>' ],
+        "functionTests<@{2,7}>": [{
             "functionModule": '<@string{4,20}>',
             "functionRequirement": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'

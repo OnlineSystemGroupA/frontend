@@ -219,7 +219,6 @@ export default {
             console.log(res)
             if (res.status === 200) {
                 alert('上传成功')
-                this.$bus.$emit('submitApplication')
             }
         },
         handleSaveResult(res) {
@@ -262,7 +261,28 @@ export default {
         console.log(testPlanForm)
     },
     created() {
-        this.form = (testPlanForm)
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    } else {
+                        this.form = testPlanForm
+                    }
+                }
+
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = testPlanForm
+            }
+        )
     }
 }
 </script>

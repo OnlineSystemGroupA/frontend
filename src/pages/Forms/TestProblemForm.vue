@@ -3,18 +3,14 @@
         <h1>测试问题清单</h1>
         <el-form :disabled="disable">
             <hr>
-            <el-table :data="form.problemList"
-                      ref="problemTable"
-                      @row-click="onRowClick"
-                      style="width: 100%">
+            <el-table :data="form.problemList" ref="problemTable" @row-click="onRowClick" style="width: 100%">
                 <el-table-column type="expand">
                     <template slot-scope="item">
                         <div class="table-dropdown">
                             <el-row :gutter="20">
                                 <el-col :span=12>
                                     <el-form-item label="对应需求条目">
-                                        <el-input v-model="item.row.relatedRequirementItem"
-                                                  placeholder="对应需求条目"></el-input>
+                                        <el-input v-model="item.row.relatedRequirementItem" placeholder="对应需求条目"></el-input>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span=12>
@@ -48,14 +44,12 @@
                             </el-form-item>
 
                             <el-form-item label="发现缺陷用例及具体操作路径（要具体）">
-                                <el-input v-model="item.row.operationRoute"
-                                          placeholder="发现缺陷用例及具体操作路径（要具体）"
+                                <el-input v-model="item.row.operationRoute" placeholder="发现缺陷用例及具体操作路径（要具体）"
                                           type="textarea"></el-input>
                             </el-form-item>
 
                             <el-form-item label="修改意见">
-                                <el-input v-model="item.row.editSuggestion" type="textarea"
-                                          placeholder="修改意见"></el-input>
+                                <el-input v-model="item.row.editSuggestion" type="textarea" placeholder="修改意见"></el-input>
                             </el-form-item>
                         </div>
                     </template>
@@ -97,7 +91,7 @@ export default {
                         initialCondition: '',
                         operationRoute: '',
                         relatedCase: '',
-                        discoveredTime: '',
+                        discoveredDate: '',
                         personInCharge: '',
                         editSuggestion: ''
                     }
@@ -206,7 +200,27 @@ export default {
         },
     },
     created() {
-        this.form = testProblemForm
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestProblemForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    } else {
+                        this.form = testProblemForm
+                    }
+                }
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = testProblemForm
+            }
+        )
     }
 }
 </script>

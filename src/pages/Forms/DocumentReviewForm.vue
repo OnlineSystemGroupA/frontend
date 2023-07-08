@@ -395,8 +395,8 @@ export default {
         },
         doSubmit() {
             if (this.writable) {
-                console.log(JSON.stringify(this.form))
-                console.log(this.processId)
+                //console.log(JSON.stringify(this.form))
+                //console.log(this.processId)
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'DocumentReviewForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'
@@ -450,7 +450,27 @@ export default {
         console.log(documentReviewForm)
     },
     created() {
-        this.form = documentReviewForm
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'DocumentReviewForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                    }
+                    else {
+                        this.form = documentReviewForm
+                    }
+                }
+
+            },
+            (err) => {
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = documentReviewForm
+            }
+        )
     }
 }
 </script>

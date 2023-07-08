@@ -6,6 +6,7 @@
         <el-button type="primary" @click="writeTestRecord">填写测试记录</el-button>
         <el-button type="primary" @click="writeTestProblem">填写测试问题表</el-button>
         <el-button type="primary" @click="writeTestReport">填写测试报告</el-button>
+        <el-button type="primary" @click="complete">完成流程</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -55,6 +56,25 @@ export default {
                     processId: this.processId,
                 }
             })
+        },
+        complete() {
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task')
+                .then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.$message.success("进入下一流程！")
+                            this.$router.push(
+                                {
+                                    name: 'employeeItemDetail',
+                                    query: { processId: this.processId }
+                                }
+                            )
+                        }
+                    },
+                    (err) => {
+                        this.$message.warning(err.data)
+                    }
+                )
         }
     }
 };
