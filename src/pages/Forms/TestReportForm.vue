@@ -136,7 +136,7 @@
                 <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                                        v-model="form.compileTime"></el-date-picker>
+                                        v-model="form.compileDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -149,7 +149,7 @@
                 <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                                        v-model="form.reviewTime"></el-date-picker>
+                                        v-model="form.reviewDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -162,7 +162,7 @@
                 <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                                        v-model="form.approveTime"></el-date-picker>
+                                        v-model="form.approveDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -677,11 +677,11 @@ export default {
                 contract: '',
                 email: '',
                 compiler: '',
-                compileTime: '',
+                compileDate: '',
                 reviewer: '',
-                reviewTime: '',
+                reviewDate: '',
                 approver: '',
-                approveTime: '',
+                approveDate: '',
                 hardwareType: '',
                 hardwareName: '',
                 hardwareConfiguration: '',

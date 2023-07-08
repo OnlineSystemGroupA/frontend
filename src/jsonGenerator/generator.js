@@ -271,7 +271,7 @@ var generateTestPlanVerification = function () {
 var generateTestReport = function () {
     var testReportModelJson = {
         "softwareName": '<@string{4,20}>',
-        "version": '<@string{4,20}>',
+        "softwareVersion": '<@string{4,20}>',
         "clientCompany": '<@string{4,20}>',
         "testType": '<@string{4,20}>',
         "reportDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
@@ -290,11 +290,11 @@ var generateTestReport = function () {
         "contract": '<@string{4,20}>',
         "email": '<@string{4,20}>',
         "compiler": '<@string{4,20}>',
-        "compilerTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "compileDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "reviewer": '<@string{4,20}>',
-        "reviewerTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "reviewDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "approver": '<@string{4,20}>',
-        "approverTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "approveDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "hardwareType": '<@string{4,20}>',
         "hardwareName": '<@string{4,20}>',
         "hardwareConfiguration": '<@string{4,20}>',
