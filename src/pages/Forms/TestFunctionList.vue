@@ -189,10 +189,6 @@ export default {
             this.$refs['itemTable' + index].toggleRowExpansion(row);
         },
 
-        funcRowClassName({ row, rowIndex }) {
-            row.index = rowIndex;
-        },
-
         submit() {
             this.$refs.form.validate((valid) => {
                 if (valid) {
@@ -309,7 +305,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 .func-list {
     width: 94%;
     margin-top: 2%;

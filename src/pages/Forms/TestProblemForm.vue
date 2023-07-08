@@ -2,64 +2,77 @@
     <div class="record-form">
         <h1>测试问题清单</h1>
         <el-form :disabled="disable">
-            <el-form-item v-for="item in form.problemList" :key="item.vforKey" class="record">
-                <el-form label-width="100px" label-position="left" :disabled="disable">
-                    <el-row>
-                        <el-col class="col">
-                            <el-form-item label="序号">
-                                <el-input v-model="item.index" placeholder="序号"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col class="col">
-                            <el-form-item label="对应需求条目">
-                                <el-input v-model="item.relatedRequirementItem" placeholder="对应需求条目"></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col class="col">
-                            <el-form-item label="关联用例">
-                                <el-input v-model="item.relatedCase" placeholder="关联用例"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col class="col">
-                            <el-form-item label="发现时间">
-                                <el-date-picker style="width: 100%;" v-model="item.discoveredDate"
-                                                placeholder="发现时间"></el-date-picker>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col class="col">
-                            <el-form-item label="责任人">
-                                <el-input v-model="item.personInCharge" placeholder="责任人"></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                </el-form>
+            <hr>
+            <el-table :data="form.problemList"
+                      ref="functionTable"
+                      @row-click="onRowClick"
+                      style="width: 100%">
+                <el-table-column type="expand">
+                    <template slot-scope="item">
+                        <div class="table-dropdown">
+                            <el-row :gutter="20">
+                                <el-col :span=12>
+                                    <el-form-item label="对应需求条目">
+                                        <el-input v-model="item.row.relatedRequirementItem"
+                                                  placeholder="对应需求条目"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span=12>
+                                    <el-form-item label="关联用例">
+                                        <el-input v-model="item.row.relatedCase" placeholder="关联用例"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row :gutter="20">
+                                <el-col :span=12>
+                                    <el-form-item label="发现时间">
+                                        <el-date-picker style="width: 100%;" v-model="item.row.discoveredDate"
+                                                        placeholder="发现时间"></el-date-picker>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span=12>
+                                    <el-form-item label="责任人">
+                                        <el-input v-model="item.row.personInCharge" placeholder="责任人"></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
 
-                <el-form-item label="问题（缺陷）简要描述">
-                    <el-input v-model="item.description" placeholder="问题（缺陷）简要描述" type="textarea"></el-input>
-                </el-form-item>
+                            <el-form-item label="问题（缺陷）简要描述">
+                                <el-input v-model="item.row.description" placeholder="问题（缺陷）简要描述"
+                                          type="textarea"></el-input>
+                            </el-form-item>
 
-                <el-form-item label="发现缺陷的初始条件">
-                    <el-input v-model="item.initialCondition" placeholder="发现缺陷的初始条件"
-                              type="textarea"></el-input>
-                </el-form-item>
+                            <el-form-item label="发现缺陷的初始条件">
+                                <el-input v-model="item.row.initialCondition" placeholder="发现缺陷的初始条件"
+                                          type="textarea"></el-input>
+                            </el-form-item>
 
-                <el-form-item label="发现缺陷用例及具体操作路径（要具体）">
-                    <el-input v-model="item.operationRoute" placeholder="发现缺陷用例及具体操作路径（要具体）"
-                              type="textarea"></el-input>
-                </el-form-item>
+                            <el-form-item label="发现缺陷用例及具体操作路径（要具体）">
+                                <el-input v-model="item.row.operationRoute"
+                                          placeholder="发现缺陷用例及具体操作路径（要具体）"
+                                          type="textarea"></el-input>
+                            </el-form-item>
 
-                <el-form-item label="修改意见">
-                    <el-input v-model="item.editSuggestion" type="textarea" placeholder="修改意见"></el-input>
-                </el-form-item>
-
-                <el-button type="danger" @click="deleteProbemItem(item.vforKey)" v-show="!disable">删除表项</el-button>
-            </el-form-item>
+                            <el-form-item label="修改意见">
+                                <el-input v-model="item.row.editSuggestion" type="textarea"
+                                          placeholder="修改意见"></el-input>
+                            </el-form-item>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="对应需求条目" prop="relatedRequirementItem"></el-table-column>
+                <el-table-column align="right">
+                    <template slot="header">
+                        <el-button size="mini" type="primary" plain circle icon="el-icon-plus"
+                                   @click.native.stop="addProblemItem"></el-button>
+                    </template>
+                    <template slot-scope="item">
+                        <el-button size="mini" type="danger" plain circle icon="el-icon-delete"
+                                   @click.native.stop="deleteProbemItem(item.$index)"></el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
         </el-form>
-        <el-button type="primary" @click="addProblemItem" v-show="!disable">添加表项</el-button>
         <br>
         <br>
         <el-row v-show="!disable">
@@ -89,8 +102,7 @@ export default {
                         relatedCase: '',
                         discoveredDate: '',
                         personInCharge: '',
-                        editSuggestion: '',
-                        vforKey: nanoid(6)
+                        editSuggestion: ''
                     }
                 ]
             }
@@ -98,6 +110,9 @@ export default {
         }
     },
     methods: {
+        onRowClick(row) {
+            this.$refs.functionTable.toggleRowExpansion(row);
+        },
         addProblemItem() {
             var Item = {
                 index: '',
@@ -106,21 +121,15 @@ export default {
                 initialCondition: '',
                 operationRoute: '',
                 relatedCase: '',
-                discoveredTime: '',
+                discoveredDate: '',
                 personInCharge: '',
                 editSuggestion: '',
                 vforKey: nanoid(6)
             }
             this.form.problemList.push(Item)
         },
-        deleteProbemItem(vforKey) {
-
-            for (var i = 0; i < this.form.problemList.length; i++) {
-                if (this.form.problemList[i].vforKey === vforKey) {
-                    this.form.problemList.splice(i, 1)
-                    break
-                }
-            }
+        deleteProbemItem(index) {
+            this.form.problemList.splice(index, 1)
         },
         submit() {
             if (this.writable) {
@@ -169,15 +178,12 @@ export default {
     padding: 5%;
 }
 
-.record {
-    width: 90%;
-    margin: 30px;
-    padding: 10px;
-    border: 1px solid black;
+.table-dropdown {
+    width: 100%;
+    padding: 0 10%;
 }
 
-.col {
-    width: 50%;
-    padding: 10px;
+.el-form-item {
+    margin-bottom: 5px;
 }
 </style>
