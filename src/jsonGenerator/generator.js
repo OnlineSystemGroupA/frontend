@@ -322,34 +322,34 @@ var generateTestReport = function () {
             }
         },
         "networkEnvironment": '<@string{4,20}>',
-        "testStandardList<@{2,7}>": [{ "standard": '<@string{4,20}>' },],
-        "referenceList<@{2,7}>": [{ "reference": '<@string{4,20}>' },],
+        "testStandards<@{2,7}>": [{ "standard": '<@string{4,20}>' },],
+        "references<@{2,7}>": [{ "reference": '<@string{4,20}>' },],
         "functionTest<@{2,7}>": [{
             "functionModule": '<@string{4,20}>',
             "functionRequirement": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "efficiencyTest<@{2,7}>": [{
+        "efficiencyTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "portabilityTest<@{2,7}>": [{
+        "portabilityTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "usabilityTest<@{2,7}>": [{
+        "usabilityTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "reliabilityTest<@{2,7}>": [{
+        "reliabilityTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "maintainabilityTest<@{2,7}>": [{
+        "maintainabilityTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
