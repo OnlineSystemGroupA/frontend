@@ -251,6 +251,24 @@ export default {
                 alert('指定流程实例不存在')
             }
         },
+        autoFill() {
+            this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm').then(
+                (res) => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                        this.form.softwareName = res.data.softwareName
+                        this.form.softwareVersion = res.data.softwareVersion
+                    }
+                },
+                (err) => {
+                    if (err.response.status === 403) {
+                        alert('指定流程或表单对该用户不可见')
+                    } else if (err.response.status === 404) {
+                        alert('指定流程或表单不存在')
+                    }
+                }
+            )
+        }
     },
     computed: {
         disable() {
@@ -286,6 +304,9 @@ export default {
                         console.log('读取成功')
                     } else {
                         this.form = functionList
+                    }
+                    if (this.writable) {
+                        this.autoFill()
                     }
                 }
 

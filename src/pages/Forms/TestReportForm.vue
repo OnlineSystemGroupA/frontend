@@ -870,6 +870,31 @@ export default {
                 alert('指定流程或表单不存在')
             }
         },
+        autoFill() {
+            this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm').then(
+                (res) => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                        this.form.softwareName = res.data.softwareName
+                        this.form.softwareVersion = res.data.softwareVersion
+                        this.form.clientCompany = res.data.companyChineseName
+                        this.form.address = res.data.companyInfo.address
+                        this.form.fax = res.data.companyInfo.fax
+                        this.form.postcode = res.data.companyInfo.postcode
+                        this.form.contract = res.data.companyInfo.contractPerson
+                        this.form.telephone = res.data.companyInfo.telephone
+                        this.form.email = res.data.email
+                    }
+                },
+                (err) => {
+                    if (err.response.status === 403) {
+                        alert('指定流程或表单对该用户不可见')
+                    } else if (err.response.status === 404) {
+                        alert('指定流程或表单不存在')
+                    }
+                }
+            )
+        }
     },
     computed: {
         disabled() {
@@ -905,6 +930,9 @@ export default {
                         console.log('读取成功')
                     } else {
                         this.form = testReportForm
+                    }
+                    if (this.writable) {
+                        this.autoFill()
                     }
                 }
 

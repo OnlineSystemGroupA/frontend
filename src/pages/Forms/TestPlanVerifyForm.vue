@@ -167,6 +167,26 @@ export default {
                 alert('指定流程或表单不存在')
             }
         },
+        autoFill() {
+            this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(
+                (res) => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                        this.form.softwareName = res.data.title
+                        this.form.softwareVersion = res.data.version
+                    }
+                },
+                (err) => {
+                    if (err.status === 402) {
+                        alert('指定流程对该用户不可见')
+                    }
+                    else if (err.status === 404) {
+                        alert('指定流程不存在')
+                    }
+                }
+            )
+
+        }
     },
     computed: {
         disable() {
@@ -184,14 +204,18 @@ export default {
         console.log(testPlanVerification)
     },
     created() {
-        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanForm').then(
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanVerifyForm').then(
             (res) => {
                 if (res.status === 200) {
                     if (res.data) {
                         this.form = res.data
+                        console.log( res.data)
                         console.log('读取成功')
                     } else {
                         this.form = testPlanVerification
+                    }
+                    if (this.writable) {
+                        this.autoFill()
                     }
                 }
 

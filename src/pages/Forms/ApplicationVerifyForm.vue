@@ -112,7 +112,13 @@ export default {
     },
     methods: {
         save() {
-
+            console.log(JSON.stringify(this.form))
+            console.log(this.processId)
+            this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationVerifyForm', JSON.stringify(this.form), {
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            }).then(this.handleSaveResult, this.handleError)
         },
         submit() {
             console.log(JSON.stringify(this.form))

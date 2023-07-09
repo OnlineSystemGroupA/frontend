@@ -647,6 +647,30 @@ export default {
                     this.chosenData.companyType = '其他'
                 }
             }
+        },
+        autoFill() {
+             if (sessionStorage.getItem('logType') === 'client') {
+                this.axios.get('/api/account/client_details').then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.form.companyChineseName = res.data.company
+                            this.form.companyInfo.address = res.data.companyAddress
+                            this.form.companyInfo.telephone = res.data.companyTelephone
+                            this.form.companyInfo.contractPerson = res.data.realName
+                            this.form.companyInfo.postcode = res.data.companyPostcode
+                            this.form.companyInfo.email = res.data.companyEmail
+                            this.form.companyInfo.fax = res.data.companyFax
+                            this.form.companyInfo.website = res.data.companyWebsite
+                            this.form.companyInfo.mobile = res.data.companyPhone
+                        }
+                    },
+                    (err) => {
+                        if (err.status === 409) {
+                            alert('登录类型错误')
+                        }
+                    }
+                )
+            }
         }
     },
     mounted() {
@@ -661,6 +685,9 @@ export default {
                     this.form = res.data
                 } else {
                     this.form = applicationForm
+                }
+                if (this.writable) {
+                    this.autoFill()
                 }
                 this.dataReady = true
                 this.initializeDOM()

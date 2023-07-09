@@ -333,6 +333,52 @@ export default {
                 alert('指定流程或表单不存在')
             }
         },
+         autoFill() {
+            this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(
+                (res) => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                        this.form.softwareName = res.data.title
+                        this.form.clientCompany = res.data.company
+                        this.form.softwareVersion = res.data.version
+                    }
+                },
+                (err) => {
+                    if (err.status === 402) {
+                        alert('指定流程对该用户不可见')
+                    }
+                    else if (err.status === 404) {
+                        alert('指定流程不存在')
+                    }
+                }
+            )
+
+        }
+    },
+    created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestWorkCheckForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    }
+                    if (this.writable) {
+                        this.autoFill()
+                    }
+                }
+
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+
+            }
+        )
     }
 }
 

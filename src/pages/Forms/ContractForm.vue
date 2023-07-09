@@ -516,6 +516,31 @@ export default {
                 alert('保存成功')
             }
         },
+        autoFill() {
+            this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm').then(
+                (res) => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                        this.form.software = res.data.softwareName
+                        this.form.projectName = res.data.softwareName
+                        this.form.trustee = "南京大学"
+                        this.form.client = res.data.companyChineseName
+                        this.form.clientInfo.address = res.data.companyInfo.address
+                        this.form.clientInfo.fax = res.data.companyInfo.fax
+                        this.form.clientInfo.postcode = res.data.companyInfo.postcode
+                        this.form.clientInfo.contact = res.data.companyInfo.contractPerson
+                        this.form.clientInfo.telephone = res.data.companyInfo.telephone
+                    }
+                },
+                (err)=>{
+                    if (err.response.status === 403) {
+                        alert('指定流程或表单对该用户不可见')
+                    } else if (err.response.status === 404) {
+                        alert('指定流程或表单不存在')
+                    }
+                }
+            )
+        }
     },
     computed: {
         disable() {
@@ -548,6 +573,9 @@ export default {
                     }
                     else {
                         this.form = contractForm
+                    }
+                    if (this.writable) {
+                        this.autoFill()
                     }
                 }
 

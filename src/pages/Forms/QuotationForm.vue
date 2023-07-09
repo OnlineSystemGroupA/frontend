@@ -233,6 +233,25 @@ export default {
                 alert('指定流程或表单不存在')
             }
         },
+        autoFill() {
+            this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(
+                (res) => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                        this.form.software = res.data.title
+                    }
+                },
+                (err) => {
+                    if (err.status === 402) {
+                        alert('指定流程对该用户不可见')
+                    }
+                    else if (err.status === 404) {
+                        alert('指定流程不存在')
+                    }
+                }
+            )
+
+        }
     },
     mounted() {
         this.$bus.$on('submitQuotation', () => {
@@ -248,6 +267,9 @@ export default {
                 console.log(res.data)
                 if (res.data) {
                     this.form = res.data
+                }
+                if (this.writable) {
+                    this.autoFill()
                 }
                 this.dataReady = true
             },

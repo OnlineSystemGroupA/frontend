@@ -382,7 +382,7 @@ const router = new VueRouter({
                 },//填写合同
                 {
                     name: 'clientUploadSamples',
-                    path: 'clientUploadSammples',
+                    path: 'clientUploadSamples',
                     component: ClientUploadSamples,
                     props({ query: { processId } }) {
                         return { processId }

@@ -1,7 +1,7 @@
 <template>
     <div class="document">
         <el-form label-width="120px" label-position="left" :disabled='disable' ref="form" :model="form" :rules="mainRules">
-            <el-row gutter="20">
+            <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="软件名称" prop="softwareName">
                         <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
@@ -13,7 +13,7 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row gutter="20">
+            <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="委托单位" prop="clientCompany">
                         <el-input placeholder="委托单位" v-model="form.clientCompany"></el-input>
@@ -25,7 +25,7 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row gutter="20">
+            <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="审评人" prop="reviewer">
                         <el-input placeholder="审评人" v-model="form.reviewer"></el-input>
@@ -423,6 +423,26 @@ export default {
                 alert('指定流程或表单不存在')
             }
         },
+        autoFill() {
+            this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'ApplicationForm').then(
+                (res) => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                        this.form.softwareName = res.data.softwareName
+                        this.form.softwareVersion = res.data.softwareVersion
+                        this.form.clientCompany = res.data.companyChineseName
+                        
+                    }
+                },
+                (err) => {
+                    if (err.response.status === 403) {
+                        alert('指定流程或表单对该用户不可见')
+                    } else if (err.response.status === 404) {
+                        alert('指定流程或表单不存在')
+                    }
+                }
+            )
+        }
     },
     computed: {
         disable() {
@@ -458,6 +478,9 @@ export default {
                     }
                     else {
                         this.form = documentReviewForm
+                    }
+                    if (this.writable) {
+                        this.autoFill()
                     }
                 }
 
