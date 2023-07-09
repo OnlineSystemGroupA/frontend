@@ -3,18 +3,14 @@
         <h1>测试问题清单</h1>
         <el-form :disabled="disable">
             <hr>
-            <el-table :data="form.problemList"
-                      ref="problemTable"
-                      @row-click="onRowClick"
-                      style="width: 100%">
+            <el-table :data="form.problemList" ref="problemTable" @row-click="onRowClick" style="width: 100%">
                 <el-table-column type="expand">
                     <template slot-scope="item">
                         <div class="table-dropdown">
                             <el-row :gutter="20">
                                 <el-col :span=12>
                                     <el-form-item label="对应需求条目">
-                                        <el-input v-model="item.row.relatedRequirementItem"
-                                                  placeholder="对应需求条目"></el-input>
+                                        <el-input v-model="item.row.relatedRequirementItem" placeholder="对应需求条目"></el-input>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span=12>
@@ -48,14 +44,12 @@
                             </el-form-item>
 
                             <el-form-item label="发现缺陷用例及具体操作路径（要具体）">
-                                <el-input v-model="item.row.operationRoute"
-                                          placeholder="发现缺陷用例及具体操作路径（要具体）"
+                                <el-input v-model="item.row.operationRoute" placeholder="发现缺陷用例及具体操作路径（要具体）"
                                           type="textarea"></el-input>
                             </el-form-item>
 
                             <el-form-item label="修改意见">
-                                <el-input v-model="item.row.editSuggestion" type="textarea"
-                                          placeholder="修改意见"></el-input>
+                                <el-input v-model="item.row.editSuggestion" type="textarea" placeholder="修改意见"></el-input>
                             </el-form-item>
                         </div>
                     </template>
@@ -76,7 +70,7 @@
         <br>
         <br>
         <el-row v-show="!disable">
-            <el-button type="success" @click="submit" :disabled="disable">提交</el-button>
+            <el-button type="primary" @click="submit" :disabled="disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
     </div>
@@ -84,7 +78,6 @@
 
 <script>
 import testProblemForm from '../../assets/jsons/testProblemForm.json'
-
 export default {
     name: 'TestProblemForm',
     props: ['writable', 'processId', 'checking'],
@@ -128,13 +121,55 @@ export default {
             this.form.problemList.splice(index, 1)
         },
         submit() {
+            this.doSubmit();
+        },
+        doSubmit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestProblemForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
             }
         },
         save() {
             if (this.writable) {
-                sessionStorage.setItem('testProblemForm', JSON.stringify(this.form))
+                sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestProblemForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
+            }
+        },
+        pass() {
+            //this.$bus.$emit('passApplication', true)
+            console.log('pass')
+        },
+        refute() {
+            //this.$bus.$emit('passApplication', false)
+            console.log('refute')
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
             }
         },
     },
@@ -142,9 +177,11 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            } else if (this.writable === 'true') {
+            }
+            else if (this.writable === 'true') {
                 return false
-            } else if (!this.writable) {
+            }
+            else if (!this.writable) {
                 return true
             }
             return false
@@ -152,16 +189,38 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            } else if (this.checking === 'false') {
+            }
+            else if (this.checking === 'false') {
                 return false
-            } else if (this.checking) {
+            }
+            else if (this.checking) {
                 return true
             }
             return false
         },
     },
     created() {
-        this.form = testProblemForm
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestProblemForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    } else {
+                        this.form = testProblemForm
+                    }
+                }
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = testProblemForm
+            }
+        )
     }
 }
 </script>

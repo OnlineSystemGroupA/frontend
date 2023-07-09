@@ -10,7 +10,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="版本号">
-                        <el-input v-model="form.version" placeholder="版本号"></el-input>
+                        <el-input v-model="form.softwareVersion" placeholder="版本号"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -64,7 +64,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="项目编号">
-                        <el-input placeholder="项目编号" v-model="form.itemNum"></el-input>
+                        <el-input placeholder="项目编号" v-model="form.projectId"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -76,7 +76,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="版本/型号">
-                        <el-input placeholder="版本/型号" v-model="form.version"></el-input>
+                        <el-input placeholder="版本/型号" v-model="form.softwareVersion"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -84,7 +84,7 @@
                 <el-col :span="12">
                     <el-form-item label="采样日期">
                         <el-date-picker type="date" placeholder="采样日期" style="width: 100%;"
-                                        v-model="form.sampleTime"></el-date-picker>
+                                        v-model="form.sampleDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -97,13 +97,13 @@
                 <el-col :span="12">
                     <el-form-item label="测试开始时间">
                         <el-date-picker type="date" placeholder="开始日期" style="width: 100%;"
-                                        v-model="form.startTime"></el-date-picker>
+                                        v-model="form.startDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="测试结束时间">
                         <el-date-picker type="date" placeholder="结束日期" style="width: 100%;"
-                                        v-model="form.endTime"></el-date-picker>
+                                        v-model="form.endDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -136,7 +136,7 @@
                 <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                                        v-model="form.compilerTime"></el-date-picker>
+                                        v-model="form.compileDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -149,7 +149,7 @@
                 <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                                        v-model="form.reviewerTime"></el-date-picker>
+                                        v-model="form.reviewDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -162,7 +162,7 @@
                 <el-col :span="12">
                     <el-form-item label="日期">
                         <el-date-picker type="date" placeholder="日期" style="width: 100%;"
-                                        v-model="form.approverTime"></el-date-picker>
+                                        v-model="form.approveDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -335,7 +335,7 @@
             <div>
                 <h3>测试依据</h3>
                 <el-form-item label-width="0" ref="testStandards" prop="testStandards">
-                    <SelectAndCreateTags v-model="form.testStandardList" :default-options="testStandardOptions"
+                    <SelectAndCreateTags v-model="form.testStandards" :default-options="testStandardOptions"
                                          :disabled="disabled" option-description="新增一个测试依据"
                                          @change="emitChangeEvent('testStandards', form.testStandards)"
                                          @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
@@ -344,7 +344,7 @@
             <div>
                 <h3>参考资料</h3>
                 <el-form-item label-width="0" ref="testStandards" prop="testStandards">
-                    <SelectAndCreateTags v-model="form.referenceList" :default-options="[]"
+                    <SelectAndCreateTags v-model="form.references" :default-options="[]"
                                          :disabled="disabled" option-description="新增一个参考资料 "
                                          @change="emitChangeEvent('testStandards', form.testStandards)"
                                          @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
@@ -353,7 +353,7 @@
             <h2>三、测试内容</h2>
             <div>
                 <h3>功能性测试</h3>
-                <el-table :data="form.functionTest" style="width: 100%">
+                <el-table :data="form.functionTests" style="width: 100%">
                     <el-table-column type="index"></el-table-column>
                     <el-table-column label="功能模块" align="center">
                         <template slot-scope="item">
@@ -400,7 +400,7 @@
             </div>
             <div>
                 <h3>效率测试</h3>
-                <el-table :data="form.efficiencyTest" style="width: 100%">
+                <el-table :data="form.efficiencyTests" style="width: 100%">
                     <el-table-column type="index"></el-table-column>
                     <el-table-column label="测试特性" align="center">
                         <template slot-scope="item">
@@ -447,7 +447,7 @@
             </div>
             <div>
                 <h3>可移植性测试</h3>
-                <el-table :data="form.portabilityTest" style="width: 100%">
+                <el-table :data="form.portabilityTests" style="width: 100%">
                     <el-table-column type="index"></el-table-column>
                     <el-table-column label="测试特性" align="center">
                         <template slot-scope="item">
@@ -494,7 +494,7 @@
             </div>
             <div>
                 <h3>易用性测试</h3>
-                <el-table :data="form.usabilityTest" style="width: 100%">
+                <el-table :data="form.usabilityTests" style="width: 100%">
                     <el-table-column type="index"></el-table-column>
                     <el-table-column label="测试特性" align="center">
                         <template slot-scope="item">
@@ -541,7 +541,7 @@
             </div>
             <div>
                 <h3>可靠性测试</h3>
-                <el-table :data="form.reliabilityTest" style="width: 100%">
+                <el-table :data="form.reliabilityTests" style="width: 100%">
                     <el-table-column type="index"></el-table-column>
                     <el-table-column label="测试特性" align="center">
                         <template slot-scope="item">
@@ -588,7 +588,7 @@
             </div>
             <div>
                 <h3>可维护性测试</h3>
-                <el-table :data="form.maintainabilityTest" style="width: 100%">
+                <el-table :data="form.maintainabilityTests" style="width: 100%">
                     <el-table-column type="index"></el-table-column>
                     <el-table-column label="测试特性" align="center">
                         <template slot-scope="item">
@@ -658,14 +658,14 @@ export default {
         return {
             form: {
                 softwareName: '',
-                version: '',
+                softwareVersion: '',
                 clientCompany: '',
                 testType: '',
                 reportDate: '',
-                itemNum: '',
-                sampleTime: '',
-                startTime: '',
-                endTime: '',
+                projectId: '',
+                sampleDate: '',
+                startDate: '',
+                endDate: '',
                 sampleCondition: '',
                 testStandard: '',
                 sampleList: '',
@@ -677,11 +677,11 @@ export default {
                 contract: '',
                 email: '',
                 compiler: '',
-                compilerTime: '',
+                compileDate: '',
                 reviewer: '',
-                reviewerTime: '',
+                reviewDate: '',
                 approver: '',
-                approverTime: '',
+                approveDate: '',
                 hardwareType: '',
                 hardwareName: '',
                 hardwareConfiguration: '',
@@ -711,14 +711,14 @@ export default {
                     }
                 },
                 networkEnvironment: '',
-                testStandardList: [{ standard: '' },],
-                referenceList: [{ reference: '' },],
-                functionTest: [{ functionModule: '', functionRequirement: '', testResult: '' }],
-                efficiencyTest: [{ property: '', testExplanation: '', testResult: '' }],
-                portabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
-                usabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
-                reliabilityTest: [{ property: '', testExplanation: '', testResult: '' }],
-                maintainabilityTest: [{ property: '', testExplanation: '', testResult: '' }]
+                testStandards: [],
+                references: [],
+                functionTests: [{ functionModule: '', functionRequirement: '', testResult: '' }],
+                efficiencyTests: [{ property: '', testExplanation: '', testResult: '' }],
+                portabilityTests: [{ property: '', testExplanation: '', testResult: '' }],
+                usabilityTests: [{ property: '', testExplanation: '', testResult: '' }],
+                reliabilityTests: [{ property: '', testExplanation: '', testResult: '' }],
+                maintainabilityTests: [{ property: '', testExplanation: '', testResult: '' }]
             },
             testStandardOptions: [
                 { value: "GB/T 25000.51-2016", label: "GB/T 25000.51-2016" },
@@ -759,10 +759,10 @@ export default {
                 functionRequirement: '',
                 testResult: ''
             }
-            this.form.functionTest.push(item)
+            this.form.functionTests.push(item)
         },
         deleteFunction(index) {
-            this.form.functionTest.splice(index, 1)
+            this.form.functionTests.splice(index, 1)
         },
         addEfficiency() {
             const item = {
@@ -770,10 +770,10 @@ export default {
                 testExplanation: '',
                 testResult: ''
             }
-            this.form.efficiencyTest.push(item)
+            this.form.efficiencyTests.push(item)
         },
         deleteEfficiency(index) {
-            this.form.efficiencyTest.splice(index, 1)
+            this.form.efficiencyTests.splice(index, 1)
         },
         addReliability() {
             const item = {
@@ -781,10 +781,10 @@ export default {
                 testExplanation: '',
                 testResult: ''
             }
-            this.form.reliabilityTest.push(item)
+            this.form.reliabilityTests.push(item)
         },
         deleteReliability(index) {
-            this.form.reliabilityTest.splice(index, 1)
+            this.form.reliabilityTests.splice(index, 1)
         },
         addPortability() {
             const item = {
@@ -792,10 +792,10 @@ export default {
                 testExplanation: '',
                 testResult: ''
             }
-            this.form.portabilityTest.push(item)
+            this.form.portabilityTests.push(item)
         },
         deletePortability(index) {
-            this.form.portabilityTest.splice(index, 1)
+            this.form.portabilityTests.splice(index, 1)
         },
         addUsability() {
             const item = {
@@ -803,10 +803,10 @@ export default {
                 testExplanation: '',
                 testResult: ''
             }
-            this.form.usabilityTest.push(item)
+            this.form.usabilityTests.push(item)
         },
         deleteUsability(index) {
-            this.form.usabilityTest.splice(index, 1)
+            this.form.usabilityTests.splice(index, 1)
         },
         addMaintainability() {
             const item = {
@@ -814,28 +814,63 @@ export default {
                 testExplanation: '',
                 testResult: ''
             }
-            this.form.maintainabilityTest.push(item)
+            this.form.maintainabilityTests.push(item)
         },
         deleteMaintainability(index) {
-            this.form.maintainabilityTest.splice(index, 1)
+            this.form.maintainabilityTests.splice(index, 1)
         },
         submit() {
+            this.doSubmit();
+        },
+        doSubmit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
-                this.$bus.$emit('submitApplication')
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
             }
         },
         save() {
             if (this.writable) {
                 sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
             }
         },
         pass() {
-            this.$bus.$emit('passApplication')
+            //this.$bus.$emit('passApplication', true)
+            console.log('pass')
         },
         refute() {
-
-        }
+            //this.$bus.$emit('passApplication', false)
+            console.log('refute')
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
     },
     computed: {
         disabled() {
@@ -862,8 +897,29 @@ export default {
     mounted() {
         console.log(testReportForm)
     },
-    created() {
-        this.form = testReportForm
+     created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    } else {
+                        this.form = testReportForm
+                    }
+                }
+
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = testReportForm
+            }
+        )
     }
 }
 </script>

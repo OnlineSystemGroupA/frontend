@@ -40,7 +40,23 @@ export default {
             })
         },
         submit() {
-
+             this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task')
+                .then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.$message.success("进入下一流程！")
+                            this.$router.push(
+                                {
+                                    name: 'clientItemDetail',
+                                    processId: this.processId
+                                }
+                            )
+                        }
+                    },
+                    (err) => {
+                        this.$message.warning(err.data)
+                    }
+                )
         }
     }
 }

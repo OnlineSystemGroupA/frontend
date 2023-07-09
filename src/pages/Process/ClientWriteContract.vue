@@ -7,6 +7,7 @@
         <el-button type="primary" @click="checkContract">审核合同</el-button>
         <el-button type="primary" @click="download">下载pdf</el-button>
         <el-button type="primary" @click="upload">上传扫描件</el-button>
+        <el-button type="primary" @click="complete">完成流程</el-button>
         <router-view></router-view>
     </div>
 </template>
@@ -109,7 +110,7 @@ export default {
                     const downloadElement = document.createElement("a");
                     const href = window.URL.createObjectURL(blob);
                     downloadElement.href = href;
-                    downloadElement.download = decodeURIComponent("合同.pdf");
+                    downloadElement.download = decodeURIComponent(this.processId + "合同.pdf");
                     document.body.appendChild(downloadElement);
                     downloadElement.click();
                     document.body.removeChild(downloadElement);
@@ -126,13 +127,32 @@ export default {
                 }
             )
         },
-        upload(){
+        upload() {
             this.$router.push({
                 name: 'clientUploadContract',
                 query: {
                     processId: this.processId
                 },
             })
+        },
+        complete() {
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task')
+                .then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.$message.success("进入下一流程！")
+                            this.$router.push(
+                                {
+                                    name: 'clientItemDetail',
+                                    query: { processId: this.processId }
+                                }
+                            )
+                        }
+                    },
+                    (err) => {
+                        this.$message.warning(err.data)
+                    }
+                )
         }
     },
     mounted() {

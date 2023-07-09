@@ -14,7 +14,7 @@
                     <el-date-picker v-model="record.date" placeholder="日期" style="width:50%"></el-date-picker>
                 </el-form-item>
                 <el-form-item label="AMD">
-                    <el-input v-model="record.AMD" placeholder="AMD" style="width:50%"></el-input>
+                    <el-input v-model="record.amd" placeholder="AMD" style="width:50%"></el-input>
                 </el-form-item>
                 <el-form-item label="修订者">
                     <el-input v-model="record.editor" placeholder="修订者" style="width:50%"></el-input>
@@ -47,7 +47,7 @@
             <h3>3.4参与组织</h3>
             <el-input type="textarea" placeholder="参与组织" v-model="form.organization"></el-input>
             <h3>3.5人员</h3>
-            <el-input type="textarea" placeholder="人员" v-model="form.stuff"></el-input>
+            <el-input type="textarea" placeholder="人员" v-model="form.staff"></el-input>
             <h2>4计划</h2>
             <h3>4.1总体设计</h3>
             <h4>4.1.1测试级别</h4>
@@ -66,7 +66,7 @@
                 个工作日，如测试需求产生变更会导致测试时间的变化。
             </p>
             <p>下表大致估计了本次测试各个阶段所需工作量及起止时间。</p>
-            <el-table :data="form.timeTable" height="auto" border style="width: 100%">
+            <el-table :data="form.timeTables" height="auto" border style="width: 100%">
                 <el-table-column prop="task" label="里程碑任务" style="width: 25%"></el-table-column>
                 <el-table-column prop="lastTime" label="工作量" style="width: 25%">
                     <template slot-scope="scope">
@@ -82,8 +82,7 @@
                 </el-table-column>
                 <el-table-column prop="endTime" label="结束时间" style="width: 25%">
                     <template slot-scope="scope">
-                        <el-date-picker v-model="scope.row.endTime" placeholder="结束时间"
-                                        style="width: 100%"></el-date-picker>
+                        <el-date-picker v-model="scope.row.endTime" placeholder="结束时间" style="width: 100%"></el-date-picker>
                     </template>
                 </el-table-column>
             </el-table>
@@ -116,7 +115,7 @@ export default {
                     {
                         version: '',
                         date: '',
-                        AMD: '',
+                        amd: '',
                         editor: '',
                         description: '',
                     }
@@ -130,14 +129,14 @@ export default {
                 software: '',
                 other: '',
                 organization: '',
-                stuff: '',
+                staff: '',
                 testLevel: '',
                 testType: '',
                 testCondition: '',
                 plannedTest: '',
                 testCases: '',
                 time: '',
-                timeTable: [
+                timeTables: [
                     {
                         task: '制定测试计划',
                         lastTime: '',
@@ -172,7 +171,7 @@ export default {
             const item = {
                 version: '',
                 date: '',
-                AMD: '',
+                amd: '',
                 editor: '',
                 description: '',
             }
@@ -184,17 +183,57 @@ export default {
             }
         },
         submit() {
-            console.log(JSON.stringify(this.form))
+            this.doSubmit();
+        },
+        doSubmit() {
+            if (this.writable) {
+                console.log(JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
+            }
         },
         save() {
-            console.log(JSON.stringify(this.form))
+            if (this.writable) {
+                sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
+            }
         },
         pass() {
-
+            //this.$bus.$emit('passApplication', true)
+            console.log('pass')
         },
         refute() {
-
-        }
+            //this.$bus.$emit('passApplication', false)
+            console.log('refute')
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
     },
     computed: {
         disable() {
@@ -222,7 +261,28 @@ export default {
         console.log(testPlanForm)
     },
     created() {
-        this.form = (testPlanForm)
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    } else {
+                        this.form = testPlanForm
+                    }
+                }
+
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = testPlanForm
+            }
+        )
     }
 }
 </script>

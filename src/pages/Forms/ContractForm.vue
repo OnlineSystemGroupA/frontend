@@ -503,6 +503,13 @@ export default {
                 this.$bus.$emit('submitContract')
             }
         },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
         handleSaveResult(res) {
             console.log(res)
             if (res.status === 200) {

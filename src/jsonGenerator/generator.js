@@ -97,7 +97,7 @@ var generateTestPlan = function () {
             {
                 "version": "<@string{4,20}>",
                 "date": "Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)",
-                "AMD": "<@string{4,20}>",
+                "amd": "<@string{4,20}>",
                 "editor": "<@string{4,20}>",
                 "description": "<@string{4,20}>",
             }
@@ -111,14 +111,14 @@ var generateTestPlan = function () {
         "software": "<@string{4,120}>",
         "other": "<@string{4,120}>",
         "organization": "<@string{4,120}>",
-        "stuff": "<@string{4,120}>",
+        "staff": "<@string{4,120}>",
         "testLevel": "<@string{4,120}>",
         "testType": "<@string{4,120}>",
         "testCondition": "<@string{4,120}>",
         "plannedTest": "<@string{4,120}>",
         "testCases": "<@string{4,120}>",
         "time": "<@string{4,120}>",
-        "timeTable": [
+        "timeTables": [
             {
                 "task": '制定测试计划',
                 "lastTime": '<@[2-10]>',
@@ -168,11 +168,11 @@ var generateTestRecords = function () {
             "prediction": "<@string{4,20}>",
             "designer": "<@string{4,20}>",
             "result": "<@string{4,20}>",
-            "isMatched": "<@boolean>",
+            "matched": "<@boolean>",
             "bugIndex": "<@string{4,20}>",
             "executor": "<@string{4,20}>",
             "date": "<@string{4,20}>",
-            "confirmer": "<@string{4,20}>"
+            "verifier": "<@string{4,20}>"
         }]
     }
     var testRecordJson = randomjson(testRecordModelJson)
@@ -189,52 +189,52 @@ var generateTestRecords = function () {
 var generateTestPlanVerification = function () {
     var testPlanVerificationModelJson = {
         "softwareName": '<@string{4,20}>',
-        "version": '<@string{4,20}>',
-        "itemNum": '<@string{4,20}>',
+        "softwareVersion": '<@string{4,20}>',
+        "projectId": '<@string{4,20}>',
         "testType": '<@string{4,20}>',
         "verifyItems": [
             {
                 "content": '《测试方案》书写规范性',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试环境是否具有典型意义以及是否符合用户要求',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试内容的完整性，是否覆盖了整个系统',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试方法的选取是否合理',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试用例能否覆盖问题',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '输入、输出数据设计合理性',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试时间安排是否合理',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
             {
                 "content": '测试人力资源安排是否合理',
-                "passOrNot": '<@boolean>',
+                "passed": '<@boolean>',
                 "explanation": '<@string{4,20}>',
             },
         ],
-        "verfiyEmployees": [
+        "verifyEmployees": [
             {
                 "position": '测试工程师',
                 "suggestions": '<@string{4,20}>',
@@ -271,14 +271,14 @@ var generateTestPlanVerification = function () {
 var generateTestReport = function () {
     var testReportModelJson = {
         "softwareName": '<@string{4,20}>',
-        "version": '<@string{4,20}>',
+        "softwareVersion": '<@string{4,20}>',
         "clientCompany": '<@string{4,20}>',
         "testType": '<@string{4,20}>',
         "reportDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-        "itemNum": '<@string{4,20}>',
-        "sampleTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-        "startTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
-        "endTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "projectId": '<@string{4,20}>',
+        "sampleDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "startDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "endDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "sampleCondition": '<@string{4,20}>',
         "testStandard": '<@string{4,20}>',
         "sampleList": '<@string{4,20}>',
@@ -290,11 +290,11 @@ var generateTestReport = function () {
         "contract": '<@string{4,20}>',
         "email": '<@string{4,20}>',
         "compiler": '<@string{4,20}>',
-        "compilerTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "compileDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "reviewer": '<@string{4,20}>',
-        "reviewerTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "reviewDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "approver": '<@string{4,20}>',
-        "approverTime": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+        "approveDate": 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
         "hardwareType": '<@string{4,20}>',
         "hardwareName": '<@string{4,20}>',
         "hardwareConfiguration": '<@string{4,20}>',
@@ -322,34 +322,34 @@ var generateTestReport = function () {
             }
         },
         "networkEnvironment": '<@string{4,20}>',
-        "testStandardList<@{2,7}>": [{ "standard": '<@string{4,20}>' },],
-        "referenceList<@{2,7}>": [{ "reference": '<@string{4,20}>' },],
-        "functionTest<@{2,7}>": [{
+        "testStandards<@{2,7}>": [ '<@string{4,20}>' ],
+        "references<@{2,7}>": ['<@string{4,20}>' ],
+        "functionTests<@{2,7}>": [{
             "functionModule": '<@string{4,20}>',
             "functionRequirement": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "efficiencyTest<@{2,7}>": [{
+        "efficiencyTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "portabilityTest<@{2,7}>": [{
+        "portabilityTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "usabilityTest<@{2,7}>": [{
+        "usabilityTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "reliabilityTest<@{2,7}>": [{
+        "reliabilityTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
         }],
-        "maintainabilityTest<@{2,7}>": [{
+        "maintainabilityTests<@{2,7}>": [{
             "property": '<@string{4,20}>',
             "testExplanation": '<@string{4,20}>',
             "testResult": '<@string{4,20}>'
@@ -365,6 +365,7 @@ var generateTestReport = function () {
         console.log("写入成功");
     })
 }
+
 
 var generateDocumentReviewForm = function () {
     var documentReviewModelJson = {
@@ -645,16 +646,15 @@ var generateProblemForm = function () {
     var testProblemModelJson = {
         "problemList<@{3,6}>": [
             {
-                index: '<@string{4,20}>',
                 description: '<@string{4,20}>',
                 relatedRequirementItem: '<@string{4,20}>',
                 initialCondition: '<@string{4,20}>',
                 operationRoute: '<@string{4,20}>',
                 relatedCase: '<@string{4,20}>',
-                discoveredTime: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
+                discoveredDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
                 personInCharge: '<@string{4,20}>',
                 editSuggestion: '<@string{4,20}>',
-                vforKey: '<@string{4,20}>'
+                //vforKey: '<@string{4,20}>'
             }
         ]
     }

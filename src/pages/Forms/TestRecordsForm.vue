@@ -53,7 +53,7 @@
                     <tr>
                         <th>一致性</th>
                         <td>
-                            <el-radio-group v-model="record.isMatched">
+                            <el-radio-group v-model="record.matched">
                                 <el-radio :label="true">是</el-radio>
                                 <el-radio :label="false">否</el-radio>
                             </el-radio-group>
@@ -77,7 +77,7 @@
 
                     <th>确认人</th>
                     <td>
-                        <el-input v-model="record.confirmer"></el-input>
+                        <el-input v-model="record.verifier"></el-input>
                     </td>
                 </table>
 
@@ -115,11 +115,11 @@ export default {
                     prediction: '',
                     designer: '',
                     result: '',
-                    isMatched: false,
+                    matched: false,
                     bugIndex: '',
                     executor: '',
                     date: '',
-                    confirmer: ''
+                    verifier: ''
                 }]
             }
 
@@ -136,33 +136,68 @@ export default {
                 prediction: '',
                 designer: '',
                 result: '',
-                isMatched: false,
+                matched: false,
                 bugIndex: '',
                 executor: '',
                 date: '',
-                confirmer: ''
+                verifier: ''
             })
         },
         deleteRecord(index) {
             this.form.records.splice(index, 1)
         },
         submit() {
+            this.doSubmit();
+        },
+        doSubmit() {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
-                this.$bus.$emit('submitApplication')
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestRecordsForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleResult, this.handleError)
             }
         },
         save() {
             if (this.writable) {
                 sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                console.log(this.processId)
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestRecordsForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
             }
         },
         pass() {
-            this.$bus.$emit('passApplication')
+            //this.$bus.$emit('passApplication', true)
+            console.log('pass')
         },
         refute() {
-
-        }
+            //this.$bus.$emit('passApplication', false)
+            console.log('refute')
+        },
+        handleResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('保存成功')
+            }
+        },
+        handleError(err) {
+            if (err.response.status === 403) {
+                alert('指定流程或表单对该用户不可见')
+            } else if (err.response.status === 404) {
+                alert('指定流程或表单不存在')
+            }
+        },
     },
     computed: {
         disable() {
@@ -190,7 +225,28 @@ export default {
         console.log(testRecords)
     },
     created() {
-        this.form = testRecords
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestRecordsForm').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data) {
+                        this.form = res.data
+                        console.log('读取成功')
+                    } else {
+                        this.form = testRecords
+                    }
+                }
+
+            },
+            (err) => {
+
+                if (err.response.status === 403) {
+                    alert('指定流程或表单对该用户不可见')
+                } else if (err.response.status === 404) {
+                    alert('指定流程或表单不存在')
+                }
+                this.form = testRecords
+            }
+        )
     }
 }
 </script>
