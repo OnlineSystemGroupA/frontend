@@ -92,13 +92,16 @@
             <hr>
             <el-form-item label="软件规模（至少一种）" ref="softwareScales" prop="softwareScales">
                 <br>
-                <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
-                             @change="handleScaleChange(scale, $event)"></el-checkbox>
-                <br>
-                <el-form-item v-for="scale in form.softwareScales" :key="scale.scaleDescription"
-                              :label="scale.scaleDescription" label-width="30%" style="margin-top:5px">
-                    <el-input-number :controls="false" v-model="scale.scale" style="width:30%"></el-input-number>
-                </el-form-item>
+                <div v-if="!disabled" style="margin: 20px 0; padding: 0 20px">
+                    <el-checkbox v-for="scale in scaleOptions" :key="scale" :label="scale"
+                                 @change="handleScaleChange(scale, $event)"></el-checkbox>
+                </div>
+                <div style="padding: 0 20px">
+                    <el-form-item v-for="scale in form.softwareScales" :key="scale.scaleDescription"
+                                  :label="scale.scaleDescription" label-width="30%" style="margin-top:5px">
+                        <el-input-number :controls="false" v-model="scale.scale" style="width:30%"></el-input-number>
+                    </el-form-item>
+                </div>
             </el-form-item>
             <br>
             <el-form-item label="软件类型" ref="softwareType" prop="softwareType" class="is-required">
