@@ -107,26 +107,18 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row :gutter="20">
-                <el-form-item label="样品状态">
-                    <el-input placeholder="样品状态" v-model="form.sampleCondition"></el-input>
-                </el-form-item>
-            </el-row>
-            <el-row :gutter="20">
-                <el-form-item label="测试依据">
-                    <el-input type="textarea" placeholder="测试依据" v-model="form.testStandard"></el-input>
-                </el-form-item>
-            </el-row>
-            <el-row :gutter="20">
-                <el-form-item label="样品清单">
-                    <el-input type="textarea" placeholder="样品清单" v-model="form.sampleList"></el-input>
-                </el-form-item>
-            </el-row>
-            <el-row :gutter="20">
-                <el-form-item label="测试结论">
-                    <el-input type="textarea" placeholder="测试结论" v-model="form.testConclusion"></el-input>
-                </el-form-item>
-            </el-row>
+            <el-form-item label="样品状态">
+                <el-input placeholder="样品状态" v-model="form.sampleCondition"></el-input>
+            </el-form-item>
+            <el-form-item label="测试依据">
+                <el-input type="textarea" placeholder="测试依据" v-model="form.testStandard"></el-input>
+            </el-form-item>
+            <el-form-item label="样品清单">
+                <el-input type="textarea" placeholder="样品清单" v-model="form.sampleList"></el-input>
+            </el-form-item>
+            <el-form-item label="测试结论">
+                <el-input type="textarea" placeholder="测试结论" v-model="form.testConclusion"></el-input>
+            </el-form-item>
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="编制人">
@@ -190,12 +182,7 @@
                 </el-col>
                 <el-col :span="12">
                     <h3>测试单位联系方式</h3>
-                    <h4>单位地址：南京市栖霞区仙林大道163号</h4>
-                    <h4>邮政编码：210046</h4>
-                    <h4>电话： 86-25-89683467, 86-25-89683670</h4>
-                    <h4>传真： 86-25-89686596</h4>
-                    <h4>网址： http://keysoftlab.nju.edu.cn</h4>
-                    <h4>E_mail: keysoftlab@nju.edu.cn</h4>
+                    <ContactInfo></ContactInfo>
                 </el-col>
             </el-row>
             <h2>一、测试环境（硬件和软件）</h2>
@@ -649,10 +636,11 @@
 <script>
 import testReportForm from '../../assets/jsons/testReportForm.json'
 import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTags.vue";
+import ContactInfo from "@/components/Infomation/ContactInfo.vue";
 
 export default {
     name: 'TestReportForm',
-    components: { SelectAndCreateTags },
+    components: { ContactInfo, SelectAndCreateTags },
     props: ['writable', 'processId', 'checking'],
     data() {
         return {
@@ -897,7 +885,7 @@ export default {
     mounted() {
         console.log(testReportForm)
     },
-     created() {
+    created() {
         this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm').then(
             (res) => {
                 if (res.status === 200) {

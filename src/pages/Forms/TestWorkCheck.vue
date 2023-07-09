@@ -2,89 +2,108 @@
     <div class="check">
         <h1>软件项目委托测试工作检查表</h1>
         <el-form label-width="100px" label-position="left" :disabled="disable">
-            <el-row>
-                <el-col class="col">
+            <el-row :gutter="20">
+                <el-col :span="12">
                     <el-form-item label="软件名称">
                         <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+                <el-col :span="12">
                     <el-form-item label="版本号">
                         <el-input placeholder="版本号" v-model="form.softwareVersion"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
 
-            <el-row class="column">
-                <el-form-item label="委托单位">
-                    <el-input placeholder="委托单位" v-model="form.clientCompany"></el-input>
-                </el-form-item>
-            </el-row>
-
-            <el-row>
-                <el-col class="col">
-                    <el-form-item label="起始日期">
-                        <el-date-picker placeholder="起始日期" v-model="form.startDate"></el-date-picker>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="委托单位">
+                        <el-input placeholder="委托单位" v-model="form.clientCompany"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
-                    <el-form-item label="预计完成日期">
-                        <el-date-picker placeholder="预计完成日期" v-model="form.expectedDueDate"></el-date-picker>
-                    </el-form-item>
-                </el-col>
-            </el-row>
-
-            <el-row>
-                <el-col class="col">
+                <el-col :span="12">
                     <el-form-item label="主测人">
                         <el-input placeholder="主测人" v-model="form.tester"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col class="col">
+            </el-row>
+
+            <el-row :gutter="20">
+                <el-col :span="8">
+                    <el-form-item label="起始日期">
+                        <el-date-picker placeholder="起始日期" v-model="form.startDate"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                    <el-form-item label="预计完成日期">
+                        <el-date-picker placeholder="预计完成日期" v-model="form.expectedDueDate"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">
                     <el-form-item label="实际完成时间">
                         <el-date-picker placeholder="实际完成时间" v-model="form.actualDueDate"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-row>
 
-
             <h2>一、前期指导工作</h2>
-            <el-form-item v-for="item in form.prework" :key="item.name">
-                <h3>{{ item.name }}</h3>
-                <el-form-item v-for="(content, index) in item.contents" :key="index">
-                    <li>{{ content.content }}</li>
-                    <el-radio-group v-model="content.confirmed">
-                        <el-radio :label="true">确认</el-radio>
-                        <el-radio :label="false">否决</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-            </el-form-item>
+            <el-collapse v-model="activeParts[0]">
+                <el-collapse-item v-for="(item, index) in form.prework"
+                                  :key="item.name"
+                                  :title="(index+1)+'. '+item.name"
+                                  :name="index">
+                    <h3>{{ item.name }}</h3>
+                    <div v-for="(content, index) in item.contents" :key="index">
+                        <li>{{ content.content }}</li>
+                        <el-form-item>
+                            <el-radio-group v-model="content.confirmed">
+                                <el-radio :label="true">确认</el-radio>
+                                <el-radio :label="false">否决</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
 
             <h2>二、对委托测试软件的可测状态进行评估</h2>
-            <el-form-item v-for="item in form.assessment" :key="item.name">
-                <h3>{{ item.name }}</h3>
-                <el-form-item v-for="(content, index) in item.contents" :key="index">
-                    <li>{{ content.content }}</li>
-                    <el-radio-group v-model="content.confirmed">
-                        <el-radio :label="true">确认</el-radio>
-                        <el-radio :label="false">否决</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-            </el-form-item>
+            <el-collapse v-model="activeParts[1]">
+                <el-collapse-item v-for="(item, index) in form.assessment"
+                                  :key="item.name"
+                                  :title="(index+1)+'. '+item.name"
+                                  :name="index">
+                    <h3>{{ item.name }}</h3>
+                    <div v-for="(content, index) in item.contents" :key="index">
+                        <li>{{ content.content }}</li>
+                        <el-form-item>
+                            <el-radio-group v-model="content.confirmed">
+                                <el-radio :label="true">确认</el-radio>
+                                <el-radio :label="false">否决</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
 
             <h2>三、实施测试</h2>
-            <el-form-item v-for="item in form.testment" :key="item.name">
-                <h3>{{ item.name }}</h3>
-                <el-form-item v-for="(content, index) in item.contents" :key="index">
-                    <li>{{ content.content }}</li>
-                    <el-radio-group v-model="content.confirmed">
-                        <el-radio :label="true">确认</el-radio>
-                        <el-radio :label="false">否决</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-            </el-form-item>
+            <el-collapse v-model="activeParts[2]">
+                <el-collapse-item v-for="(item, index) in form.testment"
+                                  :key="item.name"
+                                  :title="(index+1)+'. '+item.name"
+                                  :name="index">
+                    <h3>{{ item.name }}</h3>
+                    <div v-for="(content, index) in item.contents" :key="index">
+                        <li>{{ content.content }}</li>
+                        <el-form-item>
+                            <el-radio-group v-model="content.confirmed">
+                                <el-radio :label="true">确认</el-radio>
+                                <el-radio :label="false">否决</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
 
-            <el-form-item label="检查人">
+            <el-form-item label="检查人" style="width: 50%; margin-top: 20px">
                 <el-input v-model="form.checker" placeholder="检查人"></el-input>
             </el-form-item>
         </el-form>
@@ -257,19 +276,20 @@ export default {
                         ]
                     }
                 ],
-                checker: '',
-            }
+                checker: ''
+            },
+            activeParts: [
+                [], [], []
+            ]
         }
     },
     computed: {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -277,11 +297,9 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            }
-            else if (this.checking === 'false') {
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if (this.checking) {
+            } else if (this.checking) {
                 return true
             }
             return false
@@ -350,8 +368,7 @@ export default {
     padding: 10px;
 }
 
-.column {
-    width: 100%;
-    padding: 10px;
+.el-collapse-item {
+    padding: 0 40px
 }
 </style>

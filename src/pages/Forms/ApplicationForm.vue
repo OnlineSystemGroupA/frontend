@@ -278,13 +278,8 @@
                     </el-form-item>
                 </div>
                 <div class="CompanyInfo">
-                    <h2>软件测试中心联系方式</h2>
-                    <h4>单位地址：南京市栖霞区仙林大道163号</h4>
-                    <h4>邮政编码：210046</h4>
-                    <h4>电话： 86-25-89683467, 86-25-89683670</h4>
-                    <h4>传真： 86-25-89686596</h4>
-                    <h4>网址： http://keysoftlab.nju.edu.cn</h4>
-                    <h4>E-mail: keysoftlab@nju.edu.cn</h4>
+                    <h2>测试单位联系方式</h2>
+                    <ContactInfo></ContactInfo>
                 </div>
             </div>
         </el-form>
@@ -304,10 +299,12 @@ import SelectAndCreateTags from "@/components/ChooseAndSelect/SelectAndCreateTag
 import MultipleCreateAndSelect from "@/components/ChooseAndSelect/MultipleCreateAndSelect.vue";
 import applicationForm from "../../assets/jsons/applicationForm"
 import {nanoid} from "nanoid";
+import ContactInfo from "@/components/Infomation/ContactInfo.vue";
 
 export default {
     name: "ApplicationForm",
     components: {
+        ContactInfo,
         SelectAndCreateTags,
         MultipleCreateAndSelect
     },

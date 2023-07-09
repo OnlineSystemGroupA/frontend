@@ -1,13 +1,13 @@
 <template>
     <div class="report-verification">
         <h1>测试报告审核</h1>
-        <el-form label-position="left" label-width="125px" :disabled="disable">
+        <el-form label-position="left" label-width="100px" :disabled="disable">
             <h2>测试任务信息</h2>
             <el-form-item label="软件名称">
-                <el-input v-model="form.softwareName"></el-input>
+                <el-input v-model="form.softwareName" style="width: 50%"></el-input>
             </el-form-item>
             <el-form-item label="委托单位">
-                <el-input v-model="form.client"></el-input>
+                <el-input v-model="form.client" style="width: 50%"></el-input>
             </el-form-item>
             <h2>检查内容</h2>
             <h3>基本项</h3>
@@ -180,11 +180,9 @@ export default {
         disable() {
             if (this.writable === 'false') {
                 return true
-            }
-            else if (this.writable === 'true') {
+            } else if (this.writable === 'true') {
                 return false
-            }
-            else if (!this.writable) {
+            } else if (!this.writable) {
                 return true
             }
             return false
@@ -192,11 +190,9 @@ export default {
         check() {
             if (this.checking === 'true') {
                 return true
-            }
-            else if (this.checking === 'false') {
+            } else if (this.checking === 'false') {
                 return false
-            }
-            else if (this.checking) {
+            } else if (this.checking) {
                 return true
             }
             return false

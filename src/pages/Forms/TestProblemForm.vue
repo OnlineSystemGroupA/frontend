@@ -4,6 +4,7 @@
         <el-form :disabled="disable">
             <hr>
             <el-table :data="form.problemList" ref="problemTable" @row-click="onRowClick" style="width: 100%">
+                <el-table-column type="index"></el-table-column>
                 <el-table-column type="expand">
                     <template slot-scope="item">
                         <div class="table-dropdown">
@@ -55,6 +56,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="对应需求条目" prop="relatedRequirementItem"></el-table-column>
+                <el-table-column label="关联用例" prop="relatedCase"></el-table-column>
                 <el-table-column align="right">
                     <template slot="header">
                         <el-button size="mini" type="primary" plain circle icon="el-icon-plus"

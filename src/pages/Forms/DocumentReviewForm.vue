@@ -1,6 +1,7 @@
 <template>
     <div class="document">
-        <el-form label-width="120px" label-position="left" :disabled='disable' ref="form" :model="form" :rules="mainRules">
+        <el-form label-width="120px" label-position="left" :disabled='disable' ref="form" :model="form"
+                 :rules="mainRules">
             <el-row gutter="20">
                 <el-col :span="12">
                     <el-form-item label="软件名称" prop="softwareName">
@@ -40,48 +41,60 @@
             </el-row>
 
             <h2>一.软件说明部分审评</h2>
-            <div v-for="(review, reviewIndex) in form.reviewsOnExplanation" :key="review.title" style="padding: 0 40px">
-                <h3>{{ reviewIndex + 1 }}-{{ review.title }}</h3>
-                <div v-for="(item, itemIndex) in review.items" :key="item.content" style="padding: 0 40px">
-                    <li>{{ item.content }}</li>
-                    <el-row>
-                        <el-col class="col">
-                            <el-form-item label="评审结果" :rules="itemRules.result"
-                                          :prop="'reviewsOnExplanation.' + reviewIndex + '.items.' + itemIndex + '.result'">
-                                <el-input v-model="item.result" placeholder="评审结果"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col class="col">
-                            <el-form-item label="评审结果说明" :rules="itemRules.explanation"
-                                          :prop="'reviewsOnExplanation.' + reviewIndex + '.items.' + itemIndex + '.explanation'">
-                                <el-input type="textarea" v-model="item.explanation" placeholder="评审结果说明"></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                </div>
-            </div>
+            <el-collapse v-model="activeDescriptionParts">
+                <el-collapse-item v-for="(review, reviewIndex) in form.reviewsOnExplanation"
+                                  :key="review.title"
+                                  :title="(reviewIndex+1)+'. '+review.title"
+                                  :name="reviewIndex">
+                    <h3>{{ review.title }}</h3>
+                    <div v-for="(item, itemIndex) in review.items" :key="item.content" style="padding: 0 40px">
+                        <li>{{ item.content }}</li>
+                        <el-row>
+                            <el-col class="col">
+                                <el-form-item label="评审结果" :rules="itemRules.result"
+                                              :prop="'reviewsOnExplanation.' + reviewIndex + '.items.' + itemIndex + '.result'">
+                                    <el-input v-model="item.result" placeholder="评审结果"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col class="col">
+                                <el-form-item label="评审结果说明" :rules="itemRules.explanation"
+                                              :prop="'reviewsOnExplanation.' + reviewIndex + '.items.' + itemIndex + '.explanation'">
+                                    <el-input type="textarea" v-model="item.explanation"
+                                              placeholder="评审结果说明"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
             <h2>二.软件文档集审评</h2>
-            <div v-for="(review, reviewIndex) in form.reviewsOnDocuments" :key="review.title" style="padding: 0 40px">
-                <h3>{{ reviewIndex + 1 }}-{{ review.title }}</h3>
-                <div v-for="(item, itemIndex) in review.items" :key="item.content" style="padding: 0 40px">
-                    <li>{{ item.content }}</li>
-                    <el-row>
-                        <el-col class="col">
-                            <el-form-item label="评审结果" :rules="itemRules.result"
-                                          :prop="'reviewsOnDocuments.' + reviewIndex + '.items.' + itemIndex + '.result'">
-                                <el-input v-model="item.result" placeholder="评审结果"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col class="col">
-                            <el-form-item label="评审结果说明" :rules="itemRules.explanation"
-                                          :prop="'reviewsOnDocuments.' + reviewIndex + '.items.' + itemIndex + '.explanation'">
-                                <el-input type="textarea" v-model="item.explanation" placeholder="评审结果说明"></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                </div>
-            </div>
-            <el-form-item label="检查人" prop="checker" style="width: 50%">
+            <el-collapse v-model="activeDocumentParts">
+                <el-collapse-item v-for="(review, reviewIndex) in form.reviewsOnDocuments"
+                                  :key="review.title"
+                                  :title="(reviewIndex+1)+'. '+review.title"
+                                  :name="reviewIndex">
+                    <h3>{{ review.title }}</h3>
+                    <div v-for="(item, itemIndex) in review.items" :key="item.content" style="padding: 0 40px">
+                        <li>{{ item.content }}</li>
+                        <el-row>
+                            <el-col class="col">
+                                <el-form-item label="评审结果" :rules="itemRules.result"
+                                              :prop="'reviewsOnDocuments.' + reviewIndex + '.items.' + itemIndex + '.result'">
+                                    <el-input v-model="item.result" placeholder="评审结果"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col class="col">
+                                <el-form-item label="评审结果说明" :rules="itemRules.explanation"
+                                              :prop="'reviewsOnDocuments.' + reviewIndex + '.items.' + itemIndex + '.explanation'">
+                                    <el-input type="textarea" v-model="item.explanation"
+                                              placeholder="评审结果说明"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
+            <el-form-item label="检查人" prop="checker" style="width: 50%; margin-top: 20px">
                 <el-input placeholder="检查人" v-model="form.checker"></el-input>
             </el-form-item>
         </el-form>
@@ -379,7 +392,9 @@ export default {
             itemRules: {
                 result: { required: true, message: "请填写评审结果", trigger: 'blur' },
                 explanation: { required: true, message: "请填写评审结果说明", trigger: 'blur' }
-            }
+            },
+            activeDescriptionParts: [],
+            activeDocumentParts: []
         }
     },
     methods: {
@@ -408,7 +423,8 @@ export default {
         },
         pass() {
         },
-        refute() { },
+        refute() {
+        },
         handleResult(res) {
             console.log(res)
             if (res.status === 200) {
@@ -455,8 +471,7 @@ export default {
                 if (res.status === 200) {
                     if (res.data) {
                         this.form = res.data
-                    }
-                    else {
+                    } else {
                         this.form = documentReviewForm
                     }
                 }
@@ -486,5 +501,9 @@ export default {
 .col {
     width: 50%;
     padding: 10px;
+}
+
+.el-collapse-item {
+    padding: 0 40px
 }
 </style>

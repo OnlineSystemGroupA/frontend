@@ -2,18 +2,30 @@
     <div class="verification">
         <h1>测试方案评审表</h1>
         <el-form label-width="100px" label-position="left" :disabled="disable">
-            <el-form-item label="软件名称">
-                <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
-            </el-form-item>
-            <el-form-item label="版本号">
-                <el-input placeholder="版本号" v-model="form.softwareVersion"></el-input>
-            </el-form-item>
-            <el-form-item label="项目编号">
-                <el-input placeholder="项目编号" v-model="form.projectId"></el-input>
-            </el-form-item>
-            <el-form-item label="测试类别">
-                <el-input placeholder="测试类别" v-model="form.testType"></el-input>
-            </el-form-item>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="软件名称">
+                        <el-input placeholder="软件名称" v-model="form.softwareName"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="版本号">
+                        <el-input placeholder="版本号" v-model="form.softwareVersion"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="项目编号">
+                        <el-input placeholder="项目编号" v-model="form.projectId"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="测试类别">
+                        <el-input placeholder="测试类别" v-model="form.testType"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
             <h2>内容审核</h2>
             <el-form-item v-for="item in form.verifyItems" :key="item.content">
                 <h3>审核内容:{{ item.content }}</h3>
@@ -21,14 +33,13 @@
                     <el-radio :label="true">是</el-radio>
                     <el-radio :label="false">否</el-radio>
                 </el-radio-group>
-                <el-form-item label="不通过原因">
-                    <el-input type="textarea" v-model="item.explanation" placeholder="不通过原因"
-                              :disabled="item.passed"></el-input>
+                <el-form-item label="不通过原因" v-show="!item.passed">
+                    <el-input type="textarea" v-model="item.explanation" placeholder="不通过原因"></el-input>
                 </el-form-item>
             </el-form-item>
             <h2>审评意见</h2>
             <el-form-item v-for="employee in form.verifyEmployees" :key="employee.position">
-                <h3>职责:{{ employee.position }}</h3>
+                <h3>{{ employee.position }}</h3>
                 <el-form-item>
                     <el-input type="textarea" v-model="employee.suggestions" placeholder="评审意见"></el-input>
                 </el-form-item>
