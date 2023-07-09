@@ -826,6 +826,7 @@ export default {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 console.log(this.processId)
+                this.$bus.$emit('submitTestReport')
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'
@@ -845,12 +846,10 @@ export default {
             }
         },
         pass() {
-            //this.$bus.$emit('passApplication', true)
-            console.log('pass')
+            this.$bus.$emit('checkTestReport', true)
         },
         refute() {
-            //this.$bus.$emit('passApplication', false)
-            console.log('refute')
+            this.$bus.$emit('checkTestReport', false)
         },
         handleResult(res) {
             console.log(res)

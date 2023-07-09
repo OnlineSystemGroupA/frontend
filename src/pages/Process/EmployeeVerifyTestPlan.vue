@@ -20,6 +20,7 @@ export default {
         return {
             projectId: '',
             softwareName: '',
+            passable: true,
         }
     },
     props: ['processId'],
@@ -51,7 +52,7 @@ export default {
             })
         },
         complete() {
-            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task')
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + this.passable)
                 .then(
                     (res) => {
                         if (res.status === 200) {
@@ -86,6 +87,18 @@ export default {
     },
     created() {
         this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
+    },
+    mounted() {
+        this.$bus.$on('checkTestPlan', (check) => {
+            this.passable = check
+        })
+        this.$bus.$on('submitTestPlanVerify', () => {
+            this.complete()
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('checkTestPlan')
+        this.$bus.$off('submitTestPlanVerify')
     }
 }
 </script>

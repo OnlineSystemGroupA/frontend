@@ -208,16 +208,15 @@ export default {
             }
         },
         pass() {
-            //this.$bus.$emit('passApplication', true)
-            console.log('pass')
+            this.$bus.$emit('checkTestPlan', true)
         },
         refute() {
-            //this.$bus.$emit('passApplication', false)
-            console.log('refute')
+            this.$bus.$emit('checkTestPlan', false)
         },
         handleResult(res) {
             console.log(res)
             if (res.status === 200) {
+                this.$bus.$emit('submitTestPlan')
                 alert('上传成功')
             }
         },

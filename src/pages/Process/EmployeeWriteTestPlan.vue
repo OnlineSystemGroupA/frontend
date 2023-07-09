@@ -5,7 +5,6 @@
         <h3>项目名:{{ softwareName }}</h3>
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="writeTestPlan">创建测试方案</el-button>
-        <el-button type="primary" @click="complete">完成流程</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -76,6 +75,14 @@ export default {
     created() {
         this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
     },
+    mounted() {
+        this.$bus.$on('submitTestPlan', () => {
+            this.complete()
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('submitTestPlan')
+    }
 }
 </script>
 

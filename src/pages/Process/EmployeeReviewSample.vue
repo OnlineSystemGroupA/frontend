@@ -6,7 +6,7 @@
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="download">下载文件</el-button>
         <el-button type="primary" @click="documentReview">文档检查表</el-button>
-        <el-button type="primary" @click="complete">完成流程</el-button>
+        <el-button type="success" @click="complete">完成流程</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -60,7 +60,15 @@ export default {
                         }
                     },
                     (err) => {
-                        this.$message.warning(err.data)
+                        if (err.status === 403) {
+                            this.$message.warning('指定流程对该用户不可见或当前用户无完成任务权限');
+                        }
+                        else if (err.status === 404) {
+                            this.$message.warning(' 指定流程不存在')
+                        }
+                        else if (err.status === 460) {
+                            this.$message.warning('未满足完成条件')
+                        }
                     }
                 )
         },

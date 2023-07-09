@@ -295,6 +295,7 @@ export default {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 console.log(this.processId)
+                this.$bus.$emit('submitTestWorkCheck')
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestWorkCheckForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'

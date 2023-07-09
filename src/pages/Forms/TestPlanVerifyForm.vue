@@ -129,6 +129,7 @@ export default {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 console.log(this.processId)
+                this.$bus.$emit('submitTestPlanVerify')
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanVerifyForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'
@@ -146,14 +147,6 @@ export default {
                     }
                 }).then(this.handleSaveResult, this.handleError)
             }
-        },
-        pass() {
-            //this.$bus.$emit('passApplication', true)
-            console.log('pass')
-        },
-        refute() {
-            //this.$bus.$emit('passApplication', false)
-            console.log('refute')
         },
         handleResult(res) {
             console.log(res)

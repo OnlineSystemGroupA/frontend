@@ -5,7 +5,6 @@
         <h3>项目名:{{ softwareName }}</h3>
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="checkTestWork()">测试工作检查表</el-button>
-        <el-button type="primary" @click="complete">完成流程</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -56,7 +55,15 @@ export default {
                         }
                     },
                     (err) => {
-                        this.$message.warning(err.data)
+                        if (err.status === 403) {
+                            this.$message.warning('指定流程对该用户不可见或当前用户无完成任务权限');
+                        }
+                        else if (err.status === 404) {
+                            this.$message.warning(' 指定流程不存在')
+                        }
+                        else if (err.status === 460) {
+                            this.$message.warning('未满足完成条件')
+                        }
                     }
                 )
         },
@@ -74,9 +81,18 @@ export default {
                 alert('指定流程不存在')
             }
         },
+        
     },
     created() {
         this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
+    },
+    mounted() {
+        this.$bus.$on('submitTestWorkCheck', () => {
+            this.complete()
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('submitTestWorkCheck')
     }
 }
 </script>

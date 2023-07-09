@@ -52,9 +52,44 @@ export default {
                 alert('指定流程不存在')
             }
         },
+        complete() {
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + this.passable)
+                .then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.$message.success("进入下一流程！")
+                            this.$router.push(
+                                {
+                                    name: 'employeeItemDetail',
+                                    query: { processId: this.processId }
+                                }
+                            )
+                        }
+                    },
+                    (err) => {
+                        if (err.status === 403) {
+                            this.$message.warning('指定流程对该用户不可见或当前用户无完成任务权限');
+                        }
+                        else if (err.status === 404) {
+                            this.$message.warning(' 指定流程不存在')
+                        }
+                        else if (err.status === 460) {
+                            this.$message.warning('未满足完成条件')
+                        }
+                    }
+                )
+        },
     },
     created() {
         this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
+    },
+    mounted() {
+          this.$bus.$on('submitTestReport', () => {
+            this.complete()
+        })
+    },
+    beforeDestroy() {
+        this.$bus.$off('submitTestReport')
     }
 }
 </script>

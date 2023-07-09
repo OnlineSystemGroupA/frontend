@@ -75,7 +75,15 @@ export default {
                         }
                     },
                     (err) => {
-                        this.$message.warning(err.data)
+                        if (err.status === 403) {
+                            this.$message.warning('指定流程对该用户不可见或当前用户无完成任务权限');
+                        }
+                        else if (err.status === 404) {
+                            this.$message.warning(' 指定流程不存在')
+                        }
+                        else if (err.status === 460) {
+                            this.$message.warning('未满足完成条件')
+                        }
                     }
                 )
         },
