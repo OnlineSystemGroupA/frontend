@@ -221,7 +221,6 @@ export default {
             let routeName = this.formMap.get(row.title)
             console.log(routeName)
             if (routeName) {
-                console.log(this.authorityMap.get(routeName))
                 if (this.authorityMap.get(routeName) !== 'true' && logType === 'client') {
                     return
                 }
