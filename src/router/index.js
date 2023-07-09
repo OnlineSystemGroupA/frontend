@@ -59,6 +59,7 @@ import FinishedItemTable from '../pages/Tables/FinishedItemTable'
 import FinishedItemDetail from '../pages/Details/FinishedItemDetail'
 import ItemOfEmployee from '../pages/Tables/ItemOfEmployee'
 import ClientUploadContract from "@/pages/Process/ClientUploadContract.vue";
+import EmployeeSendReport from '../pages/Process/EmployeeSendReport'
 //import ConfidentialityForm from '../pages/Forms/ConfidentialityForm'
 
 const router = new VueRouter({
@@ -903,6 +904,26 @@ const router = new VueRouter({
                         },
                     ]
                 },//测试工作检查
+                {
+                    name: 'sendReport',
+                    path: 'sendReport',
+                    component: EmployeeSendReport,
+                    props({ query: { processId } }) {
+                        return { processId }
+                    },
+                    meta: { title: '检查测试工作', logType: 'employee' },
+                    children: [
+                        {
+                            name: 'checkReportBeforeSend',
+                            path: 'checkReportBeforeSend',
+                            component: TestReportForm,
+                            props({ query: { processId, writable, checkable} }) {
+                                return { processId, writable, checkable }
+                            },
+                            meta: { title: '检查测试报告', logType: 'employee' },
+                        }
+                    ]
+                },//发送测试报告
             ]
         },//员工界面
         {

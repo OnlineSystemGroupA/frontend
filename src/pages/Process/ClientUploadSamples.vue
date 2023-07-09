@@ -1,18 +1,12 @@
 <template>
-    <div style="width:90%;">
-        <h2>项目号:{{ processId }}</h2>
+    <div style="width:94%;">
         <h2>上传文件</h2>
-        <el-upload ref="upload" 
-                class="upload-demo" 
-                :action=contractFileURL
-                :on-preview="handlePreview" 
-                :on-remove="handleRemove" 
-                :file-list="fileList" 
-                :on-success="handleSuccess"
-                :before-upload="handleBeforeSuccess" 
-                :on-exceed="handleExceed" 
-                :auto-upload="false"
-                :headers="headers">
+        <h3>项目号:{{ projectId }}</h3>
+        <h3>项目名:{{ softwareName }}</h3>
+
+        <el-upload ref="upload" class="upload-demo" :action=contractFileURL :on-preview="handlePreview"
+                   :on-remove="handleRemove" :file-list="fileList" :on-success="handleSuccess"
+                   :before-upload="handleBeforeSuccess" :on-exceed="handleExceed" :auto-upload="false" :headers="headers">
             <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
             <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">全部上传</el-button>
             <el-button style="margin-left: 10px;" size="small" type="success" @click="complete">完成流程</el-button>
@@ -29,6 +23,8 @@ export default {
     props: ['processId'],
     data() {
         return {
+            projectId: '',
+            softwareName: '',
             fileList: [],
         }
     },
@@ -82,8 +78,26 @@ export default {
                         this.$message.warning(err.data)
                     }
                 )
-        }
-    }
+        },
+        handleError(err) {
+            if (err.status === 402) {
+                alert('指定流程对该用户不可见')
+            }
+            else if (err.status === 404) {
+                alert('指定流程不存在')
+            }
+        },
+        handleResponse(res) {
+            if (res.status === 200) {
+                this.projectId = res.data.projectId
+                this.softwareName = res.data.title
+            }
+        },
+
+    },
+    created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
+    },
 }
 </script>
 

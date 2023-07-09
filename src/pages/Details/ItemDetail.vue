@@ -2,7 +2,7 @@
     <div class="item">
         <el-row style="width: 100%">
             <el-col :span="4">
-                <el-button @click="goBack" circle icon="el-icon-arrow-left" class="return-button"></el-button>
+                <el-button @click="goBack" circle icon="el-icon-arrow-left"></el-button>
             </el-col>
             <el-col :span="16" class="top-col">
                 <h2>项目详情</h2>
@@ -59,17 +59,16 @@
         <div style="margin:10px; width: 100%;">
             <h2>测试流程</h2>
             <el-steps :active="active" finish-status="success" align-center>
-                <el-step title="申请创建中"></el-step>
-                <el-step title="申请审核中"></el-step>
-                <el-step title="报价生成中"></el-step>
-                <el-step title="合同谈判中"></el-step>
-                <el-step title="样品上传中"></el-step>
-                <el-step title="计划制定中"></el-step>
-                <el-step title="测试进行中"></el-step>
-                <el-step title="报告审核中"></el-step>
-                <el-step title="归档处理中"></el-step>
-                <el-step title="用户确认中"></el-step>
-                <el-step title="项目已完成"></el-step>
+                <el-step title="申请创建"></el-step>
+                <el-step title="申请审核"></el-step>
+                <el-step title="报价生成"></el-step>
+                <el-step title="合同谈判"></el-step>
+                <el-step title="样品上传"></el-step>
+                <el-step title="计划制定"></el-step>
+                <el-step title="测试进行"></el-step>
+                <el-step title="报告审核"></el-step>
+                <el-step title="归档处理"></el-step>
+                <el-step title="用户确认"></el-step>
             </el-steps>
             <!--<el-button type="primary" @click="nextStep">下一步</el-button>--><!--仅测试用-->
             <el-button type="primary" @click="operateProcess">操作流程</el-button>
@@ -108,6 +107,7 @@ export default {
     data() {
         return {
             itemInfo: {
+                projectId:'114514',
                 title: '专用数据库系统',
                 version: '1.2.4',
                 testType: '',
@@ -211,13 +211,6 @@ export default {
         }
     },
     methods: {
-        nextStep() {
-            this.active++;
-            if (this.active === 10) {
-                this.active = 11
-            }
-            this.active %= 12;
-        },
         readForm(row) {
             //console.log(row.title)
             if (!sessionStorage.getItem('logType')) {
@@ -228,7 +221,8 @@ export default {
             let routeName = this.formMap.get(row.title)
             console.log(routeName)
             if (routeName) {
-                if (this.authorityMap.get(routeName) !== 'true') {
+                console.log(this.authorityMap.get(routeName))
+                if (this.authorityMap.get(routeName) !== 'true' && logType === 'client') {
                     return
                 }
                 routeName = logType + 'Read' + routeName
@@ -288,8 +282,13 @@ export default {
                 this.active = this.itemInfo.index
             }
         },
-        hanldeError(err) {
-            alert(err.data)
+        handleError(err) {
+            if (err.status === 402) {
+                alert('指定流程对该用户不可见')
+            }
+            else if (err.status === 404) {
+                alert('指定流程不存在')
+            }
         }
     },
     created() {
@@ -312,7 +311,7 @@ export default {
             this.verificationMap.set(element.key, element.value)
         })
 
-        this.axios.get('/api/workflow/processes/'+this.processId+'/details').then(this.handleResponse,this.hanldeError)
+        this.axios.get('/api/workflow/processes/'+this.processId+'/details').then(this.handleResponse,this.handleError)
 
     }
 }
@@ -324,9 +323,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.return-button {
 }
 
 .pure-table {

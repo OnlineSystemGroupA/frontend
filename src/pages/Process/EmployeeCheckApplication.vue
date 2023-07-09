@@ -1,7 +1,8 @@
 <template>
-    <div style="width:90%;">
+    <div style="width:94%;">
         <h2>审核项目申请</h2>
-        <h3>项目号:{{ processId }}</h3>
+        <h3>项目号:{{ projectId }}</h3>
+        <h3>项目名:{{ softwareName }}</h3>
         <el-steps :active="active" finish-status="success">
             <el-step title="步骤 1" description="审核申请报告"></el-step>
             <el-step title="步骤 2" description="审核功能列表"></el-step>
@@ -20,7 +21,9 @@ export default {
     name: 'EmployeeCheckApplication',
     data() {
         return {
-            passable: true
+            passable: true,
+            projectId: '',
+            softwareName: ''
         }
     },
     props: ['processId'],
@@ -77,7 +80,24 @@ export default {
             } else if (err.status === 460) {
                 alert('未满足完成条件')
             }
-        }
+        },
+        handleResponse(res) {
+            if (res.status === 200) {
+                this.projectId = res.data.projectId
+                this.softwareName = res.data.title
+            }
+        },
+        handleError(err) {
+            if (err.status === 402) {
+                alert('指定流程对该用户不可见')
+            }
+            else if (err.status === 404) {
+                alert('指定流程不存在')
+            }
+        },
+    },
+    created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
     },
     computed: {
         active() {

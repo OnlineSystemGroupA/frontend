@@ -1,6 +1,5 @@
 <template>
     <div class="table">
-        <h3>工作类型:{{ workType }}</h3>
         <el-row>
             <el-col style="width:50%">
                 <el-form label-position="left" label-width="80px">

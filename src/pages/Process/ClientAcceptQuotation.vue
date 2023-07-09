@@ -1,7 +1,8 @@
 <template>
-    <div style="width:90%;">
+    <div style="width:94%;">
         <h2>查看报价</h2>
-        <h3>项目号:{{ processId }}</h3>
+        <h3>项目号:{{ projectId }}</h3>
+        <h3>项目名:{{ softwareName }}</h3>
         <QuotationForm :writable="false" :process-id="processId" :checking="false"></QuotationForm>
         <el-form>
             <el-form-item label="接受意见">
@@ -33,6 +34,8 @@ export default {
             reason: '市场行情如此',
             passable: true,
             reasonForRefution: '',
+            projectId: '',
+            softwareName: '',
         }
     },
     methods: {
@@ -44,9 +47,9 @@ export default {
             console.log(JSON.stringify(this.form))
             console.log(this.processId)
             this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + this.passable)
-                .then(this.handleResult, this.handleError)
+                .then(this.handleRes, this.handleErr)
         },
-        handleResult(res) {
+        handleRes(res) {
             console.log(res)
             if (res.status === 200) {
                 if (this.passable) {
@@ -83,16 +86,37 @@ export default {
                 alert('保存成功')
             }
         },
-        handleError(err) {
-            if (err.response.status === 401) {
-                alert('账号或者密码错误')
-            } else if (err.response.status === 403) {
-                alert('账号封禁中')
-            } else if (err.response.status === 404) {
-                alert('指定流程实例不存在')
+        handleErr(err) {
+            if (err.status === 403) {
+                alert('指定流程对该用户不可见或当前用户无完成任务权限')
             }
-        }
-    }
+            else if (err.status === 404) {
+                alert('指定流程不存在')
+            }
+            else if (err.status === 460) {
+                alert(' 未满足完成条件')
+            }
+        },
+        handleError(err) {
+            if (err.status === 402) {
+                alert('指定流程对该用户不可见')
+            }
+            else if (err.status === 404) {
+                alert('指定流程不存在')
+            }
+        },
+        handleResponse(res) {
+            if (res.status === 200) {
+                this.projectId = res.data.projectId
+                this.softwareName = res.data.title
+            }
+        },
+
+    },
+    created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
+    },
+
 }
 </script>
 

@@ -1,7 +1,8 @@
 <template>
-    <div style="width:90%;">
+    <div style="width:94%;">
         <h2>项目报价</h2>
-        <h3>项目号:{{ processId }}</h3>
+        <h3>项目号:{{ projectId }}</h3>
+        <h3>项目名:{{ softwareName }}</h3>
         <QuotationForm :writable="true" :process-id="processId" :checking="true"></QuotationForm>
         <br>
         <el-button type="primary" @click="submit">报价</el-button>
@@ -19,8 +20,8 @@ export default {
     },
     data() {
         return {
-            quotation: 0,
-            reason: '',
+            projectId: '',
+            softwareName: ''
         }
     },
     methods: {
@@ -53,7 +54,24 @@ export default {
             else if (err.status === 460) {
                 alert('未满足完成条件')
             }
-        }
+        },
+        handleResponse(res) {
+            if (res.status === 200) {
+                this.projectId = res.data.projectId
+                this.softwareName = res.data.title
+            }
+        },
+        handleError(err) {
+            if (err.status === 402) {
+                alert('指定流程对该用户不可见')
+            }
+            else if (err.status === 404) {
+                alert('指定流程不存在')
+            }
+        },
+    },
+    created() {
+        this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
     },
     mounted() {
         this.$bus.$on('QuotationSuccess', () => {
