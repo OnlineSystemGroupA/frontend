@@ -1,7 +1,7 @@
 <template>
     <div class="report">
         <h1>测 试 报 告</h1>
-        <el-form label-width="100px" label-position="left" :disabled="disabled">
+        <el-form label-width="100px" label-position="left" :disabled="disabled" v-loading="!dataReady">
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="软件名称">
@@ -319,24 +319,22 @@
                 <el-input type="textarea" placeholder="网络环境" v-model="form.networkEnvironment"></el-input>
             </div>
             <h2>二、测试依据和参考资料</h2>
-            <div>
-                <h3>测试依据</h3>
-                <el-form-item label-width="0" ref="testStandards" prop="testStandards">
-                    <SelectAndCreateTags v-model="form.testStandards" :default-options="testStandardOptions"
-                                         :disabled="disabled" option-description="新增一个测试依据"
-                                         @change="emitChangeEvent('testStandards', form.testStandards)"
-                                         @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
-                </el-form-item>
-            </div>
-            <div>
-                <h3>参考资料</h3>
-                <el-form-item label-width="0" ref="testStandards" prop="testStandards">
-                    <SelectAndCreateTags v-model="form.references" :default-options="[]"
-                                         :disabled="disabled" option-description="新增一个参考资料 "
-                                         @change="emitChangeEvent('testStandards', form.testStandards)"
-                                         @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
-                </el-form-item>
-            </div>
+            <h3>参考资料</h3>
+            <el-form-item label-width="0">
+                <SelectAndCreateTags ref="references" v-model="form.references" :default-options="referenceOptions"
+                                     :disabled="disabled" option-description="新增一个参考资料 "
+                                     v-if="dataReady"
+                                     @change="emitChangeEvent('references', form.references)"
+                                     @blur="emitBlurEvent('references', form.references)"></SelectAndCreateTags>
+            </el-form-item>
+            <h3>测试依据</h3>
+            <el-form-item label-width="0">
+                <SelectAndCreateTags ref="testStandards" v-model="form.testStandards" :default-options="testStandardOptions"
+                                     :disabled="disabled" option-description="新增一个测试类型"
+                                     v-if="dataReady"
+                                     @change="emitChangeEvent('testStandards', form.testStandards)"
+                                     @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
+            </el-form-item>
             <h2>三、测试内容</h2>
             <div>
                 <h3>功能性测试</h3>
@@ -699,8 +697,8 @@ export default {
                     }
                 },
                 networkEnvironment: '',
-                testStandards: [],
                 references: [],
+                testStandards: [],
                 functionTests: [{ functionModule: '', functionRequirement: '', testResult: '' }],
                 efficiencyTests: [{ property: '', testExplanation: '', testResult: '' }],
                 portabilityTests: [{ property: '', testExplanation: '', testResult: '' }],
@@ -717,6 +715,8 @@ export default {
                 { value: "NST-03-WI13-2011", label: "NST-03-WI13-2011" },
                 { value: "NST-03-WI22-2014", label: "NST-03-WI22-2014" },
             ],
+            referenceOptions: [],
+            dataReady: false
         }
     },
     methods: {
@@ -728,7 +728,7 @@ export default {
             }
         },
         emitChangeEvent(ref, value) {
-            console.log(value);
+            console.log(ref)
             this.$refs[ref].$emit('el.form.change', value);
         },
         addSoftware() {
@@ -858,7 +858,7 @@ export default {
             } else if (err.response.status === 404) {
                 alert('指定流程或表单不存在')
             }
-        },
+        }
     },
     computed: {
         disabled() {
@@ -882,8 +882,8 @@ export default {
             return false
         }
     },
-    mounted() {
-        console.log(testReportForm)
+    updated() {
+        console.log("form updated")
     },
     created() {
         this.axios.get('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm').then(
@@ -895,11 +895,10 @@ export default {
                     } else {
                         this.form = testReportForm
                     }
+                    this.dataReady = true
                 }
-
             },
             (err) => {
-
                 if (err.response.status === 403) {
                     alert('指定流程或表单对该用户不可见')
                 } else if (err.response.status === 404) {

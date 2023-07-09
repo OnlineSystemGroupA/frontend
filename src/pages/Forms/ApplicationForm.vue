@@ -1,11 +1,12 @@
 <template>
     <div class="application">
         <el-form label-position="left" size="small" :model="form" ref="form" :disabled="disabled" :rules="rules"
-                 v-if="dataReady">
+                 v-loading="!dataReady">
             <h1>软件项目委托测试申请书</h1>
             <el-form-item label="测试类型" prop="testTypes" ref="testTypes">
                 <br>
                 <SelectAndCreateTags v-model="form.testTypes" :default-options="testTypeOptions" :disabled="disabled"
+                                     v-if="dataReady"
                                      option-description="新增一个测试类型"
                                      @change="emitChangeEvent('testTypes', form.testTypes)"
                                      @blur="emitBlurEvent('testTypes', form.testTypes)"></SelectAndCreateTags>
@@ -69,6 +70,7 @@
             <el-form-item label="测试依据" ref="testStandards" prop="testStandards">
                 <br>
                 <SelectAndCreateTags v-model="form.testStandards" :default-options="testStandardOptions"
+                                     v-if="dataReady"
                                      :disabled="disabled" option-description="新增一个测试依据"
                                      @change="emitChangeEvent('testStandards', form.testStandards)"
                                      @blur="emitBlurEvent('testStandards', form.testStandards)"></SelectAndCreateTags>
@@ -76,7 +78,7 @@
             <hr>
             <el-form-item label="需要测试的指标" ref="testAspects" prop="testAspects">
                 <br>
-                <MultipleCreateAndSelect v-if="!disabled" v-model="form.testAspects"
+                <MultipleCreateAndSelect v-if="!disabled && dataReady" v-model="form.testAspects"
                                          :default-options="testAspectsOptions"
                                          option-description="选择测试指标" create-description="其他指标"
                                          @change="emitChangeEvent('testAspects', form.testAspects)"
@@ -137,6 +139,7 @@
             <el-form-item label="架构:" prop="serverNames" ref="serverNames">
                 <br>
                 <SelectAndCreateTags v-model="form.serverNames" :default-options="serverNameOptions"
+                                     v-if="dataReady"
                                      :disabled="disabled"
                                      option-description="添加一种架构"
                                      @change="emitChangeEvent('serverNames', form.serverNames)"
@@ -200,6 +203,7 @@
             <el-form-item label="构架:" prop="serverFrames" ref="serverFrames">
                 <br>
                 <SelectAndCreateTags v-model="form.serverFrames" :default-options="frameOptions" :disabled="disabled"
+                                     v-if="dataReady"
                                      option-description="添加一种构架"
                                      @change="emitChangeEvent('serverFrames', form.serverFrames)"
                                      @blur="emitBlurEvent('serverFrames', form.serverFrames)"></SelectAndCreateTags>
@@ -644,6 +648,7 @@ export default {
                     this.chosenData.companyType = '其他'
                 }
             }
+            this.$refs.testTypes.$forceUpdate()
         }
     },
     mounted() {
