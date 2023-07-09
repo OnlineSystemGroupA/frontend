@@ -1,89 +1,120 @@
 <template>
     <div class="record-form">
         <h1>软件测试记录</h1>
-        <el-button @click="addRecord">新建测试记录</el-button>
         <el-form label-width="120px" label-position="left" :disabled="disable">
-            <el-form-item v-for="(record, index) in form.records" :key="index" class="record">
-                <h1>Testcase {{ index }}</h1>
-                <table>
-                    <tr>
-                        <th>测试类型</th>
-                        <td>
-                            <el-input v-model="record.type"></el-input>
-                        </td>
-                        <th>设计说明</th>
-                        <td>
-                            <el-input v-model="record.description"></el-input>
-                        </td>
-                    </tr>
+            <el-table :data="form.records" ref="problemTable" @row-click="onRowClick" style="width: 100%">
+                <el-table-column type="index"></el-table-column>
+                <el-table-column type="expand">
+                    <template slot-scope="record">
+                        <div class="table-dropdown">
+                            <h1>Testcase {{ record.$index }}</h1>
+                            <table>
+                                <el-row :gutter="20">
+                                    <el-col :span="12">
+                                        <el-form-item label="测试类型">
+                                            <el-input v-model="record.row.type"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item label="设计说明">
+                                            <el-input v-model="record.row.description"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
 
-                    <tr>
-                        <th>规约说明</th>
-                        <td>
-                            <el-input v-model="record.contract"></el-input>
-                        </td>
-                        <th>前提条件</th>
-                        <td>
-                            <el-input v-model="record.premise"></el-input>
-                        </td>
-                    </tr>
+                                <el-row :gutter="20">
+                                    <el-col :span="12">
+                                        <el-form-item label="规约说明">
+                                            <el-input v-model="record.row.contract"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item label="前提条件">
+                                            <el-input v-model="record.row.premise"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
 
-                    <tr>
-                        <th>执行过程</th>
-                        <td>
-                            <el-input v-model="record.process"></el-input>
-                        </td>
-                        <th>预期结果</th>
-                        <td>
-                            <el-input v-model="record.prediction"></el-input>
-                        </td>
-                    </tr>
+                                <el-row :gutter="20">
+                                    <el-col :span="12">
+                                        <el-form-item label="执行过程">
+                                            <el-input v-model="record.row.process"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item label="预期结果">
+                                            <el-input v-model="record.row.prediction"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
 
-                    <tr>
-                        <th>设计者</th>
-                        <td>
-                            <el-input v-model="record.designer"></el-input>
-                        </td>
-                        <th>实际结果</th>
-                        <td>
-                            <el-input v-model="record.result"></el-input>
-                        </td>
-                    </tr>
+                                <el-row :gutter="20">
+                                    <el-col :span="12">
+                                        <el-form-item label="设计者">
+                                            <el-input v-model="record.row.designer"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item label="实际结果">
+                                            <el-input v-model="record.row.result"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
 
-                    <tr>
-                        <th>一致性</th>
-                        <td>
-                            <el-radio-group v-model="record.matched">
-                                <el-radio :label="true">是</el-radio>
-                                <el-radio :label="false">否</el-radio>
-                            </el-radio-group>
-                        </td>
-                        <th>相关 bug 编号</th>
-                        <td>
-                            <el-input v-model="record.bugIndex"></el-input>
-                        </td>
-                    </tr>
+                                <el-row :gutter="20">
+                                    <el-col :span="12">
+                                        <el-form-item label="一致性">
+                                            <el-radio-group v-model="record.row.matched">
+                                                <el-radio :label="true">是</el-radio>
+                                                <el-radio :label="false">否</el-radio>
+                                            </el-radio-group>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item label="相关 bug 编号">
+                                            <el-input v-model="record.row.bugIndex"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
 
-                    <tr>
-                        <th>执行者</th>
-                        <td>
-                            <el-input v-model="record.executor"></el-input>
-                        </td>
-                        <th>执行测试时间</th>
-                        <td>
-                            <el-input v-model="record.date"></el-input>
-                        </td>
-                    </tr>
+                                <el-row :gutter="20">
+                                    <el-col :span="12">
+                                        <el-form-item label="执行者">
+                                            <el-input v-model="record.row.executor"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item label="执行测试时间">
+                                            <el-input v-model="record.row.date"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
 
-                    <th>确认人</th>
-                    <td>
-                        <el-input v-model="record.verifier"></el-input>
-                    </td>
-                </table>
-
-                <br>
-                <el-button type="danger" @click="deleteRecord(index)">删除</el-button>
-            </el-form-item>
+                                <el-row :gutter="20">
+                                    <el-col :span="12">
+                                        <el-form-item label="确认人">
+                                            <el-input v-model="record.row.verifier"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+                            </table>
+                            <br>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="测试类型" prop="type"></el-table-column>
+                <el-table-column label="设计说明" prop="description"></el-table-column>
+                <el-table-column align="right">
+                    <template slot="header">
+                        <el-button size="mini" type="primary" plain circle icon="el-icon-plus"
+                                   @click.native.stop="addRecord"></el-button>
+                    </template>
+                    <template slot-scope="record">
+                        <el-button size="mini" type="danger" plain circle icon="el-icon-delete"
+                                   @click.native.stop="deleteRecord(record.$index)"></el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
         </el-form>
         <br>
         <el-row v-show="!disable">
@@ -126,6 +157,9 @@ export default {
         }
     },
     methods: {
+        onRowClick(row) {
+            this.$refs.problemTable.toggleRowExpansion(row);
+        },
         addRecord() {
             this.form.records.push({
                 type: '',
@@ -259,9 +293,12 @@ export default {
     padding: 5%;
 }
 
-.record {
-    margin: 30px;
-    padding: 10px;
-    border: 1px solid black;
+.table-dropdown {
+    width: 100%;
+    padding: 0 10%;
+}
+
+.el-form-item {
+    margin-bottom: 5px;
 }
 </style>

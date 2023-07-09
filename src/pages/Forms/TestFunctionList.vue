@@ -19,6 +19,7 @@
                       ref="functionTable"
                       @row-click="onFuncRowClick"
                       style="width: 100%">
+                <el-table-column type="index"></el-table-column>
                 <el-table-column type="expand">
                     <template slot-scope="func">
                         <div class="table-dropdown">
@@ -32,6 +33,7 @@
                                       @row-click="row=>onItemRowClick(func.$index, row)"
                                       style="width: 80%"
                                       :ref="'itemTable' + func.$index">
+                                <el-table-column type="index"></el-table-column>
                                 <el-table-column type="expand">
                                     <template slot-scope="item">
                                         <div class="table-dropdown">
