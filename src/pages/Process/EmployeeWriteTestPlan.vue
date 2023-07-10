@@ -25,7 +25,7 @@ export default {
         checkItemDetail(id) {
             this.$router.push({
                 name: 'employeeItemDetail',
-                query: { itemId: id }
+                query: { processId: id }
             })
         },
         writeTestPlan() {

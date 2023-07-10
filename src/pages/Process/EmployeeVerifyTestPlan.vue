@@ -6,7 +6,6 @@
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="priamry" @click="checkTestPlan">查看测试计划</el-button>
         <el-button type="priamry" @click="verfiyTestPlan">填写审核表格</el-button>
-        <el-button @click="complete" type="primary">完成流程</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -56,7 +55,13 @@ export default {
                 .then(
                     (res) => {
                         if (res.status === 200) {
-                            this.$message.success("进入下一流程！")
+                            if (this.passable) {
+                                this.$message.success("审核通过！")
+                            }
+                            else {
+                                 this.$message.success("表格驳回！")
+                            }
+                            
                             this.$router.push(
                                 {
                                     name: 'employeeItemDetail',
@@ -91,6 +96,7 @@ export default {
     mounted() {
         this.$bus.$on('checkTestPlan', (check) => {
             this.passable = check
+            this.verfiyTestPlan()
         })
         this.$bus.$on('submitTestPlanVerify', () => {
             this.complete()

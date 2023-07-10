@@ -868,10 +868,10 @@ export default {
                         this.form.clientCompany = res.data.companyChineseName
                         this.form.address = res.data.companyInfo.address
                         this.form.fax = res.data.companyInfo.fax
-                        this.form.postcode = res.data.companyInfo.postcode
                         this.form.contract = res.data.companyInfo.contractPerson
                         this.form.telephone = res.data.companyInfo.telephone
-                        this.form.email = res.data.email
+                        this.form.email = res.data.companyInfo.email
+                        this.form.website = res.data.companyInfo.website
                     }
                 },
                 (err) => {
