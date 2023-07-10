@@ -787,10 +787,6 @@ export default {
     padding: 5%;
 }
 
-h1 {
-    font-size: 2em;
-}
-
 .el-collapse-item {
     padding: 0 40px
 }
