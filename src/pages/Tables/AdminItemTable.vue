@@ -17,7 +17,7 @@
                 <el-radio v-for="(sort, index) in sortKeys" :key="index" :label="sort.value">{{ sort.label }}</el-radio>
             </el-radio-group>
         </div>
-        <br/>
+        <br />
         <el-table :data="itemList" border style="width: 100%; height: auto;">
             <el-table-column prop="processId" label="项目号" style="width: 14%">
                 <template slot-scope="scope">
@@ -35,14 +35,9 @@
                         <el-button @click="checkItemDetail(scope.row.processId)" icon="el-icon-search" size="small"
                                    type="primary" circle></el-button>
                     </el-tooltip>
-                    <el-tooltip class="item" effect="light" content="暂停当前项目" placement="bottom">
-                        <el-button @click="stopItem(scope.row.processId)" icon="el-icon-caret-right" size="small"
-                                   type="warning"
-                                   circle></el-button>
-                    </el-tooltip>
+
                     <el-tooltip class="item" effect="light" content="删除当前项目" placement="bottom">
-                        <el-button @click="deleteItem(scope.row.processId)" icon="el-icon-delete" size="small"
-                                   type="danger"
+                        <el-button @click="deleteItem(scope.row.processId)" icon="el-icon-delete" size="small" type="danger"
                                    circle></el-button>
                     </el-tooltip>
                 </template>
@@ -92,14 +87,15 @@ export default {
                     label: '申请人',
                 }
             ],
-            itemList: [{
-                processId: '001',
-                title: '网购平台后台测试',
-                startDate: '2022-12-04',
-                startUser: '罗翔',
-                assignee: '张三',
-                endDate: '2022-12-04',
-            },
+            itemList: [
+                {
+                    processId: '001',
+                    title: '网购平台后台测试',
+                    startDate: '2022-12-04',
+                    startUser: '罗翔',
+                    assignee: '张三',
+                    endDate: '2022-12-04',
+                },
                 {
                     processId: '002',
                     title: '网页游戏测试',
