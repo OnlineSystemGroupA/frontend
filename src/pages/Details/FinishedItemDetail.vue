@@ -122,6 +122,12 @@ export default {
                     available: true,
                 },
                 {
+                    title: '保密协议表',
+                    date: '2023-5-11',
+                    state: '已通过',
+                    available: true,
+                },
+                {
                     title: '测试计划表',
                     date: '2023-5-11',
                     state: '已通过',

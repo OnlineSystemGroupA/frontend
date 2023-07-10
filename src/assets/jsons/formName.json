@@ -21,6 +21,10 @@
             "value": "ContractForm"
         },
         {
+            "key": "保密协议表",
+            "value": "ConfidentialityForm"
+        },
+        {
             "key": "测试计划表",
             "value": "TestPlanForm"
         },

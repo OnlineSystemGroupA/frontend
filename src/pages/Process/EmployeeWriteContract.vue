@@ -5,7 +5,9 @@
         <h3>项目名:{{ softwareName }}</h3>
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="writeContract" v-if="writeIf">填写合同</el-button>
+        <el-button type="primary" @click="writeConfidentiality" v-if="writeIf">填写保密协议</el-button>
         <el-button type="primary" @click="checkContract" v-if="verifyIf">审核合同</el-button>
+        <el-button type="primary" @click="checkConfidentiality" v-if="verifyIf">查看保密协议</el-button>
         <el-button type="primary" @click="downloadContract" v-if="uploadIf">下载合同</el-button>
         <el-button type="primary" @click="complete" v-if="uploadIf">完成流程</el-button>
         <router-view></router-view>
@@ -57,6 +59,24 @@ export default {
                 query: {
                     writable: false,
                     checking: true,
+                    processId: this.processId,
+                }
+            })
+        },
+        writeConfidentiality() {
+            this.$router.push({
+                name: 'employeeWriteConfidentiality',
+                query: {
+                    writable: true,
+                    processId: this.processId,
+                }
+            })
+        },
+        checkConfidentiality() {
+            this.$router.push({
+                name: 'employeeWriteConfidentiality',
+                query: {
+                    writable: false,
                     processId: this.processId,
                 }
             })

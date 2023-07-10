@@ -6,6 +6,7 @@
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="writeContract" v-if="writeIf">填写合同</el-button>
         <el-button type="primary" @click="checkContract" v-if="verifyIf">审核合同</el-button>
+        <el-button type="primary" @click="readConfidentiality" v-if="verifyIf">查看保密协议</el-button>
         <el-button type="primary" @click="download" v-if="uploadIf">下载pdf</el-button>
         <el-button type="primary" @click="upload" v-if="uploadIf">上传扫描件</el-button>
         <el-button type="primary" @click="complete" v-if="uploadIf">完成流程</el-button>
@@ -48,6 +49,15 @@ export default {
                 query: {
                     writable: false,
                     checking: true,
+                    processId: this.processId,
+                }
+            })
+        },
+        readConfidentiality() {
+            this.$router.push({
+                name: 'clientCheckConfidentiality',
+                query: {
+                    writable: false,
                     processId: this.processId,
                 }
             })

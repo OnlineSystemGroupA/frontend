@@ -22,6 +22,10 @@
             "value": "true"
         },
         {
+            "key": "ConfidentialityForm",
+            "value": "true"
+        },
+        {
             "key": "TestPlanForm",
             "value": "false"
         },

@@ -60,7 +60,7 @@ import FinishedItemDetail from '../pages/Details/FinishedItemDetail'
 import ItemOfEmployee from '../pages/Tables/ItemOfEmployee'
 import ClientUploadContract from "@/pages/Process/ClientUploadContract.vue";
 import EmployeeSendReport from '../pages/Process/EmployeeSendReport'
-//import ConfidentialityForm from '../pages/Forms/ConfidentialityForm'
+import ConfidentialityForm from '../pages/Forms/ConfidentialityForm'
 
 const router = new VueRouter({
     routes: [
@@ -191,6 +191,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取合同', logType: 'client' }
                 },//读取合同
+                {
+                    name: 'clientReadConfidentialityForm',
+                    path: 'clientReadConfidentialityForm',
+                    component: ConfidentialityForm,
+                    props({ query: { writable, processId } }) {
+                        return { writable, processId }
+                    },
+                    meta: { title: '读取保密协议', logType: 'client' }
+                },//读取保密协议
                 {
                     name: 'clientReadApplicationVerifyForm',
                     path: 'clientReadApplicationVerifyForm',
@@ -377,6 +386,15 @@ const router = new VueRouter({
                                 return { writable, checking, processId }
                             },
                             meta: { title: '上传合同扫描件', logType: 'client' }
+                        },
+                        {
+                            name: 'clientCheckConfidentiality',
+                            path: 'clientCheckConfidentiality',
+                            component: ConfidentialityForm,
+                            props({ query: { writable, processId } }) {
+                                return { writable, processId }
+                            },
+                            meta: { title: '查看保密协议', logType: 'client' }
                         }
                     ]
                 },//填写合同
@@ -569,6 +587,15 @@ const router = new VueRouter({
                     meta: { title: '读取合同', logType: 'employee' }
                 },//读取合同
                 {
+                    name: 'employeeReadConfidentialityForm',
+                    path: 'employeeReadConfidentialityForm',
+                    component: ConfidentialityForm,
+                    props({ query: { writable, processId } }) {
+                        return { writable, processId }
+                    },
+                    meta: { title: '读取保密协议', logType: 'employee' }
+                },//读取保密协议
+                {
                     name: 'employeeReadTestPlanForm',
                     path: 'employeeReadTestPlanForm',
                     component: TestPlanForm,
@@ -725,6 +752,15 @@ const router = new VueRouter({
                             },
                             meta: { title: '填写合同', logType: 'employee' }
                         },
+                        {
+                            name: 'employeeWriteConfidentiality',
+                            path: 'employeeWriteConfidentiality',
+                            component: ConfidentialityForm,
+                            props({ query: { writable, processId } }) {
+                                return { writable, processId }
+                            },
+                            meta: { title: '填写保密协议', logType: 'employee' }
+                        }
                     ]
                 },//填写合同
                 {
@@ -1077,6 +1113,15 @@ const router = new VueRouter({
                     },
                     meta: { title: '读取合同', logType: 'admin' }
                 },//读取合同
+                {
+                    name: 'adminReadConfidentialityForm',
+                    path: 'adminReadConfidentialityForm',
+                    component: ConfidentialityForm,
+                    props({ query: { writable, processId } }) {
+                        return { writable, processId }
+                    },
+                    meta: { title: '读取保密协议', logType: 'admin' }
+                },//读取保密协议
                 {
                     name: 'adminReadTestPlanForm',
                     path: 'adminReadTestPlanForm',
