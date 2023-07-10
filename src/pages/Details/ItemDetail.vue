@@ -97,9 +97,9 @@
 <script>
 import formAuthority from '../../assets/jsons/formAuthority.json'
 import formName from '../../assets/jsons/formName.json'
-import clientOperation from '../../assets/jsons/clientOperation.json'
-import employeeOperation from '../../assets/jsons/employeeOperation.json'
-import verificationWork from '../../assets/jsons/verificationWork.json'
+import clientOperationMap from '../../assets/jsons/clientOperationMap.json'
+import employeeOperationMap from '../../assets/jsons/employeeOperationMap.json'
+
 
 export default {
     name: 'ItemDetail',
@@ -203,11 +203,11 @@ export default {
                     available: true,
                 },
             ],
+            employeeInfo:{},
             formMap: new Map(),
             authorityMap: new Map(),
-            clientOperationMap: new Map(),
-            employeeOperationMap: new Map(),
-            verificationMap: new Map()
+            clientMap: new Map(),
+            employeeMap: new Map(),
         }
     },
     methods: {
@@ -245,32 +245,7 @@ export default {
             })
         },
         operateProcess() {
-            if (!sessionStorage.getItem('logType')) {
-                alert('请登录！')
-                return
-            }
-            let logType = sessionStorage.getItem('logType')
-            let routeName = ''
-            if (logType === 'client') {
-                console.log(this.active)
-                routeName = this.clientOperationMap.get(this.active)
-            } else {
-                routeName = this.employeeOperationMap.get(this.active)
-                if (sessionStorage.getItem('work') === 'verification') {
-                    if (this.employeeOperationMap.get(routeName)) {
-                        routeName = this.employeeOperationMap.get(routeName)
-                    }
-                }
-            }
-            console.log(routeName)
-            if (routeName) {
-                this.$router.push({
-                    name: routeName,
-                    query: {
-                        processId: this.processId
-                    }
-                })
-            }
+            this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleOperationResponse, this.handleError)
         },
         handleResponse(res) {
             if (res.status === 200) {
@@ -288,6 +263,50 @@ export default {
             else if (err.status === 404) {
                 alert('指定流程不存在')
             }
+        },
+        handleOperationResponse(res) {
+            this.handleResponse(res)
+            if (!sessionStorage.getItem('logType')) {
+                alert('请登录！')
+                return
+            }
+            let logType = sessionStorage.getItem('logType')
+            let routeName = ''
+            console.log(this.itemInfo.currentTaskName)
+            if (logType === 'client') {
+                routeName = this.clientMap.get(this.itemInfo.currentTaskName)
+            } else if (logType === 'employee') {
+                if (this.employeeInfo.department !== '测试部' && this.itemInfo.currentTaskName === "测试文档归档") {
+                    this.$message({
+                        message: '没有当前任务权限',
+                        type: 'warning'
+                    });
+                    return
+                }
+                else if (this.itemInfo.currentTaskName.indexOf(this.employeeInfo.department) === -1) {
+                    this.$message({
+                        message: '没有当前任务权限',
+                        type: 'warning'
+                    });
+                    return
+                }
+                routeName = this.employeeMap.get(this.itemInfo.currentTaskName)
+            }
+            console.log(routeName)
+            if (routeName) {
+                this.$router.push({
+                    name: routeName,
+                    query: {
+                        processId: this.processId
+                    }
+                })
+            }
+            else {
+                this.$message({
+                    message: '没有当前任务权限',
+                    type: 'warning'
+                });
+            }
         }
     },
     created() {
@@ -298,20 +317,31 @@ export default {
         formAuthority.authority.forEach(element => {
             this.authorityMap.set(element.key, element.value)
         })
-        //console.log(this.authorityMap)
-        clientOperation.operation.forEach(element => {
-            this.clientOperationMap.set(parseInt(element.key), element.value)
+  
+        clientOperationMap.map.forEach(element => {
+            this.clientMap.set(element.key, element.value)
         })
-        console.log(this.clientOperationMap)
-        employeeOperation.operation.forEach(element => {
-            this.employeeOperationMap.set(parseInt(element.key), element.value)
+        employeeOperationMap.map.forEach(element => {
+            console.log(element)
+            this.employeeMap.set(element.key, element.value)
         })
-        verificationWork.operation.forEach(element => {
-            this.verificationMap.set(element.key, element.value)
-        })
-
-        this.axios.get('/api/workflow/processes/'+this.processId+'/details').then(this.handleResponse,this.handleError)
-
+        console.log(this.employeeMap)
+        this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
+        if (sessionStorage.getItem('logType') === 'employee') {
+            this.axios.get('/api/account/operator_details').then(
+                (res) => {
+                    if (res.status === 200) {
+                        this.employeeInfo = res.data
+                    }
+                },
+                (err) => {
+                    if (err.status === 409) {
+                        alert('当前登录类型错误')
+                    }
+                }
+            )
+        }
+        
     }
 }
 </script>

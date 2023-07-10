@@ -1,0 +1,52 @@
+{
+    "map":[
+        {
+            "key":"填写申请表",
+            "value":"savedApplication"
+        },
+        {
+            "key": "市场部审核不通过，修改委托",
+            "value": "submittedApplication"
+        },
+        {
+            "key": "测试部审核不通过，修改委托",
+            "value": "submittedApplication"
+        },
+        {
+            "key": "客户审核报价",
+            "value": "clientAcceptQuotation"
+        },
+        {
+            "key": "客户审核合同草稿",
+            "value": "clientContract"
+        },
+        {
+            "key": "客户填写合同",
+            "value": "clientContract"
+        },
+        {
+            "key": "客户修改合同",
+            "value": "clientContract"
+        },
+        {
+            "key": "客户签署合同",
+            "value": "clientContract"
+        },
+        {
+            "key": "客户上传待测样品",
+            "value": "clientUploadSamples"
+        },
+        {
+            "key": "客户重新上传样品",
+            "value": "clientUploadSamples"
+        },
+        {
+            "key": "用户审核测试报告",
+            "value": "clientVerifyTestReport"
+        },
+        {
+            "key": "用户确认测试报告",
+            "value": "confirmTestReport"
+        }
+    ]
+}

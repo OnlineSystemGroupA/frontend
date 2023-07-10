@@ -4,10 +4,10 @@
         <h3>项目号:{{ projectId }}</h3>
         <h3>项目名:{{ softwareName }}</h3>
         <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
-        <el-button type="primary" @click="writeContract">填写合同</el-button>
-        <el-button type="primary" @click="checkContract">审核合同</el-button>
-        <el-button type="primary" @click="downloadContract">下载合同</el-button>
-        <el-button type="primary" @click="complete">完成流程</el-button>
+        <el-button type="primary" @click="writeContract" v-if="writeIf">填写合同</el-button>
+        <el-button type="primary" @click="checkContract" v-if="verifyIf">审核合同</el-button>
+        <el-button type="primary" @click="downloadContract" v-if="uploadIf">下载合同</el-button>
+        <el-button type="primary" @click="complete" v-if="uploadIf">完成流程</el-button>
         <router-view></router-view>
     </div>
 </template>
@@ -20,7 +20,19 @@ export default {
         return {
             projectId: '',
             softwareName: '',
+            curTaskName:''
         }
+    },
+    computed: {
+        writeIf() {
+            return (this.curTaskName === "市场部生成合同草稿" || this.curTaskName === "市场部修改合同草稿")
+        },
+        verifyIf() {
+            return this.curTaskName === "市场部审核合同"
+        },
+        uploadIf() {
+            return this.curTaskName === "市场部盖章合同"
+        },
     },
     methods: {
         checkItemDetail(id) {
@@ -159,6 +171,7 @@ export default {
             if (res.status === 200) {
                 this.projectId = res.data.projectId
                 this.softwareName = res.data.title
+                this.curTaskName = res.data.currentTaskName
             }
         },
         handleError(err) {
