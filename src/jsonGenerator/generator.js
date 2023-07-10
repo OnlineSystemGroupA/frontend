@@ -671,7 +671,7 @@ var generateProblemForm = function () {
 
 var generateContractForm = function () {
     var contractModelJson = {
-        item: '<@string{4,20}>',
+        projectName: '<@string{4,20}>',
         client: '<@string{4,20}>',
         trustee: '<@string{4,20}>',
         signPlace: '<@string{4,20}>',
@@ -684,7 +684,7 @@ var generateContractForm = function () {
         rectificationFrequency: '<@[1-20000]>',
         rectificationTime: '<@[1-20000]>',
         clientInfo: {
-            representive: '<@string{4,20}>',
+            representative: '<@string{4,20}>',
             signatureDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
             contact: '<@string{4,20}>',
             address: '<@string{4,20}>',
@@ -695,7 +695,7 @@ var generateContractForm = function () {
             postcode: '<@string{4,20}>',
         },
         trusteeInfo: {
-            representive: '<@string{4,20}>',
+            representative: '<@string{4,20}>',
             signatureDate: 'Wed May 10 2023 00:00:00 GMT+0800 (中国标准时间)',
             contact: '<@string{4,20}>',
             address: '<@string{4,20}>',
