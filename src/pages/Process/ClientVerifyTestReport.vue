@@ -17,6 +17,7 @@ export default {
         return {
             projectId: '',
             softwareName: '',
+            passable: true,
         }
     },
     methods: {
@@ -39,11 +40,16 @@ export default {
             )
         },
         complete() {
-            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task')
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable' + this.passable)
                 .then(
                     (res) => {
                         if (res.status === 200) {
-                            this.$message.success("进入下一流程！")
+                            if (this.passable) {
+                                this.$message.success("进入下一流程！")
+                            }
+                            else {
+                                this.$message.warning("报告驳回")
+                            }
                             this.$router.push(
                                 {
                                     name: 'clientItemDetail',
@@ -87,6 +93,7 @@ export default {
     mounted() {
         this.$bus.$on('checkTestReport', (check) => {
             this.passable = check
+            this.complete()
         })
     },
     beforeDestroy() {

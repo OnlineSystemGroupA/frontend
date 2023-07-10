@@ -841,6 +841,7 @@ export default {
         },
         handleResult(res) {
             console.log(res)
+            this.$bus.$emit('submitTestReport')
             if (res.status === 200) {
                 alert('上传成功')
             }

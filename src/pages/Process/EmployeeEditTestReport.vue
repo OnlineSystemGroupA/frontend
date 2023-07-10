@@ -53,7 +53,7 @@ export default {
             }
         },
         complete() {
-            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=' + this.passable)
+            this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task')
                 .then(
                     (res) => {
                         if (res.status === 200) {

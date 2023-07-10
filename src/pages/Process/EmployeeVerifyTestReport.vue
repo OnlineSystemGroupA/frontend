@@ -59,7 +59,12 @@ export default {
                 .then(
                     (res) => {
                         if (res.status === 200) {
-                            this.$message.success("进入下一流程！")
+                            if (this.passable) {
+                                this.$message.success("进入下一流程！")
+                            }
+                            else {
+                                this.$message.success("驳回测试报告！")
+                            }
                             this.$router.push(
                                 {
                                     name: 'employeeItemDetail',
@@ -102,6 +107,7 @@ export default {
     mounted() {
         this.$bus.$on('checkTestReport', (check) => {
             this.passable = check
+            this.writeReportVerification()
         })
         this.$bus.$on('submitTestReportVerify', () => {
             this.complete()
