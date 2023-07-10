@@ -10,15 +10,21 @@
                 </el-radio-group>
             </el-form-item>
             <div class="virus">
-                <el-form-item label="查杀病毒">
-                    <el-radio-group v-model="form.virusCheck">
-                        <el-radio label="已完成"></el-radio>
-                        <el-radio label="无法完成"></el-radio>
-                    </el-radio-group>
-                    <el-form-item label="所用查杀工具">
-                        <el-input placeholder="所用查杀工具" v-model="form.virusScanner"></el-input>
-                    </el-form-item>
-                </el-form-item>
+                <el-row :gutter="50">
+                    <el-col :span="12">
+                        <el-form-item label="查杀病毒">
+                            <el-radio-group v-model="form.virusCheck">
+                                <el-radio label="已完成"></el-radio>
+                                <el-radio label="无法完成"></el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="所用查杀工具">
+                            <el-input placeholder="所用查杀工具" v-model="form.virusScanner"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
             </div>
             <h2>材料检查</h2>
             <el-form-item label="测试样品">
@@ -48,18 +54,19 @@
                     <el-checkbox label="支持手册"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
-            <el-form-item label="其他">
+            <el-form-item label="其他" style="width: 50%">
                 <el-input placeholder="其他材料检查" v-model="form.otherDocument"></el-input>
             </el-form-item>
             <h2>确认意见</h2>
             <el-form-item>
                 <el-radio-group v-model="form.confirmation">
                     <el-radio style="margin-bottom: 10px"
-                        label="属依据国家标准或自编非标规范进行的常规检测，有资质、能力和资源满足委托方要求。"></el-radio>
+                              label="属依据国家标准或自编非标规范进行的常规检测，有资质、能力和资源满足委托方要求。"></el-radio>
                     <br>
                     <el-radio style="margin-bottom: 10px" label="测试所需材料不全，未达到受理条件。"></el-radio>
                     <br>
-                    <el-radio style="margin-bottom: 10px" label="无国家标准和规范依据，或中心缺乏检测设备和工具，无法完成检测。"></el-radio>
+                    <el-radio style="margin-bottom: 10px"
+                              label="无国家标准和规范依据，或中心缺乏检测设备和工具，无法完成检测。"></el-radio>
                     <br>
                     <el-radio style="margin-bottom: 10px" label="超出中心能力和资质范围，无法完成检测。"></el-radio>
                 </el-radio-group>
@@ -73,11 +80,11 @@
                 </el-radio-group>
             </el-form-item>
             <h2>测试项目编号</h2>
-            <el-form-item>
+            <el-form-item style="width: 50%">
                 <el-input placeholder="测试项目编号" v-model="form.projectId"></el-input>
             </el-form-item>
             <h2>备注</h2>
-            <el-form-item>
+            <el-form-item style="width: 50%">
                 <el-input type="textarea" placeholder="备注" v-model="form.notes"></el-input>
             </el-form-item>
         </el-form>

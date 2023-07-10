@@ -12,7 +12,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .app {
     --theme-color: #3086D0;
     display: flex;
@@ -21,4 +21,7 @@ export default {
     flex-direction: column;
 }
 
+/deep/ h1 {
+    font-size: 2em;
+}
 </style>

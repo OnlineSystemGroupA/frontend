@@ -27,25 +27,42 @@
                 </el-col>
             </el-row>
             <h2>内容审核</h2>
-            <el-form-item v-for="item in form.verifyItems" :key="item.content">
-                <h3>审核内容:{{ item.content }}</h3>
-                <el-radio-group v-model="item.passed">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-                <el-form-item label="不通过原因" v-show="!item.passed">
-                    <el-input type="textarea" v-model="item.explanation" placeholder="不通过原因"></el-input>
-                </el-form-item>
-            </el-form-item>
+            <el-table :data="form.verifyItems">
+                <el-table-column label="审核内容" prop="content"></el-table-column>
+                <el-table-column label="审核结果" align="center">
+                    <template slot-scope="item">
+                        <el-form-item label-width="0" class="table-form-item">
+                            <el-radio-group v-model="item.row.passed">
+                                <el-radio :label="true">是</el-radio>
+                                <el-radio :label="false">否</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </template>
+                </el-table-column>
+                <el-table-column label="不通过原因" align="center">
+                    <template slot-scope="item">
+                        <el-form-item label-width="0" v-show="!item.row.passed" class="table-form-item">
+                            <el-input type="textarea" v-model="item.row.explanation"
+                                      placeholder="不通过原因"></el-input>
+                        </el-form-item>
+                        <p v-show="item.row.passed">无</p>
+                    </template>
+                </el-table-column>
+            </el-table>
             <h2>审评意见</h2>
-            <el-form-item v-for="employee in form.verifyEmployees" :key="employee.position">
-                <h3>{{ employee.position }}</h3>
-                <el-form-item>
-                    <el-input type="textarea" v-model="employee.suggestions" placeholder="评审意见"></el-input>
-                </el-form-item>
-            </el-form-item>
+            <el-table :data="form.verifyEmployees">
+                <el-table-column label="评审人" prop="position"></el-table-column>
+                <el-table-column label="评审意见" align="center">
+                    <template slot-scope="employee">
+                        <el-form-item label-width="0" class="table-form-item">
+                            <el-input type="textarea" v-model="employee.row.suggestions"
+                                      placeholder="评审意见"></el-input>
+                        </el-form-item>
+                    </template>
+                </el-table-column>
+            </el-table>
         </el-form>
-        <el-row v-show="!disable">
+        <el-row v-show="!disable" style="margin-top: 20px">
             <el-button type="success" @click="submit" :disabled="disable">提交</el-button>
             <el-button type="primary" @click="save" :disabled="disable">保存</el-button>
         </el-row>
@@ -190,8 +207,7 @@ export default {
                 (err) => {
                     if (err.status === 402) {
                         alert('指定流程对该用户不可见')
-                    }
-                    else if (err.status === 404) {
+                    } else if (err.status === 404) {
                         alert('指定流程不存在')
                     }
                 }
@@ -220,7 +236,7 @@ export default {
                 if (res.status === 200) {
                     if (res.data) {
                         this.form = res.data
-                        console.log( res.data)
+                        console.log(res.data)
                         console.log('读取成功')
                     } else {
                         this.form = testPlanVerification
@@ -229,7 +245,6 @@ export default {
                         this.autoFill()
                     }
                 }
-
             },
             (err) => {
 
@@ -251,5 +266,9 @@ export default {
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;
+}
+
+.table-form-item {
+    margin-bottom: 0;
 }
 </style>

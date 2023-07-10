@@ -10,93 +10,107 @@
                 <el-input v-model="form.client" style="width: 50%"></el-input>
             </el-form-item>
             <h2>检查内容</h2>
-            <h3>基本项</h3>
-            <el-form-item label="报告编号">
-                <el-radio-group v-model="form.reportIdChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="页码">
-                <el-radio-group v-model="form.pagesChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="软件名称">
-                <el-radio-group v-model="form.softwareNameChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="版本号">
-                <el-radio-group v-model="form.softwareVersionChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="委托单位">
-                <el-radio-group v-model="form.clientChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="完成日期">
-                <el-radio-group v-model="form.finishDateChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="委托单位地址">
-                <el-radio-group v-model="form.clientAddressChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="序号">
-                <el-radio-group v-model="form.indexChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="测试样品">
-                <el-radio-group v-model="form.sampleChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="软、硬件列表" label-position="top">
-                <el-radio-group v-model="form.softwareAndHardwareChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <h3>内容与格式</h3>
-            <el-form-item label="错别字">
-                <el-radio-group v-model="form.characterChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="语句">
-                <el-radio-group v-model="form.sentenceChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="格式">
-                <el-radio-group v-model="form.formatChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <h3>测试报告</h3>
-            <el-form-item label="报告准确性">
-                <el-radio-group v-model="form.reportChecked">
-                    <el-radio :label="true">是</el-radio>
-                    <el-radio :label="false">否</el-radio>
-                </el-radio-group>
-            </el-form-item>
+            <el-collapse v-model="activeParts">
+                <el-collapse-item title="1. 基本项" name="1">
+                    <h3>基本项</h3>
+                    <el-row :gutter="20">
+                        <el-col :span="12">
+                            <el-form-item label="报告编号">
+                                <el-radio-group v-model="form.reportIdChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item label="页码">
+                                <el-radio-group v-model="form.pagesChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item label="软件名称">
+                                <el-radio-group v-model="form.softwareNameChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item label="版本号">
+                                <el-radio-group v-model="form.softwareVersionChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item label="委托单位">
+                                <el-radio-group v-model="form.clientChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label="完成日期">
+                                <el-radio-group v-model="form.finishDateChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item label="委托单位地址">
+                                <el-radio-group v-model="form.clientAddressChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item label="序号">
+                                <el-radio-group v-model="form.indexChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item label="测试样品">
+                                <el-radio-group v-model="form.sampleChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item label="软、硬件列表" label-position="top">
+                                <el-radio-group v-model="form.softwareAndHardwareChecked">
+                                    <el-radio :label="true">是</el-radio>
+                                    <el-radio :label="false">否</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-collapse-item>
+                <el-collapse-item title="2. 内容与格式" name="2">
+                    <h3>内容与格式</h3>
+                    <el-form-item label="错别字">
+                        <el-radio-group v-model="form.characterChecked">
+                            <el-radio :label="true">是</el-radio>
+                            <el-radio :label="false">否</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="语句">
+                        <el-radio-group v-model="form.sentenceChecked">
+                            <el-radio :label="true">是</el-radio>
+                            <el-radio :label="false">否</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item label="格式">
+                        <el-radio-group v-model="form.formatChecked">
+                            <el-radio :label="true">是</el-radio>
+                            <el-radio :label="false">否</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                </el-collapse-item>
+                <el-collapse-item title="3. 测试报告" name="3">
+                    <h3>测试报告</h3>
+                    <el-form-item label="报告准确性">
+                        <el-radio-group v-model="form.reportChecked">
+                            <el-radio :label="true">是</el-radio>
+                            <el-radio :label="false">否</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                </el-collapse-item>
+            </el-collapse>
         </el-form>
         <el-row v-show="!disable">
             <el-button type="success" @click="submit" :disabled="disable">提交</el-button>
@@ -128,7 +142,8 @@ export default {
                 sentenceChecked: false,
                 formatChecked: false,
                 reportChecked: false,
-            }
+            },
+            activeParts: []
         }
     },
     methods: {
@@ -187,8 +202,7 @@ export default {
                 (err) => {
                     if (err.status === 402) {
                         alert('指定流程对该用户不可见')
-                    }
-                    else if (err.status === 404) {
+                    } else if (err.status === 404) {
                         alert('指定流程不存在')
                     }
                 }
@@ -225,7 +239,7 @@ export default {
                     if (res.data) {
                         this.form = res.data
                         console.log('读取成功')
-                    } 
+                    }
                     if (this.writable) {
                         this.autoFill()
                     }
@@ -252,5 +266,9 @@ export default {
     margin-top: 2%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 5%;
+}
+
+.el-collapse-item {
+    padding: 0 40px
 }
 </style>

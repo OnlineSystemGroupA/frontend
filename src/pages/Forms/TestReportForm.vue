@@ -1,6 +1,6 @@
 <template>
     <div class="report">
-        <h1>测 试 报 告</h1>
+        <h1>测试报告</h1>
         <el-form label-width="100px" label-position="left" :disabled="disabled" v-loading="!dataReady">
             <el-row :gutter="20">
                 <el-col :span="12">
