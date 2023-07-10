@@ -2,7 +2,7 @@
     <div style="height: 100%;">
         <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
             :collapse="isCollapse" background-color="var(--theme-color)" text-color="#FFFFFF" active-text-color="#FFCC00">
-            <el-menu-item index="1" @click="arrangeMission"><i class="el-icon-s-order" style="color:gold"></i>分配任务
+            <el-menu-item index="1" @click="arrangeMission" v-if="isManager"><i class="el-icon-s-order" style="color:gold"></i>分配任务
             </el-menu-item>
             <el-submenu index="2">
                 <template slot="title">
@@ -14,7 +14,7 @@
                     <el-menu-item index="2-2" @click="checkFinishedItem">已完成项目</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
-            <el-menu-item index="3" @click="manageEmployee"><i class="el-icon-s-management" style="color:gold"></i>管理员工
+            <el-menu-item index="3" @click="manageEmployee" v-if="isManager"><i class="el-icon-s-management" style="color:gold"></i>管理员工
             </el-menu-item>
         </el-menu>
     </div>
@@ -25,7 +25,9 @@ export default {
     name: 'EmployeeMenu',
     data() {
         return {
-            isCollapse: false
+            isCollapse: false,
+            isManager: false,
+
         };
     },
     methods: {
@@ -59,6 +61,22 @@ export default {
                 query: { page: 1 }
             })
         }
+    },
+    created() {
+        this.axios.get('/api/account/operator_details').then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.data.position === "主管") {
+                        this.isManager = true
+                    }
+                }
+            },
+            (err) => {
+                if (err.status === 409) {
+                    alert('当前登录类型错误')
+                }
+            }
+        )
     }
 }
 </script>
