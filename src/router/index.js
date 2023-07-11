@@ -1208,7 +1208,7 @@ router.beforeEach((to, from, next) => {
             next()
         }
         else {
-            alert('未登录或登录类型错误')
+            this.$message.error('未登录或登录类型错误')
             if (sessionStorage.getItem('tokenHead')) {
                 sessionStorage.removeItem('tokenHead')
             }
