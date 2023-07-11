@@ -21,7 +21,7 @@
         <el-table :data="currentItemList" border style="width: 100%; height: auto;">
             <el-table-column prop="jobNumber" label="员工号" style="width: 16%; height: auto;">
                 <template slot-scope="scope">
-                    <p @click="pickEmployee(scope.row.jobNumber)">{{ scope.row.jobNumber }}</p>
+                    <p @click="pickEmployee(scope.row.uid)">{{ scope.row.jobNumber }}</p>
                 </template>
             </el-table-column>
             <el-table-column prop="realName" label="姓名" style="width: 16%; height: auto;">
@@ -34,9 +34,15 @@
             </el-table-column>
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
-                    <el-button @click="pickEmployee(scope.row.jobNumber)" icon="el-icon-search" size="small"
-                               type="primary">查看员工
-                    </el-button>
+                    <el-tooltip class="item" effect="light" content="查看员工" placement="bottom">
+                        <el-button @click="pickEmployee(scope.row.uid)" icon="el-icon-search" size="small" type="primary"
+                                   circle></el-button>
+                    </el-tooltip>
+
+                    <el-tooltip class="item" effect="light" content="删除员工" placement="bottom">
+                        <el-button @click="deleteEmployee(scope.row.uid)" icon="el-icon-delete" size="small" type="danger"
+                                   circle></el-button>
+                    </el-tooltip>
                 </template>
             </el-table-column>
         </el-table>
@@ -98,6 +104,9 @@ export default {
             }
             console.log(start, end)
             return this.employeeData.slice(start, end)
+        },
+        show() {
+            return sessionStorage.getItem('logType') === 'admin'
         }
     },
     methods: {
@@ -131,14 +140,58 @@ export default {
                     query: { page: curpage }
                 })
             }
+        },
+        deleteEmployee(id) {
+            this.$confirm('此操作将永久删除该员工' + id + ', 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+                center: true
+            }).then(() => {
+                this.axios.delete('/api/account/operators/' + id).then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功'
+                            });
+                            this.$router.push({
+                                name: 'employeeTable',
+                                query: { page: 1 }
+                            })
+                        }
+                    },
+                    (err) => {
+                        if (err.status === 404) {
+                            this.$message({
+                                type: 'warning',
+                                message: '不存在该用户'
+                            });
+                        }
+                    }
+                )
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });
+            });
         }
     },
     created() {
         if (sessionStorage.getItem('logType') === 'admin') {
-            console.log('admin')
+            this.axios.get('/api/account/operators').then(
+                (res) => {
+                    console.log(res)
+                    this.employeeData = res.data
+                },
+                (err) => {
+                    console.log(err)
+                }
+            )
         }
         else {
-            this.axios.get('/api/account/operators').then(
+            this.axios.get('/api/account/operators_department').then(
                 (res) => {
                     console.log(res)
                     this.employeeData = res.data

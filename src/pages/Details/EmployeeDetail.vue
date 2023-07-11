@@ -118,16 +118,30 @@ export default {
         this.$bus.$off('changePassword')
     },
     created() {
-        this.axios.get('/api/account/operator_details').then(
-            (res) => {
-                if (res.status === 200) {
-                    this.userInfo = res.data
+        if (sessionStorage.getItem('logType') === 'operator') {
+            this.axios.get('/api/account/operator_details').then(
+                (res) => {
+                    if (res.status === 200) {
+                        this.userInfo = res.data
+                    }
+                },
+                (err) => {
+                    alert(err.data)
                 }
-            },
-            (err)=>{
-                alert(err.data)
-            }
-        )
+            )
+        }
+        else {
+            this.axios.get('/api/account/operators/' + this.employeeId).then(
+                (res) => {
+                    if (res.status === 200) {
+                        this.userInfo = res.data
+                    }
+                },
+                (err) => {
+                    alert(err.data)
+                }
+            )
+        }
     }
 }
 </script>
