@@ -118,7 +118,7 @@ export default {
         this.$bus.$off('changePassword')
     },
     created() {
-        if (sessionStorage.getItem('logType') === 'operator') {
+        if (sessionStorage.getItem('logType') === 'employee') {
             this.axios.get('/api/account/operator_details').then(
                 (res) => {
                     if (res.status === 200) {

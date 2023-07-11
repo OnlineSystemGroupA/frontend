@@ -1,0 +1,56 @@
+{
+    "map": [
+        {
+            "key": "ApplicationForm",
+            "value": "测试申请表"
+        },
+        {
+            "key": "TestFunctionForm",
+            "value": "测试功能表"
+        },
+        {
+            "key": "ApplicationVerifyForm",
+            "value": "申请审核表"
+        },
+        {
+            "key": "QuotationForm",
+            "value": "测试报价表"
+        },
+        {
+            "key": "ContractForm",
+            "value": "测试合同表"
+        },
+        {
+            "key": "ConfidentialityForm",
+            "value": "保密协议表"
+        },
+        {
+            "key": "TestPlanForm",
+            "value": "测试计划表"
+        },
+        {
+            "key": "TestPlanVerifyForm",
+            "value": "测试计划审核表"
+        },
+        {
+            "key": "TestRecordsForm",
+            "value": "测试记录表"
+        },
+        {
+            "key": "TestProblemForm",
+            "value": "测试问题表"
+        },
+        {
+            "key": "TestReportForm",
+            "value": "测试报告表"
+        },
+        {
+            "key": "TestWorkCheckForm",
+            "value": "测试检查表"
+        },
+        {
+            "key": "DocumentReviewForm",
+            "value": "文档审核表"
+        }
+    ]
+}

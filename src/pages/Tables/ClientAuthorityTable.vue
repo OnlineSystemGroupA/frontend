@@ -22,17 +22,12 @@ export default {
     props: ['clientId'],
     data() {
         return {
-            authorityItem: [
+            authorityItem:[
                 {
                     title: '登录',
                     description: '用户能否登录网页',
                     state: '已授权',
                 },
-                {
-                    title: '测试申请',
-                    description: '用户能否申请测试',
-                    state: '已授权',
-                }
             ]
         }
     },
@@ -43,6 +38,25 @@ export default {
         ban(title) {
             console.log(title)
         }
+    },
+    created() {
+        this.axios.get('/api/account/clients/' + this.clientId).then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.isNonLocked) {
+                        this.authorityItem[0].state = '已授权'
+                    }
+                    else {
+                        this.authorityItem[0].state = '被封禁'
+                    }
+                }
+            },
+            (err) => {
+                if (err.status === 404) {
+                    this.$message('不存在当前用户')
+                }
+            }
+        )
     }
 }
 </script>
