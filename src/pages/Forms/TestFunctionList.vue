@@ -197,7 +197,7 @@ export default {
                     this.doSubmit();
                 } else {
                     console.log(this.form)
-                    alert("测试功能表不符合要求，请修改测试功能表！");
+                    this.$message.error("测试功能表不符合要求，请修改测试功能表！");
                 }
             })
         },
@@ -234,23 +234,23 @@ export default {
         handleResult(res) {
             console.log(res)
             if (res.status === 200) {
-                alert('上传成功')
+                this.$message.success('上传成功')
                 this.$bus.$emit('submitFunctionList', this.processId)
             }
         },
         handleSaveResult(res) {
             console.log(res)
             if (res.status === 200) {
-                alert('保存成功')
+                this.$message.s ('保存成功')
             }
         },
         handleError(err) {
             if (err.response.status === 401) {
-                alert('账号或者密码错误')
+                this.$message.error('账号或者密码错误')
             } else if (err.response.status === 403) {
-                alert('账号封禁中')
+                this.$message.error('账号封禁中')
             } else if (err.response.status === 404) {
-                alert('指定流程实例不存在')
+                this.$message.error('指定流程实例不存在')
             }
         },
         autoFill() {
@@ -264,9 +264,9 @@ export default {
                 },
                 (err) => {
                     if (err.response.status === 403) {
-                        alert('指定流程或表单对该用户不可见')
+                        this.$message.error('指定流程或表单对该用户不可见')
                     } else if (err.response.status === 404) {
-                        alert('指定流程或表单不存在')
+                        this.$message.error('指定流程或表单不存在')
                     }
                 }
             )
@@ -314,11 +314,10 @@ export default {
 
             },
             (err) => {
-
                 if (err.response.status === 403) {
-                    alert('指定流程或表单对该用户不可见')
+                    this.$message.error('指定流程或表单对该用户不可见')
                 } else if (err.response.status === 404) {
-                    alert('指定流程或表单不存在')
+                    this.$message.error('指定流程或表单不存在')
                 }
                 this.form = functionList
 

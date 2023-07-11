@@ -158,20 +158,20 @@ export default {
         handleResult(res) {
             console.log(res)
             if (res.status === 200) {
-                alert('上传成功')
+                this.$message.success('上传成功')
             }
         },
         handleSaveResult(res) {
             console.log(res)
             if (res.status === 200) {
-                alert('保存成功')
+                this.$message.success('保存成功')
             }
         },
         handleError(err) {
             if (err.response.status === 403) {
-                alert('指定流程或表单对该用户不可见')
+                this.$message.error('指定流程或表单对该用户不可见')
             } else if (err.response.status === 404) {
-                alert('指定流程或表单不存在')
+                this.$message.error('指定流程或表单不存在')
             }
         },
     },
@@ -216,9 +216,9 @@ export default {
             (err) => {
 
                 if (err.response.status === 403) {
-                    alert('指定流程或表单对该用户不可见')
+                    this.$message.error('指定流程或表单对该用户不可见')
                 } else if (err.response.status === 404) {
-                    alert('指定流程或表单不存在')
+                    this.$message.error('指定流程或表单不存在')
                 }
                 this.form = testProblemForm
             }

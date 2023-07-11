@@ -125,7 +125,7 @@ export default {
                 }
             },
             (err)=>{
-                alert(err.data)
+                this.$message.error(err.data)
             }
         )
     }

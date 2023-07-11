@@ -43,10 +43,10 @@ export default {
         },
         handleError(err) {
             if (err.status === 402) {
-                alert('指定流程对该用户不可见')
+                this.$message.error('指定流程对该用户不可见')
             }
             else if (err.status === 404) {
-                alert('指定流程不存在')
+                this.$message.error('指定流程不存在')
             }
         },
     },

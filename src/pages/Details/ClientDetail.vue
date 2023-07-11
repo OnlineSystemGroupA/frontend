@@ -136,7 +136,7 @@ export default {
                     },
                     (err) => {
                         if (err.status === 409) {
-                            alert('登录类型错误')
+                            this.$message.error('登录类型错误')
                         }
                     }
                 )

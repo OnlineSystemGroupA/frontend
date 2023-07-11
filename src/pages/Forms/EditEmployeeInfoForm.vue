@@ -61,12 +61,12 @@ export default {
     },
     methods: {
         submit() {
-            alert('修改成功')
+            this.$message.success('修改成功')
             this.$emit('done')
             this.$emit('change')
         },
         cancel() {
-            alert('取消操作')
+            this.$message('取消操作')
             this.$emit('done')
         }
     }

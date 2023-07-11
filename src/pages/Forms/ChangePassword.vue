@@ -30,11 +30,11 @@ export default {
     },
     methods: {
         submit() {
-            alert('修改成功')
+            this.$message.success('修改成功')
             this.$emit('done')
         },
         cancel() {
-            alert('取消修改')
+            this.$message('取消修改')
             this.$emit('done')
         }
     }

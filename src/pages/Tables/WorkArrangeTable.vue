@@ -124,13 +124,13 @@ export default {
                 },
                 (err) => {
                     if (err.status === 403) {
-                        alert('指定流程对当前登录用户不可见')
+                        this.$message.error('指定流程对当前登录用户不可见')
                     }
                     else if (err.status === 404) {
-                        alert('指定流程或用户不存在')
+                        this.$message.error('指定流程或用户不存在')
                     }
                     else {
-                        alert('指定用户所在部门不符合要求')
+                        this.$message.error('指定用户所在部门不符合要求')
                     }
                 }
             )
@@ -150,13 +150,13 @@ export default {
         },
         handleErr(err) {
             if (err.status === 403) {
-                alert('指定流程对该用户不可见或当前用户无完成任务权限')
+                this.$message.error('指定流程对该用户不可见或当前用户无完成任务权限')
             }
             else if (err.status === 404) {
-                alert('指定流程不存在')
+                this.$message.error('指定流程不存在')
             }
             else if (err.status === 460) {
-                alert('未满足完成条件')
+                this.$message.error('未满足完成条件')
             }
         }
     },

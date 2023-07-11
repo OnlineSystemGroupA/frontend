@@ -78,7 +78,7 @@ export default {
                         this.axios.post('/api/auth/login?user-type=operator', this.userInfo).then(this.handleLoginResult, this.handleLoginError)
                     }
                 } else {
-                    alert("登录失败，请正确填写登录信息！")
+                    this.$message.error("登录失败，请正确填写登录信息！")
                 }
             })
 
@@ -92,17 +92,18 @@ export default {
                 this.$router.replace({
                     name: this.logType
                 })
+                this.$message.success('登录成功')
             }
         },
         handleLoginError(err) {
             //console.log(err)
             //console.log(err.response.status)
             if (err.response.status === 401) {
-                alert('账号或者密码错误')
+                this.$message.error('账号或者密码错误')
             } else if (err.response.status === 403) {
-                alert('账号封禁中')
+                this.$message.error('账号封禁中')
             } else if (err.response.status === 404) {
-                alert('不存在该用户')
+                this.$message.error('不存在该用户')
             }
             //alert(err.response.data)
         },
