@@ -7,7 +7,7 @@
                 <el-table-column type="expand">
                     <template slot-scope="record">
                         <div class="table-dropdown">
-                            <h1>Testcase {{ record.$index }}</h1>
+                            <h1>Testcase {{ record.$index + 1}}</h1>
                             <table>
                                 <el-row :gutter="20">
                                     <el-col :span="12">

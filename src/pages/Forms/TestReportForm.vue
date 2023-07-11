@@ -935,6 +935,7 @@ export default {
                     alert('指定流程或表单不存在')
                 }
                 this.form = testReportForm
+                this.dataReady = true
             }
         )
     }
