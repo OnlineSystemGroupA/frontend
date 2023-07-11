@@ -157,7 +157,7 @@ export default {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 console.log(this.processId)
-                this.$bus.$emit('submitTestPlanVerify')
+      
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestPlanVerifyForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'
@@ -178,6 +178,7 @@ export default {
         },
         handleResult(res) {
             console.log(res)
+            this.$bus.$emit('submitTestPlanVerify')
             if (res.status === 200) {
                 alert('上传成功')
             }
