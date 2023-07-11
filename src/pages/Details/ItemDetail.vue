@@ -46,6 +46,12 @@
                 <th>预计结束日期</th>
                 <td>{{ itemInfo.dueDate }}</td>
             </tr>
+            <tr>
+                <th>当前任务</th>
+                <td>{{ itemInfo.currentTaskName }}</td>
+                <th>任务负责人</th>
+                <td>{{ itemInfo.assignee }}</td>
+            </tr>
             <!--
             <tr>
                 <th>审核人员</th>
@@ -84,8 +90,7 @@
                 </el-table-column>
                 <el-table-column label="操作" style="width: 25%">
                     <template slot-scope="scope">
-                        <el-button @click="readForm(scope.row)" icon="el-icon-search" size="small"
-                                   type="primary">查看
+                        <el-button @click="readForm(scope.row)" icon="el-icon-search" size="small" type="primary">查看
                         </el-button>
                     </template>
                 </el-table-column>
@@ -107,7 +112,7 @@ export default {
     data() {
         return {
             itemInfo: {
-                projectId:'114514',
+                projectId: '114514',
                 title: '专用数据库系统',
                 version: '1.2.4',
                 testType: '',
@@ -119,8 +124,8 @@ export default {
                 address: '沈阳皇姑屯114号',
                 startDate: '2023-6-11',
                 dueDate: '2023-6-30',
-                verifier: '赵六',
-                tester: '刘七',
+                currentTaskName: '',
+                assignee: '',
             },
             active: 0,
             forms: [
@@ -209,7 +214,7 @@ export default {
                     available: true,
                 },
             ],
-            employeeInfo:{},
+            employeeInfo: {},
             formMap: new Map(),
             authorityMap: new Map(),
             clientMap: new Map(),
@@ -282,22 +287,32 @@ export default {
             if (logType === 'client') {
                 routeName = this.clientMap.get(this.itemInfo.currentTaskName)
             } else if (logType === 'employee') {
-                if (this.employeeInfo.department !== '测试部' && this.itemInfo.currentTaskName === "测试文档归档") {
-                    this.$message({
-                        message: '没有当前任务权限',
-                        type: 'warning'
-                    });
-                    return
+                
+                if (this.itemInfo.currentTaskName.indexOf(this.employeeInfo.department) === -1) {
+                    if (this.employeeInfo.department === '测试部' && this.itemInfo.currentTaskName === "测试文档归档") {
+                       console.log('Special case')
+                    }
+                    else {
+                        console.log('任务失败')
+                        this.$message({
+                            message: '没有当前任务权限',
+                            type: 'warning'
+                        });
+                        return
+                    }
                 }
-                else if (this.itemInfo.currentTaskName.indexOf(this.employeeInfo.department) === -1) {
-                    this.$message({
-                        message: '没有当前任务权限',
-                        type: 'warning'
-                    });
-                    return
+                else if (this.itemInfo.currentTaskName.indexOf('分配') !== -1) {
+                    if (this.employeeInfo.position !== '主管') {
+                        this.$message({
+                            message: '没有当前任务权限',
+                            type: 'warning'
+                        });
+                        return
+                    }
                 }
                 routeName = this.employeeMap.get(this.itemInfo.currentTaskName)
             }
+
             console.log(routeName)
             if (routeName) {
                 this.$router.push({
@@ -323,7 +338,7 @@ export default {
         formAuthority.authority.forEach(element => {
             this.authorityMap.set(element.key, element.value)
         })
-  
+
         clientOperationMap.map.forEach(element => {
             this.clientMap.set(element.key, element.value)
         })
@@ -347,7 +362,7 @@ export default {
                 }
             )
         }
-        
+
     }
 }
 </script>

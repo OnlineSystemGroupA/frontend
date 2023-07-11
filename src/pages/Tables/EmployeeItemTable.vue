@@ -3,12 +3,14 @@
         <div>
             <h2>项目表格</h2>
         </div>
+        <!--
         <div style="width: 50%">
             <h4>查找关键字</h4>
             <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
                 <el-button slot="append" icon="el-icon-search"></el-button>
             </el-input>
         </div>
+        -->
         <div>
             <br>
             <span>排序</span>
@@ -19,16 +21,17 @@
         </div>
         <br>
         <el-table :data="itemList" border style="width: 100%; height: auto;">
-            <el-table-column prop="projectId" label="项目号" style="width: 16%">
+            <el-table-column prop="projectId" label="项目号" style="width: 14%">
                 <template slot-scope="scope">
                     <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.projectId }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="title" label="项目名称" style="width: 16%"></el-table-column>
-            <el-table-column prop="startDate" label="创建时间" style="width: 16%"></el-table-column>
-            <el-table-column prop="startUser" label="申请人" style="width: 16%"></el-table-column>
-            <el-table-column prop="taskName" label="项目状态" style="width: 16%"></el-table-column>
-            <el-table-column label="操作" style="width:20%">
+            <el-table-column prop="title" label="项目名称" style="width: 14%"></el-table-column>
+            <el-table-column prop="startDate" label="创建时间" style="width: 14%"></el-table-column>
+            <el-table-column prop="startUser" label="申请人" style="width: 14%"></el-table-column>
+            <el-table-column prop="assignee" label="负责人" style="width: 14%"></el-table-column>
+            <el-table-column prop="taskName" label="项目状态" style="width: 14%"></el-table-column>
+            <el-table-column label="操作" style="width:16%">
                 <template slot-scope="scope">
                     <el-tooltip class="item" effect="light" content="查看项目详情" placement="bottom">
                         <el-button @click="checkItemDetail(scope.row.processId)" icon="el-icon-search" size="small"

@@ -203,7 +203,7 @@ export default {
         },
         save() {
             if (this.writable) {
-                console.log(JSON.stringify(this.form))
+                //console.log(JSON.stringify(this.form))
                 console.log(JSON.stringify(this.form))
                 console.log(this.processId)
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestFunctionForm', JSON.stringify(this.form), {

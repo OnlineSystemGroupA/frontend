@@ -9,6 +9,7 @@
         <el-button type="primary" @click="checkContract" v-if="verifyIf">审核合同</el-button>
         <el-button type="primary" @click="checkConfidentiality" v-if="verifyIf">查看保密协议</el-button>
         <el-button type="primary" @click="downloadContract" v-if="uploadIf">下载合同</el-button>
+        <el-button type="primary" @click="downloadConfidentiality" v-if="uploadIf">下载保密协议</el-button>
         <el-button type="primary" @click="complete" v-if="uploadIf">完成流程</el-button>
         <router-view></router-view>
     </div>
@@ -116,6 +117,9 @@ export default {
                     }
                 }
             )
+        },
+        downloadConfidentiality() {
+            
         },
         handleErr(err) {
             if (err.status === 403) {
