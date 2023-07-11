@@ -204,7 +204,7 @@ export default {
                 if (valid) {
                     this.doSubmit();
                 } else {
-                    alert("报价不符合要求，请修改报价！");
+                    this.$message.error("报价不符合要求，请修改报价！");
                 }
             })
         },
@@ -222,15 +222,15 @@ export default {
         handleResult(res) {
             console.log(res)
             if (res.status === 200) {
-                alert('上传成功')
+                this.$message.success('上传成功')
                 this.$bus.$emit('QuotationSuccess')
             }
         },
         handleError(err) {
             if (err.response.status === 403) {
-                alert('指定流程或表单对该用户不可见')
+                this.$message.error('指定流程或表单对该用户不可见')
             } else if (err.response.status === 404) {
-                alert('指定流程或表单不存在')
+                this.$message.error('指定流程或表单不存在')
             }
         },
         autoFill() {
@@ -243,10 +243,10 @@ export default {
                 },
                 (err) => {
                     if (err.status === 402) {
-                        alert('指定流程对该用户不可见')
+                        this.$message.error('指定流程对该用户不可见')
                     }
                     else if (err.status === 404) {
-                        alert('指定流程不存在')
+                        this.$message.error('指定流程不存在')
                     }
                 }
             )
@@ -275,9 +275,9 @@ export default {
             },
             (err) => {
                 if (err.response.status === 403) {
-                    alert('指定流程或表单对该用户不可见')
+                    this.$message.error('指定流程或表单对该用户不可见')
                 } else if (err.response.status === 404) {
-                    alert('指定流程或表单不存在')
+                    this.$message.error('指定流程或表单不存在')
                 }
             }
         )

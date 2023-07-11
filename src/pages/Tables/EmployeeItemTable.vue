@@ -127,7 +127,7 @@ export default {
         },
         handleError(err) {
             console.log(err.response.data)
-            alert(err.response.data)
+            this.$message.error(err.response.data)
         },
         handleCount(count) {
             this.itemCount = count.data

@@ -191,7 +191,7 @@ export default {
         readForm(row) {
             //console.log(row.title)
             if (!sessionStorage.getItem('logType')) {
-                alert('请登录！')
+                this.$message.error('请登录！')
                 return
             }
             let logType = sessionStorage.getItem('logType')

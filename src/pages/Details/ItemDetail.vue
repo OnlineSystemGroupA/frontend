@@ -225,7 +225,7 @@ export default {
         readForm(row) {
             //console.log(row.title)
             if (!sessionStorage.getItem('logType')) {
-                alert('请登录！')
+                this.$message.error('请登录！')
                 return
             }
             let logType = sessionStorage.getItem('logType')
@@ -269,16 +269,16 @@ export default {
         },
         handleError(err) {
             if (err.status === 402) {
-                alert('指定流程对该用户不可见')
+                this.$message.error('指定流程对该用户不可见')
             }
             else if (err.status === 404) {
-                alert('指定流程不存在')
+                this.$message.error('指定流程不存在')
             }
         },
         handleOperationResponse(res) {
             this.handleResponse(res)
             if (!sessionStorage.getItem('logType')) {
-                alert('请登录！')
+                this.$message.error('请登录！')
                 return
             }
             let logType = sessionStorage.getItem('logType')
@@ -357,7 +357,7 @@ export default {
                 },
                 (err) => {
                     if (err.status === 409) {
-                        alert('当前登录类型错误')
+                        this.$message.error('当前登录类型错误')
                     }
                 }
             )

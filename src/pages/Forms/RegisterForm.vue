@@ -95,21 +95,21 @@ export default {
                         //console.log(res)
                         //console.log(res.status)
                         if (res.status === 200) {
-                            alert("注册成功")
+                            this.$message.success("注册成功")
                         }
                         if (res.status === 409) {
-                            alert("用户名重复")
+                            this.$message.error("用户名重复")
                         }
 
                     }).catch(err => {
                         //console.log(err)
                         //console.log(err.response.status)
                         if (err.response.status === 409) {
-                            alert("用户名重复")
+                            this.$message.error("用户名重复")
                         }
                     })
                 } else {
-                    alert("注册失败，请正确填写注册信息！")
+                    this.$message.error("注册失败，请正确填写注册信息！")
                 }
             })
         },

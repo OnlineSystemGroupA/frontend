@@ -129,12 +129,12 @@ export default {
         handleResponse(res) {
             if (res.status === 200) {
                 if (res.data === 'email') {
-                    alert('邮箱与他人重复')
+                    this.$message.error('邮箱与他人重复')
                 } else if (res.data === 'phone') {
-                    alert('电话与他人重复')
+                    this.$message.error('电话与他人重复')
                 } else {
                     console.log(res.data)
-                    alert('修改成功')
+                    this.$message.success('修改成功')
                     this.$emit('done')
                     this.$emit('change')
                 }
@@ -143,13 +143,13 @@ export default {
 
         handleError(err) {
             if (err.status === 409) {
-                alert('登录类型错误')
+                this.$message.error('登录类型错误')
             } else if (err.status === 404) {
-                alert('404 Not found!')
+                this.$message.error('404 Not found!')
             }
         },
         cancel() {
-            alert('取消修改')
+            this.$message('取消修改')
             this.$emit('done')
         }
     },
@@ -165,7 +165,7 @@ export default {
             },
             (err) => {
                 if (err.status === 409) {
-                    alert('登录类型错误')
+                    this.$message.error('登录类型错误')
                 }
             }
         )
