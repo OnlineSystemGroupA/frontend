@@ -1,10 +1,10 @@
 <template>
     <div class="clientAuthority">
-        <el-table :data="authorityItem" style="width: 90%;">
+        <el-table :data="authorityItem">
             <el-table-column prop="title" label="权限" style="width: 25%;"></el-table-column>
-            <el-table-column prop="description" label="描述" style="width: 50%;"></el-table-column>
-            <el-table-column prop="state" label="状态" style="width: 25%;"></el-table-column>
-            <el-table-column label="操作" style="width: 25%;">
+            <el-table-column prop="description" align="center" label="描述" style="width: 50%;"></el-table-column>
+            <el-table-column prop="state" align="center" label="状态" style="width: 25%;"></el-table-column>
+            <el-table-column label="操作" align="center" style="width: 25%;">
                 <template slot-scope="scope">
                     <el-button-group>
                         <el-button size="mini" @click="authorize(scope.row.title)">授权</el-button>
@@ -22,7 +22,7 @@ export default {
     props: ['clientId'],
     data() {
         return {
-            authorityItem:[
+            authorityItem: [
                 {
                     title: '登录',
                     description: '用户能否登录网页',
@@ -45,8 +45,7 @@ export default {
                 if (res.status === 200) {
                     if (res.isNonLocked) {
                         this.authorityItem[0].state = '已授权'
-                    }
-                    else {
+                    } else {
                         this.authorityItem[0].state = '被封禁'
                     }
                 }
