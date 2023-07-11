@@ -19,24 +19,30 @@
         </div>
         <br/>
         <el-table :data="currentItemList" border style="width: 100%; height: auto;">
-            <el-table-column prop="id" label="id" style="width: 16%; height: auto;">
+            <el-table-column prop="uid" label="uid" style="width: 16%; height: auto;">
                 <template slot-scope="scope">
-                    <p @click="pickClient(scope.row.id)">{{ scope.row.id }}</p>
+                    <p @click="pickClient(scope.row.uid)">{{ scope.row.uid }}</p>
                 </template>
             </el-table-column>
-            <el-table-column prop="userName" label="用户名" style="width: 16%; height: auto;">
+            <el-table-column prop="username" label="用户名" style="width: 16%; height: auto;">
             </el-table-column>
             <el-table-column prop="company" label="单位/公司" style="width: 16%; height: auto;">
             </el-table-column>
             <el-table-column prop="email" label="邮箱" style="width: 16%; height: auto;">
             </el-table-column>
-            <el-table-column prop="address" label="地址" style="width: 16%; height: auto;">
+            <el-table-column prop="companyAddress" label="地址" style="width: 16%; height: auto;">
             </el-table-column>
             <el-table-column label="操作" style="width:20%">
                 <template slot-scope="scope">
-                    <el-button @click="pickClient(scope.row.id)" icon="el-icon-search" size="small"
-                               type="primary">查看用户
-                    </el-button>
+                   <el-tooltip class="item" effect="light" content="查看用户" placement="bottom">
+                            <el-button @click="pickClient(scope.row.uid)" icon="el-icon-search" size="small"
+                                       type="primary" circle></el-button>
+                        </el-tooltip>
+
+                        <el-tooltip class="item" effect="light" content="删除用户" placement="bottom">
+                            <el-button @click="deleteClient(scope.row.uid)" icon="el-icon-delete" size="small"
+                                       type="danger" circle></el-button>
+                        </el-tooltip>
                 </template>
             </el-table-column>
         </el-table>
@@ -79,288 +85,7 @@ export default {
                     label: '地址',
                 },
             ],
-            clientData: [
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-                {
-                    id: "c001",
-                    userName: "李华",
-                    company: "企业1",
-                    email: "123@123.com",
-                    address: "西安市122国道112号",
-                },
-                {
-                    id: "c002",
-                    userName: "张三",
-                    company: "罗翔说刑法",
-                    email: "zhangsan@qq.com",
-                    address: "北京三环12号",
-                },
-                {
-                    id: "c003",
-                    userName: "喜羊羊",
-                    company: "羊村",
-                    email: "xiyangyang@qq.com",
-                    address: "青青草原",
-                },
-                {
-                    id: "c004",
-                    userName: "御坂美琴",
-                    company: "常盘台",
-                    email: "bilibili@qq.com",
-                    address: "东京学员都市",
-                },
-            ],
+            clientData: [],
         };
     },
     computed: {
@@ -379,7 +104,8 @@ export default {
             }
             console.log(start, end)
             return this.clientData.slice(start, end)
-        }
+        },
+       
     },
     methods: {
         pickClient(id) {
@@ -390,14 +116,60 @@ export default {
                 }
             })
         },
+        deleteClient(id) {
+            this.$confirm('此操作将永久删除该用户' + id + ', 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+                center: true
+            }).then(() => {
+                this.axios.delete('/api/account/clients/' + id).then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功'
+                            });
+                             this.$router.push({
+                                name: 'clientTable',
+                                query: { page: 1 }
+                            })
+                        }
+                    },
+                    (err) => {
+                        if (err.status === 404) {
+                            this.$message({
+                                type: 'warning',
+                                message: '不存在该用户'
+                            });
+                        }
+                    }
+                )
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });
+            });
+        },
         handlePageChange(curpage) {
             this.$router.push({
                 name: 'clientTable',
                 query: { page: curpage }
             })
+        },
+        handleRes(res) {
+            if (res.status === 200) {
+                this.clientData = res.data
+            }
+        },
+        handleErr(err) {
+            alert(err.status)
         }
     },
-
+    created() {
+        this.axios.get('/api/account/clients').then(this.handleRes, this.handleErr)
+    }
 };
 </script>
 

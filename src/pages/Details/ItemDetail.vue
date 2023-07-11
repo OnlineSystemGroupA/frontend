@@ -104,7 +104,7 @@ import formAuthority from '../../assets/jsons/formAuthority.json'
 import formName from '../../assets/jsons/formName.json'
 import clientOperationMap from '../../assets/jsons/clientOperationMap.json'
 import employeeOperationMap from '../../assets/jsons/employeeOperationMap.json'
-
+import formNameMap from '../../assets/jsons/formNameMap.json'
 
 export default {
     name: 'ItemDetail',
@@ -129,96 +129,13 @@ export default {
             },
             active: 0,
             forms: [
-                {
-                    title: '测试申请表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试功能表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '申请审核表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试报价表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试合同表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '保密协议表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试计划表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试计划审核表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试记录表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试问题表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试报告表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '报告审核表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '文档审核表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试检查表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
             ],
             employeeInfo: {},
             formMap: new Map(),
             authorityMap: new Map(),
             clientMap: new Map(),
             employeeMap: new Map(),
+            formTranslationMap: new Map(),
         }
     },
     methods: {
@@ -346,6 +263,9 @@ export default {
             console.log(element)
             this.employeeMap.set(element.key, element.value)
         })
+        formNameMap.map.forEach(element => {
+            this.formTranslationMap.set(element.key, element.value)
+        })
         console.log(this.employeeMap)
         this.axios.get('/api/workflow/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
         if (sessionStorage.getItem('logType') === 'employee') {
@@ -362,7 +282,23 @@ export default {
                 }
             )
         }
-
+        this.axios.get('/api/workflow/processes/' + this.processId + '/forms').then(
+            (res) => {
+                console.log(res.data)
+                res.data.forEach(element => {
+                    var curform = {
+                        title: this.formTranslationMap.get(element.formType),
+                        state: element.formState,
+                        date: element.createDate.substring(0,10),
+                        available: true
+                    }   
+                    this.forms.push(curform)
+                })
+            },
+            (err) => {
+                console.log(err.data)
+            }
+        )
     }
 }
 </script>
