@@ -409,8 +409,6 @@ export default {
         },
         doSubmit() {
             if (this.writable) {
-                //console.log(JSON.stringify(this.form))
-                //console.log(this.processId)
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'DocumentReviewForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'
@@ -419,6 +417,13 @@ export default {
             }
         },
         save() {
+            if (this.writable) {
+                this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'DocumentReviewForm', JSON.stringify(this.form), {
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                }).then(this.handleSaveResult, this.handleError)
+            }
         },
         pass() {
         },
@@ -428,6 +433,13 @@ export default {
             console.log(res)
             if (res.status === 200) {
                 this.$message.success('上传成功')
+                //this.$bus.$emit('submitContract')
+            }
+        },
+        handleSaveResult(res) {
+            console.log(res)
+            if (res.status === 200) {
+                alert('上传成功')
                 //this.$bus.$emit('submitContract')
             }
         },

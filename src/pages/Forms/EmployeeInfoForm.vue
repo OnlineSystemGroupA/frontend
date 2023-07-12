@@ -6,11 +6,11 @@
                 <tr>
                     <th style="width:25%">姓名</th>
                     <td style="width:25%">
-                        <el-input placeholder="姓名" v-model="form.name"></el-input>
+                        <el-input placeholder="姓名" v-model="form.realName"></el-input>
                     </td>
                     <th style="width:25%">职员号</th>
                     <td style="width:25%">
-                        <el-input placeholder="职员号" v-model="form.id"></el-input>
+                        <el-input placeholder="职员号" v-model="form.jobNumber"></el-input>
                     </td>
                 </tr>
 
@@ -35,11 +35,11 @@
                 <tr>
                     <th style="width:25%">电话号码</th>
                     <td style="width:25%">
-                        <el-input placeholder="电话号码" v-model="form.telephone"></el-input>
+                        <el-input placeholder="电话号码" v-model="form.phone"></el-input>
                     </td>
                     <th style="width:25%">邮箱地址</th>
                     <td style="width:25%">
-                        <el-input placeholder="邮箱地址" v-model.number="form.e_mail"></el-input>
+                        <el-input placeholder="邮箱地址" v-model.number="form.email"></el-input>
                     </td>
                 </tr>
             </table>
@@ -57,29 +57,45 @@ export default {
     data() {
         return {
             form: {
-                name: '',
+                uid:'',
+                realName: '',
                 department: '',
-                position: '',
-                id: '',
-                telephone: '',
-                e_mail: ''
+                position: '员工',
+                jobNumber: '',
+                phone: '',
+                email: '',
+                isNonLocked: true
             },
             departments: [
                 { label: '测试部', value: '测试部', },
-                { label: '审核部', value: '审核部', },
+                { label: '质量部', value: '质量部', },
                 { label: '市场部', value: '市场部', }
             ],
             positions: [
-                { label: '部长', value: '部长', },
-                { label: '审核员', value: '审核员', },
-                { label: '测试员', value: '测试员', },
-                { label: '调查员', value: '调查员', }
+                { label: '员工', value: '员工', }
             ]
         }
     },
     methods: {
         submit() {
-
+            this.axios.post('/api/account/operators', this.form).then(
+                (res) => {
+                    if (res.status === 200) {
+                        this.$message({
+                            message: '添加成功',
+                            type: 'success'
+                        })
+                    }
+                },
+                (err) => {
+                    if (err.status === 409) {
+                        this.$message({
+                            message: '信息冲突',
+                            type: 'warnning'
+                        })
+                    }
+                }
+            )
         }
     }
 }

@@ -99,9 +99,21 @@ export default {
     methods: {
         onEditDone() {
             // dialog 关闭动画后回调
-            this.$router.replace(
-                { name: 'clientDetail' }
-            )
+            if (sessionStorage.getItem('logType') === 'client') {
+                this.$router.replace(
+                    { name: 'clientDetail' }
+                )
+            }
+            else if (sessionStorage.getItem('logType') === 'admin') {
+                this.$router.replace(
+                    {
+                        name: 'clientDetailForAdmin',
+                        query: {
+                            clientId: this.clientId
+                        }
+                    }
+                )
+            }
         },
         editInfo() {
             this.editDialogVisible = true
@@ -110,12 +122,13 @@ export default {
             })
         },
         changePassword() {
-            this.editDialogVisible = true;
+            this.editDialogVisible = true
             this.$router.push({
                 name: 'clientChangePassword'
             })
         },
         editAuthority() {
+            this.editDialogVisible = true
             this.$router.push({
                 name: 'editClientAuthority',
                 query: {
@@ -137,6 +150,23 @@ export default {
                     (err) => {
                         if (err.status === 409) {
                             this.$message.error('登录类型错误')
+                        }
+                    }
+                )
+            }
+            else if (sessionStorage.getItem('logType') === 'admin') {
+                this.axios.get('/api/account/clients/' + this.clientId).then(
+                    (res) => {
+                        if (res.status === 200) {
+                            console.log(res.data)
+                            this.userInfo = res.data
+                            var date = this.userInfo.createdDate.split('T')
+                            this.userInfo.createdDate = date[0]
+                        }
+                    },
+                    (err) => {
+                        if (err.status === 409) {
+                            alert('登录类型错误')
                         }
                     }
                 )

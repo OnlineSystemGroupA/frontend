@@ -3,12 +3,14 @@
         <div>
             <h2>项目表格</h2>
         </div>
+        <!--
         <div style="width: 50%">
             <h4>查找关键字</h4>
             <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
                 <el-button slot="append" icon="el-icon-search"></el-button>
             </el-input>
         </div>
+        -->
         <div>
             <br>
             <span>排序</span>
@@ -35,7 +37,6 @@
                         <el-button @click="checkItemDetail(scope.row.processId)" icon="el-icon-search" size="small"
                                    type="primary" circle></el-button>
                     </el-tooltip>
-
                     <el-tooltip class="item" effect="light" content="删除当前项目" placement="bottom">
                         <el-button @click="deleteItem(scope.row.processId)" icon="el-icon-delete" size="small" type="danger"
                                    circle></el-button>

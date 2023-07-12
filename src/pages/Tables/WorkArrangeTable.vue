@@ -161,7 +161,7 @@ export default {
         }
     },
     created() {
-        this.axios.get('/api/account/operators').then(
+        this.axios.get('/api/account/operators_department').then(
             (res) => {
                 console.log(res)
                 this.employeeData = res.data

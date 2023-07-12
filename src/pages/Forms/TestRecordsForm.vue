@@ -196,7 +196,7 @@ export default {
         },
         save() {
             if (this.writable) {
-                sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                //sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
                 console.log(this.processId)
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestRecordsForm', JSON.stringify(this.form), {
                     headers: {

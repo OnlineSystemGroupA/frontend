@@ -7,6 +7,7 @@
         <el-button type="primary" @click="download">下载文件</el-button>
         <el-button type="primary" @click="documentReview">文档检查表</el-button>
         <el-button type="success" @click="complete">完成流程</el-button>
+        <el-button type="warning" @click="warning">驳回重传</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -51,6 +52,33 @@ export default {
                     (res) => {
                         if (res.status === 200) {
                             this.$message.success("进入下一流程！")
+                            this.$router.push(
+                                {
+                                    name: 'employeeItemDetail',
+                                    query: { processId: this.processId }
+                                }
+                            )
+                        }
+                    },
+                    (err) => {
+                        if (err.status === 403) {
+                            this.$message.warning('指定流程对该用户不可见或当前用户无完成任务权限');
+                        }
+                        else if (err.status === 404) {
+                            this.$message.warning(' 指定流程不存在')
+                        }
+                        else if (err.status === 460) {
+                            this.$message.warning('未满足完成条件')
+                        }
+                    }
+                )
+        },
+        refute() {
+             this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task?passable=false')
+                .then(
+                    (res) => {
+                        if (res.status === 200) {
+                            this.$message.success("驳回上传样品！")
                             this.$router.push(
                                 {
                                     name: 'employeeItemDetail',

@@ -814,7 +814,7 @@ export default {
             if (this.writable) {
                 console.log(JSON.stringify(this.form))
                 console.log(this.processId)
-                this.$bus.$emit('submitTestReport')
+                
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm', JSON.stringify(this.form), {
                     headers: {
                         'Content-Type': 'text/plain'
@@ -824,7 +824,7 @@ export default {
         },
         save() {
             if (this.writable) {
-                sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
+                //sessionStorage.setItem('applicationForm', JSON.stringify(this.form))
                 console.log(this.processId)
                 this.axios.put('/api/workflow/processes/' + this.processId + '/forms/' + 'TestReportForm', JSON.stringify(this.form), {
                     headers: {

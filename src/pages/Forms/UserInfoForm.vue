@@ -100,7 +100,7 @@ export default {
     name: 'UserInfoForm',
     data() {
         return {
-            userInfo: {
+             userInfo: {
                 username: '',
                 realName: '',
                 email: '',
@@ -109,11 +109,13 @@ export default {
                 gender: '',
                 company: '',
                 companyAddress: '',
+                companyTelephone: '',
+                companyPostcode: '',
                 companyEmail: '',
                 companyFax: '',
                 companyPhone: '',
                 companyWebsite: '',
-            }
+            },
         }
     },
     methods: {
@@ -124,6 +126,7 @@ export default {
         },
 
         submit() {
+            console.log(this.userInfo)
             this.axios.post('/api/account/client_details', this.userInfo).then(this.handleResponse, this, this.handleError)
         },
         handleResponse(res) {
@@ -133,6 +136,7 @@ export default {
                 } else if (res.data === 'phone') {
                     this.$message.error('电话与他人重复')
                 } else {
+                    console.log('用户信息修改')
                     console.log(res.data)
                     this.$message.success('修改成功')
                     this.$emit('done')

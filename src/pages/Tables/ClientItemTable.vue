@@ -3,12 +3,14 @@
         <div>
             <h2>项目表格</h2>
         </div>
+        <!--
         <div style="width: 50%">
             <h4>查找关键字</h4>
             <el-input placeholder="请输入关键字" prefix-icon="el-icon-search" v-model="keyword">
                 <el-button slot="append" icon="el-icon-search"></el-button>
             </el-input>
         </div>
+        -->
         <div>
             <br>
             <span>排序</span>

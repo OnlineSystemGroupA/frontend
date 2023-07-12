@@ -5,10 +5,10 @@
             <el-table-column prop="description" label="描述" style="width: 50%;"></el-table-column>
             <el-table-column prop="state" label="状态" style="width: 25%;"></el-table-column>
             <el-table-column label="操作" style="width: 25%;">
-                <template slot-scope="scope">
+                <template>
                     <el-button-group>
-                        <el-button size="mini" @click="authorize(scope.row.title)">授权</el-button>
-                        <el-button size="mini" @click="ban(scope.row.title)">封禁</el-button>
+                        <el-button size="mini" @click="authorize()">授权</el-button>
+                        <el-button size="mini" @click="ban()">封禁</el-button>
                     </el-button-group>
                 </template>
             </el-table-column>
@@ -28,28 +28,58 @@ export default {
                     description: '用户能否登录网页',
                     state: '已授权',
                 },
-                {
-                    title: '测试申请',
-                    description: '用户能否申请测试',
-                    state: '已授权',
-                }
             ]
         }
     },
     methods: {
-        authorize(title) {
-            console.log(title)
+        authorize() {
+            //console.log(title)
+            this.axios.post('/api/account/clients/' + this.clientId + '/locked', { "doLock": false }).then(
+                (res) => {
+                    if (res.status === 200) {
+                        this.$message('授权成功！')
+                    }
+                },
+                this.handleErr
+            )
         },
-        ban(title) {
-            console.log(title)
+        ban() {
+            //console.log(title)
+            this.axios.post('/api/account/clients/' + this.clientId + '/locked', { "doLock": true }).then(
+                (res) => {
+                    if (res.status === 200) {
+                        this.$message('授权成功！')
+                    }
+                },
+                this.handleErr
+            )
+        },
+        handleErr(err) {
+            if (err.status === 404) {
+                this.$message('不存在当前用户')
+            }
         }
+    },
+    created() {
+        this.axios.get('/api/account/clients/' + this.clientId).then(
+            (res) => {
+                if (res.status === 200) {
+                    if (res.isNonLocked) {
+                        this.authorityItem[0].state = '已授权'
+                    }
+                    else {
+                        this.authorityItem[0].state = '被封禁'
+                    }
+                }
+            },
+            this.handleErr(err)
+        )
     }
 }
 </script>
 
 <style>
 .clientAuthority {
-    width: 94%;
     align-items: center;
     border-radius: 30px;
     margin: 30px;
