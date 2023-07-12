@@ -66,13 +66,12 @@ export default {
                 if (res.status === 200) {
                     if (res.isNonLocked) {
                         this.authorityItem[0].state = '已授权'
-                    }
-                    else {
+                    } else {
                         this.authorityItem[0].state = '被封禁'
                     }
                 }
             },
-            this.handleErr(err)
+            (err) => this.handleErr(err)
         )
     }
 }
