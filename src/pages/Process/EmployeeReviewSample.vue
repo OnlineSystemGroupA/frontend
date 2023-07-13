@@ -7,7 +7,7 @@
         <el-button type="primary" @click="download">下载文件</el-button>
         <el-button type="primary" @click="documentReview">文档检查表</el-button>
         <el-button type="success" @click="complete">完成流程</el-button>
-        <el-button type="warning" @click="warning">驳回重传</el-button>
+        <el-button type="warning" @click="refute">驳回重传</el-button>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>

@@ -48,7 +48,7 @@ export default {
             this.axios.post('/api/account/clients/' + this.clientId + '/locked', { "doLock": true }).then(
                 (res) => {
                     if (res.status === 200) {
-                        this.$message('授权成功！')
+                        this.$message('封禁！')
                     }
                 },
                 this.handleErr
@@ -64,7 +64,7 @@ export default {
         this.axios.get('/api/account/clients/' + this.clientId).then(
             (res) => {
                 if (res.status === 200) {
-                    if (res.isNonLocked) {
+                    if (!res.isNonLocked) {
                         this.authorityItem[0].state = '已授权'
                     }
                     else {
@@ -72,7 +72,7 @@ export default {
                     }
                 }
             },
-            this.handleErr(err)
+            this.handleErr
         )
     }
 }

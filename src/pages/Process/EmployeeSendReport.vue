@@ -45,7 +45,15 @@ export default {
             this.complete()
         },
         checkReport() {
-
+            this.$router.push({
+                name: 'checkReportBeforeSend',
+                query: {
+                    processId: this.processId,
+                    writable: false,
+                    checkable: false
+                }
+            })
+           
         },
         complete() {
             this.axios.post('/api/workflow/processes/' + this.processId + '/complete_task')
