@@ -2,9 +2,9 @@
     <div style="width:94%;">
         <h3>项目号:{{ projectId }}</h3>
         <h3>项目名:{{ softwareName }}</h3>
+        <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="editApplicationForm">修改测试申请表</el-button>
         <el-button type="primary" @click="editFunctionList">修改测试功能表</el-button>
-        <el-button type="primary" @click="checkItemDetail(processId)">查看项目详情</el-button>
         <el-button type="primary" @click="resubmit">重新提交</el-button>
         <keep-alive>
             <router-view></router-view>

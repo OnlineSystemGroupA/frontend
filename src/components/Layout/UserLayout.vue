@@ -9,7 +9,7 @@
                 </UserHeader>
             </el-header>
             <el-container>
-                <el-aside width="13%" class="aside">
+                <el-aside width="200px" class="aside">
                     <slot name="menu"></slot>
                 </el-aside>
                 <el-container class="main-container">

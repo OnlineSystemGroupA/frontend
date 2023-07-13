@@ -40,7 +40,7 @@ export default {
                         this.$message('授权成功！')
                     }
                 },
-                this.handleErr
+                (err) => this.handleErr(err)
             )
         },
         ban() {
@@ -51,7 +51,7 @@ export default {
                         this.$message('封禁！')
                     }
                 },
-                this.handleErr
+                (err) => this.handleErr(err)
             )
         },
         handleErr(err) {
@@ -66,13 +66,12 @@ export default {
                 if (res.status === 200) {
                     if (!res.isNonLocked) {
                         this.authorityItem[0].state = '已授权'
-                    }
-                    else {
+                    } else {
                         this.authorityItem[0].state = '被封禁'
                     }
                 }
             },
-            this.handleErr
+            (err) => this.handleErr(err)
         )
     }
 }
