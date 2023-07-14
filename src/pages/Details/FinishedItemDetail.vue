@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <th>申请日期</th>
-                <td>{{ itemInfo.applicateDate }}</td>
+                <td>{{ itemInfo.applicationDate }}</td>
                 <th>申请人</th>
                 <td>{{ itemInfo.applicant }}</td>
             </tr>
@@ -37,13 +37,7 @@
                 <th>开始日期</th>
                 <td>{{ itemInfo.startDate }}</td>
                 <th>结束日期</th>
-                <td>{{ itemInfo.endDate }}</td>
-            </tr>
-            <tr>
-                <th>审核人员</th>
-                <td>{{ itemInfo.verifier }}</td>
-                <th>测试人员</th>
-                <td>{{ itemInfo.tester }}</td>
+                <td>{{ itemInfo.dueDate }}</td>
             </tr>
         </table>
         <div style="margin:20px ; width: 90%;">
@@ -69,6 +63,7 @@
 <script>
 import formAuthority from '../../assets/jsons/formAuthority.json'
 import formName from '../../assets/jsons/formName.json'
+import formNameMap from '../../assets/jsons/formNameMap.json'
 
 export default {
     name: 'FinishedItemDetail',
@@ -86,98 +81,15 @@ export default {
                 email: 'zhangsan@example.com.cn',
                 address: '沈阳皇姑屯114号',
                 startDate: '2023-6-11',
-                endDate: '2023-6-30',
+                dueDate: '2023-6-30',
                 verifier: '赵六',
                 tester: '刘七',
             },
             forms: [
-                {
-                    title: '测试申请表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试功能表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '申请审核表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试报价表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试合同表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '保密协议表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试计划表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试计划审核表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试记录表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试问题表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试报告表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '报告审核表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '文档审核表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
-                {
-                    title: '测试检查表',
-                    date: '2023-5-11',
-                    state: '已通过',
-                    available: true,
-                },
             ],
             formMap: new Map(),
             authorityMap: new Map(),
+            formTranslationMap: new Map(),
         }
     },
     methods: {
@@ -214,7 +126,23 @@ export default {
                 )
             }
         },
-
+        handleResponse(res) {
+            if (res.status === 200) {
+                console.log(res.data)
+                this.itemInfo = res.data
+                this.itemInfo.testType = this.itemInfo.testType.substring(1, this.itemInfo.testType.length - 1)
+                this.itemInfo.applicationDate = this.itemInfo.applicationDate.substring(0, this.itemInfo.applicationDate.indexOf('T'))
+                this.active = this.itemInfo.index
+            }
+        },
+        handleError(err) {
+            if (err.status === 402) {
+                this.$message.error('指定流程对该用户不可见')
+            }
+            else if (err.status === 404) {
+                this.$message.error('指定流程不存在')
+            }
+        },
     },
     created() {
         formName.transformation.forEach(element => {
@@ -224,6 +152,42 @@ export default {
         formAuthority.authority.forEach(element => {
             this.authorityMap.set(element.key, element.value)
         })
+        formNameMap.map.forEach(element => {
+            this.formTranslationMap.set(element.key, element.value)
+        })
+        this.axios.get('/api/archive/processes/' + this.processId + '/details').then(this.handleResponse, this.handleError)
+        if (sessionStorage.getItem('logType') === 'employee') {
+            this.axios.get('/api/account/operator_details').then(
+                (res) => {
+                    if (res.status === 200) {
+                        this.employeeInfo = res.data
+                    }
+                },
+                (err) => {
+                    if (err.status === 409) {
+                        this.$message.error('当前登录类型错误')
+                    }
+                }
+            )
+        }
+        this.axios.get('/api/archive/processes/' + this.processId + '/forms').then(
+            (res) => {
+                console.log(res.data)
+                res.data.forEach(element => {
+                    console.log(element)
+                    var curform = {
+                        title: this.formTranslationMap.get(element.formType),
+                        state: element.formState,
+                        date: element.createDate.substring(0, 10),
+                        available: true
+                    }
+                    this.forms.push(curform)
+                })
+            },
+            (err) => {
+                console.log(err.data)
+            }
+        )
     }
 }
 </script>

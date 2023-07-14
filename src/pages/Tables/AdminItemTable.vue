@@ -21,9 +21,9 @@
         </div>
         <br />
         <el-table :data="itemList" border style="width: 100%; height: auto;">
-            <el-table-column prop="processId" label="项目号" style="width: 14%">
+            <el-table-column prop="projectId" label="项目号" style="width: 14%">
                 <template slot-scope="scope">
-                    <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.processId }}</p>
+                    <p @click="checkItemDetail(scope.row.processId)">{{ scope.row.projectId }}</p>
                 </template>
             </el-table-column>
             <el-table-column prop="title" label="项目名称" style="width: 14%"></el-table-column>
@@ -60,10 +60,10 @@ export default {
     data() {
         return {
             keyword: '',
-            sortKey: 'recordId',
+            sortKey: 'projectId',
             sortKeys: [
                 {
-                    value: 'recordId',
+                    value: 'projectId',
                     label: '项目号',
                 },
                 {
@@ -223,8 +223,8 @@ export default {
         },
     },
     created() {
-        //this.axios.get('/api/workflow/processes/count').then(this.handleCount, this.handleError)
-        //this.axios.get('/api/workflow/processes?pageIndex=' + this.page + '&numPerPage=10&' + 'orderBy=' + this.sortKey).then(this.handleResult, this.handleError)
+        this.axios.get('/api/workflow/processes/count').then(this.handleCount, this.handleError)
+        this.axios.get('/api/workflow/processes?pageIndex=' + this.page + '&numPerPage=10&' + 'orderBy=' + this.sortKey).then(this.handleResult, this.handleError)
     }
 }
 </script>

@@ -37,6 +37,14 @@
             "value": "测试记录表"
         },
         {
+            "key": "TestRecordsForm",
+            "value": "测试记录表"
+        },
+        {
+            "key": "ReportVerifyForm",
+            "value": "报告审核表"
+        },
+        {
             "key": "TestProblemForm",
             "value": "测试问题表"
         },
