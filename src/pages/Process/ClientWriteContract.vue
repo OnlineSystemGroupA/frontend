@@ -23,7 +23,7 @@ export default {
             pass: true,
             projectId: '',
             softwareName: '',
-            curTaskName:'',
+            curTaskName: '',
         }
     },
     methods: {

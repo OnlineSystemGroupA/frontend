@@ -53,10 +53,10 @@ export default {
     data() {
         return {
             keyword: '',
-            sortKey: 'processId',
+            sortKey: 'projectId',
             sortKeys: [
                 {
-                    value: 'processId',
+                    value: 'projectId',
                     label: '项目号',
                 },
                 {
@@ -2347,24 +2347,31 @@ export default {
                     assignee: '冲田总司',
                     endDate: '2022-12-04',
                 },
-            ]
+            ],
+            itemCount: 0,
         }
     },
     computed: {
         pageCount() {
-            var count = Math.floor(this.itemList.length / 10)
-            if (this.itemList.length % 10 !== 0) {
+            var count = Math.floor(this.itemCount / 10)
+            if (this.itemCount % 10 !== 0) {
                 count += 1
             }
             return count
         },
-        currentItemList() {
-            var end = this.page * 10
-            var start = end - 10
-            if (end > this.itemList.length) {
-                end = this.itemList.length
+        currentPage() {
+            var p = parseInt(this.page);
+            return p
+        }
+    },
+    watch: {
+        sortKey: {
+            immediate: true,
+            handler(newValue, oldValue) {
+                console.log("原来的关键字是", oldValue, "，现在的关键字是", newValue)
+                this.axios.get('/api/archive/processes/count').then(this.handleCount, this.handleError)
+                this.axios.get('/api/archive/processes?pageIndex=' + this.page + '&numPerPage=10&' + 'orderBy=' + this.sortKey).then(this.handleResult, this.handleError)
             }
-            return this.itemList.slice(start, end)
         }
     },
     methods: {
@@ -2401,8 +2408,16 @@ export default {
                 })
             }
             //console.log(curpage)
-        }
+        },
+        handleCount(count) {
+            this.itemCount = count.data
+            console.log(this.itemCount)
+        },
     },
+    created() {
+        this.axios.get('/api/archive/processes/count').then(this.handleCount, this.handleError)
+        this.axios.get('/api/archive/processes?pageIndex=' + this.page + '&numPerPage=10&' + 'orderBy=' + this.sortKey).then(this.handleResult, this.handleError)
+    }
 }
 </script>
 

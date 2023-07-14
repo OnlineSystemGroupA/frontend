@@ -32,7 +32,32 @@ export default {
             })
         },
         download() {
-
+            this.axios.get('/api/workflow/processes/' + this.processId + '/files/sample', {
+                responseType: "blob" // 二进制流
+            }).then(
+                (res, type) => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                        const blob = new Blob([res.data], { type: type });
+                        const downloadElement = document.createElement("a");
+                        const href = window.URL.createObjectURL(blob);
+                        downloadElement.href = href;
+                        downloadElement.download = decodeURIComponent(this.processId + ".zip");
+                        document.body.appendChild(downloadElement);
+                        downloadElement.click();
+                        document.body.removeChild(downloadElement);
+                        window.URL.revokeObjectURL(href);
+                    }
+                },
+                (err) => {
+                    if (err.status === 403) {
+                        this.$message.warning('资源不可见')
+                    }
+                    if (err.status === 404) {
+                        this.$message.warning('资源不存在')
+                    }
+                },
+            )
         },
         documentReview() {
             this.$router.push(
